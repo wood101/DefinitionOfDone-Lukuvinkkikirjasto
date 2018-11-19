@@ -20,7 +20,8 @@ pe 12.30-13.30  asiakaspalaverin jälkeen
 
 ## [Definition of done](https://github.com/DefininitionOfGettingThere/ReadMe-lukuvinkkikirjasto/blob/master/Dokumentaatio/DefinitionOfDone.md)
 
-## [CI:travis]( https://tähän linkki Travis -Janne)
+## [CI:travis](https://travis-ci.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto)
+[![Build Status](https://travis-ci.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto.svg?branch=master)](https://travis-ci.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto)
 
 ## [linkki sovelluksen toimivaan versioon]( https://Tämä tulee tähän myöhemmässä vaiheessa)
 
