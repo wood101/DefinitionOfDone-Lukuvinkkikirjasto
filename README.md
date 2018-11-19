@@ -1,5 +1,5 @@
-# ReadMe-lukuvinkkikirjasto
-OhtuMiniProjekti
+# DefinitionOfDone-lukuvinkkikirjasto
+Ryhmän Definition of Done OhtuMiniProjekti
 
 ## Asiakaspalaveri perjantaisin 12-12.30
 
@@ -24,4 +24,13 @@ pe 12.30-13.30  asiakaspalaverin jälkeen
 ## [linkki sovelluksen toimivaan versioon]( https://Tämä tulee tähän myöhemmässä vaiheessa)
 
 ## [työlle tulee määritellä lisenssi]( https://Tämä tulee tähän  myöhemmässä vaiheessa)
+
+### Tekijät:
+
+  - Harri Mehtälä
+  - Heli Huhtilainen
+  - Olli Bisi
+  - Jesper Pettersson
+  - Virva Svala
+  - [Janne Malin](https://github.com/wood101)
 
