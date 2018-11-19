@@ -45,7 +45,7 @@ public class SQLiteDatabase implements Database {
     private static String[] createTables() {
         return new String[]{
             "CREATE TABLE IF NOT EXISTS Bookmark ("
-            + "	resepti_id integer PRIMARY KEY,"
+            + "	bookmark_id integer PRIMARY KEY,"
             + "	title varchar(50),"
             + "	description varchar(3000),"
             + "	link varchar(200),"
