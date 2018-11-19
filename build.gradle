@@ -1,0 +1,63 @@
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+
+// Apply the application plugin to add support for building an application
+apply plugin: 'application'
+apply plugin: "jacoco" 
+apply plugin: 'checkstyle'
+
+project.ext {
+    cucumberVersion = '1.2.5'
+    junitVersion = '4.12'
+    springVersion = '3.1.1.RELEASE'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'info.cukes:cucumber-java:' + cucumberVersion
+    testCompile 'info.cukes:cucumber-junit:' + cucumberVersion
+    testCompile 'junit:junit:' + junitVersion
+    compile 'com.google.guava:guava:20.0'
+    compile 'org.springframework:spring-core:'+ springVersion
+    compile 'org.springframework:spring-context:'+ springVersion
+    compile 'org.springframework:spring-context-support:'+ springVersion
+    compile 'org.springframework:spring-beans:'+ springVersion    
+}
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+
+// Define the main class for the application
+mainClassName = 'main.Main'
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: ['main/**'])
+        })
+    }
+}
+
+checkstyle {
+  checkstyleTest.enabled = false
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'main.Main'
+    }
+}
+
+run {
+    standardInput = System.in
+}
