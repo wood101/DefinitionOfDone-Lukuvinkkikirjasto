@@ -23,5 +23,5 @@ pe 12.30-13.30  asiakaspalaverin jälkeen
 
 ## [linkki sovelluksen toimivaan versioon]( https://Tämä tulee tähän myöhemmässä vaiheessa)
 
-## [työlle tulee määritellä lisenssi]( https://Tämä tulee tähän joskus  myöhemmässä vaiheessa)
+## [työlle tulee määritellä lisenssi]( https://Tämä tulee tähän  myöhemmässä vaiheessa)
 
