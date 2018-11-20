@@ -1,5 +1,5 @@
 # DefinitionOfDone-lukuvinkkikirjasto
-Ryhmän Definition of Done OhtuMiniProjekti
+Ryhmän DefinitionOfGettingThere OhtuMiniProjekti
 
 ## Asiakaspalaveri perjantaisin 12-12.30
 
