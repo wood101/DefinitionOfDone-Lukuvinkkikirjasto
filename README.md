@@ -1,4 +1,4 @@
-# DefinitionOfDone-lukuvinkkikirjasto
+# DefinitionOfGettingThere lukuvinkkikirjasto
 Ryhmän DefinitionOfGettingThere OhtuMiniProjekti
 
 ## Asiakaspalaveri perjantaisin 12-12.30
