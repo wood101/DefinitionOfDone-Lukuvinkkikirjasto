@@ -3,3 +3,4 @@
 gradle.properties
 *tmp
 /.nb-gradle/
+nbproject/
