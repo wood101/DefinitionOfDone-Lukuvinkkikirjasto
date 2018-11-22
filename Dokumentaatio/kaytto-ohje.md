@@ -1,6 +1,6 @@
 # Käyttöohje
 
-1. Projektin suorittamista varten tarkista että sinulla on käytössäsi SQLite3, Gradle asennettuna ja Javasta vähintään versio , (versiossa 10 ei välttämättä kaikkia testit toimi) 
+1. Projektin suorittamista varten tarkista että sinulla on käytössäsi SQLite3, Gradle asennettuna ja Javasta vähintään versio8 , (versiossa 10 ei välttämättä kaikkia testit toimi) 
 
 2. Kloonaa projekti gitistä haluamaasi kansioon. 
 
