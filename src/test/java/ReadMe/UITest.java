@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 /**
  *
- * @author hameha
+ * @author peje
  */
 public class UITest {
 

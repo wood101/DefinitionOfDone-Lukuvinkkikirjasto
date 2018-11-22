@@ -5,9 +5,6 @@
  */
 package ReadMe.classes;
 
-
-
-
 import ReadMe.data_access.BookmarkDao;
 import ReadMe.io.IO;
 import java.util.List;
@@ -76,13 +73,9 @@ public class UI {
                     break;
                 default:
                     io.print("Choose a correct input!");
-            }
-            
+            }            
         }
-        io.print("Thank you!");
-        
-        
+        io.print("Thank you!");   
     }
-    
-    
+
 }
