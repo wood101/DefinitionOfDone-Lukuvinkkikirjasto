@@ -19,14 +19,25 @@ public class SQLiteDatabase implements Database {
 
     private String path;
 
+    /**
+     *
+     * @param file
+     */
     public SQLiteDatabase(File file) {
         this.path = file.getAbsolutePath();
     }
 
+    /**
+     *
+     */
     public SQLiteDatabase() {
         this.path = "sqlite:memory:";
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
     @Override
     public void init() throws SQLException {
         //TODO: SQL käskyt taulujen luomiseen
@@ -37,6 +48,11 @@ public class SQLiteDatabase implements Database {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     @Override
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:sqlite:" + path);

@@ -9,10 +9,21 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- *
+ * 
  * @author bisi
  */
 public interface Database {
+
+    /**
+     *
+     * @throws SQLException
+     */
     void init() throws SQLException;
+
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     Connection getConnection() throws SQLException;
 }

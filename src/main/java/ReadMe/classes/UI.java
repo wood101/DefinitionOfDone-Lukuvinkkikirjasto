@@ -15,33 +15,46 @@ import java.util.List;
 
 
 /**
- *
+ * UI object. Used to run console app.
  * @author bisi
  */
 public class UI {
     private IO io;
     private InMemoryBookmarkDao db;
 
+    /**
+     * Creates a new UI object.
+     * @param io takes I/O as parameters
+     */
     public UI(IO io) {
         this.io = io;
         this.db = new InMemoryBookmarkDao();
     }
     
+    /**
+     * Adds a new Bookmark to the database
+     * @return Bookmark
+     */
     public Bookmark addBookmark(){
         String headline = io.readLine("Enter headline: ");
         String description = io.readLine("Enter description: ");
         String link = io.readLine("Enter link: ");
         return new Bookmark(headline, description, link);
     }
+
+    /**
+     * Prints all Bookmarks from database
+     */
     public void listBookmarks(){
-        List<Bookmark> tips = db.getTips();
+        List<Bookmark> tips = db.listAll();
         for (Bookmark rt : tips) {
             io.print(rt.toString());
         }
     }
     
-    
-    
+    /**
+     * Runs console UI
+     */
     public void run(){
         this.io = io;
         io.print("Welcome to ReadTipper!\n\n");
