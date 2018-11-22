@@ -5,41 +5,41 @@
  */
 package ReadMe;
 
-import org.junit.After;
-import org.junit.AfterClass;
+import ReadMe.classes.Bookmark;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author peje
  */
 public class BookmarkTest {
-    
+    private Bookmark bookmark;
+
     public BookmarkTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
     }
     
     @Before
     public void setUp() {
+        this.bookmark = new Bookmark("title", "desc", "www");            
     }
     
-    @After
-    public void tearDown() {
+    @Test
+    public void toStringTest() {
+        assertEquals("headline: " + "title" + ", description: " + "desc" + ", link: " + "www", bookmark.toString());
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
+    @Test
+    public void equalsTrueTest() {
+        Bookmark comp = new Bookmark("title", "desc", "www");
+        assertTrue(bookmark.equals(comp));
+    }
+    @Test
+    public void equalsFalseTest() {
+        Bookmark not = new Bookmark("title1", "desc1", "aaa");
+        assertFalse(bookmark.equals(not));
+    }
 }

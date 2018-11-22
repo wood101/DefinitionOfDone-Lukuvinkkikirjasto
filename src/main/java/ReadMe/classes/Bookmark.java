@@ -13,38 +13,72 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/**
+ *
+ * @author bisi
+ */
 public class Bookmark {
 
     private String headline;
     private String description;
     private String link;
 
+    /**
+     * Create a new Bookmark object. Bookmark has a title, description and a link to the source
+     * @param String headline
+     * @param String description
+     * @param String link
+     */
     public Bookmark(String headline, String description, String link) {
         this.headline = headline;
         this.description = description;
         this.link = link;
     }
 
+    /**
+     * Returns the headline of the Bookmark
+     * @return String headline
+     */
     public String getHeadline() {
         return headline;
     }
 
+    /**
+     * Returns the description of the Bookmark
+     * @return String description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Returns the link to the source of the Bookmark
+     * @return
+     */
     public String getLink() {
         return link;
     }
 
+    /**
+     * Sets the title for the Bookmark
+     * @param headline
+     */
     public void setHeadline(String headline) {
         this.headline = headline;
     }
 
+    /**
+     * Sets the descriotion of the Bookmark
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Sets the link of the Bookmark
+     * @param link
+     */
     public void setLink(String link) {
         this.link = link;
     }
@@ -75,7 +109,13 @@ public class Bookmark {
             && Objects.equals(this.link, other.link);
     }
 
-    public static Bookmark rowToResepti(ResultSet rs) throws SQLException {
+    /**
+     * Creates a new Bookmark object from database row
+     * @param rs
+     * @return
+     * @throws SQLException
+     */
+    public static Bookmark rowToBookmark(ResultSet rs) throws SQLException {
         return new Bookmark(rs.getString("headline"), rs.getString("description"), rs.getString("link"));
     }
 
