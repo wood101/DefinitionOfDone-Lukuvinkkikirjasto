@@ -7,12 +7,8 @@ package ReadMe;
 
 import ReadMe.classes.Bookmark;
 import ReadMe.classes.UI;
-import ReadMe.data_access.BookmarkDao;
 import ReadMe.data_access.InMemoryBookmarkDao;
-import ReadMe.io.ConsoleIO;
-import ReadMe.io.IO;
 import java.util.ArrayList;
-import java.util.List;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -61,32 +57,5 @@ public class UITest {
 
         assertTrue(io.getOutputs().contains(b1.toString()));
         assertTrue(io.getOutputs().contains(b2.toString()));
-    }
-
-    class IOStub implements IO {
-
-        String[] inputs;
-        int index;
-        public ArrayList<String> outputs;
-
-        public IOStub(String... inputs) {
-            this.inputs = inputs;
-            this.outputs = new ArrayList<>();
-        }
-
-        @Override
-        public void print(String toPrint) {
-            outputs.add(toPrint);
-        }
-
-        @Override
-        public String readLine(String prompt) {
-            return inputs[index++];
-        }
-        
-        public ArrayList<String> getOutputs() {
-            return outputs;
-        }
-
     }
 }
