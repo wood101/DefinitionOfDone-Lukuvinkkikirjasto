@@ -73,16 +73,6 @@ public class SQLiteDatabase implements Database {
         stmt.close();
         System.out.println("Table created successfully");
     }
-    
-//    private static String[] createTables() {
-//        return new String[]{
-//            "CREATE TABLE IF NOT EXISTS Bookmark ("
-//            + "	bookmark_id integer PRIMARY KEY,"
-//            + "	bookmark_title varchar(50),"
-//            + "	bookmark_description varchar(3000),"
-//            + "	bookmark_link varchar(200),"
-//            + ");"
-//        };
-//    }
+   
 
 }
