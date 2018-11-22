@@ -65,26 +65,14 @@ public class Bookmark {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
+        if (this == obj) { return true; }
+        if (obj == null) { return false; }
+        if (getClass() != obj.getClass()) { return false; }
+        
         final Bookmark other = (Bookmark) obj;
-        if (!Objects.equals(this.headline, other.headline)) {
-            return false;
-        }
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        if (!Objects.equals(this.link, other.link)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.headline, other.headline) 
+            && Objects.equals(this.description, other.description) 
+            && Objects.equals(this.link, other.link);
     }
 
     public static Bookmark rowToResepti(ResultSet rs) throws SQLException {
