@@ -33,14 +33,6 @@ public class InMemoryBookmarkDao implements BookmarkDao {
         tips.add(readTip);
     }
 
-    public List<Bookmark> getTips() {
-        return tips;
-    }
-
-    public void setTips(List<Bookmark> tips) {
-        this.tips = tips;
-    }
-
     @Override
     public String toString() {
         String s = "";

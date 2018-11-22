@@ -8,7 +8,6 @@ package ReadMe.classes;
 
 
 
-import ReadMe.data_access.InMemoryBookmarkDao;
 import ReadMe.data_access.BookmarkDao;
 import ReadMe.io.IO;
 import java.util.List;
@@ -20,11 +19,11 @@ import java.util.List;
  */
 public class UI {
     private IO io;
-    private InMemoryBookmarkDao db;
+    private BookmarkDao db;
 
-    public UI(IO io) {
+    public UI(IO io, BookmarkDao db) {
         this.io = io;
-        this.db = new InMemoryBookmarkDao();
+        this.db = db;
     }
     
     public Bookmark addBookmark(){
@@ -34,7 +33,7 @@ public class UI {
         return new Bookmark(headline, description, link);
     }
     public void listBookmarks(){
-        List<Bookmark> tips = db.getTips();
+        List<Bookmark> tips = db.listAll();
         for (Bookmark rt : tips) {
             io.print(rt.toString());
         }

@@ -3,12 +3,12 @@
 <module name="Checker">
 
     <module name="TreeWalker">
-        <module name="MethodLength">
+<!--        <module name="MethodLength">
             <property name="tokens" value="METHOD_DEF"/>
             <property name="max" value="15"/>
         </module>
         <module name="Indentation"/>
-        <module name="LeftCurly"/>
+        <module name="LeftCurly"/>-->
     </module>
 
 </module>

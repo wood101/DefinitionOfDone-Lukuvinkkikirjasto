@@ -20,6 +20,7 @@ dependencies {
     testCompile 'info.cukes:cucumber-java:' + cucumberVersion
     testCompile 'info.cukes:cucumber-junit:' + cucumberVersion
     testCompile 'junit:junit:' + junitVersion
+    testCompile 'org.mockito:mockito-core:2.10.0'
     compile 'com.google.guava:guava:20.0'
     compile 'org.springframework:spring-core:'+ springVersion
     compile 'org.springframework:spring-context:'+ springVersion
