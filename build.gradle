@@ -33,6 +33,11 @@ test {
     systemProperties System.getProperties()
 }
 
+tasks.withType(Test) {
+    systemProperties = System.properties
+    systemProperties['user.dir'] = workingDir
+}
+
 // Define the main class for the application
 mainClassName = 'main.Main'
 
