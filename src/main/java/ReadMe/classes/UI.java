@@ -8,8 +8,9 @@ package ReadMe.classes;
 
 
 
+import ReadMe.data_access.BookmarkDao;
+import ReadMe.data_access.BookmarkDatabaseDao;
 import ReadMe.data_access.InMemoryBookmarkDao;
-import ReadMe.data_access.Database;
 import ReadMe.data_access.SQLiteDatabase;
 import ReadMe.io.IO;
 import java.io.FileInputStream;
@@ -25,11 +26,11 @@ import java.util.Properties;
 public class UI {
     private IO io;  
     private   SQLiteDatabase database;
-    //private InMemoryBookmarkDao db;
+    private BookmarkDao bookmarkDao;
 
-    public UI(IO io) {
+    public UI(IO io,BookmarkDao bookmarkDao) {
         this.io = io;
-       // this.db = new InMemoryBookmarkDao();
+       this.bookmarkDao = bookmarkDao;
      ;
     }
     
@@ -50,12 +51,10 @@ public class UI {
         //luo tietokantataulut if not exist
         database.init();
 
-        BookMarkDatabaseDao bookmarkDao = new  BookMarkDatabaseDao(database);
+        BookmarkDatabaseDao bookmarkDao = new  BookmarkDatabaseDao(database);
 
     
     }
-    
-    
     
     
    
@@ -67,7 +66,7 @@ public class UI {
         return new Bookmark(headline, description, link);
     }
     public void listBookmarks(){
-        List<Bookmark> tips = db.getTips();
+        List<Bookmark> tips = bookmarkDao.listAll();
         for (Bookmark rt : tips) {
             io.print(rt.toString());
         }
@@ -85,7 +84,7 @@ public class UI {
             switch (choice) {
                 case "a":
                     System.out.println("Adding a new ReadTip!:\n\n");
-                    db.add(addBookmark());
+                    bookmarkDao.add(addBookmark());
                     System.out.println("Tip added!\n\n");
                     break;
                 case "l":
