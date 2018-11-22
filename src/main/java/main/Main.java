@@ -1,8 +1,10 @@
 package main;
 
 import ReadMe.classes.UI;
+import ReadMe.data_access.BookmarkDao;
+import ReadMe.data_access.InMemoryBookmarkDao;
 import ReadMe.io.ConsoleIO;
-import java.util.Scanner;
+import ReadMe.io.IO;
 
 /**
  *
@@ -18,10 +20,10 @@ public class Main {
         System.out.println("Toimii");
         System.out.println("Niinpä!");
         
-        ConsoleIO io = new ConsoleIO();
-        UI ui = new UI(io);
+        IO io = new ConsoleIO();
+        BookmarkDao db = new InMemoryBookmarkDao();
+        UI ui = new UI(io, db);
         ui.run();
-
 
     }
 }

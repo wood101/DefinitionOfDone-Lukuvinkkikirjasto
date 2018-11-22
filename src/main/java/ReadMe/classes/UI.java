@@ -8,7 +8,6 @@ package ReadMe.classes;
 
 
 
-import ReadMe.data_access.InMemoryBookmarkDao;
 import ReadMe.data_access.BookmarkDao;
 import ReadMe.io.IO;
 import java.util.List;
@@ -20,15 +19,15 @@ import java.util.List;
  */
 public class UI {
     private IO io;
-    private InMemoryBookmarkDao db;
+    private BookmarkDao db;
 
     /**
      * Creates a new UI object.
      * @param io takes I/O as parameters
      */
-    public UI(IO io) {
+    public UI(IO io, BookmarkDao db) {
         this.io = io;
-        this.db = new InMemoryBookmarkDao();
+        this.db = db;
     }
     
     /**

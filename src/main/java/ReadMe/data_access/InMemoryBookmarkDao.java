@@ -46,8 +46,7 @@ public class InMemoryBookmarkDao implements BookmarkDao {
     public void add(Bookmark readTip) {
         tips.add(readTip);
     }
-
-
+    
     @Override
     public String toString() {
         String s = "";
