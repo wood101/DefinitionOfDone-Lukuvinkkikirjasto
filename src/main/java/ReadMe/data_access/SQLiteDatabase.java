@@ -10,37 +10,81 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
 
 /**
  *
  * @author bisi
  */
 public class SQLiteDatabase implements Database {
+    
+    
+    private final String databaseAddress;
 
-    private String path;
-
-    public SQLiteDatabase(File file) {
-        this.path = file.getAbsolutePath();
+    public SQLiteDatabase(String databaseAddress) throws ClassNotFoundException {
+        this.databaseAddress = databaseAddress;
     }
 
-    public SQLiteDatabase() {
-        this.path = "sqlite:memory:";
+    /**
+     * Opens a connection to the database
+     *
+     * @throws SQLException if this database query does not succeed, this
+     * exception is thrown
+     * @return Connection returns a Connection
+     */
+    public Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(databaseAddress);
     }
 
-    @Override
-    public void init() throws SQLException {
-        //TODO: SQL käskyt taulujen luomiseen
-        try (Connection c = getConnection()) {
-            for (String kasky : createTables()) {
-                c.prepareStatement(kasky).execute();
+    /**
+     * Initialising procedures for the database. Creates the database and tables
+     * for it if they do not exist in the root folder of the program
+     *
+     */
+    public void init() {
+        String[] createTablesSencences = createTables();
+
+        // "try with resources" closes the connection in the end
+        try (Connection conn = getConnection()) {
+            Statement st = conn.createStatement();
+
+            //  execute command
+            for (String sentence : createTablesSencences) {
+                st.executeUpdate(sentence);
             }
+
+        } catch (Throwable t) {
+            // if table exists, command not executed
+            System.out.println("Error >> " + t.getMessage());
         }
     }
+    
 
-    @Override
-    public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:sqlite:" + path);
-    }
+//    private String path;
+//
+//    public SQLiteDatabase(File file) {
+//        this.path = file.getAbsolutePath();
+//    }
+//
+//    public SQLiteDatabase() {
+//        this.path = "sqlite:memory:";
+//    }
+//
+//    @Override
+//    public void init() throws SQLException {
+//        //TODO: SQL käskyt taulujen luomiseen
+//        try (Connection c = getConnection()) {
+//            for (String kasky : createTables()) {
+//                c.prepareStatement(kasky).execute();
+//            }
+//        }
+//    }
+
+//    @Override
+//    public Connection getConnection() throws SQLException {
+//        return DriverManager.getConnection("jdbc:sqlite:" + path);
+//    }
 
     private static String[] createTables() {
         return new String[]{
