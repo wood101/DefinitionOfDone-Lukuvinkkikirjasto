@@ -9,9 +9,13 @@ package ReadMe.classes;
 
 
 import ReadMe.data_access.InMemoryBookmarkDao;
-import ReadMe.data_access.BookmarkDao;
+import ReadMe.data_access.Database;
+import ReadMe.data_access.SQLiteDatabase;
 import ReadMe.io.IO;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 
 /**
@@ -19,14 +23,43 @@ import java.util.List;
  * @author bisi
  */
 public class UI {
-    private IO io;
-    private InMemoryBookmarkDao db;
+    private IO io;  
+    private   SQLiteDatabase database;
+    //private InMemoryBookmarkDao db;
 
     public UI(IO io) {
         this.io = io;
-        this.db = new InMemoryBookmarkDao();
+       // this.db = new InMemoryBookmarkDao();
+     ;
     }
     
+    
+    //lisätty by viku
+
+    public void init() throws IOException, Exception {
+
+        //alustusmetodi init hakee tietokantaosoitteen ja luo käytettävät DAO:t ja injektoi ne sovelluslogiikalle:
+        Properties properties = new Properties();
+        properties.load(new FileInputStream("config.properties"));
+        try {
+            String usedDatabase = properties.getProperty("usedDatabase");
+        database = new SQLiteDatabase(usedDatabase);
+        } catch (Exception ex) {
+        }
+        
+        //luo tietokantataulut if not exist
+        database.init();
+
+        BookMarkDatabaseDao bookmarkDao = new  BookMarkDatabaseDao(database);
+
+    
+    }
+    
+    
+    
+    
+   
+        
     public Bookmark addBookmark(){
         String headline = io.readLine("Enter headline: ");
         String description = io.readLine("Enter description: ");
@@ -72,5 +105,6 @@ public class UI {
         
     }
     
+
     
 }
