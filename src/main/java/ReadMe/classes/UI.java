@@ -50,14 +50,14 @@ public class UI {
             choice = io.readLine("Enter choice: ");
             switch (choice) {
                 case "a":
-                    System.out.println("Adding a new ReadTip!:\n\n");
+                    io.print("Adding a new ReadTip!:\n\n");
                     db.add(addBookmark());
-                    System.out.println("Tip added!\n\n");
+                    io.print("Tip added!\n\n");
                     break;
                 case "l":
-                    System.out.println("All added tips: \n");
+                    io.print("All added tips: \n");
                     listBookmarks();
-                    System.out.println("\n\n");
+                    io.print("\n\n");
                     break;
                 case "q":
                     break;
@@ -66,7 +66,7 @@ public class UI {
             }
             
         }
-        System.out.println("Thank you!");
+        io.print("Thank you!");
         
         
     }
