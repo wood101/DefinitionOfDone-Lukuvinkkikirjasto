@@ -18,9 +18,6 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) throws Exception {
-        System.out.println("Toimii");
-        System.out.println("Niinpä!");
-        System.out.println("branch test!");
         
         String databaseName = "readMeBase.db";
         Database db = new SQLiteDatabase("jdbc:sqlite:" + databaseName);
