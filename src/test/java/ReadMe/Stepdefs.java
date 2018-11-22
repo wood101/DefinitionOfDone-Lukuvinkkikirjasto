@@ -19,7 +19,7 @@ public class Stepdefs {
     
     UI ui;
     IOStub io;
-    InMemoryBookmarkDao dao = mock(InMemoryBookmarkDao.class);
+    InMemoryBookmarkDao dao = new InMemoryBookmarkDao();
     String[] inputLinesAdd = new String[5];
     String[] inputLinesList = new String[6];
     
