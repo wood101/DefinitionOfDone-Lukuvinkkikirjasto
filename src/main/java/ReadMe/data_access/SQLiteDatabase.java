@@ -48,7 +48,6 @@ public class SQLiteDatabase implements Database {
         try {
             Class.forName("org.sqlite.JDBC");
             getConnection();
-            System.out.println("Database open - success");
         } catch (Exception e) {
             System.out.println("DB open fail");
         }

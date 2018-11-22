@@ -63,9 +63,9 @@ public class BookmarkDatabaseDao implements BookmarkDao {
         try (Connection c = db.getConnection()) {
             PreparedStatement add = c.prepareStatement("INSERT INTO Bookmark (bookmark_title, bookmark_description, bookmark_link) "
                     + "VALUES (?, ?, ?)");
-            add.setString(1, bm.getHeadline().toLowerCase());
-            add.setString(2, bm.getDescription().toLowerCase());
-            add.setString(3, bm.getLink().toLowerCase());
+            add.setString(1, bm.getTitle());
+            add.setString(2, bm.getDescription());
+            add.setString(3, bm.getLink());
             add.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BookmarkDatabaseDao.class.getName()).log(Level.SEVERE, null, ex);

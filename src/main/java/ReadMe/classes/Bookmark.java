@@ -25,12 +25,12 @@ public class Bookmark {
 
     /**
      * Create a new Bookmark object. Bookmark has a title, description and a link to the source
-     * @param String headline
+     * @param String title
      * @param String description
      * @param String link
      */
-    public Bookmark(String headline, String description, String link) {
-        this.bookmark_title = headline;
+    public Bookmark(String title, String description, String link) {
+        this.bookmark_title = title;
         this.bookmark_description = description;
         this.bookmark_link = link;
     }
@@ -39,7 +39,7 @@ public class Bookmark {
      * Returns the headline of the Bookmark
      * @return String headline
      */
-    public String getHeadline() {
+    public String getTitle() {
         return bookmark_title;
     }
 
@@ -61,14 +61,14 @@ public class Bookmark {
 
     /**
      * Sets the title for the Bookmark
-     * @param headline
+     * @param title
      */
-    public void setHeadline(String headline) {
-        this.bookmark_title = headline;
+    public void setTitle(String title) {
+        this.bookmark_title = title;
     }
 
     /**
-     * Sets the descriotion of the Bookmark
+     * Sets the description of the Bookmark
      * @param description
      */
     public void setDescription(String description) {
