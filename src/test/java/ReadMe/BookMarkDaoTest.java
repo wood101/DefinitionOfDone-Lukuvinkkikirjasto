@@ -5,6 +5,7 @@
  */
 package ReadMe;
 
+import ReadMe.classes.Bookmark;
 import ReadMe.classes.UI;
 import ReadMe.data_access.BookmarkDao;
 import ReadMe.data_access.BookmarkDatabaseDao;
@@ -12,6 +13,7 @@ import ReadMe.data_access.Database;
 import ReadMe.data_access.SQLiteDatabase;
 import ReadMe.io.ConsoleIO;
 import java.io.File;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -28,6 +30,8 @@ public class BookMarkDaoTest {
     private File testFile;
     private Database testDatabase;
     private UI testUi;
+    ConsoleIO testIo;
+    private BookmarkDao testDao;
     
     public BookMarkDaoTest() {
     }
@@ -36,11 +40,10 @@ public class BookMarkDaoTest {
     public void setUp() throws ClassNotFoundException {
         
         testFile = new File("testReadMeBase.db");
-
         testDatabase = new SQLiteDatabase("jdbc:sqlite:" + testFile.getAbsolutePath());
-        BookmarkDao dao = new BookmarkDatabaseDao(testDatabase);
-        ConsoleIO io = new ConsoleIO();
-        testUi = new UI(io, dao);
+        testDao = new BookmarkDatabaseDao(testDatabase);
+        testIo = new ConsoleIO();
+        testUi = new UI(testIo, testDao);
 
     }
 
@@ -57,8 +60,18 @@ public class BookMarkDaoTest {
     public static void tearDownClass() {
     }
 
- 
-
+    @Test
+    public void isListingCorrect() {
+        testDao.add(new Bookmark("Vinkki", "Mitä vinkki on", "https://en.wiktionary.org/wiki/vinkki"));
+        testDao.add(new Bookmark("Tip", "What is a tip", "https://dictionary.cambridge.org/dictionary/english/tip"));
+        
+        List<Bookmark> bookmarks = testDao.listAll();
+        
+        assertEquals(2, bookmarks.size());
+        assertEquals("Vinkki", bookmarks.get(0).getTitle());  
+        assertEquals("What is a tip", bookmarks.get(1).getDescription());  
+    }
+    
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
