@@ -47,7 +47,7 @@ public class BookmarkDatabaseDao implements BookmarkDao {
     @Override
     public void add(Bookmark bm) {
         try (Connection c = db.getConnection()) {
-            PreparedStatement add = c.prepareStatement("INSERT INTO Bookmark (headline, description, link) "
+            PreparedStatement add = c.prepareStatement("INSERT INTO Bookmark (bookmark_headline, bookmark_description, bookmark_link) "
                     + "VALUES (?, ?, ?) ON CONFLICT DO NOTHING RETURNING bookmark_id");
             add.setString(1, bm.getHeadline().toLowerCase());
             add.setString(2, bm.getDescription().toLowerCase());

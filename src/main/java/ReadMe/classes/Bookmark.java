@@ -15,68 +15,74 @@ import java.util.Objects;
 
 public class Bookmark {
 
-    private String headline;
-    private String description;
-    private String link;
+    private String bookmark_headline;
+    private String bookmark_description;
+    private String bookmark_link;
 
     public Bookmark(String headline, String description, String link) {
-        this.headline = headline;
-        this.description = description;
-        this.link = link;
+        this.bookmark_headline = headline;
+        this.bookmark_description = description;
+        this.bookmark_link = link;
     }
 
     public String getHeadline() {
-        return headline;
+        return bookmark_headline;
     }
 
     public String getDescription() {
-        return description;
+        return bookmark_description;
     }
 
     public String getLink() {
-        return link;
+        return bookmark_link;
     }
 
     public void setHeadline(String headline) {
-        this.headline = headline;
+        this.bookmark_headline = headline;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.bookmark_description = description;
     }
 
     public void setLink(String link) {
-        this.link = link;
+        this.bookmark_link = link;
     }
 
     @Override
     public String toString() {
-        return "headline: " + headline + ", description: " + description + ", link: " + link;
+        return "headline: " + bookmark_headline + ", description: " + bookmark_description + ", link: " + bookmark_link;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 23 * hash + Objects.hashCode(this.headline);
-        hash = 23 * hash + Objects.hashCode(this.description);
-        hash = 23 * hash + Objects.hashCode(this.link);
+        hash = 23 * hash + Objects.hashCode(this.bookmark_headline);
+        hash = 23 * hash + Objects.hashCode(this.bookmark_description);
+        hash = 23 * hash + Objects.hashCode(this.bookmark_link);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) { return true; }
-        if (obj == null) { return false; }
-        if (getClass() != obj.getClass()) { return false; }
-        
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
         final Bookmark other = (Bookmark) obj;
-        return Objects.equals(this.headline, other.headline) 
-            && Objects.equals(this.description, other.description) 
-            && Objects.equals(this.link, other.link);
+        return Objects.equals(this.bookmark_headline, other.bookmark_headline)
+                && Objects.equals(this.bookmark_description, other.bookmark_description)
+                && Objects.equals(this.bookmark_link, other.bookmark_link);
     }
 
     public static Bookmark rowToResepti(ResultSet rs) throws SQLException {
-        return new Bookmark(rs.getString("headline"), rs.getString("description"), rs.getString("link"));
+        return new Bookmark(rs.getString("bookmark_headline"), rs.getString("bookmark_description"), rs.getString("bookmark_link"));
     }
 
 }
