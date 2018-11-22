@@ -32,7 +32,7 @@ dependencies {
 
 test {
     testLogging.showStandardStreams = true
-    systemProperties System.getProperties()
+    systemProperties['user.dir'] = workingDir
 }
 
 // Define the main class for the application
