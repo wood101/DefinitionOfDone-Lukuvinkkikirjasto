@@ -16,17 +16,26 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Data access object for Bookmark database
  * @author bisi
  */
 public class BookmarkDatabaseDao implements BookmarkDao {
 
     private Database db;
 
+    /**
+     * Creates new BookMark DAO for database
+     * @param database
+     */
     public BookmarkDatabaseDao(Database db) {
         this.db = db;
     }
 
+    /**
+     * Lists all Bookmark objects. Connects to database, retrieves all lines from Bookmark table, and returns a list of Bookmark objects.
+     * Returns null in case of SQL exception.
+     * @return
+     */
     @Override
     public List<Bookmark> listAll() {
         try (Connection c = db.getConnection()) {
@@ -34,7 +43,7 @@ public class BookmarkDatabaseDao implements BookmarkDao {
 
             ResultSet rs = c.prepareStatement("SELECT * FROM Bookmark").executeQuery();
             while (rs.next()) {
-                bookmarks.add(Bookmark.rowToResepti(rs));
+                bookmarks.add(Bookmark.rowToBookmark(rs));
             }
 
             return bookmarks;
@@ -44,6 +53,11 @@ public class BookmarkDatabaseDao implements BookmarkDao {
         return null;
     }
 
+    /**
+     * Adds a new Bookmark to database. Connects to database, adds a new Bookmark to the database. In case of database conflict does nothing.
+     * In case of SQL exception returns null.
+     * @param bm
+     */
     @Override
     public void add(Bookmark bm) {
         try (Connection c = db.getConnection()) {

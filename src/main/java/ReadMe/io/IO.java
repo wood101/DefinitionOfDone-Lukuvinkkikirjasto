@@ -11,7 +11,18 @@ package ReadMe.io;
  * @author bisi
  */
 public interface IO {
+
+    /**
+     * I/O interface for printing
+     * @param toPrint
+     */
     void print(String toPrint);
+
+    /**
+     * I/O interface for reading input
+     * @param prompt
+     * @return
+     */
     String readLine(String prompt);
 }
 
