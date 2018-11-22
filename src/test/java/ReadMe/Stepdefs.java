@@ -66,7 +66,7 @@ public class Stepdefs {
     @Then("^all bookmarks are printed$")
     public void all_bookmarks_are_printed() throws Throwable {
         IOStub ios = new IOStub(inputLinesList);
-        UI uis = new UI(ios, dao);
+        UI ui = new UI(ios, dao);
         ui.run();
         assertTrue(dao.listAll().contains(new Bookmark("title", "desc", "www")));
         
