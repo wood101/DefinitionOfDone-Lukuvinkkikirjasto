@@ -5,68 +5,84 @@
  */
 package ReadMe.data_access;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 
 /**
  *
  * @author bisi
  */
 public class SQLiteDatabase implements Database {
+    
+    
+    private String databaseAddress;
+    
 
-    private String path;
-
-    /**
-     *
-     * @param file
-     */
-    public SQLiteDatabase(File file) {
-        this.path = file.getAbsolutePath();
+    public SQLiteDatabase(String databaseAddress) throws ClassNotFoundException {
+        this.databaseAddress = databaseAddress;
+        init();
     }
 
     /**
+     * Opens a connection to the database
      *
-     */
-    public SQLiteDatabase() {
-        this.path = "sqlite:memory:";
-    }
-
-    /**
-     *
-     * @throws SQLException
-     */
-    @Override
-    public void init() throws SQLException {
-        //TODO: SQL käskyt taulujen luomiseen
-        try (Connection c = getConnection()) {
-            for (String kasky : createTables()) {
-                c.prepareStatement(kasky).execute();
-            }
-        }
-    }
-
-    /**
-     *
-     * @return
-     * @throws SQLException
+     * @throws SQLException if this database query does not succeed, this
+     * exception is thrown
+     * @return Connection returns a Connection
      */
     @Override
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:sqlite:" + path);
+        return DriverManager.getConnection(databaseAddress);
     }
 
-    private static String[] createTables() {
-        return new String[]{
-            "CREATE TABLE IF NOT EXISTS Bookmark ("
-            + "	bookmark_id integer PRIMARY KEY,"
-            + "	title varchar(50),"
-            + "	description varchar(3000),"
-            + "	link varchar(200),"
-            + ");"
-        };
+    /**
+     * Initialising procedures for the database. Creates the database and tables
+     * for it if they do not exist in the root folder of the program
+     *
+     */
+    @Override
+    public void init() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+            getConnection();
+            System.out.println("Database open - success");
+        } catch (Exception e) {
+            System.out.println("DB open fail");
+        }
+        
+        try {
+            createDatabaseTables();
+        } catch (Exception e) {
+            System.out.println("Unable to create table. Maybe it already exists.");
+            return;
+        }
     }
+
+   public void createDatabaseTables() throws SQLException {
+        Statement stmt = getConnection().createStatement();
+        String sql = "CREATE TABLE IF NOT EXISTS Bookmark ("
+            + "bookmark_id integer PRIMARY KEY,"
+            + "bookmark_title varchar(50),"
+            + "bookmark_description varchar(3000),"
+            + "bookmark_link varchar(200)"
+            + ")";
+        stmt.executeUpdate(sql);
+        stmt.close();
+        System.out.println("Table created successfully");
+    }
+    
+//    private static String[] createTables() {
+//        return new String[]{
+//            "CREATE TABLE IF NOT EXISTS Bookmark ("
+//            + "	bookmark_id integer PRIMARY KEY,"
+//            + "	bookmark_title varchar(50),"
+//            + "	bookmark_description varchar(3000),"
+//            + "	bookmark_link varchar(200),"
+//            + ");"
+//        };
+//    }
 
 }

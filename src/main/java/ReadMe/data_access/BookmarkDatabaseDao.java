@@ -61,14 +61,12 @@ public class BookmarkDatabaseDao implements BookmarkDao {
     @Override
     public void add(Bookmark bm) {
         try (Connection c = db.getConnection()) {
-            PreparedStatement add = c.prepareStatement("INSERT INTO Bookmark (headline, description, link) "
-                    + "VALUES (?, ?, ?) ON CONFLICT DO NOTHING RETURNING bookmark_id");
+            PreparedStatement add = c.prepareStatement("INSERT INTO Bookmark (bookmark_title, bookmark_description, bookmark_link) "
+                    + "VALUES (?, ?, ?)");
             add.setString(1, bm.getHeadline().toLowerCase());
             add.setString(2, bm.getDescription().toLowerCase());
             add.setString(3, bm.getLink().toLowerCase());
-            ResultSet rs = add.executeQuery();
-
-            rs.next();
+            add.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BookmarkDatabaseDao.class.getName()).log(Level.SEVERE, null, ex);
         }
