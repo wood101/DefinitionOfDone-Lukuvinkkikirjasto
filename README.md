@@ -1,7 +1,7 @@
 # DefinitionOfGettingThere lukuvinkkikirjasto
 Ryhmän DefinitionOfGettingThere OhtuMiniProjekti
 
-## Asiakaspalaveri perjantaisin 12-12.30
+### Asiakaspalaveri perjantaisin 12.00-12.30 normisti. Poikkeus: 30.11 klo. 13.15-13.45
 
 ## Mahdolliset yhteiset tapaamisajat:
 
