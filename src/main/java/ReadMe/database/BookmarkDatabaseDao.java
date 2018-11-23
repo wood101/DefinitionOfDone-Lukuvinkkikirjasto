@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ReadMe.data_access;
+package ReadMe.database;
 
-import ReadMe.classes.Bookmark;
+import ReadMe.dao.BookmarkDao;
+import ReadMe.database.Database;
+import ReadMe.domain.Bookmark;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

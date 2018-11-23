@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ReadMe;
+package ReadMe.dao;
 
-import ReadMe.classes.Bookmark;
-import ReadMe.classes.UI;
-import ReadMe.data_access.BookmarkDao;
-import ReadMe.data_access.BookmarkDatabaseDao;
-import ReadMe.data_access.Database;
-import ReadMe.data_access.SQLiteDatabase;
+import ReadMe.domain.Bookmark;
+import ReadMe.ui.UI;
+import ReadMe.dao.BookmarkDao;
+import ReadMe.database.BookmarkDatabaseDao;
+import ReadMe.database.Database;
+import ReadMe.database.SQLiteDatabase;
 import ReadMe.io.ConsoleIO;
 import java.io.File;
 import java.util.List;

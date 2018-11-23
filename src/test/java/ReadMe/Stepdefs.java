@@ -1,8 +1,8 @@
 package ReadMe;
 
-import ReadMe.classes.Bookmark;
-import ReadMe.classes.UI;
-import ReadMe.data_access.InMemoryBookmarkDao;
+import ReadMe.domain.Bookmark;
+import ReadMe.ui.UI;
+import ReadMe.dao.InMemoryBookmarkDao;
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;

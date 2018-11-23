@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ReadMe;
+package ReadMe.ui;
 
-import ReadMe.classes.Bookmark;
-import ReadMe.classes.UI;
-import ReadMe.data_access.InMemoryBookmarkDao;
+import ReadMe.IOStub;
+import ReadMe.domain.Bookmark;
+import ReadMe.ui.UI;
+import ReadMe.dao.InMemoryBookmarkDao;
 import java.util.ArrayList;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
