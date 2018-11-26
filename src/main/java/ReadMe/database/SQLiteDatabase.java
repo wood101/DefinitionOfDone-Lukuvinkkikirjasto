@@ -106,6 +106,30 @@ public class SQLiteDatabase implements Database {
                 + "news_year integer(50),\n"
                 +" news_checked boolean, news_date_checked\n"
                 + ");");
+        
+        tablesList.add("CREATE TABLE IF NOT EXISTS Article (\n"
+                        + "article_id integer PRIMARY KEY,\n"
+                        + "article_author varchar(200),\n"
+                        + "article_title varchar(50),\n"
+                        + "article_link varchar(200),\n"
+                        + "article_description varchar(3000),\n"
+                        + "article_bublisher varchar(200),\n"
+                        + "article_year integer(50),\n"
+                        + "article_checked boolean,\n"
+                        + "article_date_checked date\n"
+                        + ");");
+
+
+    tablesList.add("CREATE TABLE IF NOT EXISTS Blog (\n"
+                        +"blog_id integer PRIMARY KEY,\n"
+                        + "blog_author varchar(200),\n"
+                        + "blog_title varchar(50),\n"
+                        + "blog_link varchar(200),\n"
+                        + "blog_description varchar(3000),\n"
+                        + "blog_year integer(50),\n"
+                        + "blog_checked boolean,\n"
+                        + "blog_date_checked date\n"
+                         + ");");
                    
 
 
