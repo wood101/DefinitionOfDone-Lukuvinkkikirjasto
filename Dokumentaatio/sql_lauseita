@@ -15,6 +15,23 @@ CREATE TABLE IF NOT EXISTS Book (
 + ")
 
 
+lista.add(
+CREATE TABLE IF NOT EXISTS Video (
++ "video_id integer PRIMARY KEY,"
++ "video_author varchar(200),"
++ "video_title varchar(50),"
++ "video_link varchar(200),"
++ "video_description varchar(3000),"
++ "video_year integer(50),"
++ "video_checked boolean,"
++ "video_date_checked date"
++ ")
+
+
+
+////////////////////////////////////////////////////////////////////////
+
+TERMINAALIKÄSKY
 
 
 CREATE TABLE IF NOT EXISTS Book (
