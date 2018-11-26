@@ -41,7 +41,7 @@ tasks.withType(Test) {
 }
 
 // Define the main class for the application
-mainClassName = 'main.Main'
+mainClassName = 'ReadMe.main.Main'
 
 jacocoTestReport {
     reports {

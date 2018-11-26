@@ -9,17 +9,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author bisi
  */
 public class SQLiteDatabase implements Database {
-    
-    
+
     private String databaseAddress;
-    
 
     public SQLiteDatabase(String databaseAddress) throws ClassNotFoundException {
         this.databaseAddress = databaseAddress;
@@ -51,7 +50,7 @@ public class SQLiteDatabase implements Database {
         } catch (Exception e) {
             System.out.println("DB open fail");
         }
-        
+
         try {
             createDatabaseTables();
         } catch (Exception e) {
@@ -60,18 +59,55 @@ public class SQLiteDatabase implements Database {
         }
     }
 
-   public void createDatabaseTables() throws SQLException {
-        Statement stmt = getConnection().createStatement();
-        String sql = "CREATE TABLE IF NOT EXISTS Bookmark ("
-            + "bookmark_id integer PRIMARY KEY,"
-            + "bookmark_title varchar(50),"
-            + "bookmark_description varchar(3000),"
-            + "bookmark_link varchar(200)"
-            + ")";
-        stmt.executeUpdate(sql);
-        stmt.close();
-        System.out.println("Table created successfully");
+    public void createDatabaseTables() throws SQLException {
+        List<String> createTablesSentences = sqliteTables();
+
+        //  execute command, iterate through the list
+        try (Statement stmt = getConnection().createStatement()) {
+            //  execute command, iterate through the list
+            for (String sentence : createTablesSentences) {
+                stmt.executeUpdate(sentence);
+            }
+        }
+        System.out.println("Tables created successfully");
     }
-   
+
+    private List<String> sqliteTables() {
+        ArrayList<String> tablesList = new ArrayList<>();
+
+        tablesList.add("CREATE TABLE IF NOT EXISTS Book (\n"
+                + " book_id integer PRIMARY KEY,\"\n"
+                + " book_author varchar(200),\"\n"
+                + " book_title varchar(50),\"\n"
+                + " book_ISBN integer(100),\"\n"
+                + " book_description varchar(3000),\"\n"
+                + " book_year integer(50),\"\n"
+                + " book_checked boolean\"\n"
+                + " book_date_checked date\"\n"
+                + ");");
+        tablesList.add("CREATE TABLE IF NOT EXISTS Video (\n"
+                + "video_id integer PRIMARY KEY,\"\n"
+                + "video_author varchar(200),\"\n"
+                + "video_title varchar(50),\"\n"
+                + "video_link varchar(200),\"\n"
+                + "video_description varchar(3000),\"\n"
+                + "video_year integer(50),\"\n"
+                + "video_checked boolean,\"\n"
+                + "video_date_checked date\"\n"
+                + ");");
+        tablesList.add("CREATE TABLE IF NOT EXISTS News (\n"
+                + "news_id integer PRIMARY KEY,\"\n"
+                + "news_author varchar(200),\"\n"
+                + "news_title varchar(50),\"\n"
+                + "news_link varchar(200),\"\n"
+                + "video_description varchar(3000),\"\n"
+                + "news_bublisher varchar(200),\"\n"
+                + "news_year integer(50),\"\n"
+                + "video_checked boolean,\"\n"
+                + "video_date_checked date\"\n"
+                + ");");
+
+        return tablesList;
+    }
 
 }
