@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package ReadMe.dao;
-
 import ReadMe.domain.*;
+
 
 
 /**
@@ -16,7 +16,7 @@ public interface DaoManager {
 
     /**
      * Returns all saved Bookmarks
-     * @return List<Bookmark> List of saved Bookmarks
+     * @return List<String> List of saved Bookmarks
      */
     String listAll(String type);
 
