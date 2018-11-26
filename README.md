@@ -24,9 +24,7 @@ pe 12.30-13.30  asiakaspalaverin jälkeen
 ## [CI:travis](https://travis-ci.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto)
 [![Build Status](https://travis-ci.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto.svg?branch=master)](https://travis-ci.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto)
 
-## [linkki sovelluksen toimivaan versioon]( https://Tämä tulee tähän myöhemmässä vaiheessa)
-
-## [työlle tulee määritellä lisenssi]( https://Tämä tulee tähän  myöhemmässä vaiheessa)
+## [työlle tulee määritellä lisenssi]()
 
 ## [Käyttöohje](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/blob/master/Dokumentaatio/kaytto-ohje.md)
 
