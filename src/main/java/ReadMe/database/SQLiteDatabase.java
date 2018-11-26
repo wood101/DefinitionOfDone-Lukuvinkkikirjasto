@@ -99,12 +99,12 @@ public class SQLiteDatabase implements Database {
         tablesList.add("CREATE TABLE IF NOT EXISTS News (\n"
                 + "news_id integer PRIMARY KEY,\n"
                 + "news_author varchar(200),\n"
-                + "news_title varchar(50), \n"
-                + "news_link varchar(200), \n"
+                + "news_title varchar(50),\n"
+                + "news_link varchar(200),\n"
                 + " news_description varchar(3000),\n"
-                + "news_bublisher varchar(200), \n"
-                + "news_year integer(50), \n"
-                +" news_checked boolean, news_date_checked \n"
+                + "news_bublisher varchar(200),\n"
+                + "news_year integer(50),\n"
+                +" news_checked boolean, news_date_checked\n"
                 + ");");
                    
 
