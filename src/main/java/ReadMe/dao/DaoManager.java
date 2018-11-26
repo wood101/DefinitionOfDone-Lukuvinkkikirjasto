@@ -19,7 +19,7 @@ public interface DaoManager {
      * Returns all saved Bookmarks
      * @return List<Bookmark> List of saved Bookmarks
      */
-    List<String> listAll(String type);
+    String listAll(String type);
 
     /**
      * Adds a new Bookmark object to database
@@ -34,5 +34,5 @@ public interface DaoManager {
     
     void addArticle(Article bookmark);
     
-    void add(Blog bookmark);
+    void addBlog(Blog bookmark);
 }
