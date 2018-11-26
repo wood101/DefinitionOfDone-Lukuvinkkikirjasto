@@ -10,20 +10,29 @@ import ReadMe.domain.Bookmark;
 
 
 /**
- * Interface for BookMark database access object
+ * Interface for BookMark database access object. 
  * @author bisi
  */
-public interface BookmarkDao {
+public interface DaoManager {
 
     /**
      * Returns all saved Bookmarks
      * @return List<Bookmark> List of saved Bookmarks
      */
-    List<Bookmark> listAll();
+    List<String> listAll(String type);
 
     /**
      * Adds a new Bookmark object to database
      * @param readTip Bookmark readTip
      */
-    void add(Bookmark readTip);
+    
+    void addVideo(Video bookmark);
+    
+    void addBook(Book bookmark);
+    
+    void addNews(News bookmark);
+    
+    void addArticle(Article bookmark);
+    
+    void add(Blog bookmark);
 }

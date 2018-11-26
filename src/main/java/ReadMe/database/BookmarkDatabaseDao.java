@@ -5,7 +5,6 @@
  */
 package ReadMe.database;
 
-import ReadMe.dao.BookmarkDao;
 import ReadMe.database.Database;
 import ReadMe.domain.Bookmark;
 import java.sql.Connection;
@@ -16,12 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ReadMe.dao.DaoManager;
 
 /**
  * Data access object for Bookmark database
  * @author bisi
  */
-public class BookmarkDatabaseDao implements BookmarkDao {
+public class BookmarkDatabaseDao implements DaoManager {
 
     private Database db;
 

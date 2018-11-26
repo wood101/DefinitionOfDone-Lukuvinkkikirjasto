@@ -2,7 +2,7 @@ package ReadMe;
 
 import ReadMe.domain.Bookmark;
 import ReadMe.ui.UI;
-import ReadMe.dao.InMemoryBookmarkDao;
+import ReadMe.dao.InMemoryDao;
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
@@ -18,7 +18,7 @@ public class Stepdefs {
 
     UI ui;
     IOStub io;
-    InMemoryBookmarkDao dao = new InMemoryBookmarkDao();
+    InMemoryDao dao = new InMemoryDao();
     String[] inputLinesAdd = new String[5];
     String[] inputLinesList = new String[2];
 

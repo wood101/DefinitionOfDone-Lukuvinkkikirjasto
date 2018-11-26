@@ -8,7 +8,7 @@ package ReadMe.ui;
 import ReadMe.IOStub;
 import ReadMe.domain.Bookmark;
 import ReadMe.ui.UI;
-import ReadMe.dao.InMemoryBookmarkDao;
+import ReadMe.dao.InMemoryDao;
 import java.util.ArrayList;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -24,11 +24,11 @@ public class UITest {
 
     UI ui;
     IOStub io;
-    InMemoryBookmarkDao db;
+    InMemoryDao db;
 
     @Before
     public void setUp() {
-        db = mock(InMemoryBookmarkDao.class);
+        db = mock(InMemoryDao.class);
     }
 
     @Test

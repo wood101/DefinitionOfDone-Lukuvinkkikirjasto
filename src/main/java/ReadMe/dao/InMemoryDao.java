@@ -13,14 +13,14 @@ import ReadMe.domain.Bookmark;
  *
  * @author bisi
  */
-public class InMemoryBookmarkDao implements BookmarkDao {
+public class InMemoryDao implements BookmarkDao {
 
     private List<Bookmark> tips;
 
     /**
      * In memory 'database' that can be used for testing.
      */
-    public InMemoryBookmarkDao() {
+    public InMemoryDao() {
         this.tips = new ArrayList<Bookmark>();
         tips.add(new Bookmark("Kakkakuutiot", "Tämä on tärkeää tietoa",
                 "https://www.iltalehti.fi/terveysuutiset/a/71cb5062-ed6e-45a6-a22c-d0949daeaa6a"));

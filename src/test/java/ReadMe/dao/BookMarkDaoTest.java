@@ -7,7 +7,6 @@ package ReadMe.dao;
 
 import ReadMe.domain.Bookmark;
 import ReadMe.ui.UI;
-import ReadMe.dao.BookmarkDao;
 import ReadMe.database.BookmarkDatabaseDao;
 import ReadMe.database.Database;
 import ReadMe.database.SQLiteDatabase;
@@ -20,6 +19,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import ReadMe.dao.DaoManager;
 
 /**
  *
@@ -31,7 +31,7 @@ public class BookMarkDaoTest {
     private Database testDatabase;
     private UI testUi;
     ConsoleIO testIo;
-    private BookmarkDao testDao;
+    private DaoManager testDao;
     
     public BookMarkDaoTest() {
     }

@@ -5,10 +5,10 @@
  */
 package ReadMe.ui;
 
-import ReadMe.dao.BookmarkDao;
 import ReadMe.domain.Bookmark;
 import ReadMe.io.IO;
 import java.util.List;
+import ReadMe.dao.DaoManager;
 
 /**
  * UI object. Used to run console app.
@@ -18,9 +18,9 @@ import java.util.List;
 public class UI {
 
     private IO io;
-    private BookmarkDao dao;
+    private DaoManager dao;
 
-    public UI(IO io, BookmarkDao dao) {
+    public UI(IO io, DaoManager dao) {
         this.io = io;
         this.dao = dao;
     }
