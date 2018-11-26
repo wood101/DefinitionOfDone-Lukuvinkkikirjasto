@@ -36,7 +36,6 @@ CREATE TABLE IF NOT EXISTS News (
 + "video_description varchar(3000),"
 + "news_bublisher varchar(200),"
 + "news_year integer(50),"
-+ "video_link varchar(200),"
 + "video_checked boolean,"
 + "video_date_checked date"
 + ")
