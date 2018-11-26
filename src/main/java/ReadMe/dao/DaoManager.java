@@ -5,8 +5,7 @@
  */
 package ReadMe.dao;
 
-import java.util.List;
-import ReadMe.domain.Bookmark;
+import ReadMe.domain.*;
 
 
 /**
