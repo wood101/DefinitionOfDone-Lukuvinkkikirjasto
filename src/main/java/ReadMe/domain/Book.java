@@ -28,6 +28,14 @@ public class Book {
         this.book_date_checked = book_date_checked;
     }
     
+    public Book(String book_author, String book_title, String ISBN, String book_description, int book_year) {
+        this.book_author = book_author;
+        this.book_title = book_title;
+        this.ISBN = ISBN;
+        this.book_description = book_description;
+        this.book_year = book_year;
+    }    
+    
     public int getBook_id() {
         return book_id;
     }
