@@ -102,7 +102,7 @@ public class SQLiteDatabase implements Database {
                 + "news_title varchar(50),\n"
                 + "news_link varchar(200),\n"
                 + " news_description varchar(3000),\n"
-                + "news_bublisher varchar(200),\n"
+                + "news_publisher varchar(200),\n"
                 + "news_year integer(50),\n"
                 +" news_checked boolean, news_date_checked\n"
                 + ");");
@@ -113,7 +113,7 @@ public class SQLiteDatabase implements Database {
                         + "article_title varchar(50),\n"
                         + "article_link varchar(200),\n"
                         + "article_description varchar(3000),\n"
-                        + "article_bublisher varchar(200),\n"
+                        + "article_publisher varchar(200),\n"
                         + "article_year integer(50),\n"
                         + "article_checked boolean,\n"
                         + "article_date_checked date\n"
