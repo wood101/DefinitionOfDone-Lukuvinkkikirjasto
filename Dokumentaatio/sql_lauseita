@@ -27,6 +27,20 @@ CREATE TABLE IF NOT EXISTS Video (
 + "video_date_checked date"
 + ")
 
+lista.add(
+CREATE TABLE IF NOT EXISTS News (
++ "news_id integer PRIMARY KEY,"
++ "news_author varchar(200),"
++ "news_title varchar(50),"
++ "news_link varchar(200),"
++ "video_description varchar(3000),"
++ "news_bublisher varchar(200),"
++ "news_year integer(50),"
++ "video_link varchar(200),"
++ "video_checked boolean,"
++ "video_date_checked date"
++ ")
+
 
 
 ////////////////////////////////////////////////////////////////////////
