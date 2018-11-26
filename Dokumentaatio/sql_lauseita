@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS Book (
 + "book_id integer PRIMARY KEY,"
 + "book_author varchar(200),"
 + "book_title varchar(50),"
++ "book_year integer(50),"
 + "book_ISBN integer(100),"
 + "book_description varchar(3000),"
 + "book_link varchar(200)"
