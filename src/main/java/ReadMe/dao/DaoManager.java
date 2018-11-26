@@ -5,8 +5,13 @@
  */
 package ReadMe.dao;
 
+import ReadMe.domain.Article;
+import ReadMe.domain.Blog;
+import ReadMe.domain.Book;
 import java.util.List;
 import ReadMe.domain.Bookmark;
+import ReadMe.domain.News;
+import ReadMe.domain.Video;
 
 
 /**

@@ -5,9 +5,11 @@
  */
 package ReadMe.dao;
 
+import ReadMe.domain.*;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import ReadMe.domain.Bookmark;
 
 /**
  *
@@ -32,22 +34,34 @@ public class InMemoryDao implements DaoManager {
         this.news = new ArrayList<>();
         this.articles = new ArrayList<>();
         this.blogs = new ArrayList<>();
+        setInMemoryObjects();
+    }
+
+    private void setInMemoryObjects() {
+        
+        Date date = new Date(2018, 9, 13);
 
         // Create entries 
-        news.add(new News("", "Kakkakuutiot",
+        videos.add(new Video("hackerdashery", "P vs. NP and the Computational Complexity Zoo", 
+                "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "P js NP erot", 2014));
+        
+        
+        
+        
+        /**news.add(new News("", "Kakkakuutiot",
                 "https://www.iltalehti.fi/terveysuutiset/a/71cb5062-ed6e-45a6-a22c-d0949daeaa6a"));
         news.add(new News("Täydelliset joulutortut",
                 "Näin teet täydellisen tortun", "https://www.iltalehti.fi/ruoka-artikkelit/a/556f9c4c-638b-4091-ab35-cb6e52e02555"));
-
+*       */
     }
 
     /**
-     * Returns all wanted bookmarks as a printable String.
-     * 'all' adds all data from all databases to the returned String.
-     * other possible input returns only the given object list as a String.
-     * 
+     * Returns all wanted bookmarks as a printable String. 'all' adds all data
+     * from all databases to the returned String. other possible input returns
+     * only the given object list as a String.
+     *
      * Inputs = "all", "video", "book", "news", "article", "blog".
-     * 
+     *
      * Method uses private toString methods.
      *
      * @return Bookmarks
@@ -57,30 +71,30 @@ public class InMemoryDao implements DaoManager {
         String s = "\n\n"; // returned string
         switch (type) {
             case "all":
-                s+="All: \n\n";
-                s+=videosToString();
-                s+=booksToString();
-                s+=newsToString();
-                s+=articlesToString();
-                s+=blogsToString();
-                 
+                s += "All: \n\n";
+                s += videosToString();
+                s += booksToString();
+                s += newsToString();
+                s += articlesToString();
+                s += blogsToString();
+
                 break;
             case "video":
-                s+=videosToString();
+                s += videosToString();
                 break;
             case "book":
-                s+=booksToString();
+                s += booksToString();
                 break;
             case "news":
-                s+=newsToString();
+                s += newsToString();
                 break;
 
             case "article":
-                s+=articlesToString();
+                s += articlesToString();
                 break;
 
             case "blog":
-                s+=blogsToString();
+                s += blogsToString();
                 break;
 
             default:
@@ -90,9 +104,7 @@ public class InMemoryDao implements DaoManager {
         return s;
     }
 
-    
     // Methods to keep ListAll cleaner. Methods turn list into a string.
-
     private String videosToString() {
         String s = "";
         s += "Videos:\n";
@@ -135,7 +147,7 @@ public class InMemoryDao implements DaoManager {
         s += "Articles:\n";
 
         for (Article article : articles) {
-            s += (articles.toString());
+            s += (article.toString());
         }
         s += ("\n\n");
 
@@ -155,28 +167,28 @@ public class InMemoryDao implements DaoManager {
     }
 
     @Override
-    public void addVideo(Video bookmark) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addVideo(Video video) {
+        videos.add(video);
     }
 
     @Override
-    public void addBook(Book bookmark) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addBook(Book book) {
+        books.add(book);
     }
 
     @Override
-    public void addNews(News bookmark) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addNews(News news) {
+        news.add(news);
     }
 
     @Override
-    public void addArticle(Article bookmark) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addArticle(Article article) {
+        articles.add(article);
     }
 
     @Override
-    public void addBlog(Blog bookmark) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addBlog(Blog blog) {
+        blogs.add(blog);
     }
 
 }
