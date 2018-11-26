@@ -2,7 +2,7 @@ ArrayList<String> lista = new ArrayList<>();
 
 lista.add(
 
-CREATE TABLE 
+CREATE TABLE IF NOT EXISTS Book (
 + "book_id integer PRIMARY KEY,"
 + "book_author varchar(200),"
 + "book_title varchar(50),"
