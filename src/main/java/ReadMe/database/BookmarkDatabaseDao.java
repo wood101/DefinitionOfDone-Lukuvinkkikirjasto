@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ReadMe.data_access;
+package ReadMe.database;
 
-import ReadMe.classes.Bookmark;
+import ReadMe.dao.BookmarkDao;
+import ReadMe.database.Database;
+import ReadMe.domain.Bookmark;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,14 +63,12 @@ public class BookmarkDatabaseDao implements BookmarkDao {
     @Override
     public void add(Bookmark bm) {
         try (Connection c = db.getConnection()) {
-            PreparedStatement add = c.prepareStatement("INSERT INTO Bookmark (headline, description, link) "
-                    + "VALUES (?, ?, ?) ON CONFLICT DO NOTHING RETURNING bookmark_id");
-            add.setString(1, bm.getHeadline().toLowerCase());
-            add.setString(2, bm.getDescription().toLowerCase());
-            add.setString(3, bm.getLink().toLowerCase());
-            ResultSet rs = add.executeQuery();
-
-            rs.next();
+            PreparedStatement add = c.prepareStatement("INSERT INTO Bookmark (bookmark_title, bookmark_description, bookmark_link) "
+                    + "VALUES (?, ?, ?)");
+            add.setString(1, bm.getTitle());
+            add.setString(2, bm.getDescription());
+            add.setString(3, bm.getLink());
+            add.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(BookmarkDatabaseDao.class.getName()).log(Level.SEVERE, null, ex);
         }

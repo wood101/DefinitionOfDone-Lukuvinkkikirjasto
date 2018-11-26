@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ReadMe.data_access;
+package ReadMe.dao;
 
 import java.util.List;
-import ReadMe.classes.Bookmark;
+import ReadMe.domain.Bookmark;
 
 
 /**

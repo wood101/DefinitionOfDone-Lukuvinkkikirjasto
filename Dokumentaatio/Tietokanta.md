@@ -14,10 +14,10 @@ Tietokannan alustus terminaalissa:
 sqlite3 Bookmarks.db
 
 
-CREATE TABLE Bookmark (
+CREATE TABLE IF NOT EXISTS Bookmark (
 	bookmark_id integer PRIMARY KEY,
-	headline varchar(100),
-	description varchar(256),
-	link varchar(200)
+	bookmark_headline varchar(100),
+	bookmark_description varchar(256),
+	bookmark_link varchar(200)
 );
 ```

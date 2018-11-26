@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ReadMe;
+package ReadMe.domain;
 
-import ReadMe.classes.Bookmark;
+import ReadMe.domain.Bookmark;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
