@@ -168,27 +168,27 @@ public class InMemoryDao implements DaoManager {
 
     @Override
     public void addVideo(Video video) {
-        videos.add(video);
+        this.videos.add(video);
     }
 
     @Override
     public void addBook(Book book) {
-        books.add(book);
+        this.books.add(book);
     }
 
     @Override
     public void addNews(News news) {
-        news.add(news);
+        this.news.add(news);
     }
 
     @Override
     public void addArticle(Article article) {
-        articles.add(article);
+        this.articles.add(article);
     }
 
     @Override
     public void addBlog(Blog blog) {
-        blogs.add(blog);
+        this.blogs.add(blog);
     }
 
 }
