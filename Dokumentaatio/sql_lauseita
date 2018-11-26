@@ -40,6 +40,19 @@ CREATE TABLE IF NOT EXISTS News (
 + "video_date_checked date"
 + ")
 
+lista.add(
+CREATE TABLE IF NOT EXISTS Article (
++ "article_id integer PRIMARY KEY,"
++ "article_author varchar(200),"
++ "article_title varchar(50),"
++ "article_link varchar(200),"
++ "article_description varchar(3000),"
++ "article_bublisher varchar(200),"
++ "article_year integer(50),"
++ "article_checked boolean,"
++ "article_date_checked date"
++ ")
+
 
 
 ////////////////////////////////////////////////////////////////////////
