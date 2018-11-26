@@ -53,7 +53,17 @@ CREATE TABLE IF NOT EXISTS Article (
 + "article_date_checked date"
 + ")
 
-
+lista.add(
+CREATE TABLE IF NOT EXISTS Blog (
++ "blog_id integer PRIMARY KEY,"
++ "blog_author varchar(200),"
++ "blog_title varchar(50),"
++ "blog_link varchar(200),"
++ "blog_description varchar(3000),"
++ "blog_year integer(50),"
++ "blog_checked boolean,"
++ "blog_date_checked date"
++ ")
 
 ////////////////////////////////////////////////////////////////////////
 
