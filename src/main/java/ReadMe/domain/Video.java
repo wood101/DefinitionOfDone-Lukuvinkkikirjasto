@@ -28,6 +28,14 @@ public class Video {
         this.video_date_checked = video_date_checked;
     }
     
+    public Video(String video_author, String video_title, String video_link, String video_description, int video_year) {
+        this.video_author = video_author;
+        this.video_title = video_title;
+        this.video_link = video_link;
+        this.video_description = video_description;
+        this.video_year = video_year;
+    }
+    
     public int getVideo_id() {
         return video_id;
     }
