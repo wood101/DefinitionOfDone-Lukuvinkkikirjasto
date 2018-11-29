@@ -67,14 +67,18 @@ public class InMemoryDaoTest {
     @Test
     public void isListAllCorrect() {
        String s = "All: \n\n" + "Videos:\n" + dao.getVideos().toString() 
-               + "\n\n" + "Books:\n" + "\n\n" + "News:\n" + "\n\n" + "Articles:\n" + "\n\n" + "Blogs:\n" + "\n\n";
-       assertEquals(dao.listAll("all"), s);
+               + "\n\n" + "Books:\n" + dao.getBooks().toString() 
+               + "\n\n" + "News:\n" + dao.getNews().toString() 
+               + "\n\n" + "Articles:\n" + dao.getArticles().toString() 
+               + "\n\n" + "Blogs:\n" + dao.getBlogs().toString() 
+               + "\n\n";
+       assertEquals(dao.listAll(), s);
     }
     
     @Test
     public void isListVideosCorrect() {
         String s = "Videos:\n" + dao.getVideos().toString() + "\n\n";
-        assertEquals(dao.listAll("video"), s);
+        assertEquals(dao.listByType("video"), s);
        
     }
     
