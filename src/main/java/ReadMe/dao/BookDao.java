@@ -60,11 +60,11 @@ public class BookDao {
      */
     public void add(Book book) {
         try (Connection c = db.getConnection()) {
-            PreparedStatement add = c.prepareStatement("INSERT INTO Book (book_author, book_title, ISBN, book_description, book_year, book_checked, book_date_checked) "
+            PreparedStatement add = c.prepareStatement("INSERT INTO Book (book_author, book_title, book_ISBN, book_description, book_year, book_checked, book_date_checked) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?)");
             add.setString(1, book.getBook_author());
             add.setString(2, book.getBook_title());
-            add.setString(3, book.getISBN());
+            add.setString(3, book.getbook_ISBN());
             add.setString(4, book.getBook_description());
             add.setInt(5, book.getBook_year());
             add.setBoolean(6, false);
@@ -82,6 +82,6 @@ public class BookDao {
      * @throws SQLException
      */
     public static Book rowToBook(ResultSet rs) throws SQLException {
-        return new Book(rs.getInt("book_id"), rs.getString("book_author"), rs.getString("book_title"), rs.getString("ISBN"), rs.getString("book_description"), rs.getInt("book_year"), rs.getBoolean("book_checked"), rs.getDate("book_date_checked"));
+        return new Book(rs.getInt("book_id"), rs.getString("book_author"), rs.getString("book_title"), rs.getString("book_ISBN"), rs.getString("book_description"), rs.getInt("book_year"), rs.getBoolean("book_checked"), rs.getDate("book_date_checked"));
     }
 }

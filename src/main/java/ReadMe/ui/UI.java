@@ -71,7 +71,7 @@ public class UI {
     }
 
     public void addBlog() {
-        io.print("ARTICLE ENTRY - enter information: \n\n");
+        io.print("BLOG ENTRY - enter information: \n\n");
         String title = io.readLine("Title: ");
         String author = io.readLine("Author: ");
         String link = io.readLine("Link: ");
@@ -133,14 +133,19 @@ public class UI {
         switch (choice) {
             case "1":
                 addVideo();
+                break;
             case "2":
                 addBook();
+                break;
             case "3":
                 addNews();
+                break;
             case "4":
                 addArticle();
+                break;
             case "5":
                 addBlog();
+                break;
             default:
                 io.print("Choose a correct input!\n");
                 break;
@@ -150,23 +155,32 @@ public class UI {
     
     public void selectTypeToList() {
         io.print("Choose category:\n"
-                    + "  1 - video\n"
-                    + "  2 - book\n"
-                    + "  3 - news\n"
-                    + "  4 - article\n"
-                    + "  5 - blog\n");
+                    + "  1 - all\n"
+                    + "  2 - video\n"
+                    + "  3 - book\n"
+                    + "  4 - news\n"
+                    + "  5 - article\n"
+                    + "  6 - blog\n");
         String choice = io.readLine("Enter choice: ");
         switch (choice) {
             case "1":
-                addVideo();
+                listAll();
+                break;
             case "2":
-                addBook();
+                listVideos();
+                break;
             case "3":
-                addNews();
+                listBooks();
+                break;
             case "4":
-                addArticle();
+                listNews();
+                break;
             case "5":
-                addBlog();
+                listArticles();
+                break;
+            case "6":
+                listBlogs();
+                break;
             default:
                 io.print("Choose a correct input!\n");
                 break;
