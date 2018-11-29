@@ -56,9 +56,8 @@ public class InMemoryDao implements DaoManager {
     }
 
     /**
-     * Returns all wanted bookmarks as a printable String. 'all' adds all data
-     * from all databases to the returned String. other possible input returns
-     * only the given object list as a String.
+     * Returns all wanted bookmarks as a printable String. Returns
+     * the given object list as a String based on input.
      *
      * Inputs = "all", "video", "book", "news", "article", "blog".
      *
@@ -67,18 +66,9 @@ public class InMemoryDao implements DaoManager {
      * @return Bookmarks
      */
     @Override
-    public String listAll(String type) {
+    public String listByType(String type) {
         String s = "\n\n"; // returned string
         switch (type) {
-            case "all":
-                s += "All: \n\n";
-                s += videosToString();
-                s += booksToString();
-                s += newsToString();
-                s += articlesToString();
-                s += blogsToString();
-
-                break;
             case "video":
                 s += videosToString();
                 break;
@@ -104,6 +94,25 @@ public class InMemoryDao implements DaoManager {
         return s;
     }
 
+    /**
+     * Returns all bookmarks as a printable String.
+     * only the given object list as a String.
+     * Method uses private toString methods.
+     *
+     * @return Bookmarks
+     */
+    @Override
+    public String listAll() {
+        String s = "\n\n"; // returned string
+        s += "All: \n\n";
+        s += videosToString();
+        s += booksToString();
+        s += newsToString();
+        s += articlesToString();
+        s += blogsToString();
+        return s;
+    }    
+    
     // Methods to keep ListAll cleaner. Methods turn list into a string.
     private String videosToString() {
         String s = "";

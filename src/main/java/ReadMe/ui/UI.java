@@ -84,42 +84,42 @@ public class UI {
      * Prints all Bookmarks from database
      */
     public String listAll() {
-        return manager.listAll("all");
+        return manager.listAll();
     }
     
     /**
      * Prints all Bookmarks from database
      */
     public String listVideos() {
-        return manager.listAll("video");
+        return manager.listByType("video");
     }
     
     /**
      * Prints all Bookmarks from database
      */
     public String listBooks() {
-        return manager.listAll("book");
+        return manager.listByType("book");
     }
     
     /**
      * Prints all Bookmarks from database
      */
     public String listNews() {
-        return manager.listAll("news");
+        return manager.listByType("news");
     }
     
     /**
      * Prints all Bookmarks from database
      */
     public String listArticles() {
-        return manager.listAll("article");
+        return manager.listByType("article");
     }
     
     /**
      * Prints all Bookmarks from database
      */
     public String listBlogs() {
-        return manager.listAll("blog");
+        return manager.listByType("blog");
     }
 
     public void selectTypeToAdd() {
