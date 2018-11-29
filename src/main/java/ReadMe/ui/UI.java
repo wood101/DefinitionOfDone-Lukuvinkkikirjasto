@@ -208,7 +208,7 @@ public class UI {
                     break;
                 case "l":
                     io.print("All added tips: \n");
-                    listAll();
+                    io.print(listAll());
                     io.print("\n\n");
                     break;
                 case "q":
