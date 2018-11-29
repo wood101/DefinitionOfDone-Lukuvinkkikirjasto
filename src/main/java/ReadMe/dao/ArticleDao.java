@@ -11,8 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,9 +58,19 @@ public class ArticleDao {
      * Marks the article as read and sets the date it was read on.
      * @param article Object that is marked read
      */
-    public void markArticleAsRead(Article article) {
-        article.setArticle_checked(true);
-        article.setArticle_date_checked(new Date());
+    public boolean markAsRead(String title) {
+        try (Connection c = db.getConnection()) {
+            PreparedStatement stmt = c.prepareStatement(
+                    "UPDATE Article SET article_checked = ?, article_date_checked = ? WHERE article_title = ?) ");
+            stmt.setBoolean(1, true);
+            stmt.setDate(2, new Date(System.currentTimeMillis()));
+            stmt.setString(3, title);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ArticleDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }    
     
     /**
