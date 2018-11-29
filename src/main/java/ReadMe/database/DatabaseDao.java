@@ -22,14 +22,15 @@ public class DatabaseDao implements DaoManager {
     private ArticleDao articleDao;
     private BlogDao blogDao;
 
-    public DatabaseDao(VideoDao videoDao, BookDao bookDao, NewsDao newsDao, ArticleDao articleDao, BlogDao blogDao) {
+    public DatabaseDao(VideoDao videoDao, BookDao bookDao,
+            NewsDao newsDao, ArticleDao articleDao, BlogDao blogDao) {
         this.videoDao = videoDao;
         this.bookDao = bookDao;
         this.newsDao = newsDao;
         this.articleDao = articleDao;
         this.blogDao = blogDao;
     }
-    
+
     @Override
     public String listAll(String type) {
         String s = "\n\n"; // returned string
@@ -72,8 +73,8 @@ public class DatabaseDao implements DaoManager {
         s += ("\n\n");
         return s;
     }
-    
-        private String booksToString() {
+
+    private String booksToString() {
         String s = "";
         s += "Books:\n";
         for (Book book : bookDao.listAll()) {
@@ -114,27 +115,27 @@ public class DatabaseDao implements DaoManager {
     }
 
     @Override
-    public void addVideo(Video bookmark) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addVideo(Video video) {
+        videoDao.add(video);
     }
 
     @Override
     public void addBook(Book book) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        bookDao.add(book);
     }
 
     @Override
-    public void addNews(News bookmark) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addNews(News news) {
+        newsDao.add(news);
     }
 
     @Override
-    public void addArticle(Article bookmark) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addArticle(Article article) {
+        articleDao.add(article);
     }
 
     @Override
-    public void addBlog(Blog bookmark) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addBlog(Blog blog) {
+        blogDao.add(blog);
     }
 }
