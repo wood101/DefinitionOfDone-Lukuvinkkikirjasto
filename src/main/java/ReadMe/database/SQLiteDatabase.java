@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *
- * @author bisi
+ * @author bisi & apndx
  */
 public class SQLiteDatabase implements Database {
 
