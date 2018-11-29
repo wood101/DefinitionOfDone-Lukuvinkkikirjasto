@@ -14,3 +14,13 @@ Feature: A new tip can be added if proper properties are given
      	Given command "a" add new readtip is selected and command "3" book is selected
         When  Title "title" and Author "Author" and link "www" and Description "desc" and Publisher "publisher" and Year published "2000" are input
         Then  a new newstip is added
+
+    Scenario: articletip creation is successful with valid properties
+     	Given command "a" add new readtip is selected and command "4" article is selected
+        When Title "title" and Author "Author" and Link "www" and Description "desc" and Publisher "pub" and Year "2000" are input
+        Then  a new articletip is added
+
+    Scenario: blogtip creation is successful with valid properties
+     	Given command "a" add new readtip is selected and command "5" blog is selected
+        When Title "title" and Author "Author" and Link "www" and Description "desc" and Year "2000" are input
+        Then  a new blogtip is added
