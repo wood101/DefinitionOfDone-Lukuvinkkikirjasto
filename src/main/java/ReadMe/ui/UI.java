@@ -5,7 +5,6 @@
  */
 package ReadMe.ui;
 
-import ReadMe.domain.Bookmark;
 import ReadMe.io.IO;
 import ReadMe.dao.DaoManager;
 import ReadMe.domain.Article;
@@ -17,7 +16,7 @@ import ReadMe.domain.Video;
 /**
  * UI object. Used to run console app.
  *
- * @author bisi
+ * @author bisi, peje
  */
 public class UI {
 
@@ -28,13 +27,6 @@ public class UI {
         this.io = io;
         this.manager = manager;
     }
-
-//    public void addBookmark() {
-//        String headline = io.readLine("Enter title: ");
-//        String description = io.readLine("Enter description: ");
-//        String link = io.readLine("Enter link: ");
-//        manager.add(new Bookmark(headline, description, link));
-//    }
 
     public void addVideo() {
         io.print("VIDEO ENTRY - enter information: \n\n");
@@ -79,7 +71,7 @@ public class UI {
     }
 
     public void addBlog() {
-        io.print("ARTICLE ENTRY - enter information: \n\n");
+        io.print("BLOG ENTRY - enter information: \n\n");
         String title = io.readLine("Title: ");
         String author = io.readLine("Author: ");
         String link = io.readLine("Link: ");
@@ -92,11 +84,46 @@ public class UI {
      * Prints all Bookmarks from database
      */
     public String listAll() {
-        return manager.listAll("all");
+        return manager.listAll();
+    }
+    
+    /**
+     * Prints all Bookmarks from database
+     */
+    public String listVideos() {
+        return manager.listByType("video");
+    }
+    
+    /**
+     * Prints all Bookmarks from database
+     */
+    public String listBooks() {
+        return manager.listByType("book");
+    }
+    
+    /**
+     * Prints all Bookmarks from database
+     */
+    public String listNews() {
+        return manager.listByType("news");
+    }
+    
+    /**
+     * Prints all Bookmarks from database
+     */
+    public String listArticles() {
+        return manager.listByType("article");
+    }
+    
+    /**
+     * Prints all Bookmarks from database
+     */
+    public String listBlogs() {
+        return manager.listByType("blog");
     }
 
-    public void selectTypeOfTip() {
-        io.print("Choose type of readtip:\n"
+    public void selectTypeToAdd() {
+        io.print("Choose category:\n"
                     + "  1 - video\n"
                     + "  2 - book\n"
                     + "  3 - news\n"
@@ -106,14 +133,54 @@ public class UI {
         switch (choice) {
             case "1":
                 addVideo();
+                break;
             case "2":
                 addBook();
+                break;
             case "3":
                 addNews();
+                break;
             case "4":
                 addArticle();
+                break;
             case "5":
                 addBlog();
+                break;
+            default:
+                io.print("Choose a correct input!\n");
+                break;
+        }
+        io.print("Tip added!\n\n");
+    }
+    
+    public void selectTypeToList() {
+        io.print("Choose category:\n"
+                    + "  1 - all\n"
+                    + "  2 - video\n"
+                    + "  3 - book\n"
+                    + "  4 - news\n"
+                    + "  5 - article\n"
+                    + "  6 - blog\n");
+        String choice = io.readLine("Enter choice: ");
+        switch (choice) {
+            case "1":
+                listAll();
+                break;
+            case "2":
+                listVideos();
+                break;
+            case "3":
+                listBooks();
+                break;
+            case "4":
+                listNews();
+                break;
+            case "5":
+                listArticles();
+                break;
+            case "6":
+                listBlogs();
+                break;
             default:
                 io.print("Choose a correct input!\n");
                 break;
@@ -137,7 +204,7 @@ public class UI {
             switch (choice) {
                 case "a":
                     io.print("Adding a new ReadTip!:\n\n");
-                    selectTypeOfTip();
+                    selectTypeToAdd();
                     break;
                 case "l":
                     io.print("All added tips: \n");

@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package ReadMe.database;
+
+package ReadMe.dao;
 
 import ReadMe.dao.*;
 import ReadMe.domain.*;
-import java.util.List;
 
 /**
  * Class that manages DAO Objects.
@@ -22,23 +17,29 @@ public class DatabaseDao implements DaoManager {
     private ArticleDao articleDao;
     private BlogDao blogDao;
 
-    public DatabaseDao() {
+    public DatabaseDao(VideoDao videoDao, BookDao bookDao,
+            NewsDao newsDao, ArticleDao articleDao, BlogDao blogDao) {
+        this.videoDao = videoDao;
+        this.bookDao = bookDao;
+        this.newsDao = newsDao;
+        this.articleDao = articleDao;
+        this.blogDao = blogDao;
     }
-    
-    
 
+    /**
+     * Returns all wanted bookmarks as a printable String. Returns
+     * the given object list as a String based on input.
+     *
+     * Inputs = "all", "video", "book", "news", "article", "blog".
+     *
+     * Method uses private toString methods.
+     *
+     * @return Bookmarks
+     */
     @Override
-    public String listAll(String type) {
+    public String listByType(String type) {
         String s = "\n\n"; // returned string
         switch (type) {
-            case "all":
-                s += "All: \n\n";
-                s += videosToString();
-                s += booksToString();
-                s += newsToString();
-                s += articlesToString();
-                s += blogsToString();
-                break;
             case "video":
                 s += videosToString();
                 break;
@@ -48,17 +49,40 @@ public class DatabaseDao implements DaoManager {
             case "news":
                 s += newsToString();
                 break;
+
             case "article":
                 s += articlesToString();
                 break;
+
             case "blog":
                 s += blogsToString();
                 break;
+
             default:
                 s += ("\n\n");
         }
+
         return s;
     }
+
+    /**
+     * Returns all bookmarks as a printable String.
+     * only the given object list as a String.
+     * Method uses private toString methods.
+     *
+     * @return Bookmarks
+     */
+    @Override
+    public String listAll() {
+        String s = "\n\n"; // returned string
+        s += "All: \n\n";
+        s += videosToString();
+        s += booksToString();
+        s += newsToString();
+        s += articlesToString();
+        s += blogsToString();
+        return s;
+    }    
 
     private String videosToString() {
         String s = "";
@@ -69,8 +93,8 @@ public class DatabaseDao implements DaoManager {
         s += ("\n\n");
         return s;
     }
-    
-        private String booksToString() {
+
+    private String booksToString() {
         String s = "";
         s += "Books:\n";
         for (Book book : bookDao.listAll()) {
@@ -111,27 +135,27 @@ public class DatabaseDao implements DaoManager {
     }
 
     @Override
-    public void addVideo(Video bookmark) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addVideo(Video video) {
+        videoDao.add(video);
     }
 
     @Override
     public void addBook(Book book) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        bookDao.add(book);
     }
 
     @Override
-    public void addNews(News bookmark) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addNews(News news) {
+        newsDao.add(news);
     }
 
     @Override
-    public void addArticle(Article bookmark) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addArticle(Article article) {
+        articleDao.add(article);
     }
 
     @Override
-    public void addBlog(Blog bookmark) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addBlog(Blog blog) {
+        blogDao.add(blog);
     }
 }

@@ -17,9 +17,16 @@ public interface DaoManager {
      * Returns all saved Bookmarks
      * @return List<String> List of saved Bookmarks
      */
-    String listAll(String type);
+    String listAll();
 
     /**
+     * Returns all data as a string based on input type.
+     * @param type the desired object
+     * @return  String of all data of the given type
+     */
+    String listByType(String type);
+    
+     /**
      * Adds a new Bookmark object to database
      * @param readTip Bookmark readTip
      */

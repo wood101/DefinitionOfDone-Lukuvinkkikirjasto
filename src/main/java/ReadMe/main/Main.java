@@ -1,11 +1,10 @@
 package ReadMe.main;
 
 import ReadMe.ui.UI;
-import ReadMe.database.BookmarkDatabaseDao;
 import ReadMe.database.Database;
 import ReadMe.database.SQLiteDatabase;
 import ReadMe.io.ConsoleIO;
-import ReadMe.dao.DaoManager;
+import ReadMe.dao.*;
 
 /**
  *
@@ -21,7 +20,12 @@ public class Main {
         
         String databaseName = "readMeBase.db";
         Database db = new SQLiteDatabase("jdbc:sqlite:" + databaseName);
-        DaoManager dao = new BookmarkDatabaseDao(db);
+        VideoDao video = new VideoDao(db);
+        BookDao book = new BookDao(db);
+        NewsDao news = new NewsDao(db);
+        ArticleDao article = new ArticleDao(db);
+        BlogDao blog = new BlogDao(db);
+        DaoManager dao = new DatabaseDao(video, book, news, article, blog);
         ConsoleIO io = new ConsoleIO();
         UI ui = new UI(io, dao);
         ui.run();

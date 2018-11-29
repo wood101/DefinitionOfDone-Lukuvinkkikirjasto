@@ -8,7 +8,6 @@ package ReadMe.dao;
 import ReadMe.database.Database;
 import ReadMe.domain.Video;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,7 +61,7 @@ public class VideoDao {
     public void add(Video vid) {
         try (Connection c = db.getConnection()) {
             PreparedStatement add = c.prepareStatement("INSERT INTO Video (video_author, video_title, video_link, video_description, video_year, video_checked, video_date_checked) "
-                    + "VALUES (?, ?, ?)");
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)");
             add.setString(1, vid.getVideo_author());
             add.setString(2, vid.getVideo_title());
             add.setString(3, vid.getVideo_link());
@@ -76,7 +75,7 @@ public class VideoDao {
         }
     }
 
-        /**
+     /**
      * Creates a new Video object from database row
      * @param rs
      * @return

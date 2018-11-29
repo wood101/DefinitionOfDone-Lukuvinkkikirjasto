@@ -5,7 +5,6 @@
  */
 package ReadMe.dao;
 
-import ReadMe.ui.UI;
 import ReadMe.database.Database;
 import ReadMe.database.SQLiteDatabase;
 import ReadMe.io.ConsoleIO;
@@ -15,21 +14,21 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import ReadMe.domain.Video;
+import ReadMe.domain.News;
 import java.util.Date;
 
 /**
  *
  * @author madjanne
  */
-public class VideoDaoTest {
+public class NewsDaoTest {
 
     private File testFile;
     private Database testDatabase;
     ConsoleIO testIo;
-    private VideoDao testDao;
+    private NewsDao testDao;
     
-    public VideoDaoTest() {
+    public NewsDaoTest() {
     }
 
     @Before
@@ -37,9 +36,8 @@ public class VideoDaoTest {
         
         testFile = new File("testReadMeBase.db");
         testDatabase = new SQLiteDatabase("jdbc:sqlite:" + testFile.getAbsolutePath());
-        testDao = new VideoDao(testDatabase);
+        testDao = new NewsDao(testDatabase);
         testIo = new ConsoleIO();
-
     }
 
     @After
@@ -49,13 +47,13 @@ public class VideoDaoTest {
 
     @Test
     public void isListingCorrect() {
-        testDao.add(new Video(1, "author", "title", "www", "desc", 2018, false, new Date(5)));
-        testDao.add(new Video(3, "author1", "title2", "www4", "descr", 2015, true, new Date(7)));
+        testDao.add(new News(1, "author", "title", "www", "desc", "otava", 2018, false, new Date(5)));
+        testDao.add(new News(3, "author1", "title2", "www4", "descr", "penguin", 2015, true, new Date(7)));
         
-        List<Video> videos = testDao.listAll();
+        List<News> newsArray = testDao.listAll();
         
-        assertEquals(2, videos.size());
-        assertEquals("title", videos.get(0).getVideo_title());  
-        assertEquals("descr", videos.get(0).getVideo_description());  
+        assertEquals(2, newsArray.size());
+        assertEquals("title", newsArray.get(0).getNews_title());  
+        assertEquals("descr", newsArray.get(0).getNews_description());  
     }
 }

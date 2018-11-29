@@ -59,6 +59,12 @@ public class SQLiteDatabase implements Database {
         }
     }
 
+     /**
+     * Databasetables are created if they do not exist already
+     *
+     * @throws SQLException if this database query does not succeed, this
+     * exception is thrown
+     */
     public void createDatabaseTables() throws SQLException {
         List<String> createTablesSentences = sqliteTables();
 
@@ -72,6 +78,11 @@ public class SQLiteDatabase implements Database {
         System.out.println("Tables created successfully");
     }
 
+     /**
+     * Creates the SQL database creation sentences
+     *
+     * @return a list of Strings, each String is a creation sentence for one database table
+     */
     private List<String> sqliteTables() {
         ArrayList<String> tablesList = new ArrayList<>();
 
