@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,6 +54,15 @@ public class ArticleDao {
         return null;
     }
 
+    /**
+     * Marks the article as read and sets the date it was read on.
+     * @param article Object that is marked read
+     */
+    public void markArticleAsRead(Article article) {
+        article.setArticle_checked(true);
+        article.setArticle_date_checked(new Date());
+    }    
+    
     /**
      * Adds a new Article to database. Connects to database, adds a new Article to the database. In case of database conflict does nothing.
      * In case of SQL exception returns null.

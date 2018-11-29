@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,6 +77,15 @@ public class NewsDao {
         }
     }
 
+    /**
+     * Marks the news as read and sets the date it was read on.
+     * @param news Object that is marked read
+     */
+    public void markNewsAsRead(News news) {
+        news.setNews_checked(true);
+        news.setNews_date_checked(new Date());
+    }    
+    
      /**
      * Creates a new News object from database row
      * @param rs

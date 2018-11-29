@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,7 +76,16 @@ public class BlogDao {
         }
     }
 
-        /**
+    /**
+     * Marks the blog as read and sets the date it was read on.
+     * @param blog Object that is marked read
+     */
+    public void markBlogAsRead(Blog blog) {
+        blog.setBlog_checked(true);
+        blog.setBlog_date_checked(new Date());
+    }
+    
+    /**
      * Creates a new Blog object from database row
      * @param rs
      * @return

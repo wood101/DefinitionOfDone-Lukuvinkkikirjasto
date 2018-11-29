@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,6 +76,15 @@ public class VideoDao {
         }
     }
 
+    /**
+     * Marks the video as read and sets the date it was read on.
+     * @param video Object that is marked read
+     */
+    public void markVideoAsRead(Video video) {
+        video.setVideo_checked(true);
+        video.setVideo_date_checked(new Date());
+    }
+    
      /**
      * Creates a new Video object from database row
      * @param rs

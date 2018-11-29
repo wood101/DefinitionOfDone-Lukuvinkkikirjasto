@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,6 +76,15 @@ public class BookDao {
         }
     }
 
+    /**
+     * Marks the book as read and sets the date it was read on.
+     * @param book Object that is marked read
+     */
+    public void markBookAsRead(Book book) {
+        book.setBook_checked(true);
+        book.setBook_date_checked(new Date());
+    }    
+    
      /**
      * Creates a new Book object from database row
      * @param rs
