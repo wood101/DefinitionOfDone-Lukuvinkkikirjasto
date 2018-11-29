@@ -102,9 +102,9 @@ public class Book {
     
     @Override
     public String toString() {
-        return "book_id: " + book_id + ", book_author: " + book_author + ", book_title: " + book_title + 
-                ", book_ISBN: " + book_ISBN + ", book_description: " + book_description + 
-                ", book_year: " + book_year + ", book_checked: " + book_checked + ", book_date_checked: " + book_date_checked;
+        return "\nTitle: " + book_title + "\n Author: " + book_author +
+                "\n ISBN: " + book_ISBN + "\n Description: " + book_description + 
+                "\n Year: " + book_year + "\n Checked: " + book_checked + "\n Date checked: " + book_date_checked + "\n";
     }
     
     @Override

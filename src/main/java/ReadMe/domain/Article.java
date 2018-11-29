@@ -113,9 +113,9 @@ public class Article {
     
     @Override
     public String toString() {
-        return "article_id: " + article_id + ", article_author: " + article_author + ", article_title: " + article_title + 
-                ", article_link: " + article_link + ", article_description: " + article_description + ", article_publisher: " + article_publisher +
-                ", article_year: " + article_year + ", article_checked: " + article_checked + ", article_date_checked: " + article_date_checked;
+        return "\nTitle: " + article_title + "\n Author: " + article_author + 
+                "\n Link: " + article_link + "\n Description: " + article_description + "\n Publisher: " + article_publisher + 
+                "\n Year: " + article_year + "\n Checked: " + article_checked + "\n Date checked: " + article_date_checked +"\n";
     }
     
     @Override

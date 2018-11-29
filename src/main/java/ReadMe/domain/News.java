@@ -113,9 +113,9 @@ public class News {
     
     @Override
     public String toString() {
-        return "news_id: " + news_id + ", news_author: " + news_author + ", news_title: " + news_title + 
-                ", news_link: " + news_link + ", news_description: " + news_description + ", news_publisher: " + news_publisher +
-                ", news_year: " + news_year + ", news_checked: " + news_checked + ", news_date_checked: " + news_date_checked;
+        return "\nTitle: " + news_title + "\n Author: " + news_author + 
+                "\n Link: " + news_link + "\n Description: " + news_description + "\n Publisher: " + news_publisher + 
+                "\n Year: " + news_year + "\n Checked: " + news_checked + "\n Date checked: " + news_date_checked +"\n";
     }
     
     @Override

@@ -102,9 +102,9 @@ public class Blog {
     
     @Override
     public String toString() {
-        return "blog_id: " + blog_id + ", blog_author: " + blog_author + ", blog_title: " + blog_title + 
-                ", blog_link: " + blog_link + ", blog_description: " + blog_description + 
-                ", blog_year: " + blog_year + ", blog_checked: " + blog_checked + ", blog_date_checked: " + blog_date_checked;
+        return "\nTitle: " + blog_title + "\n Author: " + blog_author + 
+                "\n Link: " + blog_link + "\n Description: " + blog_description + 
+                "\n Year: " + blog_year + "\n Checked: " + blog_checked + "\n Date checked: " + blog_date_checked + "\n";
     }
     
     @Override

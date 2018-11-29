@@ -102,9 +102,9 @@ public class Video {
     
     @Override
     public String toString() {
-        return "video_id: " + video_id + ", video_author: " + video_author + ", video_title: " + video_title + 
-                ", video_link: " + video_link + ", video_description: " + video_description + 
-                ", video_year: " + video_year + ", video_checked: " + video_checked + ", video_date_checked: " + video_date_checked;
+        return "\nTitle: " + video_title + "\n Author: " + video_author + 
+                "\n Link: " + video_link + "\n Description: " + video_description + 
+                "\n Year: " + video_year + "\n Checked: " + video_checked + "\n Date checked: " + video_date_checked + "\n";
     }
     
     @Override
