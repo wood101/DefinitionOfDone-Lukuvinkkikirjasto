@@ -54,6 +54,6 @@ public class NewsDaoTest {
         
         assertEquals(2, newsArray.size());
         assertEquals("title", newsArray.get(0).getNews_title());  
-        assertEquals("descr", newsArray.get(0).getNews_description());  
+        assertEquals("desc", newsArray.get(0).getNews_description());  
     }
 }

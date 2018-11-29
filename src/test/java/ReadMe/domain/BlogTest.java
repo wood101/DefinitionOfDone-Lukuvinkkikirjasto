@@ -24,9 +24,9 @@ public class BlogTest {
     
     @Test
     public void toStringTest() {
-        assertEquals("blog_id: " + 1 + ", blog_author: " + "author" + ", blog_title: " + "title" + 
-                ", blog_link: " + "www" + ", blog_description: " + "desc" + ", blog_year: " + 2018 +
-                ", blog_checked: " + false + ", blog_date_checked: " + new Date(5), blog.toString());
+        assertEquals("\nTitle: " + "title" + "\n Author: " + "author" + 
+                "\n Link: " + "www" + "\n Description: " + "desc" + 
+                "\n Year: " + 2018 + "\n Checked: " + false + "\n Date checked: " + new Date(5) + "\n", blog.toString());
     }
     
     @Test

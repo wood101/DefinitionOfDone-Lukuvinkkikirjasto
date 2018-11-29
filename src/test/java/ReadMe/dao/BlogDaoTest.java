@@ -55,6 +55,6 @@ public class BlogDaoTest {
         
         assertEquals(2, blogs.size());
         assertEquals("title", blogs.get(0).getBlog_title());  
-        assertEquals("descr", blogs.get(0).getBlog_description());  
+        assertEquals("desc", blogs.get(0).getBlog_description());  
     }
 }

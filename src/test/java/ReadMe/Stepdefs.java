@@ -5,6 +5,7 @@ import ReadMe.ui.UI;
 import ReadMe.io.IOStub;
 import ReadMe.dao.InMemoryDao;
 import ReadMe.domain.Book;
+import ReadMe.domain.Video;
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;

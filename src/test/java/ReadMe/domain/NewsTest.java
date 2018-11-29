@@ -24,9 +24,9 @@ public class NewsTest {
     
     @Test
     public void toStringTest() {
-        assertEquals("news_id: " + 1 + ", news_author: " + "author" + ", news_title: " + "title" + 
-                ", news_link: " + "www" + ", news_description: " + "desc" + ", news_publisher: " + "penguin" + ", news_year: " + 2018 +
-                ", news_checked: " + false + ", news_date_checked: " + new Date(5), news.toString());
+        assertEquals("\nTitle: " + "title" + "\n Author: " + "author" + 
+                "\n Link: " + "www" + "\n Description: " + "desc" + "\n Publisher: " + "penguin" + 
+                "\n Year: " + 2018 + "\n Checked: " + false + "\n Date checked: " + new Date(5) +"\n", news.toString());
     }
     
     @Test

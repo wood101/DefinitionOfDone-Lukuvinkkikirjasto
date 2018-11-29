@@ -56,6 +56,6 @@ public class VideoDaoTest {
         
         assertEquals(2, videos.size());
         assertEquals("title", videos.get(0).getVideo_title());  
-        assertEquals("descr", videos.get(0).getVideo_description());  
+        assertEquals("desc", videos.get(0).getVideo_description());  
     }
 }

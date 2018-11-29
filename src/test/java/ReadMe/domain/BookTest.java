@@ -24,9 +24,9 @@ public class BookTest {
     
     @Test
     public void toStringTest() {
-        assertEquals("book_id: " + 1 + ", book_author: " + "author" + ", book_title: " + "title" + 
-                ", ISBN: " + "a52d253" + ", book_description: " + "desc" + ", book_year: " + 2018 +
-                ", book_checked: " + false + ", book_date_checked: " + new Date(5), book.toString());
+        assertEquals("\nTitle: " + "title" + "\n Author: " + "author" +
+                "\n ISBN: " + "a52d253" + "\n Description: " + "desc" + 
+                "\n Year: " + 2018 + "\n Checked: " + false + "\n Date checked: " + new Date(5) + "\n", book.toString());
     }
     
     @Test

@@ -53,7 +53,7 @@ public class UITest {
     public void addVideoSuccessfulWhenCorrectInputIsGiven() {
         io = new IOStub("a", "1", "title", "author", "www.test.org", "desc", "2000", "q");
         ui = new UI(io, db);
-        Video video = new Video("author", "title", "www.test.org", "desc", 2000);
+        Video video = new Video("author", "title", "desc", "www.test.org", 2000);
         
         ui.run();
 

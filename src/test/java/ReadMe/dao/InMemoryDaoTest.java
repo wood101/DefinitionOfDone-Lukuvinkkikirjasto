@@ -66,20 +66,17 @@ public class InMemoryDaoTest {
     
     @Test
     public void isListAllCorrect() {
-       String s = "All: \n\n" + "Videos:\n" + dao.getVideos().toString() 
-               + "\n\n" + "Books:\n" + dao.getBooks().toString() 
-               + "\n\n" + "News:\n" + dao.getNews().toString() 
-               + "\n\n" + "Articles:\n" + dao.getArticles().toString() 
-               + "\n\n" + "Blogs:\n" + dao.getBlogs().toString() 
-               + "\n\n";
+       String s = "\n\nAll: \n\n" + "Videos:\n" + dao.getVideos().toString().replace("[", "").replace("]", "") 
+               + "\n\n" + "Books:\n" + dao.getBooks().toString().replace("[", "").replace("]", "") 
+               + "\n\n" + "News:\n" + dao.getNews().toString().replace("[", "").replace("]", "") 
+               + "\n\n" + "Articles:\n" + dao.getArticles().toString().replace("[", "").replace("]", "") + "\n\n" + "Blogs:\n" + dao.getBlogs().toString().replace("[", "").replace("]", "") + "\n\n";
        assertEquals(dao.listAll(), s);
     }
     
     @Test
     public void isListVideosCorrect() {
-        String s = "Videos:\n" + dao.getVideos().toString() + "\n\n";
+        String s = "\n\nVideos:\n" + dao.getVideos().toString().replace("[", "").replace("]", "") + "\n\n";
         assertEquals(dao.listByType("video"), s);
-       
     }
     
     

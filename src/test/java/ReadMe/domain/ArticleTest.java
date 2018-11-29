@@ -24,9 +24,9 @@ public class ArticleTest {
     
     @Test
     public void toStringTest() {
-        assertEquals("article_id: " + 1 + ", article_author: " + "author" + ", article_title: " + "title" + 
-                ", article_link: " + "www" + ", article_description: " + "desc" + ", article_publisher: " + "penguin" + ", article_year: " + 2018 +
-                ", article_checked: " + false + ", article_date_checked: " + new Date(5), article.toString());
+        assertEquals("\nTitle: " + "title" + "\n Author: " + "author" + 
+                "\n Link: " + "www" + "\n Description: " + "desc" + "\n Publisher: " + "penguin" + 
+                "\n Year: " + 2018 + "\n Checked: " + false + "\n Date checked: " + new Date(5) +"\n", article.toString());
     }
     
     @Test

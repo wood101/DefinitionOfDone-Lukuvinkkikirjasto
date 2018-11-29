@@ -24,9 +24,9 @@ public class VideoTest {
     
     @Test
     public void toStringTest() {
-        assertEquals("video_id: " + 1 + ", video_author: " + "author" + ", video_title: " + "title" + 
-                ", video_link: " + "www" + ", video_description: " + "desc" + ", video_year: " + 2018 +
-                ", video_checked: " + false + ", video_date_checked: " + new Date(5), video.toString());
+        assertEquals("\nTitle: " + "title" + "\n Author: " + "author" + 
+                "\n Link: " + "www" + "\n Description: " + "desc" + 
+                "\n Year: " + 2018 + "\n Checked: " + false + "\n Date checked: " + new Date(5) + "\n", video.toString());
     }
     
     @Test
