@@ -5,7 +5,6 @@
  */
 package ReadMe.ui;
 
-import ReadMe.domain.Bookmark;
 import ReadMe.io.IO;
 import ReadMe.dao.DaoManager;
 import ReadMe.domain.Article;
@@ -17,7 +16,7 @@ import ReadMe.domain.Video;
 /**
  * UI object. Used to run console app.
  *
- * @author bisi
+ * @author bisi, peje
  */
 public class UI {
 
@@ -28,13 +27,6 @@ public class UI {
         this.io = io;
         this.manager = manager;
     }
-
-//    public void addBookmark() {
-//        String headline = io.readLine("Enter title: ");
-//        String description = io.readLine("Enter description: ");
-//        String link = io.readLine("Enter link: ");
-//        manager.add(new Bookmark(headline, description, link));
-//    }
 
     public void addVideo() {
         io.print("VIDEO ENTRY - enter information: \n\n");
@@ -94,9 +86,70 @@ public class UI {
     public String listAll() {
         return manager.listAll("all");
     }
+    
+    /**
+     * Prints all Bookmarks from database
+     */
+    public String listVideos() {
+        return manager.listAll("video");
+    }
+    
+    /**
+     * Prints all Bookmarks from database
+     */
+    public String listBooks() {
+        return manager.listAll("book");
+    }
+    
+    /**
+     * Prints all Bookmarks from database
+     */
+    public String listNews() {
+        return manager.listAll("news");
+    }
+    
+    /**
+     * Prints all Bookmarks from database
+     */
+    public String listArticles() {
+        return manager.listAll("article");
+    }
+    
+    /**
+     * Prints all Bookmarks from database
+     */
+    public String listBlogs() {
+        return manager.listAll("blog");
+    }
 
-    public void selectTypeOfTip() {
-        io.print("Choose type of readtip:\n"
+    public void selectTypeToAdd() {
+        io.print("Choose category:\n"
+                    + "  1 - video\n"
+                    + "  2 - book\n"
+                    + "  3 - news\n"
+                    + "  4 - article\n"
+                    + "  5 - blog\n");
+        String choice = io.readLine("Enter choice: ");
+        switch (choice) {
+            case "1":
+                addVideo();
+            case "2":
+                addBook();
+            case "3":
+                addNews();
+            case "4":
+                addArticle();
+            case "5":
+                addBlog();
+            default:
+                io.print("Choose a correct input!\n");
+                break;
+        }
+        io.print("Tip added!\n\n");
+    }
+    
+    public void selectTypeToList() {
+        io.print("Choose category:\n"
                     + "  1 - video\n"
                     + "  2 - book\n"
                     + "  3 - news\n"
@@ -137,7 +190,7 @@ public class UI {
             switch (choice) {
                 case "a":
                     io.print("Adding a new ReadTip!:\n\n");
-                    selectTypeOfTip();
+                    selectTypeToAdd();
                     break;
                 case "l":
                     io.print("All added tips: \n");
