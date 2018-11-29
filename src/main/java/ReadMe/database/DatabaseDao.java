@@ -22,11 +22,14 @@ public class DatabaseDao implements DaoManager {
     private ArticleDao articleDao;
     private BlogDao blogDao;
 
-    public DatabaseDao() {
+    public DatabaseDao(VideoDao videoDao, BookDao bookDao, NewsDao newsDao, ArticleDao articleDao, BlogDao blogDao) {
+        this.videoDao = videoDao;
+        this.bookDao = bookDao;
+        this.newsDao = newsDao;
+        this.articleDao = articleDao;
+        this.blogDao = blogDao;
     }
     
-    
-
     @Override
     public String listAll(String type) {
         String s = "\n\n"; // returned string
