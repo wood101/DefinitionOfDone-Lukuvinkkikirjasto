@@ -124,12 +124,11 @@ public class UI {
 
     public void selectTypeToAdd() {
         io.print("Choose category:\n"
-                    + "  1 - all\n"
-                    + "  2 - video\n"
-                    + "  3 - book\n"
-                    + "  4 - news\n"
-                    + "  5 - article\n"
-                    + "  6 - blog\n");
+                    + "  1 - video\n"
+                    + "  2 - book\n"
+                    + "  3 - news\n"
+                    + "  4 - article\n"
+                    + "  5 - blog\n");
         String choice = io.readLine("Enter choice: ");
         switch (choice) {
             case "1":
@@ -151,12 +150,11 @@ public class UI {
     
     public void selectTypeToList() {
         io.print("Choose category:\n"
-                    + "  1 - all\n"
-                    + "  2 - video\n"
-                    + "  3 - book\n"
-                    + "  4 - news\n"
-                    + "  5 - article\n"
-                    + "  6 - blog\n");
+                    + "  1 - video\n"
+                    + "  2 - book\n"
+                    + "  3 - news\n"
+                    + "  4 - article\n"
+                    + "  5 - blog\n");
         String choice = io.readLine("Enter choice: ");
         switch (choice) {
             case "1":
