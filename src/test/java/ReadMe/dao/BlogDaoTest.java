@@ -15,21 +15,21 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import ReadMe.domain.Video;
+import ReadMe.domain.Blog;
 import java.util.Date;
 
 /**
  *
  * @author madjanne
  */
-public class VideoDaoTest {
+public class BlogDaoTest {
 
     private File testFile;
     private Database testDatabase;
     ConsoleIO testIo;
-    private VideoDao testDao;
+    private BlogDao testDao;
     
-    public VideoDaoTest() {
+    public BlogDaoTest() {
     }
 
     @Before
@@ -37,9 +37,8 @@ public class VideoDaoTest {
         
         testFile = new File("testReadMeBase.db");
         testDatabase = new SQLiteDatabase("jdbc:sqlite:" + testFile.getAbsolutePath());
-        testDao = new VideoDao(testDatabase);
+        testDao = new BlogDao(testDatabase);
         testIo = new ConsoleIO();
-
     }
 
     @After
@@ -49,13 +48,13 @@ public class VideoDaoTest {
 
     @Test
     public void isListingCorrect() {
-        testDao.add(new Video(1, "author", "title", "www", "desc", 2018, false, new Date(5)));
-        testDao.add(new Video(3, "author1", "title2", "www4", "descr", 2015, true, new Date(7)));
+        testDao.add(new Blog(1, "author", "title", "www", "desc", 2018, false, new Date(5)));
+        testDao.add(new Blog(3, "author1", "title2", "www4", "descr", 2015, true, new Date(7)));
         
-        List<Video> videos = testDao.listAll();
+        List<Blog> blogs = testDao.listAll();
         
-        assertEquals(2, videos.size());
-        assertEquals("title", videos.get(0).getVideo_title());  
-        assertEquals("descr", videos.get(0).getVideo_description());  
+        assertEquals(2, blogs.size());
+        assertEquals("title", blogs.get(0).getBlog_title());  
+        assertEquals("descr", blogs.get(0).getBlog_description());  
     }
 }
