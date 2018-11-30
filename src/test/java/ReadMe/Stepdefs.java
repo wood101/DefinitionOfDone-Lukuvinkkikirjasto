@@ -1,18 +1,24 @@
-package ReadMe;
+package ReadMe.ui;
 
 import ReadMe.domain.Bookmark;
 import ReadMe.ui.UI;
 import ReadMe.io.IOStub;
 import ReadMe.dao.InMemoryDao;
+import ReadMe.dao.VideoDao;
+import ReadMe.database.Database;
+import ReadMe.database.SQLiteDatabase;
 import ReadMe.domain.Blog;
 import ReadMe.domain.Book;
 import ReadMe.domain.News;
 import ReadMe.domain.Video;
+import ReadMe.io.ConsoleIO;
+import ReadMe.io.IO;
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.*;
@@ -27,11 +33,11 @@ public class Stepdefs {
     String[] inputLinesAdd = new String[2];
     String[] inputLinesList = new String[5];
 
-    String[] inputLinesVideo = new String[7];
-    String[] inputLinesBook = new String[7];
-    String[] inputLinesNews = new String[8];
-    String[] inputLinesArticle = new String[8];
-    String[] inputLinesBlog = new String[7];
+    String[] inputLinesVideo = new String[10];
+    String[] inputLinesBook = new String[10];
+    String[] inputLinesNews = new String[10];
+    String[] inputLinesArticle = new String[10];
+    String[] inputLinesBlog = new String[10];
 
 //    @Given("^command new tip is selected$")
 //    public void command_new_tip_is_selected() throws Throwable {
@@ -86,6 +92,7 @@ public class Stepdefs {
         inputLinesVideo[4] = "www";
         inputLinesVideo[5] = "desc";
         inputLinesVideo[6] = "2000";
+        inputLinesVideo[7] = "q";
     }
 
     //for video
@@ -95,6 +102,12 @@ public class Stepdefs {
 //        ui = new UI(io, dao);
 //        ui.run();
 //        assertTrue(dao.listByType("video").contains(new Video("author", "title", "www", "desc", 2000).toString()));
+
+        io = new IOStub(inputLinesBlog);
+        ui = new UI(io, dao);
+        ui.run();
+        assertTrue(dao.listByType("video").contains(new Video("author", "title", "www", "desc", 2000).toString()));
+
     }
 
     //for book
@@ -112,16 +125,17 @@ public class Stepdefs {
         inputLinesBook[4] = "12345";
         inputLinesBook[5] = "desc";
         inputLinesBook[6] = "2000";
+        inputLinesBook[7] = "q";
     }
 
     //for book
     @Then("^a new booktip is added$")
     public void a_new_booktip_is_added() throws Throwable {
-//        io = new IOStub(inputLinesBook);
-//        InMemoryDao daoBook= new InMemoryDao();
-//        ui = new UI(io, daoBook);
-//        ui.run();
-//        assertTrue(daoBook.listByType("book").contains(new Book("author", "title", "12345", "desc", 2000).toString()));
+        io = new IOStub(inputLinesBook);
+        InMemoryDao daoBook = new InMemoryDao();
+        ui = new UI(io, daoBook);
+        ui.run();
+        assertTrue(daoBook.listByType("book").contains(new Book("author", "title", "12345", "desc", 2000).toString()));
 
     }
 
@@ -141,15 +155,16 @@ public class Stepdefs {
         inputLinesNews[5] = "desc";
         inputLinesNews[6] = "publisher";
         inputLinesNews[7] = "2000";
+        inputLinesNews[8] = "q";
     }
 
     //news
     @Then("^a new newstip is added$")
     public void a_new_newstip_is_added() throws Throwable {
-//        io = new IOStub(inputLinesNews);
-//        ui = new UI(io, dao);
-//        ui.run();
-//        assertTrue(dao.listByType("news").contains(new News("author", "title", "www", "desc", "publisher", 2000).toString()));
+        io = new IOStub(inputLinesNews);
+        ui = new UI(io, dao);
+        ui.run();
+        assertTrue(dao.listByType("news").contains(new News("author", "title", "www", "desc", "publisher", 2000).toString()));
     }
 
     //article
@@ -168,15 +183,16 @@ public class Stepdefs {
         inputLinesArticle[5] = "desc";
         inputLinesArticle[6] = "pub";
         inputLinesArticle[7] = "2000";
+        inputLinesArticle[8] = "q";
     }
 
     //article
     @Then("^a new articletip is added$")
     public void a_new_articletip_is_added() throws Throwable {
-//        io = new IOStub(inputLinesArticle);
-//        ui = new UI(io, dao);
-//        ui.run();
-//        assertTrue(dao.listByType("article").contains(new News("author", "title", "www", "desc", "publisher", 2000).toString()));
+        io = new IOStub(inputLinesArticle);
+        ui = new UI(io, dao);
+        ui.run();
+        assertTrue(dao.listByType("article").contains(new News("author", "title", "www", "desc", "pub", 2000).toString()));
 
     }
 
@@ -195,15 +211,16 @@ public class Stepdefs {
         inputLinesBlog[4] = "www";
         inputLinesBlog[5] = "desc";
         inputLinesBlog[6] = "2000";
+        inputLinesBlog[7] = "q";
     }
 
     //blog
     @Then("^a new blogtip is added$")
     public void a_new_blogtip_is_added() throws Throwable {
-//        io = new IOStub(inputLinesBlog);
-//        ui = new UI(io, dao);
-//        ui.run();
-//        assertTrue(dao.listByType("blog").contains(new Blog("author", "title", "www", "desc", 2000).toString()));
+        io = new IOStub(inputLinesBlog);
+        ui = new UI(io, dao);
+        ui.run();
+        assertTrue(dao.listByType("blog").contains(new Blog("author", "title", "www", "desc", 2000).toString()));
     }
 
     @Then("^all bookmarks are printed$")
