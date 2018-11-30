@@ -32,6 +32,7 @@ public class Stepdefs {
     InMemoryDao dao = new InMemoryDao();
     String[] inputLinesAdd = new String[2];
     String[] inputLinesList = new String[5];
+    String[] inputLinesAll = new String[5];
 
     String[] inputLinesVideo = new String[10];
     String[] inputLinesBook = new String[10];
@@ -52,10 +53,11 @@ public class Stepdefs {
 //        inputLinesAdd[4] = "q";
 //
 //    }
+    // list all
     @When("^command list all is given$")
     public void command_list_all_is_given() throws Throwable {
-        inputLinesList[0] = "l";
-        inputLinesList[1] = "q";
+        inputLinesAll[0] = "l";
+        inputLinesAll[1] = "q";
     }
 
 //    @Then("^a new tip is added$")
@@ -98,16 +100,11 @@ public class Stepdefs {
     //for video
     @Then("^a new videotip is added$")
     public void a_new_videotip_is_added() throws Throwable {
-//        io = new IOStub(inputLinesVideo);
-//        ui = new UI(io, dao);
-//        ui.run();
-//        assertTrue(dao.listByType("video").contains(new Video("author", "title", "www", "desc", 2000).toString()));
-
         io = new IOStub(inputLinesVideo);
         ui = new UI(io, dao);
+        assertTrue(dao.getVideos().size() == 1);
         ui.run();
-        assertTrue(dao.listByType("video").contains(new Video("author", "title", "www", "desc", 2000).toString()));
-
+        assertTrue(dao.getVideos().size() == 2);
     }
 
     //for book
@@ -225,13 +222,16 @@ public class Stepdefs {
 
     @Then("^all bookmarks are printed$")
     public void all_bookmarks_are_printed() throws Throwable {
-//        IOStub ios = new IOStub(inputLinesVideo);     
-//        InMemoryDao dao = new InMemoryDao();
-//        ui = new UI(ios, dao);
-//        ui.run();
-//        assertTrue(ios.getOutputs().contains(new Video("hackerdashery", "P vs. NP and the Computational Complexity Zoo",
-        //        "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "P js NP erot", 2014)));
-        //assertTrue(ios.getOutputs().contains(new Video("author", "title", "www", "desc", 2000).toString()));
+        IOStub ios = new IOStub(inputLinesAll);
+        InMemoryDao dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+
+        String s = "\n\nAll: \n\n" + "Videos:\n" + dao.getVideos().toString().replace("[", "").replace("]", "")
+                + "\n\n" + "Books:\n" + dao.getBooks().toString().replace("[", "").replace("]", "")
+                + "\n\n" + "News:\n" + dao.getNews().toString().replace("[", "").replace("]", "")
+                + "\n\n" + "Articles:\n" + dao.getArticles().toString().replace("[", "").replace("]", "") + "\n\n" + "Blogs:\n" + dao.getBlogs().toString().replace("[", "").replace("]", "") + "\n\n";
+        assertTrue(ios.getOutputs().contains(s));
     }
 
 }
