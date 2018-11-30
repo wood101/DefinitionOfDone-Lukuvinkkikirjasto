@@ -82,7 +82,7 @@ public class DatabaseDao implements DaoManager {
         s += articlesToString();
         s += blogsToString();
         return s;
-    }    
+    }
 
     private String videosToString() {
         String s = "";

@@ -13,13 +13,12 @@ import ReadMe.domain.Blog;
 import ReadMe.domain.Book;
 import ReadMe.domain.News;
 import ReadMe.domain.Video;
-import java.util.ArrayList;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
@@ -37,17 +36,6 @@ public class UITest {
     public void setUp() {
         db = mock(InMemoryDao.class);
     }
-
-//    @Test
-//    public void addBookmarkSuccessfulWhenTitleGiven() {
-//        io = new IOStub("a", "title", "desc", "www.test.org", "q");
-//        ui = new UI(io, db);
-//        Bookmark bookmark = new Bookmark("title", "desc", "www.test.org");
-//        
-//        ui.run();
-//
-//        assertTrue(io.getOutputs().contains("Tip added!\n\n"));
-//    }
     
     @Test
     public void addVideoSuccessfulWhenCorrectInputIsGiven() {
@@ -56,9 +44,10 @@ public class UITest {
         Video video = new Video("author", "title", "desc", "www.test.org", 2000);
         
         ui.run();
-
+        
         assertTrue(io.getOutputs().contains("Tip added!\n\n"));
-        verify(db).addVideo(eq(video));
+        verify(db).addVideo(any());
+        verify(db, times(1)).addVideo(any());
     }
     
     @Test
@@ -70,7 +59,8 @@ public class UITest {
         ui.run();
 
         assertTrue(io.getOutputs().contains("Tip added!\n\n"));
-        verify(db).addBook(eq(book));
+        verify(db).addBook(any());
+        verify(db, times(1)).addBook(any());
     }
     
     @Test
@@ -82,7 +72,8 @@ public class UITest {
         ui.run();
 
         assertTrue(io.getOutputs().contains("Tip added!\n\n"));
-        verify(db).addNews(eq(news));
+        verify(db).addNews(any());
+        verify(db, times(1)).addNews(any());
     }
     
     @Test
@@ -94,7 +85,8 @@ public class UITest {
         ui.run();
 
         assertTrue(io.getOutputs().contains("Tip added!\n\n"));
-        verify(db).addArticle(eq(article));
+        verify(db).addArticle(any());
+        verify(db, times(1)).addArticle(any());
     }
     
     @Test
@@ -106,24 +98,125 @@ public class UITest {
         ui.run();
 
         assertTrue(io.getOutputs().contains("Tip added!\n\n"));
-        verify(db).addBlog(eq(blog));
+        verify(db).addBlog(any());
+        verify(db, times(1)).addBlog(any());
     }
     
-//    @Test
-//    public void listBookmarksPrintsBookmarksCorrectly() {
-//        io = new IOStub("l", "q");
-//        ui = new UI(io, db);
-//        Bookmark b1 = new Bookmark("title", "desc", "www.test.org");
-//        Bookmark b2 = new Bookmark("title2", "desc2", "www.test2.org");
-//        ArrayList<Bookmark> tips = new ArrayList<>();
-//        tips.add(b1);
-//        tips.add(b2);
-//        
-//        when(db.listAll()).thenReturn(tips);
-//        
-//        ui.run();
-//
-//        assertTrue(io.getOutputs().contains(b1.toString()));
-//        assertTrue(io.getOutputs().contains(b2.toString()));
-//    }
+    @Test
+    public void listAllPrintsCorrectly() {
+        io = new IOStub("l", "1", "q");
+        ui = new UI(io, db);
+        Video video1 = new Video("author", "title", "www.test.org", "desc", 2000);
+        Video video2 = new Video("author", "title", "www.testAlt.org", "desc", 2000);
+        String tips = "";
+        tips += "Videos:\n";
+        tips += video1.toString();
+        tips += "\n\n";
+        tips += video2.toString();
+        
+        when(db.listAll()).thenReturn(tips);
+        
+        ui.run();
+
+        assertTrue(io.getOutputs().contains(tips));
+    }
+    
+    @Test
+    public void listVideosPrintsCorrectly() {
+        io = new IOStub("l", "2", "q");
+        ui = new UI(io, db);
+        Video video1 = new Video("author", "title", "www.test.org", "desc", 2000);
+        Video video2 = new Video("author", "title", "www.testAlt.org", "desc", 2000);
+        String tips = "";
+        tips += "Videos:\n";
+        tips += video1.toString();
+        tips += "\n\n";
+        tips += video2.toString();
+        
+        when(db.listByType("video")).thenReturn(tips);
+        
+        ui.run();
+
+        assertTrue(io.getOutputs().contains(tips));
+    }
+    
+    @Test
+    public void listBooksPrintsCorrectly() {
+        io = new IOStub("l", "3", "q");
+        ui = new UI(io, db);
+        Book book1 = new Book("author", "title", "1234", "desc", 2000);
+        Book book2 = new Book("author", "title", "4321", "desc", 2000);
+        String tips = "";
+        tips += "Books:\n";
+        tips += book1.toString();
+        tips += "\n\n";
+        tips += book2.toString();
+        
+        when(db.listByType("book")).thenReturn(tips);
+        
+        ui.run();
+
+        assertTrue(io.getOutputs().contains(tips));
+    }
+    
+    @Test
+    public void listNewsPrintsCorrectly() {
+        io = new IOStub("l", "4", "q");
+        ui = new UI(io, db);
+        News news1 = new News("author", "title", "www.test.org", "desc", "publisher", 2000);
+        News news2 = new News("author", "title", "www.testAlt.org", "desc", "publisher", 2000);
+        
+        String tips = "";
+        tips += "News:\n";
+        tips += news1.toString();
+        tips += "\n\n";
+        tips += news2.toString();
+        
+        when(db.listByType("news")).thenReturn(tips);
+        
+        ui.run();
+
+        assertTrue(io.getOutputs().contains(tips));
+    }
+    
+    @Test
+    public void listArticlesPrintsCorrectly() {
+        io = new IOStub("l", "5", "q");
+        ui = new UI(io, db);
+        Article article1 = new Article("author", "title", "www.test.org", "desc", "publisher", 2000);
+        Article article2 = new Article("author", "title", "www.testAlt.org", "desc", "publisher", 2000);
+        
+        String tips = "";
+        tips += "Articles:\n";
+        tips += article1.toString();
+        tips += "\n\n";
+        tips += article2.toString();
+        
+        when(db.listByType("article")).thenReturn(tips);
+        
+        ui.run();
+
+        assertTrue(io.getOutputs().contains(tips));
+    }
+    
+    @Test
+    public void listBlogsPrintsCorrectly() {
+        io = new IOStub("l", "6", "q");
+        ui = new UI(io, db);
+        Blog blog1 = new Blog("author", "title", "www.test.org", "desc", 2000);
+        Blog blog2 = new Blog("author", "title", "www.testAlt.org", "desc", 2000);
+        
+        String tips = "";
+        tips += "Blogs:\n";
+        tips += blog1.toString();
+        tips += "\n\n";
+        tips += blog2.toString();
+        
+        when(db.listByType("blog")).thenReturn(tips);
+        
+        ui.run();
+
+        assertTrue(io.getOutputs().contains(tips));
+    }
+    
 }
