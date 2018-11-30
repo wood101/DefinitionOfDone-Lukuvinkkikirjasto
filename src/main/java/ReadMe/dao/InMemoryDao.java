@@ -44,6 +44,10 @@ public class InMemoryDao implements DaoManager {
         // Create entries 
         videos.add(new Video("hackerdashery", "P vs. NP and the Computational Complexity Zoo", 
                 "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "P js NP erot", 2014));
+        books.add(new Book("hackerdashery1", "P vs. NP and the Computational Complexity Zoo1", "1234", "P js NP erot", 2014));
+        news.add(new News("hackerdashery2", "P vs. NP and the Computational Complexity Zoo2", "1234", "P js NP erot", "hmm", 2014));
+        articles.add(new Article("hackerdashery3", "P vs. NP and the Computational Complexity Zoo3", "1234", "P js NP erot", "hmm", 2014));
+        blogs.add(new Blog("hackerdashery4", "P vs. NP and the Computational Complexity Zoo4", "1234", "P js NP erot", 2014));
         
         /**news.add(new News("", "Kakkakuutiot",
                 "https://www.iltalehti.fi/terveysuutiset/a/71cb5062-ed6e-45a6-a22c-d0949daeaa6a"));

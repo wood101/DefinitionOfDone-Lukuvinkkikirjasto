@@ -60,7 +60,7 @@ public class UI {
             int year = Integer.parseInt(io.readLine("Year published: "));
             manager.addBook(new Book(author, title, ISBN, description, year));
         } catch (Exception e) {
-            io.print("Please type ISBN and year as numbers!");
+            io.print("Please type  year as numbers!");
         }
 
     }

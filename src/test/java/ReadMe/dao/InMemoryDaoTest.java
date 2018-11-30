@@ -37,7 +37,7 @@ public class InMemoryDaoTest {
     public void bookIsAdded() {
        Book b = new Book("auth", "title", "ISBN", "desc", 2010);
        dao.addBook(b);
-       assertEquals(b, dao.getBooks().get(0));
+       assertEquals(b, dao.getBooks().get(1));
     }
     
     @Test
@@ -45,7 +45,7 @@ public class InMemoryDaoTest {
        Article a = new Article("auth", "title", "link", 
                "desc", "publisher", 2000);
        dao.addArticle(a);
-       assertEquals(a, dao.getArticles().get(0));
+       assertEquals(a, dao.getArticles().get(1));
     }
     
     @Test
@@ -53,14 +53,14 @@ public class InMemoryDaoTest {
         News n = new News("auth", "title", "link", 
                 "desc", "publisher", 2000);
         dao.addNews(n);
-        assertEquals(n, dao.getNews().get(0));
+        assertEquals(n, dao.getNews().get(1));
     }
     
     @Test
     public void blogIsAdded() {
        Blog b = new Blog("auth", "title", "link", "desc", 2010);
        dao.addBlog(b);
-       assertEquals(b, dao.getBlogs().get(0));
+       assertEquals(b, dao.getBlogs().get(1));
     }
     
     
