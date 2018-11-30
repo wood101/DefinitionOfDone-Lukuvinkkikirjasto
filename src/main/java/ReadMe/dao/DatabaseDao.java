@@ -1,4 +1,3 @@
-
 package ReadMe.dao;
 
 import ReadMe.dao.*;
@@ -27,8 +26,8 @@ public class DatabaseDao implements DaoManager {
     }
 
     /**
-     * Returns all wanted bookmarks as a printable String. Returns
-     * the given object list as a String based on input.
+     * Returns all wanted bookmarks as a printable String. Returns the given
+     * object list as a String based on input.
      *
      * Inputs = "all", "video", "book", "news", "article", "blog".
      *
@@ -66,9 +65,8 @@ public class DatabaseDao implements DaoManager {
     }
 
     /**
-     * Returns all bookmarks as a printable String.
-     * only the given object list as a String.
-     * Method uses private toString methods.
+     * Returns all bookmarks as a printable String. only the given object list
+     * as a String. Method uses private toString methods.
      *
      * @return Bookmarks
      */
@@ -157,5 +155,29 @@ public class DatabaseDao implements DaoManager {
     @Override
     public void addBlog(Blog blog) {
         blogDao.add(blog);
+    }
+
+    /**
+     * Marks selected title as read.
+     * 
+     * @param type
+     * @param title
+     * @return true is marking is successful
+     */
+    public boolean markAsRead(String type, String title) {
+        switch (type) {
+            case "video":
+                return false;
+            case "book":
+                return false;
+            case "news":
+                return false;
+            case "article":
+                return articleDao.markAsRead(title);
+            case "blog":
+                return false;
+            default:
+                return false;
+        }
     }
 }
