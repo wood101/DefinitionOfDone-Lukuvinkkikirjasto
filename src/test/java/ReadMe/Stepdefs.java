@@ -103,7 +103,7 @@ public class Stepdefs {
 //        ui.run();
 //        assertTrue(dao.listByType("video").contains(new Video("author", "title", "www", "desc", 2000).toString()));
 
-        io = new IOStub(inputLinesBlog);
+        io = new IOStub(inputLinesVideo);
         ui = new UI(io, dao);
         ui.run();
         assertTrue(dao.listByType("video").contains(new Video("author", "title", "www", "desc", 2000).toString()));
