@@ -40,4 +40,6 @@ public interface DaoManager {
     void addArticle(Article bookmark);
     
     void addBlog(Blog bookmark);
+    
+    boolean markAsRead(String type, String title);
 }

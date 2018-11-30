@@ -55,13 +55,13 @@ public class ArticleDao {
     }
 
     /**
-     * Marks the article as read and sets the date it was read on.
+     * Marks the Article as read and sets the date it was read on.
      * @param article Object that is marked read
      */
     public boolean markAsRead(String title) {
         try (Connection c = db.getConnection()) {
             PreparedStatement stmt = c.prepareStatement(
-                    "UPDATE Article SET article_checked = ?, article_date_checked = ? WHERE article_title = ?) ");
+                    "UPDATE Article SET article_checked = ?, article_date_checked = ? WHERE article_title = ? ");
             stmt.setBoolean(1, true);
             stmt.setDate(2, new Date(System.currentTimeMillis()));
             stmt.setString(3, title);
@@ -103,6 +103,6 @@ public class ArticleDao {
      * @throws SQLException
      */
     public static Article rowToArticle(ResultSet rs) throws SQLException {
-        return new Article(rs.getInt("article_id"), rs.getString("article_author"), rs.getString("article_title"), rs.getString("article_link"), rs.getString("article_description"), rs.getString("article_publisher"), rs.getInt("article_year"), rs.getBoolean("article_checked"), rs.getDate("article_date_checked"));
+        return new Article(rs.getInt("article_id"), rs.getString("article_author"), rs.getString("article_title"), rs.getString("article_link"), rs.getString("article_description"), rs.getString("article_publisher"), rs.getInt("article_year"), rs.getBoolean("article_checked"), null);
     }
 }

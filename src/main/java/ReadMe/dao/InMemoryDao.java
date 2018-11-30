@@ -217,4 +217,10 @@ public class InMemoryDao implements DaoManager {
         this.blogs.add(blog);
     }
 
+    @Override
+    public boolean markAsRead(String type, String title) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+        //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
