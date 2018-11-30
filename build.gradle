@@ -62,7 +62,7 @@ checkstyle {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'main.Main'
+        attributes 'Main-Class': 'ReadMe.main.Main'
     }
 }
 
