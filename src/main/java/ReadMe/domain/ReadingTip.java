@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- *
+ * Superclass for all the reading tips
  * @author madjanne
  */
 public abstract class ReadingTip {
