@@ -5,8 +5,10 @@
  */
 package ReadMe.io;
 
+import ReadMe.domain.ReadingTip;
 import ReadMe.io.IO;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -35,5 +37,23 @@ public class IOStub implements IO {
 
     public ArrayList<String> getOutputs() {
         return outputs;
+    }
+    
+    /**
+    * Returns a string of a summary table of all reading tips
+    * @param tips 
+    * @return  
+    */
+    public String summaryTableView(List<ReadingTip> tips) {
+        String output = "";
+        String leftAlignFormat = "| %-4d| %-15s | %-20s | %-7s |%n";
+        output += String.format("+-----+-----------------+----------------------+---------+%n");
+        output += String.format("| ID  |     Author      |        Title         |  Type   |%n");
+        output += String.format("+-----+-----------------+----------------------+---------+%n");
+        for (int i = 0; i < tips.size(); i++) {
+        output += String.format(leftAlignFormat, tips.get(i).getId(), tips.get(i).getAuthor(), tips.get(i).getTitle(), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
+        }
+        output += String.format("+-----+-----------------+----------------------+---------+%n");
+        return output;
     }
 }

@@ -12,7 +12,13 @@ import ReadMe.domain.Article;
 import ReadMe.domain.Blog;
 import ReadMe.domain.Book;
 import ReadMe.domain.News;
+import ReadMe.domain.ReadingTip;
 import ReadMe.domain.Video;
+import ReadMe.io.ConsoleIO;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -101,7 +107,7 @@ public class UITest {
         verify(db).addBlog(any());
         verify(db, times(1)).addBlog(any());
     }
-    
+/*
     @Test
     public void listAllPrintsCorrectly() {
         io = new IOStub("l", "1", "q");
@@ -218,5 +224,27 @@ public class UITest {
 
         assertTrue(io.getOutputs().contains(tips));
     }
-    
+*/
+    @Test
+    public void summaryTableViewPrintsCorrectly() {
+        io = new IOStub();
+        List<ReadingTip> tips = new ArrayList<>();
+        ReadingTip blog = new Blog(1, "author", "title", "www.test.org", "desc", 2000, false, new Date(5));
+        ReadingTip article = new Article(2, "hack", "cook chicken", "www.test.org", "desc", "publisher", 2000, false, new Date(5));
+        ReadingTip news = new News(3, "writer", "chicken is not good", "www.test.org", "desc", "publisher", 2000, false, new Date(5));
+        tips.add(news);
+        tips.add(blog);
+        tips.add(article);
+        
+        String expectedOutput = "";
+        expectedOutput += String.format("+-----+-----------------+----------------------+---------+%n");
+        expectedOutput += String.format("| ID  |     Author      |        Title         |  Type   |%n");
+        expectedOutput += String.format("+-----+-----------------+----------------------+---------+%n");
+        expectedOutput += String.format("| 3   | writer          | chicken is not good  | News    |%n");
+        expectedOutput += String.format("| 1   | author          | title                | Blog    |%n");
+        expectedOutput += String.format("| 2   | hack            | cook chicken         | Article |%n");
+        expectedOutput += String.format("+-----+-----------------+----------------------+---------+%n");
+        
+        assertEquals(io.summaryTableView(tips), expectedOutput);
+    }
 }

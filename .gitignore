@@ -5,3 +5,4 @@ gradle.properties
 /.nb-gradle/
 nbproject/
 readMeBase.db
+testReadMeBase.db

@@ -10,6 +10,8 @@ package ReadMe.io;
  * @author bisi
  */
 
+import ReadMe.domain.ReadingTip;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -36,5 +38,21 @@ public class ConsoleIO implements IO {
         System.out.println(prompt);
         return scanner.nextLine();
     }
+    
+    /**
+    * Prints a summary table of all reading tips
+    * @param tips 
+    */
+    public void summaryTableView(List<ReadingTip> tips) {
+        String leftAlignFormat = "| %-4d| %-15s | %-20s | %-7s |%n";
+        System.out.format("+-----+-----------------+----------------------+---------+%n");
+        System.out.format("| ID  |     Author      |        Title         |  Type   |%n");
+        System.out.format("+-----+-----------------+----------------------+---------+%n");
+        for (int i = 0; i < tips.size(); i++) {
+            System.out.format(leftAlignFormat, tips.get(i).getId(), tips.get(i).getAuthor(), tips.get(i).getTitle(), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
+        }
+        System.out.format("+-----+-----------------+----------------------+---------+%n");
+    }
+
     
 }
