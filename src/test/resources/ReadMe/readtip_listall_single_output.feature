@@ -7,7 +7,7 @@
 #    Then the video is shown
 
 #  Scenario: all readtips are listed and single book is wanted
-#    Given command "l" list tips is given
+#    Given command "l" list tips  is given
 #    When type command "1" all is input
 #    And command //valitaan book joka halutaan
 #    Then the book is shown
@@ -34,5 +34,5 @@
 #    Given command "l" list tips is given
 #    When type command "1" all is input
 #    And command //valitaan video joka halutaan ja jota ei ole
-#    Then the video is shown
+#    Then there is output "herja" // korjaa tämä
 
