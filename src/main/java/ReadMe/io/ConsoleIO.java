@@ -39,10 +39,7 @@ public class ConsoleIO implements IO {
         return scanner.nextLine();
     }
     
-    /**
-    * Prints a summary table of all reading tips
-    * @param tips 
-    */
+    @Override
     public void summaryTableView(List<ReadingTip> tips) {
         String leftAlignFormat = "| %-4d| %-15s | %-20s | %-7s |%n";
         System.out.format("+-----+-----------------+----------------------+---------+%n");

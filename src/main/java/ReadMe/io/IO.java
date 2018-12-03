@@ -1,5 +1,8 @@
 package ReadMe.io;
 
+import ReadMe.domain.ReadingTip;
+import java.util.List;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -24,5 +27,11 @@ public interface IO {
      * @return
      */
     String readLine(String prompt);
+    
+    /**
+    * Prints a summary table of all reading tips
+    * @param tips 
+    */
+    public void summaryTableView(List<ReadingTip> tips);
 }
 

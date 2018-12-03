@@ -39,12 +39,8 @@ public class IOStub implements IO {
         return outputs;
     }
     
-    /**
-    * Returns a string of a summary table of all reading tips
-    * @param tips 
-    * @return  
-    */
-    public String summaryTableView(List<ReadingTip> tips) {
+    @Override
+    public void summaryTableView(List<ReadingTip> tips) {
         String output = "";
         String leftAlignFormat = "| %-4d| %-15s | %-20s | %-7s |%n";
         output += String.format("+-----+-----------------+----------------------+---------+%n");
@@ -54,6 +50,6 @@ public class IOStub implements IO {
         output += String.format(leftAlignFormat, tips.get(i).getId(), tips.get(i).getAuthor(), tips.get(i).getTitle(), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
         }
         output += String.format("+-----+-----------------+----------------------+---------+%n");
-        return output;
+        outputs.add(output);
     }
 }

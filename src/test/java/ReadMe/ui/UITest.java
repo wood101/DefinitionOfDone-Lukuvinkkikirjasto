@@ -235,6 +235,7 @@ public class UITest {
         tips.add(news);
         tips.add(blog);
         tips.add(article);
+        io.summaryTableView(tips);
         
         String expectedOutput = "";
         expectedOutput += String.format("+-----+-----------------+----------------------+---------+%n");
@@ -245,6 +246,6 @@ public class UITest {
         expectedOutput += String.format("| 2   | hack            | cook chicken         | Article |%n");
         expectedOutput += String.format("+-----+-----------------+----------------------+---------+%n");
         
-        assertEquals(io.summaryTableView(tips), expectedOutput);
+        assertEquals(io.getOutputs().get(0), expectedOutput);
     }
 }
