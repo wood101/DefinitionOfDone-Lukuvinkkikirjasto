@@ -1,11 +1,5 @@
-#Feature: readtiplists are printed in correct form
-#
-#  Scenario: all readtips are printed in a compact table
-#    Given command "l" list tips is given
-#    When  type command "1" all is input
-#    Then all readtips are printed in a table
-#
-#
+#Feature: readtiplists by type are printed in correct form
+
 #  Scenario: videotips are printed in a compact table
 #    Given command "l" list tips is given
 #    When  type command "2" video is input
