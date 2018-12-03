@@ -1,4 +1,4 @@
-#Feature: readtips are printed in correct form
+#Feature: readtiplists are printed in correct form
 #
 #  Scenario: all readtips are printed in a compact table
 #    Given command "l" list tips is given

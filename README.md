@@ -30,9 +30,8 @@ pe 12.30-13.30  asiakaspalaverin jälkeen
 ## [CI:travis](https://travis-ci.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto)
 [![Build Status](https://travis-ci.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto.svg?branch=master)](https://travis-ci.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto)
 
-## Testikattavuus 
-
-![jacoco](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/blob/master/Dokumentaatio/Screenshot%202018-11-30%20at%2012.04.22.png)
+## [Testikattavuus](https://codecov.io/gh/wood101/DefinitionOfDone-Lukuvinkkikirjasto) 
+[![codecov](https://codecov.io/gh/wood101/DefinitionOfDone-Lukuvinkkikirjasto/branch/master/graph/badge.svg)](https://codecov.io/gh/wood101/DefinitionOfDone-Lukuvinkkikirjasto)
 
 ## [työlle tulee määritellä lisenssi]()
 

@@ -15,13 +15,8 @@ import java.util.List;
 public interface DaoManager {
 
     /**
-     * Returns all saved Bookmarks
-     * @return List<String> List of saved Bookmarks
-     */
-    String listAll();
-
-    /**
-     * Returns all reading tips based on input type.
+     * Returns all reading tips based on input type. If type is "all" 
+     * then all ReadingTips in the database are listed.
      * @param type the desired object
      * @return  List of all ReadingTips of the given type
      */
