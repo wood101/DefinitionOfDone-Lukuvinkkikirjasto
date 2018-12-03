@@ -82,12 +82,12 @@ public class ArticleDao {
         try (Connection c = db.getConnection()) {
             PreparedStatement add = c.prepareStatement("INSERT INTO Article (article_author, article_title, article_link, article_description, article_publisher, article_year, article_checked, article_date_checked) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            add.setString(1, article.getArticle_author());
-            add.setString(2, article.getArticle_title());
-            add.setString(3, article.getArticle_link());
-            add.setString(4, article.getArticle_description());
-            add.setString(5, article.getArticle_publisher());
-            add.setInt(6, article.getArticle_year());
+            add.setString(1, article.getAuthor());
+            add.setString(2, article.getTitle());
+            add.setString(3, article.getLink());
+            add.setString(4, article.getDescription());
+            add.setString(5, article.getPublisher());
+            add.setInt(6, article.getYear());
             add.setBoolean(7, false);
             add.setDate(8, null);
             add.executeUpdate();

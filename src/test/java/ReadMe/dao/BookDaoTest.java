@@ -53,7 +53,7 @@ public class BookDaoTest {
         List<Book> books = testDao.listAll();
         
         assertEquals(2, books.size());
-        assertEquals("title", books.get(0).getBook_title());  
-        assertEquals("desc", books.get(0).getBook_description());  
+        assertEquals("title", books.get(0).getTitle());  
+        assertEquals("desc", books.get(0).getDescription());  
     }
 }

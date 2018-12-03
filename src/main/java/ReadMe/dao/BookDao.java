@@ -63,11 +63,11 @@ public class BookDao {
         try (Connection c = db.getConnection()) {
             PreparedStatement add = c.prepareStatement("INSERT INTO Book (book_author, book_title, book_ISBN, book_description, book_year, book_checked, book_date_checked) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?)");
-            add.setString(1, book.getBook_author());
-            add.setString(2, book.getBook_title());
-            add.setString(3, book.getbook_ISBN());
-            add.setString(4, book.getBook_description());
-            add.setInt(5, book.getBook_year());
+            add.setString(1, book.getAuthor());
+            add.setString(2, book.getTitle());
+            add.setString(3, book.getISBN());
+            add.setString(4, book.getDescription());
+            add.setInt(5, book.getYear());
             add.setBoolean(6, false);
             add.setDate(7, null);
             add.executeUpdate();
@@ -81,8 +81,8 @@ public class BookDao {
      * @param book Object that is marked read
      */
     public void markBookAsRead(Book book) {
-        book.setBook_checked(true);
-        book.setBook_date_checked(new Date());
+        book.setChecked(true);
+        book.setDate_checked(new Date());
     }    
     
      /**

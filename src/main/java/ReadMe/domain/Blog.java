@@ -7,115 +7,43 @@ import java.util.Objects;
  * Class for blogs in the reading tip library.
  * @author madjanne
  */
-public class Blog {
-    private int blog_id;
-    private String blog_author;
-    private String blog_title;
-    private String blog_link;
-    private String blog_description;
-    private int blog_year;
-    private boolean blog_checked;
-    private Date blog_date_checked;
-
-    public Blog(int blog_id, String blog_author, String blog_title, String blog_link, String blog_description, int blog_year, boolean blog_checked, Date blog_date_checked) {
-        this.blog_id = blog_id;
-        this.blog_author = blog_author;
-        this.blog_title = blog_title;
-        this.blog_link = blog_link;
-        this.blog_description = blog_description;
-        this.blog_year = blog_year;
-        this.blog_checked = blog_checked;
-        this.blog_date_checked = blog_date_checked;
+public class Blog extends ReadingTip {
+    private String link;
+    
+    public Blog(int id, String author, String title, String link, String description, int year, boolean checked, Date date_checked) {
+        super(id, author, title, description, year, checked, date_checked);
+        this.link = link;
     }
     
-    public Blog(String blog_author, String blog_title, String blog_link, String blog_description, int blog_year) {
-        this.blog_author = blog_author;
-        this.blog_title = blog_title;
-        this.blog_link = blog_link;
-        this.blog_description = blog_description;
-        this.blog_year = blog_year;
-    }
-    
-    public int getBlog_id() {
-        return blog_id;
+    public Blog(String author, String title, String link, String description, int year) {
+        super(author, title, description, year);
+        this.link = link;
+    }    
+
+    public String getLink() {
+        return link;
     }
 
-    public void setBlog_id(int blog_id) {
-        this.blog_id = blog_id;
-    }
-
-    public String getBlog_author() {
-        return blog_author;
-    }
-
-    public void setBlog_author(String blog_author) {
-        this.blog_author = blog_author;
-    }
-
-    public String getBlog_title() {
-        return blog_title;
-    }
-
-    public void setBlog_title(String blog_title) {
-        this.blog_title = blog_title;
-    }
-
-    public String getBlog_link() {
-        return blog_link;
-    }
-
-    public void setBlog_link(String blog_link) {
-        this.blog_link = blog_link;
-    }
-
-    public String getBlog_description() {
-        return blog_description;
-    }
-
-    public void setBlog_description(String blog_description) {
-        this.blog_description = blog_description;
-    }
-
-    public int getBlog_year() {
-        return blog_year;
-    }
-
-    public void setBlog_year(int blog_year) {
-        this.blog_year = blog_year;
-    }
-
-    public boolean isBlog_checked() {
-        return blog_checked;
-    }
-
-    public void setBlog_checked(boolean blog_checked) {
-        this.blog_checked = blog_checked;
-    }
-
-    public Date getBlog_date_checked() {
-        return blog_date_checked;
-    }
-
-    public void setBlog_date_checked(Date blog_date_checked) {
-        this.blog_date_checked = blog_date_checked;
+    public void setLink(String link) {
+        this.link = link;
     }
     
     @Override
     public String toString() {
-        return "\nTitle: " + blog_title + "\n Author: " + blog_author + 
-                "\n Link: " + blog_link + "\n Description: " + blog_description + 
-                "\n Year: " + blog_year + "\n Checked: " + blog_checked + "\n Date checked: " + blog_date_checked + "\n";
+        return "\nTitle: " + super.getTitle() + "\n Author: " + super.getAuthor() + 
+                "\n Link: " + link + "\n Description: " + super.getDescription() + 
+                "\n Year: " + super.getYear() + "\n Checked: " + super.isChecked() + "\n Date checked: " + super.getDate_checked() + "\n";
     }
     
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 23 * hash + Objects.hashCode(this.blog_author);
-        hash = 23 * hash + Objects.hashCode(this.blog_title);
-        hash = 23 * hash + Objects.hashCode(this.blog_description);
-        hash = 23 * hash + Objects.hashCode(this.blog_link);
-        hash = 23 * hash + Objects.hashCode(this.blog_checked);
-        hash = 23 * hash + Objects.hashCode(this.blog_date_checked);
+        hash = 23 * hash + Objects.hashCode(super.getAuthor());
+        hash = 23 * hash + Objects.hashCode(super.getTitle());
+        hash = 23 * hash + Objects.hashCode(super.getDescription());
+        hash = 23 * hash + Objects.hashCode(this.link);
+        hash = 23 * hash + Objects.hashCode(super.isChecked());
+        hash = 23 * hash + Objects.hashCode(super.getDate_checked());
         return hash;
     }
 
@@ -132,11 +60,11 @@ public class Blog {
         }
 
         final Blog other = (Blog) obj;
-        return Objects.equals(this.blog_author, other.blog_author)
-                && Objects.equals(this.blog_title, other.blog_title)
-                && Objects.equals(this.blog_description, other.blog_description)
-                && Objects.equals(this.blog_link, other.blog_link)
-                && Objects.equals(this.blog_checked, other.blog_checked)
-                && Objects.equals(this.blog_date_checked, other.blog_date_checked);
+        return Objects.equals(super.getAuthor(), other.getAuthor())
+                && Objects.equals(super.getTitle(), other.getTitle())
+                && Objects.equals(super.getDescription(), other.getDescription())
+                && Objects.equals(this.link, other.link)
+                && Objects.equals(super.isChecked(), other.isChecked())
+                && Objects.equals(super.getDate_checked(), other.getDate_checked());
     }    
 }

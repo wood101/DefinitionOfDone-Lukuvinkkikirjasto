@@ -54,7 +54,7 @@ public class BlogDaoTest {
         List<Blog> blogs = testDao.listAll();
         
         assertEquals(2, blogs.size());
-        assertEquals("title", blogs.get(0).getBlog_title());  
-        assertEquals("desc", blogs.get(0).getBlog_description());  
+        assertEquals("title", blogs.get(0).getTitle());  
+        assertEquals("desc", blogs.get(0).getDescription());  
     }
 }

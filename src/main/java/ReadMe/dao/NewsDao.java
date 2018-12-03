@@ -63,12 +63,12 @@ public class NewsDao {
         try (Connection c = db.getConnection()) {
             PreparedStatement add = c.prepareStatement("INSERT INTO News (news_author, news_title, news_link, news_description, news_publisher, news_year, news_checked, news_date_checked) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            add.setString(1, news.getNews_author());
-            add.setString(2, news.getNews_title());
-            add.setString(3, news.getNews_link());
-            add.setString(4, news.getNews_description());
-            add.setString(5, news.getNews_publisher());
-            add.setInt(6, news.getNews_year());
+            add.setString(1, news.getAuthor());
+            add.setString(2, news.getTitle());
+            add.setString(3, news.getLink());
+            add.setString(4, news.getDescription());
+            add.setString(5, news.getPublisher());
+            add.setInt(6, news.getYear());
             add.setBoolean(7, false);
             add.setDate(8, null);
             add.executeUpdate();
@@ -82,8 +82,8 @@ public class NewsDao {
      * @param news Object that is marked read
      */
     public void markNewsAsRead(News news) {
-        news.setNews_checked(true);
-        news.setNews_date_checked(new Date());
+        news.setChecked(true);
+        news.setDate_checked(new Date());
     }    
     
      /**

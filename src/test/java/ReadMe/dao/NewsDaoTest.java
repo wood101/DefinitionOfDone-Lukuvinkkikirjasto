@@ -53,7 +53,7 @@ public class NewsDaoTest {
         List<News> newsArray = testDao.listAll();
         
         assertEquals(2, newsArray.size());
-        assertEquals("title", newsArray.get(0).getNews_title());  
-        assertEquals("desc", newsArray.get(0).getNews_description());  
+        assertEquals("title", newsArray.get(0).getTitle());  
+        assertEquals("desc", newsArray.get(0).getDescription());  
     }
 }
