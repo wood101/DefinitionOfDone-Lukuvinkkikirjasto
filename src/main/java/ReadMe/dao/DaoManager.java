@@ -5,6 +5,7 @@
  */
 package ReadMe.dao;
 import ReadMe.domain.*;
+import java.util.List;
 
 
 /**
@@ -20,11 +21,11 @@ public interface DaoManager {
     String listAll();
 
     /**
-     * Returns all data as a string based on input type.
+     * Returns all reading tips based on input type.
      * @param type the desired object
-     * @return  String of all data of the given type
+     * @return  List of all ReadingTips of the given type
      */
-    String listByType(String type);
+    List<ReadingTip> listByType(String type);
     
      /**
      * Adds a new Bookmark object to database
