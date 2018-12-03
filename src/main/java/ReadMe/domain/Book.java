@@ -7,115 +7,50 @@ import java.util.Objects;
  * Class for books in the reading tip library.
  * @author madjanne
  */
-public class Book {
-    private int book_id;
-    private String book_author;
-    private String book_title;
-    private String book_ISBN;
-    private String book_description;
-    private int book_year;
-    private boolean book_checked;
-    private Date book_date_checked;
+public class Book extends ReadingTip {
+    private int id;
+    private String author;
+    private String title;
+    private String ISBN;
+    private String description;
+    private int year;
+    private boolean checked;
+    private Date date_checked;
 
-    public Book(int book_id, String book_author, String book_title, String book_ISBN, String book_description, int book_year, boolean book_checked, Date book_date_checked) {
-        this.book_id = book_id;
-        this.book_author = book_author;
-        this.book_title = book_title;
-        this.book_ISBN = book_ISBN;
-        this.book_description = book_description;
-        this.book_year = book_year;
-        this.book_checked = book_checked;
-        this.book_date_checked = book_date_checked;
+    public Book(int id, String author, String title, String ISBN, String description, int year, boolean checked, Date date_checked) {
+        super(id, author, title, description, year, checked, date_checked);
+        this.ISBN = ISBN;
     }
     
-    public Book(String book_author, String book_title, String book_ISBN, String book_description, int book_year) {
-        this.book_author = book_author;
-        this.book_title = book_title;
-        this.book_ISBN = book_ISBN;
-        this.book_description = book_description;
-        this.book_year = book_year;
+    public Book(String author, String title, String link, String description, int year) {
+        super(author, title, description, year);
+        this.ISBN = ISBN;
     }    
-    
-    public int getBook_id() {
-        return book_id;
+
+    public String getISBN() {
+        return ISBN;
     }
 
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
-    }
-
-    public String getBook_author() {
-        return book_author;
-    }
-
-    public void setBook_author(String book_author) {
-        this.book_author = book_author;
-    }
-
-    public String getBook_title() {
-        return book_title;
-    }
-
-    public void setBook_title(String book_title) {
-        this.book_title = book_title;
-    }
-
-    public String getbook_ISBN() {
-        return book_ISBN;
-    }
-
-    public void setbook_ISBN(String book_ISBN) {
-        this.book_ISBN = book_ISBN;
-    }
-
-    public String getBook_description() {
-        return book_description;
-    }
-
-    public void setBook_description(String book_description) {
-        this.book_description = book_description;
-    }
-
-    public int getBook_year() {
-        return book_year;
-    }
-
-    public void setBook_year(int book_year) {
-        this.book_year = book_year;
-    }
-
-    public boolean isBook_checked() {
-        return book_checked;
-    }
-
-    public void setBook_checked(boolean book_checked) {
-        this.book_checked = book_checked;
-    }
-
-    public Date getBook_date_checked() {
-        return book_date_checked;
-    }
-
-    public void setBook_date_checked(Date book_date_checked) {
-        this.book_date_checked = book_date_checked;
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
     }
     
     @Override
     public String toString() {
-        return "\nTitle: " + book_title + "\n Author: " + book_author +
-                "\n ISBN: " + book_ISBN + "\n Description: " + book_description + 
-                "\n Year: " + book_year + "\n Checked: " + book_checked + "\n Date checked: " + book_date_checked + "\n";
+        return "\nTitle: " + super.getTitle() + "\n Author: " + super.getAuthor() +
+                "\n ISBN: " + ISBN + "\n Description: " + super.getDescription() + 
+                "\n Year: " + super.getYear() + "\n Checked: " + super.isChecked() + "\n Date checked: " + super.getDate_checked() + "\n";
     }
     
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 23 * hash + Objects.hashCode(this.book_author);
-        hash = 23 * hash + Objects.hashCode(this.book_title);
-        hash = 23 * hash + Objects.hashCode(this.book_description);
-        hash = 23 * hash + Objects.hashCode(this.book_ISBN);
-        hash = 23 * hash + Objects.hashCode(this.book_checked);
-        hash = 23 * hash + Objects.hashCode(this.book_date_checked);
+        hash = 23 * hash + Objects.hashCode(super.getAuthor());
+        hash = 23 * hash + Objects.hashCode(super.getTitle());
+        hash = 23 * hash + Objects.hashCode(super.getDescription());
+        hash = 23 * hash + Objects.hashCode(this.ISBN);
+        hash = 23 * hash + Objects.hashCode(super.isChecked());
+        hash = 23 * hash + Objects.hashCode(super.getDate_checked());
         return hash;
     }
 
@@ -132,11 +67,11 @@ public class Book {
         }
 
         final Book other = (Book) obj;
-        return Objects.equals(this.book_author, other.book_author)
-                && Objects.equals(this.book_title, other.book_title)
-                && Objects.equals(this.book_description, other.book_description)
-                && Objects.equals(this.book_ISBN, other.book_ISBN)
-                && Objects.equals(this.book_checked, other.book_checked)
-                && Objects.equals(this.book_date_checked, other.book_date_checked);
+        return Objects.equals(super.getAuthor(), other.getAuthor())
+                && Objects.equals(super.getTitle(), other.getTitle())
+                && Objects.equals(super.getDescription(), other.getDescription())
+                && Objects.equals(this.ISBN, other.ISBN)
+                && Objects.equals(super.isChecked(), other.isChecked())
+                && Objects.equals(super.getDate_checked(), other.getDate_checked());
     }    
 }

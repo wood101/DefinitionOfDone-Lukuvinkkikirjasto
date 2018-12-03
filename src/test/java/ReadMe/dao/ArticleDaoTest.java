@@ -54,7 +54,7 @@ public class ArticleDaoTest {
         List<Article> articles = testDao.listAll();
         
         assertEquals(2, articles.size());
-        assertEquals("title", articles.get(0).getArticle_title());  
-        assertEquals("desc", articles.get(0).getArticle_description());  
+        assertEquals("title", articles.get(0).getTitle());  
+        assertEquals("desc", articles.get(0).getDescription());  
     }
 }

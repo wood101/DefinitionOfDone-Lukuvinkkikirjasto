@@ -63,11 +63,11 @@ public class BlogDao {
         try (Connection c = db.getConnection()) {
             PreparedStatement add = c.prepareStatement("INSERT INTO Blog (blog_author, blog_title, blog_link, blog_description, blog_year, blog_checked, blog_date_checked) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?)");
-            add.setString(1, blog.getBlog_author());
-            add.setString(2, blog.getBlog_title());
-            add.setString(3, blog.getBlog_link());
-            add.setString(4, blog.getBlog_description());
-            add.setInt(5, blog.getBlog_year());
+            add.setString(1, blog.getAuthor());
+            add.setString(2, blog.getTitle());
+            add.setString(3, blog.getLink());
+            add.setString(4, blog.getDescription());
+            add.setInt(5, blog.getYear());
             add.setBoolean(6, false);
             add.setDate(7, null);
             add.executeUpdate();
@@ -81,8 +81,8 @@ public class BlogDao {
      * @param blog Object that is marked read
      */
     public void markBlogAsRead(Blog blog) {
-        blog.setBlog_checked(true);
-        blog.setBlog_date_checked(new Date());
+        blog.setChecked(true);
+        blog.setDate_checked(new Date());
     }
     
     /**

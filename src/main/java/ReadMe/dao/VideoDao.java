@@ -63,11 +63,11 @@ public class VideoDao {
         try (Connection c = db.getConnection()) {
             PreparedStatement add = c.prepareStatement("INSERT INTO Video (video_author, video_title, video_link, video_description, video_year, video_checked, video_date_checked) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?)");
-            add.setString(1, vid.getVideo_author());
-            add.setString(2, vid.getVideo_title());
-            add.setString(3, vid.getVideo_link());
-            add.setString(4, vid.getVideo_description());
-            add.setInt(5, vid.getVideo_year());
+            add.setString(1, vid.getAuthor());
+            add.setString(2, vid.getTitle());
+            add.setString(3, vid.getLink());
+            add.setString(4, vid.getDescription());
+            add.setInt(5, vid.getYear());
             add.setBoolean(6, false);
             add.setDate(7, null);
             add.executeUpdate();
@@ -81,8 +81,8 @@ public class VideoDao {
      * @param video Object that is marked read
      */
     public void markVideoAsRead(Video video) {
-        video.setVideo_checked(true);
-        video.setVideo_date_checked(new Date());
+        video.setChecked(true);
+        video.setDate_checked(new Date());
     }
     
      /**

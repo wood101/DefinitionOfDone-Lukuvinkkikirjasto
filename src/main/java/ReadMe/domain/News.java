@@ -7,127 +7,55 @@ import java.util.Objects;
  * Class for news from newspapers in the reading tip library.
  * @author madjanne
  */
-public class News {
-    private int news_id;
-    private String news_author;
-    private String news_title;
-    private String news_link;
-    private String news_description;
-    private String news_publisher;
-    private int news_year;
-    private boolean news_checked;
-    private Date news_date_checked;
+public class News extends ReadingTip {
+    private String link;
+    private String publisher;
 
-    public News(int news_id, String news_author, String news_title, String news_link, String news_description, String news_publisher, int news_year, boolean news_checked, Date news_date_checked) {
-        this.news_id = news_id;
-        this.news_author = news_author;
-        this.news_title = news_title;
-        this.news_link = news_link;
-        this.news_description = news_description;
-        this.news_publisher = news_publisher;
-        this.news_year = news_year;
-        this.news_checked = news_checked;
-        this.news_date_checked = news_date_checked;
+    public News(int id, String author, String title, String link, String description, String publisher, int year, boolean checked, Date date_checked) {
+        super(id, author, title, description, year, checked, date_checked);
+        this.publisher = publisher;
+        this.link = link;
     }
     
-    public News(String news_author, String news_title, String news_link, String news_description, String news_publisher, int news_year) {
-        this.news_author = news_author;
-        this.news_title = news_title;
-        this.news_link = news_link;
-        this.news_description = news_description;
-        this.news_publisher = news_publisher;
-        this.news_year = news_year;
+    public News(String author, String title, String link, String description, String publisher, int year) {
+        super(author, title, description, year);
+        this.link = link;
+        this.publisher = publisher;
     }    
 
-    public int getNews_id() {
-        return news_id;
+    public String getLink() {
+        return link;
     }
 
-    public void setNews_id(int news_id) {
-        this.news_id = news_id;
+    public void setLink(String link) {
+        this.link = link;
     }
 
-    public String getNews_author() {
-        return news_author;
+    public String getPublisher() {
+        return publisher;
     }
 
-    public void setNews_author(String news_author) {
-        this.news_author = news_author;
-    }
-
-    public String getNews_title() {
-        return news_title;
-    }
-
-    public void setNews_title(String news_title) {
-        this.news_title = news_title;
-    }
-
-    public String getNews_link() {
-        return news_link;
-    }
-
-    public void setNews_link(String news_link) {
-        this.news_link = news_link;
-    }
-
-    public String getNews_description() {
-        return news_description;
-    }
-
-    public void setNews_description(String news_description) {
-        this.news_description = news_description;
-    }
-
-    public String getNews_publisher() {
-        return news_publisher;
-    }
-
-    public void setNews_publisher(String news_publisher) {
-        this.news_publisher = news_publisher;
-    }
-
-    public int getNews_year() {
-        return news_year;
-    }
-
-    public void setNews_year(int news_year) {
-        this.news_year = news_year;
-    }
-
-    public boolean isNews_checked() {
-        return news_checked;
-    }
-
-    public void setNews_checked(boolean news_checked) {
-        this.news_checked = news_checked;
-    }
-
-    public Date getNews_date_checked() {
-        return news_date_checked;
-    }
-
-    public void setNews_date_checked(Date news_date_checked) {
-        this.news_date_checked = news_date_checked;
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
     
     @Override
     public String toString() {
-        return "\nTitle: " + news_title + "\n Author: " + news_author + 
-                "\n Link: " + news_link + "\n Description: " + news_description + "\n Publisher: " + news_publisher + 
-                "\n Year: " + news_year + "\n Checked: " + news_checked + "\n Date checked: " + news_date_checked +"\n";
+        return "\nTitle: " + super.getTitle() + "\n Author: " + super.getAuthor() +
+                "\n Link: " + link + "\n Description: " + super.getDescription() +  "\n Publisher: " + publisher +
+                "\n Year: " + super.getYear() + "\n Checked: " + super.isChecked() + "\n Date checked: " + super.getDate_checked() + "\n";
     }
     
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 23 * hash + Objects.hashCode(this.news_author);
-        hash = 23 * hash + Objects.hashCode(this.news_title);
-        hash = 23 * hash + Objects.hashCode(this.news_description);
-        hash = 23 * hash + Objects.hashCode(this.news_publisher);
-        hash = 23 * hash + Objects.hashCode(this.news_link);
-        hash = 23 * hash + Objects.hashCode(this.news_checked);
-        hash = 23 * hash + Objects.hashCode(this.news_date_checked);
+        hash = 23 * hash + Objects.hashCode(super.getAuthor());
+        hash = 23 * hash + Objects.hashCode(super.getTitle());
+        hash = 23 * hash + Objects.hashCode(super.getDescription());
+        hash = 23 * hash + Objects.hashCode(this.publisher);
+        hash = 23 * hash + Objects.hashCode(this.link);
+        hash = 23 * hash + Objects.hashCode(super.isChecked());
+        hash = 23 * hash + Objects.hashCode(super.getDate_checked());
         return hash;
     }
 
@@ -144,12 +72,12 @@ public class News {
         }
 
         final News other = (News) obj;
-        return Objects.equals(this.news_author, other.news_author)
-                && Objects.equals(this.news_title, other.news_title)
-                && Objects.equals(this.news_description, other.news_description)
-                && Objects.equals(this.news_publisher, other.news_publisher)
-                && Objects.equals(this.news_link, other.news_link)
-                && Objects.equals(this.news_checked, other.news_checked)
-                && Objects.equals(this.news_date_checked, other.news_date_checked);
+        return Objects.equals(super.getAuthor(), other.getAuthor())
+                && Objects.equals(super.getTitle(), other.getTitle())
+                && Objects.equals(super.getDescription(), other.getDescription())
+                && Objects.equals(this.publisher, other.publisher)
+                && Objects.equals(this.link, other.link)
+                && Objects.equals(super.isChecked(), other.isChecked())
+                && Objects.equals(super.getDate_checked(), other.getDate_checked());
     }    
 }
