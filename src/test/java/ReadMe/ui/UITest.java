@@ -107,7 +107,7 @@ public class UITest {
         verify(db).addBlog(any());
         verify(db, times(1)).addBlog(any());
     }
-/*
+
     @Test
     public void listAllPrintsCorrectly() {
         io = new IOStub("l", "1", "q");
@@ -224,7 +224,7 @@ public class UITest {
 
         assertTrue(io.getOutputs().contains(tips));
     }
-*/
+
     @Test
     public void summaryTableViewPrintsCorrectly() {
         io = new IOStub();
