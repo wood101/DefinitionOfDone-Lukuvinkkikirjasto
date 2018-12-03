@@ -6,6 +6,7 @@
 package ReadMe.dao;
 
 import ReadMe.database.Database;
+import ReadMe.domain.ReadingTip;
 import ReadMe.domain.Video;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,9 +39,9 @@ public class VideoDao {
      * @return
      */
     
-    public List<Video> listAll() {
+    public List<ReadingTip> listAll() {
         try (Connection c = db.getConnection()) {
-            List<Video> videos = new ArrayList<>();
+            List<ReadingTip> videos = new ArrayList<>();
 
             ResultSet rs = c.prepareStatement("SELECT * FROM Video").executeQuery();
             while (rs.next()) {

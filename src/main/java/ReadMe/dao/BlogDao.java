@@ -7,6 +7,7 @@ package ReadMe.dao;
 
 import ReadMe.database.Database;
 import ReadMe.domain.Blog;
+import ReadMe.domain.ReadingTip;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,9 +39,9 @@ public class BlogDao {
      * @return
      */
     
-    public List<Blog> listAll() {
+    public List<ReadingTip> listAll() {
         try (Connection c = db.getConnection()) {
-            List<Blog> blogs = new ArrayList<>();
+            List<ReadingTip> blogs = new ArrayList<>();
 
             ResultSet rs = c.prepareStatement("SELECT * FROM Blog").executeQuery();
             while (rs.next()) {

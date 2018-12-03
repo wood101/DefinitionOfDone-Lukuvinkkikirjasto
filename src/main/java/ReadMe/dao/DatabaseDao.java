@@ -2,6 +2,8 @@ package ReadMe.dao;
 
 import ReadMe.dao.*;
 import ReadMe.domain.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class that manages DAO Objects.
@@ -15,6 +17,7 @@ public class DatabaseDao implements DaoManager {
     private NewsDao newsDao;
     private ArticleDao articleDao;
     private BlogDao blogDao;
+    int amountOfLists = 5;
 
     public DatabaseDao(VideoDao videoDao, BookDao bookDao,
             NewsDao newsDao, ArticleDao articleDao, BlogDao blogDao) {
@@ -36,56 +39,35 @@ public class DatabaseDao implements DaoManager {
      * @return Bookmarks
      */
     @Override
-    public String listByType(String type) {
-        String s = "\n\n"; // returned string
+    public List<ReadingTip> listByType(String type) {
+        ArrayList<ReadingTip> list = new ArrayList<>();
         switch (type) {
+            case "all":  
+                videoDao.listAll().forEach(a -> list.add(a));
+                bookDao.listAll().forEach(a -> list.add(a));
+                newsDao.listAll().forEach(a -> list.add(a));
+                articleDao.listAll().forEach(a -> list.add(a));
+                blogDao.listAll().forEach(a -> list.add(a));
+                return list;
             case "video":
-                s += videosToString();
-                break;
+                return videoDao.listAll();
             case "book":
-                s += booksToString();
-                break;
+                return bookDao.listAll();
             case "news":
-                s += newsToString();
-                break;
-
+               return newsDao.listAll();
             case "article":
-                s += articlesToString();
-                break;
-
+                return articleDao.listAll();
             case "blog":
-                s += blogsToString();
-                break;
-
+               return blogDao.listAll();
             default:
-                s += ("\n\n");
+                return null;
         }
-
-        return s;
-    }
-
-    /**
-     * Returns all bookmarks as a printable String. only the given object list
-     * as a String. Method uses private toString methods.
-     *
-     * @return Bookmarks
-     */
-    @Override
-    public String listAll() {
-        String s = "\n\n"; // returned string
-        s += "All: \n\n";
-        s += videosToString();
-        s += booksToString();
-        s += newsToString();
-        s += articlesToString();
-        s += blogsToString();
-        return s;
     }
 
     private String videosToString() {
         String s = "";
         s += "Videos:\n";
-        for (Video video : videoDao.listAll()) {
+        for (ReadingTip video : videoDao.listAll()) {
             s += (video.toString());
         }
         s += ("\n\n");
@@ -95,7 +77,7 @@ public class DatabaseDao implements DaoManager {
     private String booksToString() {
         String s = "";
         s += "Books:\n";
-        for (Book book : bookDao.listAll()) {
+        for (ReadingTip book : bookDao.listAll()) {
             s += (book.toString());
         }
         s += ("\n\n");
@@ -105,7 +87,7 @@ public class DatabaseDao implements DaoManager {
     private String newsToString() {
         String s = "";
         s += "News:\n";
-        for (News n : newsDao.listAll()) {
+        for (ReadingTip n : newsDao.listAll()) {
             s += (n.toString());
         }
         s += ("\n\n");
@@ -115,7 +97,7 @@ public class DatabaseDao implements DaoManager {
     private String articlesToString() {
         String s = "";
         s += "Articles:\n";
-        for (Article article : articleDao.listAll()) {
+        for (ReadingTip article : articleDao.listAll()) {
             s += (article.toString());
         }
         s += ("\n\n");
@@ -125,7 +107,7 @@ public class DatabaseDao implements DaoManager {
     private String blogsToString() {
         String s = "";
         s += "Blogs:\n";
-        for (Blog blog : blogDao.listAll()) {
+        for (ReadingTip blog : blogDao.listAll()) {
             s += (blog.toString());
         }
         s += ("\n\n");
@@ -180,4 +162,7 @@ public class DatabaseDao implements DaoManager {
                 return false;
         }
     }
+   
+
+    
 }

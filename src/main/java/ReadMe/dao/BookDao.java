@@ -7,6 +7,7 @@ package ReadMe.dao;
 
 import ReadMe.database.Database;
 import ReadMe.domain.Book;
+import ReadMe.domain.ReadingTip;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,9 +39,9 @@ public class BookDao {
      * @return
      */
     
-    public List<Book> listAll() {
+    public List<ReadingTip> listAll() {
         try (Connection c = db.getConnection()) {
-            List<Book> books = new ArrayList<>();
+            List<ReadingTip> books = new ArrayList<>();
 
             ResultSet rs = c.prepareStatement("SELECT * FROM Book").executeQuery();
             while (rs.next()) {

@@ -7,6 +7,7 @@ package ReadMe.dao;
 
 import ReadMe.database.Database;
 import ReadMe.domain.News;
+import ReadMe.domain.ReadingTip;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,9 +39,9 @@ public class NewsDao {
      * @return
      */
     
-    public List<News> listAll() {
+    public List<ReadingTip> listAll() {
         try (Connection c = db.getConnection()) {
-            List<News> newss = new ArrayList<>();
+            List<ReadingTip> newss = new ArrayList<>();
 
             ResultSet rs = c.prepareStatement("SELECT * FROM News").executeQuery();
             while (rs.next()) {
