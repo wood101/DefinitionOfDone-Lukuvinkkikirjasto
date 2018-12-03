@@ -33,8 +33,19 @@ public class UI {
         this.manager = manager;
     }
     
+    /**
+     * Prints a summary table of all reading tips
+     * @param tips 
+     */
     public void summaryTableView(List<ReadingTip> tips) {
-        
+        String leftAlignFormat = "| %-5s | %-10d | %-15d | %-7d |%n";
+        System.out.format("+----+--------+-------+------+%n");
+        System.out.format("| ID | Author | Title | Type |%n");
+        System.out.format("+----+--------+-------+------+%n");
+        for (int i = 0; i < tips.size(); i++) {
+            System.out.format(leftAlignFormat, tips.get(i).getId(), tips.get(i).getAuthor(), tips.get(i).getTitle(), tips.get(i).getClass().getName());
+        }
+        System.out.format("+----+--------+-------+------+%n");
     }
 
     /**
