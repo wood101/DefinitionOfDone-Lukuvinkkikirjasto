@@ -1,6 +1,6 @@
 package ReadMe.dao;
 
-import ReadMe.dao.*;
+
 import ReadMe.domain.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +29,11 @@ public class DatabaseDao implements DaoManager {
     }
 
     /**
-     * Returns all wanted bookmarks as a printable String. Returns the given
-     * object list as a String based on input.
+     * Returns all wanted bookmarks as a List. 
      *
      * Inputs = "all", "video", "book", "news", "article", "blog".
-     *
-     * Method uses private toString methods.
-     *
-     * @return Bookmarks
+
+     * @return List<ReadingTips>
      */
     @Override
     public List<ReadingTip> listByType(String type) {
@@ -64,55 +61,6 @@ public class DatabaseDao implements DaoManager {
         }
     }
 
-    private String videosToString() {
-        String s = "";
-        s += "Videos:\n";
-        for (ReadingTip video : videoDao.listAll()) {
-            s += (video.toString());
-        }
-        s += ("\n\n");
-        return s;
-    }
-
-    private String booksToString() {
-        String s = "";
-        s += "Books:\n";
-        for (ReadingTip book : bookDao.listAll()) {
-            s += (book.toString());
-        }
-        s += ("\n\n");
-        return s;
-    }
-
-    private String newsToString() {
-        String s = "";
-        s += "News:\n";
-        for (ReadingTip n : newsDao.listAll()) {
-            s += (n.toString());
-        }
-        s += ("\n\n");
-        return s;
-    }
-
-    private String articlesToString() {
-        String s = "";
-        s += "Articles:\n";
-        for (ReadingTip article : articleDao.listAll()) {
-            s += (article.toString());
-        }
-        s += ("\n\n");
-        return s;
-    }
-
-    private String blogsToString() {
-        String s = "";
-        s += "Blogs:\n";
-        for (ReadingTip blog : blogDao.listAll()) {
-            s += (blog.toString());
-        }
-        s += ("\n\n");
-        return s;
-    }
 
     @Override
     public void addVideo(Video video) {

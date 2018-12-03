@@ -17,11 +17,11 @@ import java.util.List;
  */
 public class InMemoryDao implements DaoManager {
 
-    private List<Video> videos;
-    private List<Book> books;
-    private List<News> news;
-    private List<Article> articles;
-    private List<Blog> blogs;
+    private List<ReadingTip> videos;
+    private List<ReadingTip> books;
+    private List<ReadingTip> news;
+    private List<ReadingTip> articles;
+    private List<ReadingTip> blogs;
 
     /**
      * In memory 'database' that can be used for testing. Creates new lists of
@@ -49,150 +49,58 @@ public class InMemoryDao implements DaoManager {
         articles.add(new Article("hackerdashery3", "P vs. NP and the Computational Complexity Zoo3", "1234", "P js NP erot", "hmm", 2014));
         blogs.add(new Blog("hackerdashery4", "P vs. NP and the Computational Complexity Zoo4", "1234", "P js NP erot", 2014));
         
-        /**news.add(new News("", "Kakkakuutiot",
-                "https://www.iltalehti.fi/terveysuutiset/a/71cb5062-ed6e-45a6-a22c-d0949daeaa6a"));
-        news.add(new News("Täydelliset joulutortut",
-                "Näin teet täydellisen tortun", "https://www.iltalehti.fi/ruoka-artikkelit/a/556f9c4c-638b-4091-ab35-cb6e52e02555"));
-*       */
     }
 
     /**
-     * Returns all wanted bookmarks as a printable String. Returns
-     * the given object list as a String based on input.
+     * Returns all wanted bookmarks as a List. 
      *
      * Inputs = "all", "video", "book", "news", "article", "blog".
-     *
-     * Method uses private toString methods.
-     *
-     * @return Bookmarks
+
+     * @return List<ReadingTips>
      */
     @Override
-    public String listByType(String type) {
-        String s = "\n\n"; // returned string
+    public List<ReadingTip> listByType(String type) {
+        ArrayList<ReadingTip> list = new ArrayList<>();
         switch (type) {
+            case "all":  
+                videos.forEach(a -> list.add(a));
+                books.forEach(a -> list.add(a));
+                news.forEach(a -> list.add(a));
+                articles.forEach(a -> list.add(a));
+                blogs.forEach(a -> list.add(a));
+                return list;
             case "video":
-                s += videosToString();
-                break;
+                return videos;
             case "book":
-                s += booksToString();
-                break;
+                return books;
             case "news":
-                s += newsToString();
-                break;
-
+               return news;
             case "article":
-                s += articlesToString();
-                break;
-
+                return articles;
             case "blog":
-                s += blogsToString();
-                break;
-
+               return blogs;
             default:
-                s += ("\n\n");
+                return null;
         }
-
-        return s;
     }
 
-    /**
-     * Returns all bookmarks as a printable String.
-     * only the given object list as a String.
-     * Method uses private toString methods.
-     *
-     * @return Bookmarks
-     */
-    @Override
-    public String listAll() {
-        String s = "\n\n"; // returned string
-        s += "All: \n\n";
-        s += videosToString();
-        s += booksToString();
-        s += newsToString();
-        s += articlesToString();
-        s += blogsToString();
-        return s;
-    }    
-    
-    // Methods to keep ListAll cleaner. Methods turn list into a string.
-    private String videosToString() {
-        String s = "";
-        s += "Videos:\n";
-
-        for (Video video : videos) {
-            s += (video.toString());
-        }
-        s += ("\n\n");
-
-        return s;
-
-    }
-
-    private String booksToString() {
-        String s = "";
-        s += "Books:\n";
-
-        for (Book book : books) {
-            s += (book.toString());
-        }
-        s += ("\n\n");
-
-        return s;
-    }
-
-    private String newsToString() {
-        String s = "";
-        s += "News:\n";
-
-        for (News n : news) {
-            s += (n.toString());
-        }
-        s += ("\n\n");
-
-        return s;
-    }
-
-    private String articlesToString() {
-        String s = "";
-        s += "Articles:\n";
-
-        for (Article article : articles) {
-            s += (article.toString());
-        }
-        s += ("\n\n");
-
-        return s;
-    }
-
-    private String blogsToString() {
-        String s = "";
-        s += "Blogs:\n";
-
-        for (Blog blog : blogs) {
-            s += (blog.toString());
-        }
-        s += ("\n\n");
-
-        return s;
-    }
-
-    public List<Video> getVideos() {
+    public List<ReadingTip> getVideos() {
         return videos;
     }
 
-    public List<Book> getBooks() {
+    public List<ReadingTip> getBooks() {
         return books;
     }
 
-    public List<News> getNews() {
+    public List<ReadingTip> getNews() {
         return news;
     }
 
-    public List<Article> getArticles() {
+    public List<ReadingTip> getArticles() {
         return articles;
     }
 
-    public List<Blog> getBlogs() {
+    public List<ReadingTip> getBlogs() {
         return blogs;
     }
 
