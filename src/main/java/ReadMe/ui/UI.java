@@ -343,7 +343,7 @@ public class UI {
         while (!choice.equals("q")) {
             io.print("Choose an action:\n"
                     + "  a - add new readtip\n"
-                    + "  l - list all tips\n"
+                    + "  l - list tips\n"
 //                    + "  m - mark a tip as read\n"
                     + "  q - quit app\n");
             choice = io.readLine("Enter choice: ");
