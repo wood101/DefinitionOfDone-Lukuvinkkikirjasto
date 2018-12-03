@@ -8,6 +8,7 @@ package ReadMe.dao;
 import ReadMe.ui.UI;
 import ReadMe.database.Database;
 import ReadMe.database.SQLiteDatabase;
+import ReadMe.domain.ReadingTip;
 import ReadMe.io.ConsoleIO;
 import java.io.File;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.Date;
 
 /**
  *
- * @author madjanne
+ * @author madjanne, hajame, obisi
  */
 public class VideoDaoTest {
 
@@ -52,8 +53,7 @@ public class VideoDaoTest {
         testDao.add(new Video(1, "author", "title", "www", "desc", 2018, false, new Date(5)));
         testDao.add(new Video(3, "author1", "title2", "www4", "descr", 2015, true, new Date(7)));
         
-        List<Video> videos = testDao.listAll();
-        
+        List<ReadingTip> videos = testDao.listAll();
         assertEquals(2, videos.size());
         assertEquals("title", videos.get(0).getTitle());  
         assertEquals("desc", videos.get(0).getDescription());  

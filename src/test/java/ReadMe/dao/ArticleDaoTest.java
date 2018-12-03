@@ -5,7 +5,6 @@
  */
 package ReadMe.dao;
 
-import ReadMe.ui.UI;
 import ReadMe.database.Database;
 import ReadMe.database.SQLiteDatabase;
 import ReadMe.io.ConsoleIO;
@@ -16,11 +15,12 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import ReadMe.domain.Article;
+import ReadMe.domain.ReadingTip;
 import java.util.Date;
 
 /**
  *
- * @author madjanne
+ * @author madjanne, hajame, obisi
  */
 public class ArticleDaoTest {
 
@@ -51,8 +51,7 @@ public class ArticleDaoTest {
         testDao.add(new Article(1, "author", "title", "www", "desc", "otava", 2018, false, new Date(5)));
         testDao.add(new Article(3, "author1", "title2", "www4", "descr", "penguin", 2015, true, new Date(7)));
         
-        List<Article> articles = testDao.listAll();
-        
+        List<ReadingTip> articles = testDao.listAll();       
         assertEquals(2, articles.size());
         assertEquals("title", articles.get(0).getTitle());  
         assertEquals("desc", articles.get(0).getDescription());  

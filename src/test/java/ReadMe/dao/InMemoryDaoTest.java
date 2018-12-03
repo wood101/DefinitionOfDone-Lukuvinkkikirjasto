@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author bisi
+ * @author obisi, hajame
  */
 public class InMemoryDaoTest {
     
@@ -63,21 +63,14 @@ public class InMemoryDaoTest {
        assertEquals(b, dao.getBlogs().get(1));
     }
     
-    
     @Test
     public void isListAllCorrect() {
-       String s = "\n\nAll: \n\n" + "Videos:\n" + dao.getVideos().toString().replace("[", "").replace("]", "") 
-               + "\n\n" + "Books:\n" + dao.getBooks().toString().replace("[", "").replace("]", "") 
-               + "\n\n" + "News:\n" + dao.getNews().toString().replace("[", "").replace("]", "") 
-               + "\n\n" + "Articles:\n" + dao.getArticles().toString().replace("[", "").replace("]", "") + "\n\n" + "Blogs:\n" + dao.getBlogs().toString().replace("[", "").replace("]", "") + "\n\n";
-       assertEquals(dao.listAll(), s);
+       assertTrue(dao.getVideos().get(0).getTitle().equals("hackerdashery"));
+       assertTrue(dao.getBlogs().get(0).getTitle().equals("hackerdashery4"));
     }
     
     @Test
     public void isListVideosCorrect() {
-        String s = "\n\nVideos:\n" + dao.getVideos().toString().replace("[", "").replace("]", "") + "\n\n";
-        assertEquals(dao.listByType("video"), s);
-    }
-    
-    
+        assertTrue(dao.getVideos().get(0).getTitle().equals("hackerdashery"));
+    }   
 }

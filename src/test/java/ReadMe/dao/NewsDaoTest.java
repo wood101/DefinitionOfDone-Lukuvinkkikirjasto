@@ -15,11 +15,12 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import ReadMe.domain.News;
+import ReadMe.domain.ReadingTip;
 import java.util.Date;
 
 /**
  *
- * @author madjanne
+ * @author madjanne, hajame, obisi
  */
 public class NewsDaoTest {
 
@@ -27,13 +28,13 @@ public class NewsDaoTest {
     private Database testDatabase;
     ConsoleIO testIo;
     private NewsDao testDao;
-    
+
     public NewsDaoTest() {
     }
 
     @Before
     public void setUp() throws ClassNotFoundException {
-        
+
         testFile = new File("testReadMeBase.db");
         testDatabase = new SQLiteDatabase("jdbc:sqlite:" + testFile.getAbsolutePath());
         testDao = new NewsDao(testDatabase);
@@ -49,11 +50,10 @@ public class NewsDaoTest {
     public void isListingCorrect() {
         testDao.add(new News(1, "author", "title", "www", "desc", "otava", 2018, false, new Date(5)));
         testDao.add(new News(3, "author1", "title2", "www4", "descr", "penguin", 2015, true, new Date(7)));
-        
-        List<News> newsArray = testDao.listAll();
-        
+
+        List<ReadingTip> newsArray = testDao.listAll();
         assertEquals(2, newsArray.size());
-        assertEquals("title", newsArray.get(0).getTitle());  
-        assertEquals("desc", newsArray.get(0).getDescription());  
+        assertEquals("title", newsArray.get(0).getTitle());
+        assertEquals("desc", newsArray.get(0).getDescription());
     }
 }

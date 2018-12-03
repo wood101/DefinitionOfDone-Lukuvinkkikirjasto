@@ -15,11 +15,12 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import ReadMe.domain.Book;
+import ReadMe.domain.ReadingTip;
 import java.util.Date;
 
 /**
  *
- * @author madjanne
+* @author madjanne, hajame, obisi
  */
 public class BookDaoTest {
 
@@ -50,8 +51,7 @@ public class BookDaoTest {
         testDao.add(new Book(1, "author", "title", "5F3D3", "desc", 2018, false, new Date(5)));
         testDao.add(new Book(3, "author1", "title2", "ASD214214", "descr", 2015, true, new Date(7)));
         
-        List<Book> books = testDao.listAll();
-        
+        List<ReadingTip> books = testDao.listAll();
         assertEquals(2, books.size());
         assertEquals("title", books.get(0).getTitle());  
         assertEquals("desc", books.get(0).getDescription());  
