@@ -33,6 +33,19 @@ public class UI {
         this.manager = manager;
     }
     
+    public void summaryTableView(List<ReadingTip> tips) {
+        String table = "";
+        String leftAlignFormat = "| %-4d| %-15s | %-20s | %-7s |%n";
+        table += String.format("+-----+-----------------+----------------------+---------+%n");
+        table += String.format("| ID  |     Author      |        Title         |  Type   |%n");
+        table += String.format("+-----+-----------------+----------------------+---------+%n");
+        for (int i = 0; i < tips.size(); i++) {
+            table += String.format(leftAlignFormat, i, tips.get(i).getAuthor(), tips.get(i).getTitle(), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
+        }
+        table += String.format("+-----+-----------------+----------------------+---------+%n");
+        io.print(table);
+    }
+    
     /**
      * Displays fields to input for video entry, takes input, and creates video
      * entry
@@ -131,19 +144,13 @@ public class UI {
      * selection of type
      */
     public void selectTypeToAdd() {
-        io.print("Choose type:\n"
-                + "  1 - video\n"
-                + "  2 - book\n"
-                + "  3 - news\n"
-                + "  4 - article\n"
-                + "  5 - blog\n");
-
         String prompt = "Choose type:\n"
                 + "  1 - video\n"
                 + "  2 - book\n"
                 + "  3 - news\n"
                 + "  4 - article\n"
-                + "  5 - blog\n";
+                + "  5 - blog\n"
+                + "  b - back to previous view\n";
 
         Set<String> acceptedInput = new TreeSet<>();
         acceptedInput.add("1");
@@ -151,7 +158,6 @@ public class UI {
         acceptedInput.add("3");
         acceptedInput.add("4");
         acceptedInput.add("5");
-        acceptedInput.add("6");
         acceptedInput.add("b");
 
         String choice = userCommand(prompt, acceptedInput);
@@ -171,10 +177,10 @@ public class UI {
             case "5":
                 addBlog();
                 break;
-            default:
-                io.print("Choose a correct input!\n");
-                return;
+            case "b":
+                break;
         }
+        selectBaseCommand();
         io.print("Tip added!\n\n");
     }
 
@@ -190,7 +196,7 @@ public class UI {
                 + "  4 - news\n"
                 + "  5 - article\n"
                 + "  6 - blog\n"
-                + "  b - back to prevoius commands\n";
+                + "  b - back to main commands\n";
 
         Set<String> acceptedInput = new TreeSet<>();
         acceptedInput.add("1");
@@ -216,9 +222,32 @@ public class UI {
             case "6":
                 break;
             case "b":
-                selectBaseCommand();
                 break;
         }
+        selectBaseCommand();
+    }
+    
+    /**
+     * Displays options of types of tips to list and takes user input for
+     * selection of type or to list all
+     */
+    public void selectSingleTip() {
+        String prompt = "Choose type:\n"
+                + "  s - show more info about single tip\n"
+                + "  b - back to main commands\n";
+
+        Set<String> acceptedInput = new TreeSet<>();
+        acceptedInput.add("s");
+        acceptedInput.add("b");
+
+        String choice = userCommand(prompt, acceptedInput);
+        switch (choice) {
+            case "s":
+                break;
+            case "b":
+                break;
+        }
+        selectBaseCommand();
     }
 
     /**
