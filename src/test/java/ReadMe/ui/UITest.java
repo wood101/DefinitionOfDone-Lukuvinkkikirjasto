@@ -42,65 +42,65 @@ public class UITest {
     public void setUp() {
         db = mock(InMemoryDao.class);
     }
-    
+
     @Test
     public void addVideoSuccessfulWhenCorrectInputIsGiven() {
         io = new IOStub("a", "1", "title", "author", "www.test.org", "desc", "2000", "q");
         ui = new UI(io, db);
         Video video = new Video("author", "title", "desc", "www.test.org", 2000);
-        
+
         ui.run();
-        
+
         assertTrue(io.getOutputs().contains("Tip added!\n\n"));
         verify(db).addVideo(any());
         verify(db, times(1)).addVideo(any());
     }
-    
+
     @Test
     public void addBookSuccessfulWhenCorrectInputIsGiven() {
         io = new IOStub("a", "2", "title", "author", "1234", "desc", "2000", "q");
         ui = new UI(io, db);
         Book book = new Book("author", "title", "1234", "desc", 2000);
-        
+
         ui.run();
 
         assertTrue(io.getOutputs().contains("Tip added!\n\n"));
         verify(db).addBook(any());
         verify(db, times(1)).addBook(any());
     }
-    
+
     @Test
     public void addNewsSuccessfulWhenCorrectInputIsGiven() {
         io = new IOStub("a", "3", "title", "author", "www.test.org", "desc", "publisher", "2000", "q");
         ui = new UI(io, db);
         News news = new News("author", "title", "www.test.org", "desc", "publisher", 2000);
-        
+
         ui.run();
 
         assertTrue(io.getOutputs().contains("Tip added!\n\n"));
         verify(db).addNews(any());
         verify(db, times(1)).addNews(any());
     }
-    
+
     @Test
     public void addArticleSuccessfulWhenCorrectInputIsGiven() {
         io = new IOStub("a", "4", "title", "author", "www.test.org", "desc", "publisher", "2000", "q");
         ui = new UI(io, db);
         Article article = new Article("author", "title", "www.test.org", "desc", "publisher", 2000);
-        
+
         ui.run();
 
         assertTrue(io.getOutputs().contains("Tip added!\n\n"));
         verify(db).addArticle(any());
         verify(db, times(1)).addArticle(any());
     }
-    
+
     @Test
     public void addBlogSuccessfulWhenCorrectInputIsGiven() {
         io = new IOStub("a", "5", "title", "author", "www.test.org", "desc", "2000", "q");
         ui = new UI(io, db);
         Blog blog = new Blog("author", "title", "www.test.org", "desc", 2000);
-        
+
         ui.run();
 
         assertTrue(io.getOutputs().contains("Tip added!\n\n"));
@@ -112,117 +112,112 @@ public class UITest {
     public void listAllPrintsCorrectly() {
         io = new IOStub("l", "1", "q");
         ui = new UI(io, db);
-        Video video1 = new Video("author", "title", "www.test.org", "desc", 2000);
-        Video video2 = new Video("author", "title", "www.testAlt.org", "desc", 2000);
-        String tips = "";
-        tips += "Videos:\n";
-        tips += video1.toString();
-        tips += "\n\n";
-        tips += video2.toString();
-        
-        when(db.listAll()).thenReturn(tips);
-        
-        ui.run();
+        Video video1 = new Video("author1", "title", "www.test.org", "desc", 2000);
+        Video video2 = new Video("author2", "title", "www.testAlt.org", "desc", 2000);
+        List<ReadingTip> list = new ArrayList<>();
+        list.add(video1);
+        list.add(video2);
 
-        assertTrue(io.getOutputs().contains(tips));
+        when(db.listByType("all")).thenReturn(list);
+
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains(video1.getAuthor()) && output.contains(video2.getTitle()));
     }
-    
+
     @Test
     public void listVideosPrintsCorrectly() {
         io = new IOStub("l", "2", "q");
         ui = new UI(io, db);
-        Video video1 = new Video("author", "title", "www.test.org", "desc", 2000);
-        Video video2 = new Video("author", "title", "www.testAlt.org", "desc", 2000);
-        String tips = "";
-        tips += "Videos:\n";
-        tips += video1.toString();
-        tips += "\n\n";
-        tips += video2.toString();
-        
-        when(db.listByType("video")).thenReturn(tips);
-        
-        ui.run();
+        String author = "author1";
+        String title = "title2";
+        Video video1 = new Video(author, "title", "www.test.org", "desc", 2000);
+        Video video2 = new Video("author2", title, "www.testAlt.org", "desc", 2000);
+        List<ReadingTip> list = new ArrayList<>();
+        list.add(video1);
+        list.add(video2);
+        when(db.listByType("video")).thenReturn(list);
 
-        assertTrue(io.getOutputs().contains(tips));
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains(author) && output.contains(title));
     }
-    
+
     @Test
     public void listBooksPrintsCorrectly() {
         io = new IOStub("l", "3", "q");
         ui = new UI(io, db);
-        Book book1 = new Book("author", "title", "1234", "desc", 2000);
-        Book book2 = new Book("author", "title", "4321", "desc", 2000);
-        String tips = "";
-        tips += "Books:\n";
-        tips += book1.toString();
-        tips += "\n\n";
-        tips += book2.toString();
-        
-        when(db.listByType("book")).thenReturn(tips);
-        
-        ui.run();
+        String author = "author1";
+        String title = "title2";
+        Book book1 = new Book(author, "title", "1234", "desc", 2000);
+        Book book2 = new Book("author2", title, "4321", "desc", 2000);
+        List<ReadingTip> list = new ArrayList<>();
+        list.add(book1);
+        list.add(book2);
 
-        assertTrue(io.getOutputs().contains(tips));
+        when(db.listByType("book")).thenReturn(list);
+
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains(author) && output.contains(title));
+
     }
-    
+
     @Test
     public void listNewsPrintsCorrectly() {
         io = new IOStub("l", "4", "q");
         ui = new UI(io, db);
-        News news1 = new News("author", "title", "www.test.org", "desc", "publisher", 2000);
-        News news2 = new News("author", "title", "www.testAlt.org", "desc", "publisher", 2000);
-        
-        String tips = "";
-        tips += "News:\n";
-        tips += news1.toString();
-        tips += "\n\n";
-        tips += news2.toString();
-        
-        when(db.listByType("news")).thenReturn(tips);
-        
-        ui.run();
+        String author = "author1";
+        String title = "title2";
+        News news1 = new News(author, "title", "www.test.org", "desc", "publisher", 2000);
+        News news2 = new News("author2", title, "www.testAlt.org", "desc", "publisher", 2000);
+        List<ReadingTip> list = new ArrayList<>();
+        list.add(news1);
+        list.add(news2);
 
-        assertTrue(io.getOutputs().contains(tips));
+        when(db.listByType("news")).thenReturn(list);
+
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains(author) && output.contains(title));
     }
-    
+
     @Test
     public void listArticlesPrintsCorrectly() {
         io = new IOStub("l", "5", "q");
         ui = new UI(io, db);
-        Article article1 = new Article("author", "title", "www.test.org", "desc", "publisher", 2000);
-        Article article2 = new Article("author", "title", "www.testAlt.org", "desc", "publisher", 2000);
-        
-        String tips = "";
-        tips += "Articles:\n";
-        tips += article1.toString();
-        tips += "\n\n";
-        tips += article2.toString();
-        
-        when(db.listByType("article")).thenReturn(tips);
-        
-        ui.run();
+        String author = "author1";
+        String title = "title2";
+        Article article1 = new Article(author, "title", "www.test.org", "desc", "publisher", 2000);
+        Article article2 = new Article("author2", title, "www.testAlt.org", "desc", "publisher", 2000);
+        List<ReadingTip> list = new ArrayList<>();
+        list.add(article1);
+        list.add(article2);
 
-        assertTrue(io.getOutputs().contains(tips));
+        when(db.listByType("article")).thenReturn(list);
+
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains(author) && output.contains(title));
     }
-    
+
     @Test
     public void listBlogsPrintsCorrectly() {
         io = new IOStub("l", "6", "q");
         ui = new UI(io, db);
-        Blog blog1 = new Blog("author", "title", "www.test.org", "desc", 2000);
-        Blog blog2 = new Blog("author", "title", "www.testAlt.org", "desc", 2000);
-        
-        String tips = "";
-        tips += "Blogs:\n";
-        tips += blog1.toString();
-        tips += "\n\n";
-        tips += blog2.toString();
-        
-        when(db.listByType("blog")).thenReturn(tips);
-        
-        ui.run();
+        String author = "author1";
+        String title = "title2";
+        Blog blog1 = new Blog(author, "title", "www.test.org", "desc", 2000);
+        Blog blog2 = new Blog("author2", title, "www.testAlt.org", "desc", 2000);
+        List<ReadingTip> list = new ArrayList<>();
+        list.add(blog1);
+        list.add(blog2);
 
-        assertTrue(io.getOutputs().contains(tips));
+        when(db.listByType("blog")).thenReturn(list);
+
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains(author) && output.contains(title));
     }
 
     @Test
@@ -236,7 +231,7 @@ public class UITest {
         tips.add(blog);
         tips.add(article);
         io.summaryTableView(tips);
-        
+
         String expectedOutput = "";
         expectedOutput += String.format("+-----+-----------------+----------------------+---------+%n");
         expectedOutput += String.format("| ID  |     Author      |        Title         |  Type   |%n");
@@ -245,7 +240,7 @@ public class UITest {
         expectedOutput += String.format("| 1   | author          | title                | Blog    |%n");
         expectedOutput += String.format("| 2   | hack            | cook chicken         | Article |%n");
         expectedOutput += String.format("+-----+-----------------+----------------------+---------+%n");
-        
+
         assertEquals(io.getOutputs().get(0), expectedOutput);
     }
 }

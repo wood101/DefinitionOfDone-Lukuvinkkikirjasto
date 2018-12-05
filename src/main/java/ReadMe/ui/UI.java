@@ -210,16 +210,22 @@ public class UI {
         String choice = userCommand(prompt, acceptedInput);
         switch (choice) {
             case "1":
+                summaryTableView(manager.listByType("all"));
                 break;
             case "2":
+                summaryTableView(manager.listByType("video"));
                 break;
             case "3":
+                summaryTableView(manager.listByType("book"));
                 break;
             case "4":
+                summaryTableView(manager.listByType("news"));
                 break;
             case "5":
+                summaryTableView(manager.listByType("article"));
                 break;
             case "6":
+                summaryTableView(manager.listByType("blog"));
                 break;
             case "b":
                 break;

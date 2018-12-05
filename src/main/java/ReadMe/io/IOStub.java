@@ -39,6 +39,10 @@ public class IOStub implements IO {
         return outputs;
     }
     
+    public String getOutputString() {
+        return outputs.toString();
+    }
+    
     @Override
     public void summaryTableView(List<ReadingTip> tips) {
         String output = "";
