@@ -78,13 +78,23 @@ public class BookDao {
     }
 
     /**
-     * Marks the book as read and sets the date it was read on.
+     * Marks the Book as read and sets the date it was read on.
      * @param book Object that is marked read
      */
-    public void markBookAsRead(Book book) {
-        book.setChecked(true);
-        book.setDate_checked(new Date());
-    }    
+    public boolean markAsRead(String title) {
+        try (Connection c = db.getConnection()) {
+            PreparedStatement stmt = c.prepareStatement(
+                    "UPDATE Book SET book_checked = ?, book_date_checked = ? WHERE book_title = ? ");
+            stmt.setBoolean(1, true);
+            stmt.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+            stmt.setString(3, title);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(BookDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    } 
     
      /**
      * Creates a new Book object from database row
