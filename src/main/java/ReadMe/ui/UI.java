@@ -33,24 +33,23 @@ public class UI {
         this.manager = manager;
     }
 
-    public void summaryTableView(List<ReadingTip> tips) {
-
+    public boolean summaryTableView(List<ReadingTip> tips) {
         if (tips.isEmpty()) {
             io.print("\nNo reading tips found.\n");
+            return false;
         } else {
             String table = "";
-            String leftAlignFormat = "| %-4d| %-15s | %-20s | %-7s |%n";
-            table += String.format("+-----+-----------------+----------------------+---------+%n");
-            table += String.format("| ID  |     Author      |        Title         |  Type   |%n");
-            table += String.format("+-----+-----------------+----------------------+---------+%n");
+            String leftAlignFormat = "| %-6d| %-15s | %-20s | %-7s |%n";
+            table += String.format("+-------+-----------------+----------------------+---------+%n");
+            table += String.format("| Index |     Author      |        Title         |  Type   |%n");
+            table += String.format("+-------+-----------------+----------------------+---------+%n");
             for (int i = 0; i < tips.size(); i++) {
-                table += String.format(leftAlignFormat, i, tips.get(i).getAuthor(), tips.get(i).getTitle(), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
+                table += String.format(leftAlignFormat, i, tips.get(i).getAuthor(), tips.get(i).getTitle().substring(0, Math.min(19, tips.get(i).getTitle().length())), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
             }
-            table += String.format("+-----+-----------------+----------------------+---------+%n");
+            table += String.format("+-------+-----------------+----------------------+---------+%n");
             io.print(table);
-            
+            return true;
         }
-
     }
 
     /**
@@ -160,7 +159,7 @@ public class UI {
      * Displays options of types of tips to add and takes user input for
      * selection of type
      */
-    public void selectTypeToAdd() {
+    private void selectTypeToAdd() {
         String prompt = "Choose type:\n"
                 + "  1 - video\n"
                 + "  2 - book\n"
@@ -209,7 +208,7 @@ public class UI {
      * Displays options of types of tips to list and takes user input for
      * selection of type or to list all
      */
-    public void selectTypeToList() {
+    private void selectTypeToList() {
         String prompt = "Choose type:\n"
                 + "  1 - all\n"
                 + "  2 - video\n"
@@ -229,30 +228,45 @@ public class UI {
         acceptedInput.add("b");
 
         String choice = userCommand(prompt, acceptedInput);
+        boolean hasTips = true;
+        List<ReadingTip> tips;
         switch (choice) {
             case "1":
-                summaryTableView(manager.listByType("all"));
+                tips = manager.listByType("all");
+                hasTips = summaryTableView(tips);
+                selectSingleTip(tips);
                 break;
             case "2":
-                summaryTableView(manager.listByType("video"));
+                tips = manager.listByType("video");
+                hasTips = summaryTableView(tips);
+                selectSingleTip(tips);
                 break;
             case "3":
-                summaryTableView(manager.listByType("book"));
+                tips = manager.listByType("book");
+                hasTips = summaryTableView(tips);
+                selectSingleTip(tips);
                 break;
             case "4":
-                summaryTableView(manager.listByType("news"));
+                tips = manager.listByType("news");
+                hasTips = summaryTableView(tips);
+                selectSingleTip(tips);
                 break;
             case "5":
-                summaryTableView(manager.listByType("article"));
+                tips = manager.listByType("article");
+                hasTips = summaryTableView(tips);
+                selectSingleTip(tips);
                 break;
             case "6":
-                summaryTableView(manager.listByType("blog"));
+                tips = manager.listByType("blog");
+                hasTips = summaryTableView(tips);
+                selectSingleTip(tips);
                 break;
             case "b":
                 selectBaseCommand();
-                break;
-            default:
-                selectBaseCommand();
+                return;
+        }
+        if (!hasTips) {
+            selectBaseCommand();
         }
     }
 
@@ -260,7 +274,7 @@ public class UI {
      * Displays options of types of tips to list and takes user input for
      * selection of type or to list all
      */
-    public void selectSingleTip(List<ReadingTip> tips) {
+    private void selectSingleTip(List<ReadingTip> tips) {
         String prompt = "Choose an action:\n"
                 + "  s - show more info about single tip\n"
                 + "  b - back to main commands\n"
@@ -269,10 +283,12 @@ public class UI {
         Set<String> acceptedInput = new TreeSet<>();
         acceptedInput.add("s");
         acceptedInput.add("b");
+        acceptedInput.add("q");
 
         String choice = userCommand(prompt, acceptedInput);
         switch (choice) {
             case "s":
+                selectTipFromList(tips);
                 break;
             case "b":
                 selectBaseCommand();
@@ -282,12 +298,16 @@ public class UI {
                 break;
         }
     }
+    
+    private void selectTipFromList(List<ReadingTip> tips) {
+        io.print("hello");
+    }
 
     /**
      * Displays options of types of tips to list and takes user input for
      * selection of type or to list all
      */
-    public void selectBaseCommand() {
+    private void selectBaseCommand() {
         String prompt = "Choose an action:\n"
                 + "  a - add new readtip\n"
                 + "  l - list tips\n"
@@ -317,7 +337,7 @@ public class UI {
     private String userCommand(String prompt, Set<String> acceptedInput) {
         io.print(prompt);
         String choice = "";
-        while (!choice.equals("q")) {
+        while (true) {
             choice = io.readLine("Enter choice: ");
             if (acceptedInput.contains(choice)) {
                 break;
