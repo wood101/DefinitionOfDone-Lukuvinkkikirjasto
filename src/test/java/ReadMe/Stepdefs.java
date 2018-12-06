@@ -42,13 +42,6 @@ public class Stepdefs {
     
     String[] inputLinesMark = new String[10];
     String[] inputLinesMarkFail = new String[10];
-    
-//    // list all
-//    @When("^command list all is given$")
-//    public void command_list_all_is_given() throws Throwable {
-//        inputLinesAll[0] = "l";
-//        inputLinesAll[1] = "q";
-//    }
 
     //for video: Feature: A new tip can be added if proper properties are given
     @Given("^command \"([^\"]*)\" add new readtip is selected and command \"([^\"]*)\" video is selected$")
