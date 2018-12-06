@@ -39,14 +39,14 @@ public class UI {
             io.print("\nNo reading tips found.\n");
         } else {
             String table = "";
-            String leftAlignFormat = "| %-4d| %-15s | %-20s | %-7s |%n";
-            table += String.format("+-----+-----------------+----------------------+---------+%n");
-            table += String.format("| ID  |     Author      |        Title         |  Type   |%n");
-            table += String.format("+-----+-----------------+----------------------+---------+%n");
+            String leftAlignFormat = "| %-6d| %-15s | %-20s | %-7s |%n";
+            table += String.format("+-------+-----------------+----------------------+---------+%n");
+            table += String.format("| Index |     Author      |        Title         |  Type   |%n");
+            table += String.format("+-------+-----------------+----------------------+---------+%n");
             for (int i = 0; i < tips.size(); i++) {
-                table += String.format(leftAlignFormat, i, tips.get(i).getAuthor(), tips.get(i).getTitle(), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
+                table += String.format(leftAlignFormat, i, tips.get(i).getAuthor(), tips.get(i).getTitle().substring(0, Math.min(19, tips.get(i).getTitle().length())), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
             }
-            table += String.format("+-----+-----------------+----------------------+---------+%n");
+            table += String.format("+-------+-----------------+----------------------+---------+%n");
             io.print(table);
             
         }

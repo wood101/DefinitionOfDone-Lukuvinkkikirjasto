@@ -37,7 +37,8 @@ public class Stepdefs {
 //        inputLinesAll[1] = "q";
 //    }
 
-    //for video
+    
+    //for video: Feature: A new tip can be added if proper properties are given
     @Given("^command \"([^\"]*)\" add new readtip is selected and command \"([^\"]*)\" video is selected$")
     public void command_add_new_readtip_is_selected_and_command_video_is_selected(String arg1, String arg2) throws Throwable {
         inputLinesVideo[0] = "a";
@@ -45,7 +46,7 @@ public class Stepdefs {
 
     }
 
-    //for video
+    //for video: Feature: A new tip can be added if proper properties are given
     @When("^Title \"([^\"]*)\" and Author \"([^\"]*)\" and Link \"([^\"]*)\" and Description \"([^\"]*)\" and Year published \"([^\"]*)\" are input$")
     public void title_and_Author_and_Link_and_Description_and_Year_published_are_input(String arg1, String arg2, String arg3, String arg4, String arg5) throws Throwable {
         inputLinesVideo[2] = "title";
@@ -56,7 +57,7 @@ public class Stepdefs {
         inputLinesVideo[7] = "q";
     }
 
-    //for video
+    //for video: Feature: A new tip can be added if proper properties are given
     @Then("^a new videotip is added$")
     public void a_new_videotip_is_added() throws Throwable {
         io = new IOStub(inputLinesVideo);
@@ -66,14 +67,14 @@ public class Stepdefs {
         assertTrue(dao.getVideos().size() == 2);
     }
 
-    //for book
+    //for book: Feature: A new tip can be added if proper properties are given
     @Given("^command \"([^\"]*)\" add new readtip is selected and command \"([^\"]*)\" book is selected$")
     public void command_add_new_readtip_is_selected_and_command_book_is_selected(String arg1, String arg2) throws Throwable {
         inputLinesBook[0] = "a";
         inputLinesBook[1] = "2";
     }
 
-    //for book
+    //for book: Feature: A new tip can be added if proper properties are given
     @When("^Title \"([^\"]*)\" and Author \"([^\"]*)\" and ISBN \"([^\"]*)\" and Description \"([^\"]*)\" and Year \"([^\"]*)\" are input$")
     public void title_and_Author_and_ISBN_and_Description_and_Year_are_input(String arg1, String arg2, String arg3, String arg4, String arg5) throws Throwable {
         inputLinesBook[2] = "title";
@@ -84,7 +85,7 @@ public class Stepdefs {
         inputLinesBook[7] = "q";
     }
 
-    //for book
+    //for book: Feature: A new tip can be added if proper properties are given
     @Then("^a new booktip is added$")
     public void a_new_booktip_is_added() throws Throwable {
         io = new IOStub(inputLinesBook);
@@ -95,14 +96,14 @@ public class Stepdefs {
 
     }
 
-    //news
+    //news: Feature: A new tip can be added if proper properties are given
     @Given("^command \"([^\"]*)\" add new readtip is selected and command \"([^\"]*)\" newstip is selected$")
     public void command_add_new_readtip_is_selected_and_command_newstip_is_selected(String arg1, String arg2) throws Throwable {
         inputLinesNews[0] = "a";
         inputLinesNews[1] = "3";
     }
 
-    //news
+    //news: Feature: A new tip can be added if proper properties are given
     @When("^Title \"([^\"]*)\" and Author \"([^\"]*)\" and link \"([^\"]*)\" and Description \"([^\"]*)\" and Publisher \"([^\"]*)\" and Year published \"([^\"]*)\" are input$")
     public void title_and_Author_and_link_and_Description_and_Publisher_and_Year_published_are_input(String arg1, String arg2, String arg3, String arg4, String arg5, String arg6) throws Throwable {
         inputLinesNews[2] = "title";
@@ -114,7 +115,7 @@ public class Stepdefs {
         inputLinesNews[8] = "q";
     }
 
-    //news
+    //news: Feature: A new tip can be added if proper properties are given
     @Then("^a new newstip is added$")
     public void a_new_newstip_is_added() throws Throwable {
         io = new IOStub(inputLinesNews);
@@ -123,14 +124,14 @@ public class Stepdefs {
         assertTrue(dao.listByType("news").contains(new News("author", "title", "www", "desc", "publisher", 2000).toString()));
     }
 
-    //article
+    //article: Feature: A new tip can be added if proper properties are given
     @Given("^command \"([^\"]*)\" add new readtip is selected and command \"([^\"]*)\" article is selected$")
     public void command_add_new_readtip_is_selected_and_command_article_is_selected(String arg1, String arg2) throws Throwable {
         inputLinesArticle[0] = "a";
         inputLinesArticle[1] = "4";
     }
 
-    //article
+    //article: Feature: A new tip can be added if proper properties are given
     @When("^Title \"([^\"]*)\" and Author \"([^\"]*)\" and Link \"([^\"]*)\" and Description \"([^\"]*)\" and Publisher \"([^\"]*)\" and Year \"([^\"]*)\" are input$")
     public void title_and_Author_and_Link_and_Description_and_Publisher_and_Year_are_input(String arg1, String arg2, String arg3, String arg4, String arg5, String arg6) throws Throwable {
         inputLinesArticle[2] = "title";
@@ -142,7 +143,7 @@ public class Stepdefs {
         inputLinesArticle[8] = "q";
     }
 
-    //article
+    //article: Feature: A new tip can be added if proper properties are given
     @Then("^a new articletip is added$")
     public void a_new_articletip_is_added() throws Throwable {
         io = new IOStub(inputLinesArticle);
@@ -152,14 +153,14 @@ public class Stepdefs {
 
     }
 
-    //blog
+    //blog: Feature: A new tip can be added if proper properties are given
     @Given("^command \"([^\"]*)\" add new readtip is selected and command \"([^\"]*)\" blog is selected$")
     public void command_add_new_readtip_is_selected_and_command_blog_is_selected(String arg1, String arg2) throws Throwable {
         inputLinesBlog[0] = "a";
         inputLinesBlog[1] = "5";
     }
 
-    //blog
+    //blog: Feature: A new tip can be added if proper properties are given
     @When("^Title \"([^\"]*)\" and Author \"([^\"]*)\" and Link \"([^\"]*)\" and Description \"([^\"]*)\" and Year \"([^\"]*)\" are input$")
     public void title_and_Author_and_Link_and_Description_and_Year_are_input(String arg1, String arg2, String arg3, String arg4, String arg5) throws Throwable {
         inputLinesBlog[2] = "title";
@@ -170,7 +171,7 @@ public class Stepdefs {
         inputLinesBlog[7] = "q";
     }
 
-    //blog
+    //blog: Feature: A new tip can be added if proper properties are given
     @Then("^a new blogtip is added$")
     public void a_new_blogtip_is_added() throws Throwable {
         io = new IOStub(inputLinesBlog);
@@ -178,6 +179,8 @@ public class Stepdefs {
         ui.run();
         assertTrue(dao.listByType("blog").contains(new Blog("author", "title", "www", "desc", 2000).toString()));
     }
+    
+    // Feature vaihtuu -----------------------------------------------------------------------------------------------------------------------------------
     
     @Given("^command \"([^\"]*)\" is input$")
     public void command_is_input(String action) throws Throwable {
