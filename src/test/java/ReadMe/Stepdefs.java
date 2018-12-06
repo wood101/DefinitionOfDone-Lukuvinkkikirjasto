@@ -34,6 +34,9 @@ public class Stepdefs {
     String[] inputLinesNewsType = new String[10];
     String[] inputLinesArticleType = new String[10];
     String[] inputLinesBlogType = new String[10];
+
+    String[] inputLinesSingle = new String[10];
+    String[] inputLinesSingle2 = new String[10];
 //    // list all
 //    @When("^command list all is given$")
 //    public void command_list_all_is_given() throws Throwable {
@@ -398,18 +401,61 @@ public class Stepdefs {
 
     @When("^command \"([^\"]*)\" is chosen$")
     public void command_is_chosen(String arg1) throws Throwable {
+        inputLinesSingle[0] = "l";
+        inputLinesSingle[1] = "1";
+        inputLinesSingle[2] = "s";
 
     }
 
     @When("^index \"([^\"]*)\" is chosen$")
     public void index_is_chosen(String arg1) throws Throwable {
-        
+        inputLinesSingle[3] = "1";
+        inputLinesSingle[4] = "q";
+
     }
 
     @Then("^the right tip shown$")
     public void the_right_tip_shown() throws Throwable {
-        
-        
+        Video testVideo = new Video("hackerdashery", "P vs. NP and the Computational Complexity Zoo",
+                "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "P js NP erot", 2014);
+        IOStub ios = new IOStub(inputLinesSingle);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains(testVideo.toString()));
+
     }
 
+    @When("^wrong index \"([^\"]*)\" is chosen$")
+    public void wrong_index_is_chosen(String arg1) throws Throwable {
+        inputLinesSingle[3] = "100";
+        inputLinesSingle[4] = "q";
+    }
+
+    @Then("^\"([^\"]*)\" is printed$")
+    public void is_printed(String arg1) throws Throwable {
+        Video testVideo = new Video("hackerdashery", "P vs. NP and the Computational Complexity Zoo",
+                "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "P js NP erot", 2014);
+        IOStub ios = new IOStub(inputLinesSingle2);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains("Bad index"));
+    }
+
+//     Scenario: all readtips are listed and single tip is wanted
+//    Given command "l" list tips is given
+//    When type command "1" all is input
+//    And command "s" is chosen
+//    And index "1" is chosen
+//    Then the right tip shown
+//
+//  Scenario: all readtips are listed and single tip is wanted
+//    Given command "l" list tips is given
+//    When type command "1" all is input
+//    And command "s" is chosen
+//    And index "100" is chosen
+//    Then "Bad index" is printed
 }

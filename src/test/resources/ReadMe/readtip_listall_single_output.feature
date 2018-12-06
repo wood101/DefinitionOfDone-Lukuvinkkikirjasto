@@ -11,5 +11,5 @@ Feature: single readtips are printed in correct form from the list of all
     Given command "l" list tips is given
     When type command "1" all is input
     And command "s" is chosen
-    And index "100" is chosen
+    And wrong index "100" is chosen
     Then "Bad index" is printed
