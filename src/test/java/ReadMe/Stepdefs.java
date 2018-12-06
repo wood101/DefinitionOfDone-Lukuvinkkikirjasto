@@ -387,7 +387,23 @@ public class Stepdefs {
         assertTrue(!ios.getOutputString().contains("2014"));
     }
 
-}
+
+//No emptfeature____-y _tiplist  Feature changes here -----------------------------------------------------------------------------------------------------------------------------------
+
+       @Then("^error message(\\d+) :\"([^\"]*)\" is printed$")
+    public void error_message_is_printed(int arg1, String arg2) throws Throwable {
+      IOStub ios = new IOStub(inputLinesAll);
+        InMemoryDao daoEmpty = new InMemoryDao(true);
+        ui = new UI(ios, daoEmpty);
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains("No reading tips found."));
+    }
+    }
+
+
+
+
 // Feature changes here -----------------------------------------------------------------------------------------------------------------------------------
 // Old listing features 
 //    @Given("^command \"([^\"]*)\" is input$")
