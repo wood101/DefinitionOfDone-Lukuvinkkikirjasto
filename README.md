@@ -3,8 +3,8 @@ Ryhmän DefinitionOfGettingThere OhtuMiniProjekti
 
 ## Releases
 
-- [Version 0.7 (sprintti3)](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/releases/tag/sprintti3)
-- [Version 0.5 (sprintti2)](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/releases/tag/sprintti2)
+- [Versio 0.7.1 (sprintti3)](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/releases/tag/sprintti3)
+- [Versio 0.5 (sprintti2)](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/releases/tag/sprintti2)
 
 ### Asiakaspalaveri perjantaisin 12.00-12.30 normisti. Poikkeus: 30.11 klo. 13.15-13.45
 
