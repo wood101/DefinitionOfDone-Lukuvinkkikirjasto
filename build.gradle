@@ -55,7 +55,8 @@ jacocoTestReport {
     afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
             fileTree(dir: it,
-                    exclude: ['main/**'])
+                    exclude: ['ReadMe/main/**',
+                    'ReadMe/dao/DatabaseDao**'])
         })
     }
 }
