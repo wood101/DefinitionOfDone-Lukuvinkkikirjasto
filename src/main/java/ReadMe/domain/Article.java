@@ -1,5 +1,6 @@
 package ReadMe.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -41,9 +42,13 @@ public class Article extends ReadingTip {
     
     @Override
     public String toString() {
+        String dateText;
+        if(this.getDate_checked() == null) dateText = "";
+        else dateText = " Date checked: " + new SimpleDateFormat("dd-MM-yyyy").format(super.getDate_checked())+ "\n";
+        
         return "\nTitle: " + super.getTitle() + "\n Author: " + super.getAuthor() +
                 "\n Link: " + link + "\n Description: " + super.getDescription() +  "\n Publisher: " + publisher +
-                "\n Year: " + super.getYear() + "\n Checked: " + super.isChecked() + "\n Date checked: " + super.getDate_checked() + "\n";
+                "\n Year: " + super.getYear() + "\n Checked: " + super.isChecked() + "\n" + dateText;
     }
     
     @Override
