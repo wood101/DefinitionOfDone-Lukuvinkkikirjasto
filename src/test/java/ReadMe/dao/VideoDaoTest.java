@@ -58,4 +58,13 @@ public class VideoDaoTest {
         assertEquals("title", videos.get(0).getTitle());  
         assertEquals("desc", videos.get(0).getDescription());  
     }
+    
+        @Test
+    public void markAsReadWorks() {
+        testDao.add(new Video(1, "author", "title", "www", "desc", 2018, false, null));
+        testDao.markAsRead("title");
+        
+        assertTrue(testDao.listAll().get(0).isChecked());
+        assertNotNull(testDao.listAll().get(0).getDate_checked());
+    }  
 }

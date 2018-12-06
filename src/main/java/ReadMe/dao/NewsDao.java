@@ -79,13 +79,23 @@ public class NewsDao {
     }
 
     /**
-     * Marks the news as read and sets the date it was read on.
+     * Marks the News as read and sets the date it was read on.
      * @param news Object that is marked read
      */
-    public void markNewsAsRead(News news) {
-        news.setChecked(true);
-        news.setDate_checked(new Date());
-    }    
+    public boolean markAsRead(String title) {
+        try (Connection c = db.getConnection()) {
+            PreparedStatement stmt = c.prepareStatement(
+                    "UPDATE News SET news_checked = ?, news_date_checked = ? WHERE news_title = ? ");
+            stmt.setBoolean(1, true);
+            stmt.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+            stmt.setString(3, title);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(NewsDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }   
     
      /**
      * Creates a new News object from database row

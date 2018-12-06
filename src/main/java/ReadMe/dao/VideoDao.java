@@ -78,13 +78,23 @@ public class VideoDao {
     }
 
     /**
-     * Marks the video as read and sets the date it was read on.
+     * Marks the Video as read and sets the date it was read on.
      * @param video Object that is marked read
      */
-    public void markVideoAsRead(Video video) {
-        video.setChecked(true);
-        video.setDate_checked(new Date());
-    }
+    public boolean markAsRead(String title) {
+        try (Connection c = db.getConnection()) {
+            PreparedStatement stmt = c.prepareStatement(
+                    "UPDATE Video SET video_checked = ?, video_date_checked = ? WHERE video_title = ? ");
+            stmt.setBoolean(1, true);
+            stmt.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+            stmt.setString(3, title);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(VideoDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    } 
     
      /**
      * Creates a new Video object from database row
