@@ -11,6 +11,8 @@ import ReadMe.domain.Video;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import static org.junit.Assert.*;
 
 public class Stepdefs {
@@ -483,7 +485,7 @@ public class Stepdefs {
         ui = new UI(ios, dao);
         ui.run();
         
-        assertTrue(ios.getOutputString().contains("Date checked"));
+        assertTrue(ios.getOutputString().contains("Checked: true"));
     }
 
     @Then("^the input is rejected and application responds \"([^\"]*)\"$")
@@ -496,6 +498,21 @@ public class Stepdefs {
         ui.run();
         
         assertTrue(ios.getOutputString().contains(error));
+    }
+    
+    @Then("^the tip listed at index \"([^\"]*)\" shows when it was marked$")
+    public void the_tip_listed_at_index_shows_when_it_was_marked(String index) throws Throwable {
+        inputLinesMark[4] = "s";
+        inputLinesMark[5] = index;
+        inputLinesMark[6] = "q";
+        
+        IOStub ios = new IOStub(inputLinesMark);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        
+        String dateToday = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+        assertTrue(ios.getOutputString().contains("Date checked: "+ dateToday));
     }
 
 }
