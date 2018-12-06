@@ -225,19 +225,18 @@ public class Stepdefs {
 
     }
     
-       //blogs
-    @Then("^blogtips are not printed in a table$")
-    public void _not_printed_in_a_table() throws Throwable {
-        IOStub ios = new IOStub(inputLinesVideoType);
+    @Then("^table don't contain year'$")
+    public void table_don_t_contain_year() throws Throwable {
+     IOStub ios = new IOStub(inputLinesAll);
         InMemoryDao dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
         assertTrue(!ios.getOutputString().contains("2014"));
-     
     }
 
+   
 
-    // Feature: readtiplists by type are printed in correct form  ------------------------uses same given as list all
+   // Feature: readtiplists by type are printed in correct form  ---_______________------------------------uses same given as list all
     // video
     @When("^type command \"([^\"]*)\" video is input$")
     public void type_command_video_is_input(String arg1) throws Throwable {
