@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Projektin suorittamista varten tarkista että sinulla on käytössäsi SQLite3, Gradle asennettuna ja Javasta vähintään versio8 , (versiossa 10 ei välttämättä kaikki testit toimi) 
+Projektin suorittamista varten tarkista että sinulla on käytössäsi SQLite3, Gradle asennettuna ja Javasta vähintään versio8. (versiossa 10 ei välttämättä kaikki testit toimi)
 
 ## Koodista buildaaminen
 
@@ -10,15 +10,15 @@ Projektin suorittamista varten tarkista että sinulla on käytössäsi SQLite3, 
 
 ## Suoritettava .jar
 
-1. Lataa suoritettava java jar tiedosto
+1. Lataa suoritettava [jar](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/releases) tiedosto
 
-2. Avaa terminaali, navigoi samaan kansioon ja suorita ohjelma komennolla `java -jar tiedoston_nimi.jar`
+2. Avaa terminaali, navigoi samaan kansioon ja suorita ohjelma komennolla `java -jar ReadMe-lukuvinkkikirjasto-*versio*.jar`
 
 ## Komennot
 
 ```
   a - lisää uusi lukuvinkki
-  l - listaa lukuvinkit
+  l - listaa lukuvinkit (kaikki tai tyypin mukaan)
   q - lopeta ohjelma
 
 ```
