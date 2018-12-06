@@ -36,6 +36,7 @@ public class Stepdefs {
     String[] inputLinesBlogType = new String[10];
 
     String[] inputLinesSingle = new String[10];
+    String[] inputLinesSingle2 = new String[10];
 //    // list all
 //    @When("^command list all is given$")
 //    public void command_list_all_is_given() throws Throwable {
@@ -428,19 +429,20 @@ public class Stepdefs {
 
     @When("^wrong index \"([^\"]*)\" is chosen$")
     public void wrong_index_is_chosen(String arg1) throws Throwable {
+        inputLinesSingle[3] = "100";
+        inputLinesSingle[4] = "q";
+    }
+
+    @Then("^\"([^\"]*)\" is printed$")
+    public void is_printed(String arg1) throws Throwable {
         Video testVideo = new Video("hackerdashery", "P vs. NP and the Computational Complexity Zoo",
                 "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "P js NP erot", 2014);
-        IOStub ios = new IOStub(inputLinesSingle);
+        IOStub ios = new IOStub(inputLinesSingle2);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
 
         assertTrue(ios.getOutputString().contains("Bad index"));
-    }
-
-    @Then("^\"([^\"]*)\" is printed$")
-    public void is_printed(String arg1) throws Throwable {
-
     }
 
 //     Scenario: all readtips are listed and single tip is wanted
