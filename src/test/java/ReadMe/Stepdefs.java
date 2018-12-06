@@ -37,6 +37,10 @@ public class Stepdefs {
 
     String[] inputLinesSingle = new String[10];
     String[] inputLinesSingle2 = new String[10];
+    
+    String[] inputLinesMark = new String[10];
+    String[] inputLinesMarkFail = new String[10];
+    
 //    // list all
 //    @When("^command list all is given$")
 //    public void command_list_all_is_given() throws Throwable {
@@ -437,8 +441,6 @@ public class Stepdefs {
 
     @Then("^\"([^\"]*)\" is printed$")
     public void is_printed(String arg1) throws Throwable {
-        Video testVideo = new Video("hackerdashery", "P vs. NP and the Computational Complexity Zoo",
-                "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "P js NP erot", 2014);
         IOStub ios = new IOStub(inputLinesSingle2);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
@@ -446,18 +448,54 @@ public class Stepdefs {
 
         assertTrue(ios.getOutputString().contains("Bad index"));
     }
+    
+//  --------------------------- Mark as read ------------------------------------------------
+    
+    @Given("^all tips are shown by typing commands \"([^\"]*)\", \"([^\"]*)\"$")
+    public void all_tips_are_shown_by_typing_commands(String list, String type) throws Throwable {
+        inputLinesMark[0] = list;
+        inputLinesMarkFail[0] = list;
+        
+        inputLinesMark[1] = type;
+        inputLinesMarkFail[1] = type;
+    }
 
-//     Scenario: all readtips are listed and single tip is wanted
-//    Given command "l" list tips is given
-//    When type command "1" all is input
-//    And command "s" is chosen
-//    And index "1" is chosen
-//    Then the right tip shown
-//
-//  Scenario: all readtips are listed and single tip is wanted
-//    Given command "l" list tips is given
-//    When type command "1" all is input
-//    And command "s" is chosen
-//    And index "100" is chosen
-//    Then "Bad index" is printed
+    @When("^command \"([^\"]*)\" is input$")
+    public void command_is_input(String singleAction) throws Throwable {
+        inputLinesMark[2] = singleAction;
+        inputLinesMarkFail[2] = singleAction;
+    }
+
+    @When("^index \"([^\"]*)\" for tip to be marked is input$")
+    public void index_for_tip_to_be_marked_is_input(String index) throws Throwable {
+        inputLinesMark[3] = index;
+        inputLinesMarkFail[3] = index;
+    }
+
+    @Then("^the tip listed at index \"([^\"]*)\" has been marked as read$")
+    public void the_tip_listed_at_index_has_been_marked_as_read(String index) throws Throwable {
+        inputLinesMark[4] = "s";
+        inputLinesMark[5] = index;
+        inputLinesMark[6] = "q";
+        
+        IOStub ios = new IOStub(inputLinesMark);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        
+        assertTrue(ios.getOutputString().contains("Date checked"));
+    }
+
+    @Then("^the input is rejected and application responds \"([^\"]*)\"$")
+    public void the_input_is_rejected_and_application_responds(String error) throws Throwable {
+        inputLinesMarkFail[4] = "q";
+        
+        IOStub ios = new IOStub(inputLinesMarkFail);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        
+        assertTrue(ios.getOutputString().contains(error));
+    }
+
 }
