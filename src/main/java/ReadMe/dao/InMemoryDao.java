@@ -25,7 +25,7 @@ public class InMemoryDao implements DaoManager {
 
     /**
      * In memory 'database' that can be used for testing. Creates new lists of
-     * boomark objects, and adds new objects in them.
+     * bookmark objects, and adds new objects in them.
      *
      */
     public InMemoryDao() {

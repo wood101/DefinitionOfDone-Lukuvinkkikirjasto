@@ -219,28 +219,4 @@ public class UITest {
         String output = io.getOutputString();
         assertTrue(output.contains(author) && output.contains(title));
     }
-
-    @Test
-    public void summaryTableViewPrintsCorrectly() {
-        io = new IOStub();
-        List<ReadingTip> tips = new ArrayList<>();
-        ReadingTip blog = new Blog(1, "author", "title", "www.test.org", "desc", 2000, false, new Date(5));
-        ReadingTip article = new Article(2, "hack", "cook chicken", "www.test.org", "desc", "publisher", 2000, false, new Date(5));
-        ReadingTip news = new News(3, "writer", "chicken is not good", "www.test.org", "desc", "publisher", 2000, false, new Date(5));
-        tips.add(news);
-        tips.add(blog);
-        tips.add(article);
-        io.summaryTableView(tips);
-
-        String expectedOutput = "";
-        expectedOutput += String.format("+-----+-----------------+----------------------+---------+%n");
-        expectedOutput += String.format("| ID  |     Author      |        Title         |  Type   |%n");
-        expectedOutput += String.format("+-----+-----------------+----------------------+---------+%n");
-        expectedOutput += String.format("| 3   | writer          | chicken is not good  | News    |%n");
-        expectedOutput += String.format("| 1   | author          | title                | Blog    |%n");
-        expectedOutput += String.format("| 2   | hack            | cook chicken         | Article |%n");
-        expectedOutput += String.format("+-----+-----------------+----------------------+---------+%n");
-
-        assertEquals(io.getOutputs().get(0), expectedOutput);
-    }
 }
