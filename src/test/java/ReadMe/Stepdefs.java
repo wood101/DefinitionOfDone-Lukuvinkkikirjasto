@@ -22,7 +22,6 @@ public class Stepdefs {
     String[] inputLinesList = new String[5];
     String[] inputLinesAll = new String[5];
     String[] inputLinesListType = new String[4];
-    
 
     String[] inputLinesVideo = new String[10];
     String[] inputLinesBook = new String[10];
@@ -30,6 +29,11 @@ public class Stepdefs {
     String[] inputLinesArticle = new String[10];
     String[] inputLinesBlog = new String[10];
 
+    String[] inputLinesVideoType = new String[10];
+    String[] inputLinesBookType = new String[10];
+    String[] inputLinesNewsType = new String[10];
+    String[] inputLinesArticleType = new String[10];
+    String[] inputLinesBlogType = new String[10];
 //    // list all
 //    @When("^command list all is given$")
 //    public void command_list_all_is_given() throws Throwable {
@@ -37,7 +41,6 @@ public class Stepdefs {
 //        inputLinesAll[1] = "q";
 //    }
 
-    
     //for video: Feature: A new tip can be added if proper properties are given
     @Given("^command \"([^\"]*)\" add new readtip is selected and command \"([^\"]*)\" video is selected$")
     public void command_add_new_readtip_is_selected_and_command_video_is_selected(String arg1, String arg2) throws Throwable {
@@ -179,24 +182,30 @@ public class Stepdefs {
         ui.run();
         assertTrue(dao.listByType("blog").contains(new Blog("author", "title", "www", "desc", 2000)));
     }
-    
- // Feature changes here ----readtip_list_all.feature-------------------------------------------------------------------------------------------------------------------------------
- 
-   //Feature: all readtiplist is printed in correct form
-        @Given("^command \"([^\"]*)\" list tips is given$")
+
+    // Feature changes here ----readtip_list_all.feature-------------------------------------------------------------------------------------------------------------------------------
+    //Feature: all readtiplist is printed in correct form
+    @Given("^command \"([^\"]*)\" list tips is given$")
     public void command_list_tips_is_given(String arg1) throws Throwable {
-        inputLinesAll[0] = "l";   
+        inputLinesAll[0] = "l";
+        inputLinesVideoType[0] = "l";
+        inputLinesBookType[0] = "l";
+        inputLinesNewsType[0] = "l";
+        inputLinesArticleType[0] = "l";
+        inputLinesBlogType[0] = "l";
+
     }
-   
 
     @When("^type command \"([^\"]*)\" all is input$")
     public void type_command_all_is_input(String arg1) throws Throwable {
-      inputLinesAll[1] = "1";
+        inputLinesAll[1] = "1";
+        inputLinesAll[2] = "q";
+        
     }
-    
-        @Then("^all readtips are printed in a table$")
+
+    @Then("^all readtips are printed in a table$")
     public void all_readtips_are_printed_in_a_table() throws Throwable {
-       
+
         IOStub ios = new IOStub(inputLinesAll);
         InMemoryDao dao = new InMemoryDao();
         ui = new UI(ios, dao);
@@ -204,12 +213,80 @@ public class Stepdefs {
 
         assertTrue(ios.getOutputString().contains("hackerdashery"));
     }
+
+    // Feature: readtiplists by type are printed in correct form  ------------------------uses same given as list all
+    // video
+    @When("^type command \"([^\"]*)\" video is input$")
+    public void type_command_video_is_input(String arg1) throws Throwable {
+        inputLinesVideoType[1] = "2";
+        inputLinesVideoType[2] = "q";
+        
+
     }
 
-    
-    
-    // Feature changes here -----------------------------------------------------------------------------------------------------------------------------------
-    // Old listing features 
+    //video
+    @Then("^videotips are printed in a table$")
+    public void videotips_are_printed_in_a_table() throws Throwable {
+
+    }
+
+    //book
+    @When("^type command \"([^\"]*)\" book is input$")
+    public void type_command_book_is_input(String arg1) throws Throwable {
+        inputLinesBookType[1] = "3";
+        inputLinesBookType[2] = "q";
+
+    }
+
+    //book
+    @Then("^booktips are printed in a table$")
+    public void booktips_are_printed_in_a_table() throws Throwable {
+
+    }
+
+    //news
+    @When("^type command \"([^\"]*)\" news  is input$")
+    public void type_command_news_is_input(String arg1) throws Throwable {
+        inputLinesNewsType[1] = "4";
+        inputLinesNewsType[2] = "q";
+    }
+
+    //news
+    @Then("^newstips are printed in a table$")
+    public void newstips_are_printed_in_a_table() throws Throwable {
+
+    }
+
+    //article
+    @When("^type command \"([^\"]*)\" article is input$")
+    public void type_command_article_is_input(String arg1) throws Throwable {
+        inputLinesArticleType[1] = "5";
+        inputLinesArticleType[2] = "q";
+    }
+
+    //article
+    @Then("^articletips are printed in a table$")
+    public void articletips_are_printed_in_a_table() throws Throwable {
+
+    }
+
+    //blogs
+    @When("^type command \"([^\"]*)\" blogs is input$")
+    public void type_command_blogs_is_input(String arg1) throws Throwable {
+        inputLinesBlogType[1] = "6";
+        inputLinesBlogType[2] = "q";
+    }
+
+    //blogs
+    @Then("^blogtips are printed in a table$")
+    public void blogtips_are_printed_in_a_table() throws Throwable {
+
+    }
+
+}
+
+// Feature changes here -----------------------------------------------------------------------------------------------------------------------------------
+// Old listing features 
 //    @Given("^command \"([^\"]*)\" is input$")
 //    public void command_is_input(String action) throws Throwable {
 //        inputLinesListType[0] = action;
@@ -300,7 +377,6 @@ public class Stepdefs {
 //        
 //        assertTrue(io.getOutputs().contains(s));
 //    }
-
 //    @Then("^all bookmarks are printed$")
 //    public void all_bookmarks_are_printed() throws Throwable {
 //        IOStub ios = new IOStub(inputLinesAll);
@@ -314,5 +390,4 @@ public class Stepdefs {
 //                + "\n\n" + "Articles:\n" + dao.getArticles().toString().replace("[", "").replace("]", "") + "\n\n" + "Blogs:\n" + dao.getBlogs().toString().replace("[", "").replace("]", "") + "\n\n";
 //        assertTrue(ios.getOutputs().contains(s));
 //    }
-
 
