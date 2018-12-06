@@ -37,5 +37,5 @@ public interface DaoManager {
     
     void addBlog(Blog bookmark);
     
-    boolean markAsRead(String type, String title);
+    boolean markAsRead(ReadingTip tip);
 }
