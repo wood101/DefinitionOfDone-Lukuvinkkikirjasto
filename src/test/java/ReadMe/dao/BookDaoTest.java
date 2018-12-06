@@ -56,4 +56,13 @@ public class BookDaoTest {
         assertEquals("title", books.get(0).getTitle());  
         assertEquals("desc", books.get(0).getDescription());  
     }
+        
+    @Test
+    public void markAsReadWorks() {
+        testDao.add(new Book(1, "author", "title", "5F3D3", "desc", 2018, false, null));
+        testDao.markAsRead("title");
+        
+        assertTrue(testDao.listAll().get(0).isChecked());
+        assertNotNull(testDao.listAll().get(0).getDate_checked());
+    }
 }

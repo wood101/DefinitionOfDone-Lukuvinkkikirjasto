@@ -78,13 +78,23 @@ public class BlogDao {
     }
 
     /**
-     * Marks the blog as read and sets the date it was read on.
+     * Marks the Blog as read and sets the date it was read on.
      * @param blog Object that is marked read
      */
-    public void markBlogAsRead(Blog blog) {
-        blog.setChecked(true);
-        blog.setDate_checked(new Date());
-    }
+    public boolean markAsRead(String title) {
+        try (Connection c = db.getConnection()) {
+            PreparedStatement stmt = c.prepareStatement(
+                    "UPDATE Blog SET blog_checked = ?, blog_date_checked = ? WHERE blog_title = ? ");
+            stmt.setBoolean(1, true);
+            stmt.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+            stmt.setString(3, title);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(BlogDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    } 
     
     /**
      * Creates a new Blog object from database row

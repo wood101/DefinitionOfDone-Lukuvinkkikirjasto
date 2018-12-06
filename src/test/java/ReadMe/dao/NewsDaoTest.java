@@ -56,4 +56,13 @@ public class NewsDaoTest {
         assertEquals("title", newsArray.get(0).getTitle());
         assertEquals("desc", newsArray.get(0).getDescription());
     }
+    
+        @Test
+    public void markAsReadWorks() {
+        testDao.add(new News(1, "author", "title", "www", "desc", "otava", 2018, false, null));
+        testDao.markAsRead("title");
+        
+        assertTrue(testDao.listAll().get(0).isChecked());
+        assertNotNull(testDao.listAll().get(0).getDate_checked());
+    }  
 }

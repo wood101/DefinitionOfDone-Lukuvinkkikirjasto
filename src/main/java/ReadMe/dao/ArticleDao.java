@@ -104,6 +104,9 @@ public class ArticleDao {
      * @throws SQLException
      */
     public static Article rowToArticle(ResultSet rs) throws SQLException {
-        return new Article(rs.getInt("article_id"), rs.getString("article_author"), rs.getString("article_title"), rs.getString("article_link"), rs.getString("article_description"), rs.getString("article_publisher"), rs.getInt("article_year"), rs.getBoolean("article_checked"), null);
+        return new Article(rs.getInt("article_id"), rs.getString("article_author"), 
+                rs.getString("article_title"), rs.getString("article_link"), 
+                rs.getString("article_description"), rs.getString("article_publisher"), 
+                rs.getInt("article_year"), rs.getBoolean("article_checked"), rs.getDate("article_date_checked"));
     }
 }
