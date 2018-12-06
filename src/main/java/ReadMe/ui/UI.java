@@ -289,15 +289,19 @@ public class UI {
             acceptedInput.add("q");
 
             String choice = userCommand(prompt, acceptedInput);
+            ReadingTip selected = null;
             switch (choice) {
                 case "s":
-                    singleTipView(selectTipFromList(tips));
+                    selected = selectTipFromList(tips);
+                    if (selected != null) {
+                        singleTipView(selected);
+                    }
                     break;
                 case "b":
                     viewing = false;
                     break;
                 case "r":
-                    ReadingTip selected = selectTipFromList(tips);
+                    selected = selectTipFromList(tips);
                     ReadingTip edited = MarkTipAsRead(selected);
                     if (selected != null) {
                         for (int i = 0; i < tips.size(); i++) {
@@ -330,6 +334,7 @@ public class UI {
             int index = Integer.parseInt(io.readLine("Enter index: "));
             int indexDecrement = index - 1;
             ReadingTip tip = tips.get(indexDecrement);
+            System.out.println("haaaaa");
             return tip;
         } catch (Exception e) {
             io.print("Bad index\n");

@@ -261,7 +261,7 @@ public class UITest {
 
     @Test
     public void givingWrongIndexForTipDoesNotShowTip() {
-        io = new IOStub("l", "4", "s", "1", "q");
+        io = new IOStub("l", "4", "s", "1234", "q");
         ui = new UI(io, db);
         String author = "author1";
         String title = "title2";
