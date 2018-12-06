@@ -36,6 +36,15 @@ public class InMemoryDao implements DaoManager {
         this.blogs = new ArrayList<>();
         setInMemoryObjects();
     }
+    
+    // not found testiä varten tyhjä konstruktori
+        public InMemoryDao(boolean empty) {
+        this.videos = new ArrayList<>();
+        this.books = new ArrayList<>();
+        this.news = new ArrayList<>();
+        this.articles = new ArrayList<>();
+        this.blogs = new ArrayList<>();
+    }
 
     private void setInMemoryObjects() {
 
