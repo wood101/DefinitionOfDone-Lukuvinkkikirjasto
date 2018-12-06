@@ -32,20 +32,26 @@ public class UI {
         this.io = io;
         this.manager = manager;
     }
-    
+
     public void summaryTableView(List<ReadingTip> tips) {
-        String table = "";
-        String leftAlignFormat = "| %-4d| %-15s | %-20s | %-7s |%n";
-        table += String.format("+-----+-----------------+----------------------+---------+%n");
-        table += String.format("| ID  |     Author      |        Title         |  Type   |%n");
-        table += String.format("+-----+-----------------+----------------------+---------+%n");
-        for (int i = 0; i < tips.size(); i++) {
-            table += String.format(leftAlignFormat, i, tips.get(i).getAuthor(), tips.get(i).getTitle(), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
+
+        if (tips.isEmpty()) {
+            io.print("\nNo reading tips found.\n");
+        } else {
+            String table = "";
+            String leftAlignFormat = "| %-4d| %-15s | %-20s | %-7s |%n";
+            table += String.format("+-----+-----------------+----------------------+---------+%n");
+            table += String.format("| ID  |     Author      |        Title         |  Type   |%n");
+            table += String.format("+-----+-----------------+----------------------+---------+%n");
+            for (int i = 0; i < tips.size(); i++) {
+                table += String.format(leftAlignFormat, i, tips.get(i).getAuthor(), tips.get(i).getTitle(), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
+            }
+            table += String.format("+-----+-----------------+----------------------+---------+%n");
+            io.print(table);
         }
-        table += String.format("+-----+-----------------+----------------------+---------+%n");
-        io.print(table);
+
     }
-    
+
     /**
      * Displays fields to input for video entry, takes input, and creates video
      * entry
@@ -232,7 +238,7 @@ public class UI {
         }
         selectBaseCommand();
     }
-    
+
     /**
      * Displays options of types of tips to list and takes user input for
      * selection of type or to list all
