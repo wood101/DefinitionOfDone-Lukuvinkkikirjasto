@@ -28,6 +28,7 @@ public class UI {
 
     private IO io;
     private DaoManager manager;
+    private boolean run;
 
     public UI(IO io, DaoManager manager) {
         this.io = io;
@@ -67,7 +68,7 @@ public class UI {
             table += String.format("| Index |     Author      |        Title         |  Type   |%n");
             table += String.format("+-------+-----------------+----------------------+---------+%n");
             for (int i = 0; i < tips.size(); i++) {
-                table += String.format(leftAlignFormat, i, tips.get(i).getAuthor(), tips.get(i).getTitle().substring(0, Math.min(19, tips.get(i).getTitle().length())), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
+                table += String.format(leftAlignFormat, incrementedIndex(i), tips.get(i).getAuthor(), tips.get(i).getTitle().substring(0, Math.min(19, tips.get(i).getTitle().length())), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
             }
             table += String.format("+-------+-----------------+----------------------+---------+%n");
             io.print(table);
@@ -78,6 +79,10 @@ public class UI {
 
     private void singleTipView(ReadingTip tip) {
         io.print(tip.toString());
+    }
+    
+    private int incrementedIndex(int index) {
+        return index + 1;
     }
 
     /**
@@ -169,7 +174,7 @@ public class UI {
                 + "  3 - news\n"
                 + "  4 - article\n"
                 + "  5 - blog\n"
-                + "  b - back to previous view\n";
+                + "  b - back to main commands\n";
 
         Set<String> acceptedInput = new TreeSet<>();
         acceptedInput.add("1");
@@ -198,13 +203,11 @@ public class UI {
                 addedSuccessfully = addBlog();
                 break;
             case "b":
-                selectBaseCommand();
                 return;
         }
         if (addedSuccessfully) {
             io.print("Tip added!\n\n");
         }
-        selectBaseCommand();
     }
 
     /**
@@ -232,44 +235,37 @@ public class UI {
 
         String choice = userCommand(prompt, acceptedInput);
         boolean hasTips = true;
-        List<ReadingTip> tips;
+        List<ReadingTip> tips = new ArrayList<>();
         switch (choice) {
             case "1":
                 tips = manager.listByType("all");
                 hasTips = summaryTableView(tips);
-                selectSingleTip(tips);
                 break;
             case "2":
                 tips = manager.listByType("video");
                 hasTips = summaryTableView(tips);
-                selectSingleTip(tips);
                 break;
             case "3":
                 tips = manager.listByType("book");
                 hasTips = summaryTableView(tips);
-                selectSingleTip(tips);
                 break;
             case "4":
                 tips = manager.listByType("news");
                 hasTips = summaryTableView(tips);
-                selectSingleTip(tips);
                 break;
             case "5":
                 tips = manager.listByType("article");
                 hasTips = summaryTableView(tips);
-                selectSingleTip(tips);
                 break;
             case "6":
                 tips = manager.listByType("blog");
                 hasTips = summaryTableView(tips);
-                selectSingleTip(tips);
                 break;
             case "b":
-                selectBaseCommand();
                 return;
         }
-        if (!hasTips) {
-            selectBaseCommand();
+        if (hasTips) {
+            selectSingleTip(tips);
         }
     }
 
@@ -278,35 +274,41 @@ public class UI {
      * selection of type or to list all
      */
     private void selectSingleTip(List<ReadingTip> tips) {
-        String prompt = "Choose an action:\n"
-                + "  s - show more info about single tip\n"
-                + "  b - back to main commands\n"
-                + "  q - exit app\n";
+        boolean viewing = true;
+        while (viewing) {
+            String prompt = "Choose an action:\n"
+                    + "  s - show more info about single tip\n"
+                    + "  b - back to main commands\n"
+                    + "  q - quit app\n";
 
-        Set<String> acceptedInput = new TreeSet<>();
-        acceptedInput.add("s");
-        acceptedInput.add("b");
-        acceptedInput.add("q");
+            Set<String> acceptedInput = new TreeSet<>();
+            acceptedInput.add("s");
+            acceptedInput.add("b");
+            acceptedInput.add("q");
 
-        String choice = userCommand(prompt, acceptedInput);
-        switch (choice) {
-            case "s":
-                selectTipFromList(tips);
-                break;
-            case "b":
-                selectBaseCommand();
-                break;
-            case "q":
-                exitApplication();
-                break;
+            String choice = userCommand(prompt, acceptedInput);
+            switch (choice) {
+                case "s":
+                    selectTipFromList(tips);
+                    break;
+                case "b":
+                    viewing = false;
+                    break;
+                case "q":
+                    exitApplication();
+                    viewing = false;
+                    break;
+            }
         }
+
     }
 
     private void selectTipFromList(List<ReadingTip> tips) {
         io.print("Choose tip by index:\n");
         try {
             int index = Integer.parseInt(io.readLine("Enter index: "));
-            ReadingTip tip = tips.get(index);
+            int indexDecrement = index - 1;
+            ReadingTip tip = tips.get(indexDecrement);
             singleTipView(tip);
         } catch (Exception e) {
             io.print("Bad index\n");
@@ -318,29 +320,30 @@ public class UI {
      * selection of type or to list all
      */
     private void selectBaseCommand() {
-        String prompt = "Choose an action:\n"
-                + "  a - add new readtip\n"
-                + "  l - list tips\n"
-                + "  q - quit app\n";
+        while (run) {
+            String prompt = "Choose an action:\n"
+                    + "  a - add new readtip\n"
+                    + "  l - list tips\n"
+                    + "  q - quit app\n";
 
-        Set<String> acceptedInput = new TreeSet<>();
-        acceptedInput.add("a");
-        acceptedInput.add("l");
-        acceptedInput.add("q");
+            Set<String> acceptedInput = new TreeSet<>();
+            acceptedInput.add("a");
+            acceptedInput.add("l");
+            acceptedInput.add("q");
 
-        String choice = userCommand(prompt, acceptedInput);
-        switch (choice) {
-            case "a":
-                io.print("Adding a new ReadTip: \n\n");
-                selectTypeToAdd();
-                break;
-            case "l":
-                io.print("Existing tips: \n");
-                selectTypeToList();
-                io.print("\n\n");
-                break;
-            case "q":
-                exitApplication();
+            String choice = userCommand(prompt, acceptedInput);
+            switch (choice) {
+                case "a":
+                    io.print("Adding a new ReadTip: \n");
+                    selectTypeToAdd();
+                    break;
+                case "l":
+                    io.print("Existing tips: \n");
+                    selectTypeToList();
+                    break;
+                case "q":
+                    exitApplication();
+            }
         }
     }
 
@@ -364,10 +367,12 @@ public class UI {
     public void run() {
         this.io = io;
         io.print("Welcome to ReadTipper!\n\n");
+        run = true;
         selectBaseCommand();
     }
 
     private void exitApplication() {
+        run = false;
         io.print("Thank you!");
     }
 

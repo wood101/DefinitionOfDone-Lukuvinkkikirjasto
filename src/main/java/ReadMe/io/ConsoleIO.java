@@ -38,18 +38,4 @@ public class ConsoleIO implements IO {
         System.out.println(prompt);
         return scanner.nextLine();
     }
-    
-    @Override
-    public void summaryTableView(List<ReadingTip> tips) {
-        String leftAlignFormat = "| %-4d| %-15s | %-20s | %-7s |%n";
-        System.out.format("+-----+-----------------+----------------------+---------+%n");
-        System.out.format("| ID  |     Author      |        Title         |  Type   |%n");
-        System.out.format("+-----+-----------------+----------------------+---------+%n");
-        for (int i = 0; i < tips.size(); i++) {
-            System.out.format(leftAlignFormat, tips.get(i).getId(), tips.get(i).getAuthor(), tips.get(i).getTitle(), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
-        }
-        System.out.format("+-----+-----------------+----------------------+---------+%n");
-    }
-
-    
 }

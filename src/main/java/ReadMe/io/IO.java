@@ -27,11 +27,5 @@ public interface IO {
      * @return
      */
     String readLine(String prompt);
-    
-    /**
-    * Prints a summary table of all reading tips
-    * @param tips 
-    */
-    public void summaryTableView(List<ReadingTip> tips);
 }
 

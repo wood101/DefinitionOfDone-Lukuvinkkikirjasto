@@ -94,18 +94,19 @@ public class DatabaseDao implements DaoManager {
      * @param title
      * @return true is marking is successful
      */
-    public boolean markAsRead(String type, String title) {
-        switch (type) {
-            case "video":
-                return false;
-            case "book":
-                return false;
-            case "news":
-                return false;
-            case "article":
-                return articleDao.markAsRead(title);
-            case "blog":
-                return false;
+    public boolean markAsRead(ReadingTip tip) {
+        if (tip == null) return false;
+        switch (tip.getClass().getName().replace("ReadMe.domain.", "")) {
+            case "Video":
+                return videoDao.markAsRead(tip.getTitle());
+            case "Book":
+                return bookDao.markAsRead(tip.getTitle());
+            case "News":
+                return newsDao.markAsRead(tip.getTitle());
+            case "Article":
+                return articleDao.markAsRead(tip.getTitle());
+            case "Blog":
+                return blogDao.markAsRead(tip.getTitle());
             default:
                 return false;
         }

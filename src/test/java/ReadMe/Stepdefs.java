@@ -200,7 +200,7 @@ public class Stepdefs {
     public void type_command_all_is_input(String arg1) throws Throwable {
         inputLinesAll[1] = "1";
         inputLinesAll[2] = "q";
-        
+
     }
 
     @Then("^all readtips are printed in a table$")
@@ -211,7 +211,18 @@ public class Stepdefs {
         ui = new UI(ios, dao);
         ui.run();
 
-        assertTrue(ios.getOutputString().contains("hackerdashery"));
+         assertTrue(ios.getOutputString().contains("hackerdashery"));
+         assertTrue(ios.getOutputString().contains("hackerdashery1"));
+         assertTrue(ios.getOutputString().contains("hackerdashery2"));
+         assertTrue(ios.getOutputString().contains("hackerdashery3"));
+         assertTrue(ios.getOutputString().contains("hackerdashery4"));
+         assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
+         assertTrue(ios.getOutputString().contains("book"));
+         assertTrue(ios.getOutputString().contains("video"));
+         assertTrue(ios.getOutputString().contains("blog"));
+         assertTrue(ios.getOutputString().contains("news"));
+         assertTrue(ios.getOutputString().contains("article"));
+
     }
 
     // Feature: readtiplists by type are printed in correct form  ------------------------uses same given as list all
@@ -220,14 +231,20 @@ public class Stepdefs {
     public void type_command_video_is_input(String arg1) throws Throwable {
         inputLinesVideoType[1] = "2";
         inputLinesVideoType[2] = "q";
-        
 
     }
 
     //video
     @Then("^videotips are printed in a table$")
     public void videotips_are_printed_in_a_table() throws Throwable {
+        IOStub ios = new IOStub(inputLinesVideoType);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
 
+        assertTrue(ios.getOutputString().contains("hackerdashery"));
+        assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
+        assertTrue(ios.getOutputString().contains("Video"));
     }
 
     //book
@@ -241,7 +258,15 @@ public class Stepdefs {
     //book
     @Then("^booktips are printed in a table$")
     public void booktips_are_printed_in_a_table() throws Throwable {
+        IOStub ios = new IOStub(inputLinesBookType);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
 
+        assertTrue(ios.getOutputString().contains("hackerdashery1"));
+        //assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
+        assertTrue(ios.getOutputString().contains("Book"));        
+        
     }
 
     //news
@@ -255,6 +280,15 @@ public class Stepdefs {
     @Then("^newstips are printed in a table$")
     public void newstips_are_printed_in_a_table() throws Throwable {
 
+        IOStub ios = new IOStub(inputLinesNewsType);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains("hackerdashery2"));
+        assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
+        assertTrue(ios.getOutputString().contains("News")); 
+
     }
 
     //article
@@ -267,7 +301,14 @@ public class Stepdefs {
     //article
     @Then("^articletips are printed in a table$")
     public void articletips_are_printed_in_a_table() throws Throwable {
+        IOStub ios = new IOStub(inputLinesArticleType);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
 
+        assertTrue(ios.getOutputString().contains("hackerdashery3"));
+        assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
+        assertTrue(ios.getOutputString().contains("Article")); 
     }
 
     //blogs
@@ -280,11 +321,17 @@ public class Stepdefs {
     //blogs
     @Then("^blogtips are printed in a table$")
     public void blogtips_are_printed_in_a_table() throws Throwable {
+        IOStub ios = new IOStub(inputLinesBlogType);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
 
+        assertTrue(ios.getOutputString().contains("hackerdashery4"));
+        assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
+        assertTrue(ios.getOutputString().contains("Blog")); 
     }
 
 }
-
 // Feature changes here -----------------------------------------------------------------------------------------------------------------------------------
 // Old listing features 
 //    @Given("^command \"([^\"]*)\" is input$")
