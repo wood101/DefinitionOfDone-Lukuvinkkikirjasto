@@ -243,4 +243,22 @@ public class UITest {
 
         assertEquals(io.getOutputs().get(0), expectedOutput);
     }
+    @Test
+    public void addVideoUnsuccessfulWhenNonnumericalYearIsGiven() {
+        io = new IOStub("a", "2", "title", "author", "1234", "desc", "f", "2000", "q");
+        ui = new UI(io, db);
+
+        ui.run();
+
+        assertTrue(io.getOutputs().contains("Please type year as a number!"));
+    }
+    @Test
+    public void addVideoUnsuccessfulWhenFutureYearIsGiven() {
+        io = new IOStub("a", "2", "title", "author", "1234", "desc", "20000", "2000", "q");
+        ui = new UI(io, db);
+
+        ui.run();
+
+        assertTrue(io.getOutputs().contains("Year cannot be in the future!"));
+    }
 }
