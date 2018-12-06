@@ -211,7 +211,18 @@ public class Stepdefs {
         ui = new UI(ios, dao);
         ui.run();
 
-        assertTrue(ios.getOutputString().contains("hackerdashery"));
+         assertTrue(ios.getOutputString().contains("hackerdashery"));
+         assertTrue(ios.getOutputString().contains("hackerdashery1"));
+         assertTrue(ios.getOutputString().contains("hackerdashery2"));
+         assertTrue(ios.getOutputString().contains("hackerdashery3"));
+         assertTrue(ios.getOutputString().contains("hackerdashery4"));
+         assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
+         assertTrue(ios.getOutputString().contains("book"));
+         assertTrue(ios.getOutputString().contains("video"));
+         assertTrue(ios.getOutputString().contains("blog"));
+         assertTrue(ios.getOutputString().contains("news"));
+         assertTrue(ios.getOutputString().contains("article"));
+
     }
 
     // Feature: readtiplists by type are printed in correct form  ------------------------uses same given as list all
