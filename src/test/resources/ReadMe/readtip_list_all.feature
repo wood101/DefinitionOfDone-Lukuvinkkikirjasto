@@ -4,6 +4,4 @@
     Given command "l" list tips is given
     When  type command "1" all is input
     Then all readtips are printed in a table
-
-Scenario: if tips are not found error message is given
     
