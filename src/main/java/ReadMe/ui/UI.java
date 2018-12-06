@@ -297,7 +297,11 @@ public class UI {
                     viewing = false;
                     break;
                 case "r":
-                    MarkTipAsRead(selectTipFromList(tips));
+                    ReadingTip selected = selectTipFromList(tips);
+                    ReadingTip edited = MarkTipAsRead(selected);
+                    for(int i = 0; i < tips.size(); i++) {
+                        if(tips.get(i).equals(selected)) tips.set(i, edited);
+                    }
                     break;                    
                 case "q":
                     exitApplication();
@@ -308,9 +312,12 @@ public class UI {
 
     }
 
-    private void MarkTipAsRead(ReadingTip tip) {
+    private ReadingTip MarkTipAsRead(ReadingTip tip) {
         manager.markAsRead(tip);
-        io.print("Marked " + tip.getTitle() + " as read");      
+        io.print("Marked " + tip.getTitle() + " as read");  
+        tip.setChecked(true);
+        tip.setDate_checked(new Date());
+        return tip;
     }
     
     private ReadingTip selectTipFromList(List<ReadingTip> tips) {
