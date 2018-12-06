@@ -238,12 +238,12 @@ public class Stepdefs {
     @Then("^videotips are printed in a table$")
     public void videotips_are_printed_in_a_table() throws Throwable {
         IOStub ios = new IOStub(inputLinesVideoType);
-        InMemoryDao dao = new InMemoryDao();
+        dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
 
         assertTrue(ios.getOutputString().contains("hackerdashery"));
-        assertTrue(ios.getOutputString().contains("P vs. NP and the Computational Complexity Zoo"));
+        assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
         assertTrue(ios.getOutputString().contains("Video"));
     }
 
@@ -258,13 +258,13 @@ public class Stepdefs {
     //book
     @Then("^booktips are printed in a table$")
     public void booktips_are_printed_in_a_table() throws Throwable {
-        IOStub ios = new IOStub(inputLinesVideoType);
-        InMemoryDao dao = new InMemoryDao();
+        IOStub ios = new IOStub(inputLinesBookType);
+        dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
 
         assertTrue(ios.getOutputString().contains("hackerdashery1"));
-        assertTrue(ios.getOutputString().contains("P vs. NP and the Computational Complexity Zoo1"));
+        //assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
         assertTrue(ios.getOutputString().contains("Book"));        
         
     }
@@ -280,13 +280,13 @@ public class Stepdefs {
     @Then("^newstips are printed in a table$")
     public void newstips_are_printed_in_a_table() throws Throwable {
 
-        IOStub ios = new IOStub(inputLinesVideoType);
-        InMemoryDao dao = new InMemoryDao();
+        IOStub ios = new IOStub(inputLinesNewsType);
+        dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
 
         assertTrue(ios.getOutputString().contains("hackerdashery2"));
-        assertTrue(ios.getOutputString().contains("P vs. NP and the Computational Complexity Zoo2"));
+        assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
         assertTrue(ios.getOutputString().contains("News")); 
 
     }
@@ -301,13 +301,13 @@ public class Stepdefs {
     //article
     @Then("^articletips are printed in a table$")
     public void articletips_are_printed_in_a_table() throws Throwable {
-        IOStub ios = new IOStub(inputLinesVideoType);
-        InMemoryDao dao = new InMemoryDao();
+        IOStub ios = new IOStub(inputLinesArticleType);
+        dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
 
         assertTrue(ios.getOutputString().contains("hackerdashery3"));
-        assertTrue(ios.getOutputString().contains("P vs. NP and the Computational Complexity Zoo3"));
+        assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
         assertTrue(ios.getOutputString().contains("Article")); 
     }
 
@@ -321,18 +321,17 @@ public class Stepdefs {
     //blogs
     @Then("^blogtips are printed in a table$")
     public void blogtips_are_printed_in_a_table() throws Throwable {
-        IOStub ios = new IOStub(inputLinesVideoType);
-        InMemoryDao dao = new InMemoryDao();
+        IOStub ios = new IOStub(inputLinesBlogType);
+        dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
 
         assertTrue(ios.getOutputString().contains("hackerdashery4"));
-        assertTrue(ios.getOutputString().contains("P vs. NP and the Computational Complexity Zoo4"));
+        assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
         assertTrue(ios.getOutputString().contains("Blog")); 
     }
 
 }
-
 // Feature changes here -----------------------------------------------------------------------------------------------------------------------------------
 // Old listing features 
 //    @Given("^command \"([^\"]*)\" is input$")
