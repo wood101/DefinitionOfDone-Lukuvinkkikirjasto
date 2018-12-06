@@ -33,7 +33,7 @@ public class UI {
         this.manager = manager;
     }
 
-    public boolean summaryTableView(List<ReadingTip> tips) {
+    private boolean summaryTableView(List<ReadingTip> tips) {
         if (tips.isEmpty()) {
             io.print("\nNo reading tips found.\n");
             return false;
@@ -50,6 +50,10 @@ public class UI {
             io.print(table);
             return true;
         }
+    }
+
+    private void singleTipView(ReadingTip tip) {
+        io.print(tip.toString());
     }
 
     /**
@@ -175,7 +179,7 @@ public class UI {
         acceptedInput.add("4");
         acceptedInput.add("5");
         acceptedInput.add("b");
-        
+
         String choice = userCommand(prompt, acceptedInput);
         boolean addedSuccessfully = false;
         switch (choice) {
@@ -298,9 +302,16 @@ public class UI {
                 break;
         }
     }
-    
+
     private void selectTipFromList(List<ReadingTip> tips) {
-        io.print("hello");
+        io.print("Choose tip by index:\n");
+        try {
+            int index = Integer.parseInt(io.readLine("Enter index: "));
+            ReadingTip tip = tips.get(index);
+            singleTipView(tip);
+        } catch (Exception e) {
+            io.print("Bad index\n");
+        }
     }
 
     /**
