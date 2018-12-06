@@ -74,4 +74,21 @@ public class InMemoryDaoTest {
     public void isListVideosCorrect() {
         assertTrue(dao.getVideos().get(0).getAuthor().equals("hackerdashery"));
     }   
+    
+    @Test
+    public void markAsReadWorks() {
+       Blog b = new Blog("auth", "title", "link", "desc", 2010);
+       dao.addBlog(b);
+       News n = new News("auth", "title", "link", "desc", "publisher", 2000);
+       dao.addNews(n);
+       assertTrue(dao.markAsRead(b));
+       assertTrue(dao.markAsRead(n));
+    }
+    
+    @Test
+    public void markAsReadReturnsFalseIfNotFound() {
+       Blog b = new Blog("auth", "title", "link", "desc", 2010);
+       assertFalse(dao.markAsRead(b));
+       assertFalse(dao.markAsRead(null));
+    }
 }
