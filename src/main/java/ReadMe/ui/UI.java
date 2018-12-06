@@ -278,22 +278,31 @@ public class UI {
         while (viewing) {
             String prompt = "Choose an action:\n"
                     + "  s - show more info about single tip\n"
+                    + "  r - mark reading tip as read\n"
                     + "  b - back to main commands\n"
                     + "  q - quit app\n";
 
             Set<String> acceptedInput = new TreeSet<>();
             acceptedInput.add("s");
             acceptedInput.add("b");
+            acceptedInput.add("r");
             acceptedInput.add("q");
 
             String choice = userCommand(prompt, acceptedInput);
             switch (choice) {
                 case "s":
-                    selectTipFromList(tips);
+                    singleTipView(selectTipFromList(tips));
                     break;
                 case "b":
                     viewing = false;
                     break;
+                case "r":
+                    ReadingTip selected = selectTipFromList(tips);
+                    ReadingTip edited = MarkTipAsRead(selected);
+                    for(int i = 0; i < tips.size(); i++) {
+                        if(tips.get(i).equals(selected)) tips.set(i, edited);
+                    }
+                    break;                    
                 case "q":
                     exitApplication();
                     viewing = false;
@@ -303,16 +312,25 @@ public class UI {
 
     }
 
-    private void selectTipFromList(List<ReadingTip> tips) {
+    private ReadingTip MarkTipAsRead(ReadingTip tip) {
+        manager.markAsRead(tip);
+        io.print("Marked " + tip.getTitle() + " as read");  
+        tip.setChecked(true);
+        tip.setDate_checked(new Date());
+        return tip;
+    }
+    
+    private ReadingTip selectTipFromList(List<ReadingTip> tips) {
         io.print("Choose tip by index:\n");
         try {
             int index = Integer.parseInt(io.readLine("Enter index: "));
             int indexDecrement = index - 1;
             ReadingTip tip = tips.get(indexDecrement);
-            singleTipView(tip);
+            return tip;
         } catch (Exception e) {
             io.print("Bad index\n");
         }
+        return null;
     }
 
     /**

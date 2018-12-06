@@ -211,21 +211,30 @@ public class Stepdefs {
         ui = new UI(ios, dao);
         ui.run();
 
-         assertTrue(ios.getOutputString().contains("hackerdashery"));
-         assertTrue(ios.getOutputString().contains("hackerdashery1"));
-         assertTrue(ios.getOutputString().contains("hackerdashery2"));
-         assertTrue(ios.getOutputString().contains("hackerdashery3"));
-         assertTrue(ios.getOutputString().contains("hackerdashery4"));
-         assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
-         assertTrue(ios.getOutputString().contains("book"));
-         assertTrue(ios.getOutputString().contains("video"));
-         assertTrue(ios.getOutputString().contains("blog"));
-         assertTrue(ios.getOutputString().contains("news"));
-         assertTrue(ios.getOutputString().contains("article"));
+        assertTrue(ios.getOutputString().contains("hackerdashery"));
+        assertTrue(ios.getOutputString().contains("hackerdashery1"));
+        assertTrue(ios.getOutputString().contains("hackerdashery2"));
+        assertTrue(ios.getOutputString().contains("hackerdashery3"));
+        assertTrue(ios.getOutputString().contains("hackerdashery4"));
+        assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
+        assertTrue(ios.getOutputString().contains("book"));
+        assertTrue(ios.getOutputString().contains("video"));
+        assertTrue(ios.getOutputString().contains("blog"));
+        assertTrue(ios.getOutputString().contains("news"));
+        assertTrue(ios.getOutputString().contains("article"));
 
     }
 
-    // Feature: readtiplists by type are printed in correct form  ------------------------uses same given as list all
+    @Then("^table don't contain year'$")
+    public void table_don_t_contain_year() throws Throwable {
+        IOStub ios = new IOStub(inputLinesAll);
+        InMemoryDao dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(!ios.getOutputString().contains("2014"));
+    }
+
+    // Feature: readtiplists by type are printed in correct form  ---_______________------------------------uses same given as list all
     // video
     @When("^type command \"([^\"]*)\" video is input$")
     public void type_command_video_is_input(String arg1) throws Throwable {
@@ -247,6 +256,16 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains("Video"));
     }
 
+    //video
+    @Then("^videotable does not contain year$")
+    public void videotable_does_not_contain_year() throws Throwable {
+        IOStub ios = new IOStub(inputLinesVideoType);
+        InMemoryDao dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(!ios.getOutputString().contains("2014"));
+    }
+
     //book
     @When("^type command \"([^\"]*)\" book is input$")
     public void type_command_book_is_input(String arg1) throws Throwable {
@@ -265,8 +284,17 @@ public class Stepdefs {
 
         assertTrue(ios.getOutputString().contains("hackerdashery1"));
         //assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
-        assertTrue(ios.getOutputString().contains("Book"));        
-        
+        assertTrue(ios.getOutputString().contains("Book"));
+
+    }
+
+    @Then("^booktable does not contain year$")
+    public void booktable_does_not_contain_year() throws Throwable {
+        IOStub ios = new IOStub(inputLinesBookType);
+        InMemoryDao dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(!ios.getOutputString().contains("2014"));
     }
 
     //news
@@ -287,10 +315,19 @@ public class Stepdefs {
 
         assertTrue(ios.getOutputString().contains("hackerdashery2"));
         assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
-        assertTrue(ios.getOutputString().contains("News")); 
+        assertTrue(ios.getOutputString().contains("News"));
 
     }
-
+    
+    @Then("^newstable does not contain year$")
+    public void newstable_does_not_contain_year() throws Throwable {
+        IOStub ios = new IOStub(inputLinesNewsType);
+        InMemoryDao dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(!ios.getOutputString().contains("2014"));
+    }
+    
     //article
     @When("^type command \"([^\"]*)\" article is input$")
     public void type_command_article_is_input(String arg1) throws Throwable {
@@ -308,7 +345,17 @@ public class Stepdefs {
 
         assertTrue(ios.getOutputString().contains("hackerdashery3"));
         assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
-        assertTrue(ios.getOutputString().contains("Article")); 
+        assertTrue(ios.getOutputString().contains("Article"));
+    }
+    
+    
+    @Then("^articletable does not contain year$")
+    public void articletable_does_not_contain_year() throws Throwable {
+        IOStub ios = new IOStub(inputLinesArticleType);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(!ios.getOutputString().contains("2014"));
     }
 
     //blogs
@@ -328,7 +375,16 @@ public class Stepdefs {
 
         assertTrue(ios.getOutputString().contains("hackerdashery4"));
         assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
-        assertTrue(ios.getOutputString().contains("Blog")); 
+        assertTrue(ios.getOutputString().contains("Blog"));
+    }
+    
+    @Then("^blogtable does not contain year$")
+    public void blogtable_does_not_contain_year() throws Throwable {
+        IOStub ios = new IOStub(inputLinesBlogType);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(!ios.getOutputString().contains("2014"));
     }
 
 }
