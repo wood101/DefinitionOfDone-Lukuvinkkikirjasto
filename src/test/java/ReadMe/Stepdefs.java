@@ -37,6 +37,7 @@ public class Stepdefs {
 //        inputLinesAll[1] = "q";
 //    }
 
+    
     //for video
     @Given("^command \"([^\"]*)\" add new readtip is selected and command \"([^\"]*)\" video is selected$")
     public void command_add_new_readtip_is_selected_and_command_video_is_selected(String arg1, String arg2) throws Throwable {
