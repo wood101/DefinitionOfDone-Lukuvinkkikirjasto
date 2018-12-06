@@ -180,6 +180,34 @@ public class Stepdefs {
         assertTrue(dao.listByType("blog").contains(new Blog("author", "title", "www", "desc", 2000)));
     }
     
+ // Feature changes here ----readtip_list_all.feature-------------------------------------------------------------------------------------------------------------------------------
+ 
+   //Feature: all readtiplist is printed in correct form
+        @Given("^command \"([^\"]*)\" list tips is given$")
+    public void command_list_tips_is_given(String arg1) throws Throwable {
+        inputLinesAll[0] = "l";   
+    }
+   
+
+    @When("^type command \"([^\"]*)\" all is input$")
+    public void type_command_all_is_input(String arg1) throws Throwable {
+      inputLinesAll[1] = "1";
+    }
+    
+        @Then("^all readtips are printed in a table$")
+    public void all_readtips_are_printed_in_a_table() throws Throwable {
+       
+        IOStub ios = new IOStub(inputLinesAll);
+        InMemoryDao dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains("hackerdashery"));
+    }
+    }
+
+    
+    
     // Feature changes here -----------------------------------------------------------------------------------------------------------------------------------
     // Old listing features 
 //    @Given("^command \"([^\"]*)\" is input$")
@@ -287,4 +315,4 @@ public class Stepdefs {
 //        assertTrue(ios.getOutputs().contains(s));
 //    }
 
-}
+
