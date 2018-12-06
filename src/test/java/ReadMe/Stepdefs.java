@@ -318,7 +318,7 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains("News"));
 
     }
-    
+
     @Then("^newstable does not contain year$")
     public void newstable_does_not_contain_year() throws Throwable {
         IOStub ios = new IOStub(inputLinesNewsType);
@@ -327,7 +327,7 @@ public class Stepdefs {
         ui.run();
         assertTrue(!ios.getOutputString().contains("2014"));
     }
-    
+
     //article
     @When("^type command \"([^\"]*)\" article is input$")
     public void type_command_article_is_input(String arg1) throws Throwable {
@@ -347,8 +347,7 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
         assertTrue(ios.getOutputString().contains("Article"));
     }
-    
-    
+
     @Then("^articletable does not contain year$")
     public void articletable_does_not_contain_year() throws Throwable {
         IOStub ios = new IOStub(inputLinesArticleType);
@@ -377,7 +376,7 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains("P vs. NP and the Co"));
         assertTrue(ios.getOutputString().contains("Blog"));
     }
-    
+
     @Then("^blogtable does not contain year$")
     public void blogtable_does_not_contain_year() throws Throwable {
         IOStub ios = new IOStub(inputLinesBlogType);
@@ -387,126 +386,17 @@ public class Stepdefs {
         assertTrue(!ios.getOutputString().contains("2014"));
     }
 
-
-//No emptfeature____-y _tiplist  Feature changes here -----------------------------------------------------------------------------------------------------------------------------------
-
-       @Then("^error message(\\d+) :\"([^\"]*)\" is printed$")
-    public void error_message_is_printed(int arg1, String arg2) throws Throwable {
-      IOStub ios = new IOStub(inputLinesAll);
+    @Then("^error message :\"([^\"]*)\" is printed$")
+    public void error_message_is_printed(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesAll);
         InMemoryDao daoEmpty = new InMemoryDao(true);
         ui = new UI(ios, daoEmpty);
         ui.run();
 
         assertTrue(ios.getOutputString().contains("No reading tips found."));
     }
-    }
+
+}
 
 
-
-
-// Feature changes here -----------------------------------------------------------------------------------------------------------------------------------
-// Old listing features 
-//    @Given("^command \"([^\"]*)\" is input$")
-//    public void command_is_input(String action) throws Throwable {
-//        inputLinesListType[0] = action;
-//    }
-//
-//    @When("^type command \"([^\"]*)\" is input$")
-//    public void type_command_is_input(String type) throws Throwable {
-//        inputLinesListType[1] = type;
-//        inputLinesListType[2] = "q";
-//    }
-//
-//    @Then("^video tips are printed$")
-//    public void video_tips_are_printed() throws Throwable {
-//        io = new IOStub(inputLinesListType);
-//        InMemoryDao d = new InMemoryDao();
-//        ui = new UI(io, d);
-//        ui.run();
-//        Video v = new Video("hackerdashery", "P vs. NP and the Computational Complexity Zoo", 
-//                "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "P js NP erot", 2014);
-//        String s = "\n\n";
-//        s += "Videos:\n";
-//        s += v.toString();
-//        s += ("\n\n");
-//        
-//        assertTrue(io.getOutputs().contains(s));
-//    }
-//
-//    @Then("^book tips are printed$")
-//    public void book_tips_are_printed() throws Throwable {
-//        io = new IOStub(inputLinesListType);
-//        InMemoryDao d = new InMemoryDao();
-//        ui = new UI(io, d);
-//        ui.run();
-//        
-//        Book b = new Book("hackerdashery1", "P vs. NP and the Computational Complexity Zoo1", "1234", "P js NP erot", 2014);
-//        String s = "\n\n";
-//        s += "Books:\n";
-//        s += b.toString();
-//        s += ("\n\n");
-//        
-//        assertTrue(io.getOutputs().contains(s));
-//    }
-//
-//    @Then("^news tips are printed$")
-//    public void news_tips_are_printed() throws Throwable {
-//        io = new IOStub(inputLinesListType);
-//        InMemoryDao d = new InMemoryDao();
-//        ui = new UI(io, d);
-//        ui.run();
-//        
-//        News n = new News("hackerdashery2", "P vs. NP and the Computational Complexity Zoo2", "1234", "P js NP erot", "hmm", 2014);
-//        String s = "\n\n";
-//        s += "News:\n";
-//        s += n.toString();
-//        s += ("\n\n");
-//        
-//        assertTrue(io.getOutputs().contains(s));
-//    }
-//
-//    @Then("^article tips are printed$")
-//    public void article_tips_are_printed() throws Throwable {
-//        io = new IOStub(inputLinesListType);
-//        InMemoryDao d = new InMemoryDao();
-//        ui = new UI(io, d);
-//        ui.run();
-//        
-//        Article a = new Article("hackerdashery3", "P vs. NP and the Computational Complexity Zoo3", "1234", "P js NP erot", "hmm", 2014);
-//        String s = "\n\n";
-//        s += "Articles:\n";
-//        s += a.toString();
-//        s += ("\n\n");
-//        
-//        assertTrue(io.getOutputs().contains(s));
-//    }
-//
-//    @Then("^blog tips are printed$")
-//    public void blog_tips_are_printed() throws Throwable {
-//        io = new IOStub(inputLinesListType);
-//        InMemoryDao d = new InMemoryDao();
-//        ui = new UI(io, d);
-//        ui.run();
-//        
-//        Blog b = new Blog("hackerdashery4", "P vs. NP and the Computational Complexity Zoo4", "1234", "P js NP erot", 2014);
-//        String s = "\n\n";
-//        s += "Blogs:\n";
-//        s += b.toString();
-//        s += ("\n\n");
-//        
-//        assertTrue(io.getOutputs().contains(s));
-//    }
-//    @Then("^all bookmarks are printed$")
-//    public void all_bookmarks_are_printed() throws Throwable {
-//        IOStub ios = new IOStub(inputLinesAll);
-//        InMemoryDao dao = new InMemoryDao();
-//        ui = new UI(ios, dao);
-//        ui.run();
-//
-//        String s = "\n\nAll: \n\n" + "Videos:\n" + dao.getVideos().toString().replace("[", "").replace("]", "")
-//                + "\n\n" + "Books:\n" + dao.getBooks().toString().replace("[", "").replace("]", "")
-//                + "\n\n" + "News:\n" + dao.getNews().toString().replace("[", "").replace("]", "")
-//                + "\n\n" + "Articles:\n" + dao.getArticles().toString().replace("[", "").replace("]", "") + "\n\n" + "Blogs:\n" + dao.getBlogs().toString().replace("[", "").replace("]", "") + "\n\n";
-//        assertTrue(ios.getOutputs().contains(s));
-//    }
 
