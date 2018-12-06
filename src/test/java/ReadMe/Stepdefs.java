@@ -404,7 +404,9 @@ public class Stepdefs {
         inputLinesSingle[0] = "l";
         inputLinesSingle[1] = "1";
         inputLinesSingle[2] = "s";
-
+        inputLinesSingle2[0] = "l";
+        inputLinesSingle2[1] = "1";
+        inputLinesSingle2[2] = "s";
     }
 
     @When("^index \"([^\"]*)\" is chosen$")
@@ -429,8 +431,8 @@ public class Stepdefs {
 
     @When("^wrong index \"([^\"]*)\" is chosen$")
     public void wrong_index_is_chosen(String arg1) throws Throwable {
-        inputLinesSingle[3] = "100";
-        inputLinesSingle[4] = "q";
+        inputLinesSingle2[3] = "100";
+        inputLinesSingle2[4] = "q";
     }
 
     @Then("^\"([^\"]*)\" is printed$")
