@@ -224,6 +224,18 @@ public class Stepdefs {
          assertTrue(ios.getOutputString().contains("article"));
 
     }
+    
+       //blogs
+    @Then("^blogtips are not printed in a table$")
+    public void _not_printed_in_a_table() throws Throwable {
+        IOStub ios = new IOStub(inputLinesVideoType);
+        InMemoryDao dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(!ios.getOutputString().contains("2014"));
+     
+    }
+
 
     // Feature: readtiplists by type are printed in correct form  ------------------------uses same given as list all
     // video
