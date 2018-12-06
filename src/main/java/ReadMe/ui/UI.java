@@ -334,7 +334,6 @@ public class UI {
             int index = Integer.parseInt(io.readLine("Enter index: "));
             int indexDecrement = index - 1;
             ReadingTip tip = tips.get(indexDecrement);
-            System.out.println("haaaaa");
             return tip;
         } catch (Exception e) {
             io.print("Bad index\n");
