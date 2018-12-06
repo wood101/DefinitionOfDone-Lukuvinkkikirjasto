@@ -14,6 +14,7 @@ import ReadMe.domain.News;
 import ReadMe.domain.ReadingTip;
 import ReadMe.domain.Video;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -33,6 +34,28 @@ public class UI {
         this.manager = manager;
     }
 
+    public int safeYearInput() {
+        Date today = new Date();
+        int thisYear = today.getYear() + 1900; // getYear return this year - 1900 for reasons unknown
+        int year = 0;
+        boolean flag = false;
+
+        do {
+            try {
+                String option = io.readLine("Year published: ");
+                year = Integer.parseInt(option);
+                if (year > thisYear) {
+                    io.print("Year cannot be in the future!");
+                } else {
+                    flag = true;
+                }
+            } catch (Exception e) {
+                io.print("Please type year as a number!");
+            }
+        } while (!flag);
+        return year;
+    }
+
     public void summaryTableView(List<ReadingTip> tips) {
 
         if (tips.isEmpty()) {
@@ -48,7 +71,7 @@ public class UI {
             }
             table += String.format("+-------+-----------------+----------------------+---------+%n");
             io.print(table);
-            
+
         }
 
     }
@@ -58,19 +81,15 @@ public class UI {
      * entry
      */
     public boolean addVideo() {
-        try {
-            io.print("VIDEO ENTRY - enter information: \n\n");
-            String title = io.readLine("Title: ");
-            String author = io.readLine("Author: ");
-            String link = io.readLine("Link: ");
-            String description = io.readLine("Description: ");
-            int year = Integer.parseInt(io.readLine("Year published: "));
-            manager.addVideo(new Video(author, title, description, link, year));
-            return true;
-        } catch (Exception e) {
-            io.print("Please type year as a number!");
-            return false;
-        }
+        io.print("VIDEO ENTRY - enter information: \n\n");
+        String title = io.readLine("Title: ");
+        String author = io.readLine("Author: ");
+        String link = io.readLine("Link: ");
+        String description = io.readLine("Description: ");
+        int year = safeYearInput();
+        manager.addVideo(new Video(author, title, description, link, year));
+        return true;
+
     }
 
     /**
@@ -78,20 +97,14 @@ public class UI {
      * entry
      */
     public boolean addBook() {
-        try {
-            io.print("BOOK ENTRY - enter information: \n\n");
-            String title = io.readLine("Title: ");
-            String author = io.readLine("Author: ");
-            String ISBN = io.readLine("ISBN: ");
-            String description = io.readLine("Description: ");
-            int year = Integer.parseInt(io.readLine("Year published: "));
-            manager.addBook(new Book(author, title, ISBN, description, year));
-            return true;
-        } catch (Exception e) {
-            io.print("Please type  year as numbers!");
-            return false;
-        }
-
+        io.print("BOOK ENTRY - enter information: \n\n");
+        String title = io.readLine("Title: ");
+        String author = io.readLine("Author: ");
+        String ISBN = io.readLine("ISBN: ");
+        String description = io.readLine("Description: ");
+        int year = safeYearInput();
+        manager.addBook(new Book(author, title, ISBN, description, year));
+        return true;
     }
 
     /**
@@ -99,20 +112,15 @@ public class UI {
      * entry
      */
     public boolean addNews() {
-        try {
-            io.print("NEWS ENTRY - enter information: \n\n");
-            String title = io.readLine("Title: ");
-            String author = io.readLine("Author: ");
-            String link = io.readLine("Link: ");
-            String description = io.readLine("Description: ");
-            String publisher = io.readLine("Publisher: ");
-            int year = Integer.parseInt(io.readLine("Year published: "));
-            manager.addNews(new News(author, title, link, description, publisher, year));
-            return true;
-        } catch (Exception e) {
-            io.print("Please type year as a number!");
-            return false;
-        }
+        io.print("NEWS ENTRY - enter information: \n\n");
+        String title = io.readLine("Title: ");
+        String author = io.readLine("Author: ");
+        String link = io.readLine("Link: ");
+        String description = io.readLine("Description: ");
+        String publisher = io.readLine("Publisher: ");
+        int year = safeYearInput();
+        manager.addNews(new News(author, title, link, description, publisher, year));
+        return true;
     }
 
     /**
@@ -120,20 +128,15 @@ public class UI {
      * article entry
      */
     public boolean addArticle() {
-        try {
-            io.print("ARTICLE ENTRY - enter information: \n\n");
-            String title = io.readLine("Title: ");
-            String author = io.readLine("Author: ");
-            String link = io.readLine("Link: ");
-            String description = io.readLine("Description: ");
-            String publisher = io.readLine("Publisher: ");
-            int year = Integer.parseInt(io.readLine("Year published: "));
-            manager.addArticle(new Article(author, title, link, description, publisher, year));
-            return true;
-        } catch (Exception e) {
-            io.print("Please type year as a number!");
-            return false;
-        }
+        io.print("ARTICLE ENTRY - enter information: \n\n");
+        String title = io.readLine("Title: ");
+        String author = io.readLine("Author: ");
+        String link = io.readLine("Link: ");
+        String description = io.readLine("Description: ");
+        String publisher = io.readLine("Publisher: ");
+        int year = safeYearInput();
+        manager.addArticle(new Article(author, title, link, description, publisher, year));
+        return true;
     }
 
     /**
@@ -141,19 +144,14 @@ public class UI {
      * entry
      */
     public boolean addBlog() {
-        try {
-            io.print("BLOG ENTRY - enter information: \n\n");
-            String title = io.readLine("Title: ");
-            String author = io.readLine("Author: ");
-            String link = io.readLine("Link: ");
-            String description = io.readLine("Description: ");
-            int year = Integer.parseInt(io.readLine("Year published: "));
-            manager.addBlog(new Blog(author, title, link, description, year));
-            return true;
-        } catch (Exception e) {
-            io.print("Please type year as a number!");
-            return false;
-        }
+        io.print("BLOG ENTRY - enter information: \n\n");
+        String title = io.readLine("Title: ");
+        String author = io.readLine("Author: ");
+        String link = io.readLine("Link: ");
+        String description = io.readLine("Description: ");
+        int year = safeYearInput();
+        manager.addBlog(new Blog(author, title, link, description, year));
+        return true;
     }
 
     /**
@@ -176,7 +174,7 @@ public class UI {
         acceptedInput.add("4");
         acceptedInput.add("5");
         acceptedInput.add("b");
-        
+
         String choice = userCommand(prompt, acceptedInput);
         boolean addedSuccessfully = false;
         switch (choice) {
