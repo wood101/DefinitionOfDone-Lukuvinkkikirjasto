@@ -396,7 +396,20 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains("No reading tips found."));
     }
 
+    @When("^command \"([^\"]*)\" is chosen$")
+    public void command_is_chosen(String arg1) throws Throwable {
+
+    }
+
+    @When("^index \"([^\"]*)\" is chosen$")
+    public void index_is_chosen(String arg1) throws Throwable {
+        
+    }
+
+    @Then("^the right tip shown$")
+    public void the_right_tip_shown() throws Throwable {
+        
+        
+    }
+
 }
-
-
-
