@@ -80,7 +80,7 @@ public class UI {
     private void singleTipView(ReadingTip tip) {
         io.print(tip.toString());
     }
-    
+
     private int incrementedIndex(int index) {
         return index + 1;
     }
@@ -299,10 +299,14 @@ public class UI {
                 case "r":
                     ReadingTip selected = selectTipFromList(tips);
                     ReadingTip edited = MarkTipAsRead(selected);
-                    for(int i = 0; i < tips.size(); i++) {
-                        if(tips.get(i).equals(selected)) tips.set(i, edited);
+                    if (selected != null) {
+                        for (int i = 0; i < tips.size(); i++) {
+                            if (tips.get(i).equals(selected)) {
+                                tips.set(i, edited);
+                            }
+                        }
                     }
-                    break;                    
+                    break;
                 case "q":
                     exitApplication();
                     viewing = false;
@@ -314,12 +318,12 @@ public class UI {
 
     private ReadingTip MarkTipAsRead(ReadingTip tip) {
         manager.markAsRead(tip);
-        io.print("Marked " + tip.getTitle() + " as read");  
+        io.print("Marked " + tip.getTitle() + " as read");
         tip.setChecked(true);
         tip.setDate_checked(new Date());
         return tip;
     }
-    
+
     private ReadingTip selectTipFromList(List<ReadingTip> tips) {
         io.print("Choose tip by index:\n");
         try {

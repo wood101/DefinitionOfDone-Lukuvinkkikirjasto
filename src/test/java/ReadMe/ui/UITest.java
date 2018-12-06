@@ -261,7 +261,7 @@ public class UITest {
 
     @Test
     public void givingWrongIndexForTipDoesNotShowTip() {
-        io = new IOStub("l", "4", "s", "5", "q");
+        io = new IOStub("l", "4", "s", "1", "q");
         ui = new UI(io, db);
         String author = "author1";
         String title = "title2";
@@ -302,7 +302,8 @@ public class UITest {
     public void noReadingTipsPrintedWhenDatabaseIsEmpty() {
         io = new IOStub("l", "1", "q");
         ui = new UI(io, db);
-        when(db.listByType("all")).thenReturn(new ArrayList<ReadingTip>());
+        List<ReadingTip> list = new ArrayList<>();
+        when(db.listByType("all")).thenReturn(list);
         
         ui.run();
         String output = io.getOutputString();
