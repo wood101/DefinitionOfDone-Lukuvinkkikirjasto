@@ -359,7 +359,7 @@ public class Stepdefs {
     }
 
     //blogs
-    @When("^type command \"([^\"]*)\" blogs is input$")
+    @When("^type command \"([^\"]*)\" blog is input$")
     public void type_command_blogs_is_input(String arg1) throws Throwable {
         inputLinesBlogType[1] = "6";
         inputLinesBlogType[2] = "q";

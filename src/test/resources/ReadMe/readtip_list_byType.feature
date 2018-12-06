@@ -42,11 +42,11 @@ Feature: readtiplists by type are printed in correct form
 
   Scenario: blogtips are printed in a compact table
     Given command "l" list tips is given
-    When  type command "6" blogs is input
+    When  type command "6" blog is input
     Then blogtips are printed in a table
 
   Scenario: blogtips do not contain extra information
     Given command "l" list tips is given
-    When  type command "6" blog  is input
+    When  type command "6" blog is input
     Then blogtable does not contain year
 
