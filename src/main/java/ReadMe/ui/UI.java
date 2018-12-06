@@ -39,15 +39,16 @@ public class UI {
             io.print("\nNo reading tips found.\n");
         } else {
             String table = "";
-            String leftAlignFormat = "| %-4d| %-15s | %-20s | %-7s |%n";
-            table += String.format("+-----+-----------------+----------------------+---------+%n");
-            table += String.format("| ID  |     Author      |        Title         |  Type   |%n");
-            table += String.format("+-----+-----------------+----------------------+---------+%n");
+            String leftAlignFormat = "| %-6d| %-15s | %-20s | %-7s |%n";
+            table += String.format("+-------+-----------------+----------------------+---------+%n");
+            table += String.format("| Index |     Author      |        Title         |  Type   |%n");
+            table += String.format("+-------+-----------------+----------------------+---------+%n");
             for (int i = 0; i < tips.size(); i++) {
-                table += String.format(leftAlignFormat, i, tips.get(i).getAuthor(), tips.get(i).getTitle(), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
+                table += String.format(leftAlignFormat, i, tips.get(i).getAuthor(), tips.get(i).getTitle().substring(0, Math.min(19, tips.get(i).getTitle().length())), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
             }
-            table += String.format("+-----+-----------------+----------------------+---------+%n");
+            table += String.format("+-------+-----------------+----------------------+---------+%n");
             io.print(table);
+            
         }
 
     }
@@ -56,7 +57,7 @@ public class UI {
      * Displays fields to input for video entry, takes input, and creates video
      * entry
      */
-    public void addVideo() {
+    public boolean addVideo() {
         try {
             io.print("VIDEO ENTRY - enter information: \n\n");
             String title = io.readLine("Title: ");
@@ -65,8 +66,10 @@ public class UI {
             String description = io.readLine("Description: ");
             int year = Integer.parseInt(io.readLine("Year published: "));
             manager.addVideo(new Video(author, title, description, link, year));
+            return true;
         } catch (Exception e) {
             io.print("Please type year as a number!");
+            return false;
         }
     }
 
@@ -74,7 +77,7 @@ public class UI {
      * Displays fields to input for book entry, takes input, and creates book
      * entry
      */
-    public void addBook() {
+    public boolean addBook() {
         try {
             io.print("BOOK ENTRY - enter information: \n\n");
             String title = io.readLine("Title: ");
@@ -83,8 +86,10 @@ public class UI {
             String description = io.readLine("Description: ");
             int year = Integer.parseInt(io.readLine("Year published: "));
             manager.addBook(new Book(author, title, ISBN, description, year));
+            return true;
         } catch (Exception e) {
             io.print("Please type  year as numbers!");
+            return false;
         }
 
     }
@@ -93,7 +98,7 @@ public class UI {
      * Displays fields to input for news entry, takes input, and creates news
      * entry
      */
-    public void addNews() {
+    public boolean addNews() {
         try {
             io.print("NEWS ENTRY - enter information: \n\n");
             String title = io.readLine("Title: ");
@@ -103,8 +108,10 @@ public class UI {
             String publisher = io.readLine("Publisher: ");
             int year = Integer.parseInt(io.readLine("Year published: "));
             manager.addNews(new News(author, title, link, description, publisher, year));
+            return true;
         } catch (Exception e) {
             io.print("Please type year as a number!");
+            return false;
         }
     }
 
@@ -112,7 +119,7 @@ public class UI {
      * Displays fields to input for article entry, takes input, and creates
      * article entry
      */
-    public void addArticle() {
+    public boolean addArticle() {
         try {
             io.print("ARTICLE ENTRY - enter information: \n\n");
             String title = io.readLine("Title: ");
@@ -122,8 +129,10 @@ public class UI {
             String publisher = io.readLine("Publisher: ");
             int year = Integer.parseInt(io.readLine("Year published: "));
             manager.addArticle(new Article(author, title, link, description, publisher, year));
+            return true;
         } catch (Exception e) {
             io.print("Please type year as a number!");
+            return false;
         }
     }
 
@@ -131,7 +140,7 @@ public class UI {
      * Displays fields to input for blog entry, takes input, and creates blog
      * entry
      */
-    public void addBlog() {
+    public boolean addBlog() {
         try {
             io.print("BLOG ENTRY - enter information: \n\n");
             String title = io.readLine("Title: ");
@@ -140,8 +149,10 @@ public class UI {
             String description = io.readLine("Description: ");
             int year = Integer.parseInt(io.readLine("Year published: "));
             manager.addBlog(new Blog(author, title, link, description, year));
+            return true;
         } catch (Exception e) {
             io.print("Please type year as a number!");
+            return false;
         }
     }
 
@@ -165,29 +176,33 @@ public class UI {
         acceptedInput.add("4");
         acceptedInput.add("5");
         acceptedInput.add("b");
-
+        
         String choice = userCommand(prompt, acceptedInput);
+        boolean addedSuccessfully = false;
         switch (choice) {
             case "1":
-                addVideo();
+                addedSuccessfully = addVideo();
                 break;
             case "2":
-                addBook();
+                addedSuccessfully = addBook();
                 break;
             case "3":
-                addNews();
+                addedSuccessfully = addNews();
                 break;
             case "4":
-                addArticle();
+                addedSuccessfully = addArticle();
                 break;
             case "5":
-                addBlog();
+                addedSuccessfully = addBlog();
                 break;
             case "b":
-                break;
+                selectBaseCommand();
+                return;
+        }
+        if (addedSuccessfully) {
+            io.print("Tip added!\n\n");
         }
         selectBaseCommand();
-        io.print("Tip added!\n\n");
     }
 
     /**
@@ -234,19 +249,22 @@ public class UI {
                 summaryTableView(manager.listByType("blog"));
                 break;
             case "b":
+                selectBaseCommand();
                 break;
+            default:
+                selectBaseCommand();
         }
-        selectBaseCommand();
     }
 
     /**
      * Displays options of types of tips to list and takes user input for
      * selection of type or to list all
      */
-    public void selectSingleTip() {
-        String prompt = "Choose type:\n"
+    public void selectSingleTip(List<ReadingTip> tips) {
+        String prompt = "Choose an action:\n"
                 + "  s - show more info about single tip\n"
-                + "  b - back to main commands\n";
+                + "  b - back to main commands\n"
+                + "  q - exit app\n";
 
         Set<String> acceptedInput = new TreeSet<>();
         acceptedInput.add("s");
@@ -257,9 +275,12 @@ public class UI {
             case "s":
                 break;
             case "b":
+                selectBaseCommand();
+                break;
+            case "q":
+                exitApplication();
                 break;
         }
-        selectBaseCommand();
     }
 
     /**
@@ -314,30 +335,6 @@ public class UI {
         this.io = io;
         io.print("Welcome to ReadTipper!\n\n");
         selectBaseCommand();
-//        String choice = "";
-//        while (!choice.equals("q")) {
-//            String prompt = "Choose an action:\n"
-//                    + "  a - add new readtip\n"
-//                    + "  l - list tips\n"
-//                    + "  q - quit app\n";
-//            choice = io.readLine("Enter choice: ");
-//            switch (choice) {
-//                case "a":
-//                    io.print("Adding a new ReadTip: \n\n");
-//                    selectTypeToAdd();
-//                    break;
-//                case "l":
-//                    io.print("Existing tips: \n");
-//                    selectTypeToList();
-//                    io.print("\n\n");
-//                    break;
-//                case "q":
-//                    break;
-//                default:
-//                    io.print("Choose a correct input!");
-//            }
-//        }
-
     }
 
     private void exitApplication() {
