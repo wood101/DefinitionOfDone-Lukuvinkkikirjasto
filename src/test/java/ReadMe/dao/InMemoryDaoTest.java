@@ -65,12 +65,13 @@ public class InMemoryDaoTest {
     
     @Test
     public void isListAllCorrect() {
-       assertTrue(dao.getVideos().get(0).getTitle().equals("hackerdashery"));
-       assertTrue(dao.getBlogs().get(0).getTitle().equals("hackerdashery4"));
+       assertTrue(dao.getVideos().get(0).getAuthor().equals("hackerdashery"));
+       assertTrue(dao.getBlogs().get(0).getAuthor().equals("hackerdashery4"));
+       
     }
     
     @Test
     public void isListVideosCorrect() {
-        assertTrue(dao.getVideos().get(0).getTitle().equals("hackerdashery"));
+        assertTrue(dao.getVideos().get(0).getAuthor().equals("hackerdashery"));
     }   
 }
