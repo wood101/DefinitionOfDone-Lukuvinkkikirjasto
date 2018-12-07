@@ -227,13 +227,13 @@ public class Stepdefs {
 
     }
 
-    @Then("^table don't contain year'$")
-    public void table_don_t_contain_year() throws Throwable {
+    @Then("^table don't contain link$")
+    public void table_don_t_contain_link() throws Throwable {
         IOStub ios = new IOStub(inputLinesAll);
         InMemoryDao dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("2014"));
+        assertTrue(!ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
     }
 
     // Feature: readtiplists by type are printed in correct form  ---_______________------------------------uses same given as list all
