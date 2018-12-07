@@ -57,6 +57,12 @@ public class UI {
         return year;
     }
 
+    /**
+     * Prints reading tips as a table
+     *
+     * @param tips that should be printed
+     * @return true if there were reading tips to print, otherwise false
+     */
     private boolean summaryTableView(List<ReadingTip> tips) {
         if (tips.isEmpty()) {
             io.print("\nNo reading tips found.\n");
@@ -77,10 +83,22 @@ public class UI {
         }
     }
 
+    /**
+     * Method prints a the string representation of the tip
+     *
+     * @param tip
+     */
     private void singleTipView(ReadingTip tip) {
         io.print(tip.toString());
     }
-    
+
+    /**
+     * Method to increment index shown to user for a more familiar experience
+     * when indexes start from 1
+     *
+     * @param index
+     * @return incremented integer
+     */
     private int incrementedIndex(int index) {
         return index + 1;
     }
@@ -270,8 +288,8 @@ public class UI {
     }
 
     /**
-     * Displays options of types of tips to list and takes user input for
-     * selection of type or to list all
+     * Displays options for actions to be made on a single tip and directs user
+     * input
      */
     private void selectSingleTip(List<ReadingTip> tips) {
         boolean viewing = true;
@@ -289,20 +307,24 @@ public class UI {
             acceptedInput.add("q");
 
             String choice = userCommand(prompt, acceptedInput);
+            ReadingTip selected = null;
             switch (choice) {
                 case "s":
-                    singleTipView(selectTipFromList(tips));
+                    selected = selectTipFromList(tips);
+                    if (selected != null) {
+                        singleTipView(selected);
+                    }
                     break;
                 case "b":
                     viewing = false;
                     break;
                 case "r":
-                    ReadingTip selected = selectTipFromList(tips);
-                    ReadingTip edited = MarkTipAsRead(selected);
-                    for(int i = 0; i < tips.size(); i++) {
-                        if(tips.get(i).equals(selected)) tips.set(i, edited);
+                    selected = selectTipFromList(tips);
+                    if (selected != null) {
+                        ReadingTip edited = MarkTipAsRead(selected);
+                        updateCachedTipWhenMarked(tips, selected, edited);
                     }
-                    break;                    
+                    break;
                 case "q":
                     exitApplication();
                     viewing = false;
@@ -312,14 +334,30 @@ public class UI {
 
     }
 
+    private void updateCachedTipWhenMarked(List<ReadingTip> tips, ReadingTip selected, ReadingTip edited) {
+        for (int i = 0; i < tips.size(); i++) {
+            if (tips.get(i).equals(selected)) {
+                tips.set(i, edited);
+            }
+        }
+    }
+
     private ReadingTip MarkTipAsRead(ReadingTip tip) {
         manager.markAsRead(tip);
-        io.print("Marked " + tip.getTitle() + " as read");  
+        io.print("Marked " + tip.getTitle() + " as read");
         tip.setChecked(true);
         tip.setDate_checked(new Date());
         return tip;
     }
-    
+
+    /**
+     * Expects an index from a given list of reading tips to be input by the
+     * user and rejects the input if it not an index, then returns tip or null
+     * if none was found
+     *
+     * @param tips list to be checked for indexes
+     * @return reading tip that was desired by index
+     */
     private ReadingTip selectTipFromList(List<ReadingTip> tips) {
         io.print("Choose tip by index:\n");
         try {
@@ -365,6 +403,14 @@ public class UI {
         }
     }
 
+    /**
+     * Provides list of commands and prompts user for input. Accepts only input
+     * from set of commands given as a parameter. Everything else is rejected.
+     *
+     * @param prompt message for telling user what to do
+     * @param acceptedInput set of accepted input(s)
+     * @return which input the user has typed
+     */
     private String userCommand(String prompt, Set<String> acceptedInput) {
         io.print(prompt);
         String choice = "";
@@ -395,112 +441,3 @@ public class UI {
     }
 
 }
-
-///**
-// * Gets and prints string representation of all tips from manager
-// *
-// */
-//public void listAll() {
-//        io.print(manager.listAll());
-//    }
-//
-//    /**
-//     * Gets and prints string representation of all video tips from manager
-//     *
-//     */
-//    public void listVideos() {
-//        io.print(manager.listByType("video"));
-//    }
-//
-//    /**
-//     * Gets and prints string representation of all book tips from manager
-//     *
-//     */
-//    public void listBooks() {
-//        io.print(manager.listByType("book"));
-//    }
-//
-//    /**
-//     * Gets and prints string representation of all news tips from manager
-//     *
-//     */
-//    public void listNews() {
-//        io.print(manager.listByType("news"));
-//    }
-//
-//    /**
-//     * Gets and prints string representation of all article tips from manager
-//     *
-//     */
-//    public void listArticles() {
-//        io.print(manager.listByType("article"));
-//    }
-//
-//    /**
-//     * Gets and prints string representation of all blog tips from manager
-//     *
-//     */
-//    public void listBlogs() {
-//        io.print(manager.listByType("blog"));
-//    }
-//    /**
-//     * Marks a video tip as read based on the title
-//     */
-//    public void markVideoAsRead() {
-//        String title = io.readLine("Enter title: ");
-//        boolean success = manager.markAsRead("video", title);
-//        if (success) {
-//            io.print("Video tip marked as read");
-//        } else {
-//            io.print("No such tip in database");
-//        }
-//    }
-//    /**
-//     * Marks a book tip as read based on the title
-//     */
-//    public void markBookAsRead() {
-//        String title = io.readLine("Enter title: ");
-//        boolean success = manager.markAsRead("book", title);
-//        if (success) {
-//            io.print("Book tip marked as read");
-//        } else {
-//            io.print("No such tip in database");
-//        }
-//    }
-//    /**
-//     * Marks a video tip as read based on the title
-//     */
-//    public void markNewsAsRead() {
-//        String title = io.readLine("Enter title: ");
-//        boolean success = manager.markAsRead("news", title);
-//        if (success) {
-//            io.print("News tip marked as read");
-//        } else {
-//            io.print("No such tip in database");
-//        }
-//    }
-//    /**
-//     * Marks a video tip as read based on the title
-//     */
-//    public void markArticleAsRead() {
-//        String title = io.readLine("Enter title: ");
-//        boolean success = manager.markAsRead("article", title);
-//        if (success) {
-//            io.print("News tip marked as read");
-//        } else {
-//            io.print("No such tip in database");
-//        }
-//    }
-//    /**
-//     * Marks a video tip as read based on the title
-//     */
-//    public void markBlogAsRead() {
-//        String title = io.readLine("Enter title: ");
-//        boolean success = manager.markAsRead("blog", title);
-//        if (success) {
-//            io.print("Blog tip marked as read");
-//        } else {
-//            io.print("No such tip in database");
-//        }
-//    }
-

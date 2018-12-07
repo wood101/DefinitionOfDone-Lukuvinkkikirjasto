@@ -48,13 +48,13 @@ public class SQLiteDatabase implements Database {
             Class.forName("org.sqlite.JDBC");
             getConnection();
         } catch (Exception e) {
-            System.out.println("DB open fail");
+            //System.out.println("DB open fail");
         }
 
         try {
             createDatabaseTables();
         } catch (Exception e) {
-            System.out.println("Unable to create table. Maybe it already exists.");
+            //System.out.println("Unable to create table. Maybe it already exists.");
             return;
         }
     }
@@ -75,7 +75,7 @@ public class SQLiteDatabase implements Database {
                 stmt.executeUpdate(sentence);
             }
         }
-        System.out.println("Tables created successfully");
+        //System.out.println("Tables created successfully");
     }
 
      /**

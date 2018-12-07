@@ -1,5 +1,6 @@
 package ReadMe.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -26,8 +27,16 @@ public class BlogTest {
     public void toStringTest() {
         assertEquals("\nTitle: " + "title" + "\n Author: " + "author" + 
                 "\n Link: " + "www" + "\n Description: " + "desc" + 
-                "\n Year: " + 2018 + "\n Checked: " + false + "\n Date checked: " + new Date(5) + "\n", blog.toString());
+                "\n Year: " + 2018 + "\n Checked: " + false + "\n Date checked: " + new SimpleDateFormat("dd-MM-yyyy").format(new Date(5)) + "\n", blog.toString());
     }
+    
+    @Test
+    public void toStringTestWithNullDate() {
+        Blog nullDate = new Blog(1, "author", "title", "www", "desc", 2018, false, null);  
+        assertEquals("\nTitle: " + "title" + "\n Author: " + "author" + 
+                "\n Link: " + "www" + "\n Description: " + "desc" + 
+                "\n Year: " + 2018 + "\n Checked: " + false + "\n", nullDate.toString());
+    }    
     
     @Test
     public void equalsTrueTest() {

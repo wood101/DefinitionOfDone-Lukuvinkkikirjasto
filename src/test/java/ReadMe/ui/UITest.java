@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.ArgumentMatchers.any;
@@ -221,6 +222,63 @@ public class UITest {
     }
 
     @Test
+    public void singleBlogPrintsCorrectly() {
+        io = new IOStub("l", "6", "s", "1", "q");
+        ui = new UI(io, db);
+        String author = "author1";
+        String title = "title2";
+        Blog blog1 = new Blog(author, "title", "www.test.org", "desc", 2000);
+        Blog blog2 = new Blog("author2", title, "www.testAlt.org", "desc", 2000);
+        List<ReadingTip> list = new ArrayList<>();
+        list.add(blog1);
+        list.add(blog2);
+
+        when(db.listByType("blog")).thenReturn(list);
+
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains(blog1.toString()));
+    }
+
+    @Test
+    public void singleNewsPrintsCorrectly() {
+        io = new IOStub("l", "4", "s", "2", "q");
+        ui = new UI(io, db);
+        String author = "author1";
+        String title = "title2";
+        News news1 = new News(author, "title", "www.test.org", "desc", "publisher", 2000);
+        News news2 = new News("author2", title, "www.testAlt.org", "desc", "publisher", 2000);
+        List<ReadingTip> list = new ArrayList<>();
+        list.add(news1);
+        list.add(news2);
+
+        when(db.listByType("news")).thenReturn(list);
+
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains(news2.toString()));
+    }
+
+    @Test
+    public void givingWrongIndexForTipDoesNotShowTip() {
+        io = new IOStub("l", "4", "s", "1234", "q");
+        ui = new UI(io, db);
+        String author = "author1";
+        String title = "title2";
+        News news1 = new News(author, "title", "www.test.org", "desc", "publisher", 2000);
+        News news2 = new News("author2", title, "www.testAlt.org", "desc", "publisher", 2000);
+        List<ReadingTip> list = new ArrayList<>();
+        list.add(news1);
+        list.add(news2);
+
+        when(db.listByType("news")).thenReturn(list);
+
+        ui.run();
+        String output = io.getOutputString();
+        assertFalse(output.contains(news2.toString()));
+    }
+
+    @Test
     public void addVideoUnsuccessfulWhenNonnumericalYearIsGiven() {
         io = new IOStub("a", "2", "title", "author", "1234", "desc", "f", "2000", "q");
         ui = new UI(io, db);
@@ -229,6 +287,7 @@ public class UITest {
 
         assertTrue(io.getOutputs().contains("Please type year as a number!"));
     }
+
     @Test
     public void addVideoUnsuccessfulWhenFutureYearIsGiven() {
         io = new IOStub("a", "2", "title", "author", "1234", "desc", "20000", "2000", "q");
@@ -237,6 +296,18 @@ public class UITest {
         ui.run();
 
         assertTrue(io.getOutputs().contains("Year cannot be in the future!"));
+    }
+    
+    @Test
+    public void noReadingTipsPrintedWhenDatabaseIsEmpty() {
+        io = new IOStub("l", "1", "q");
+        ui = new UI(io, db);
+        List<ReadingTip> list = new ArrayList<>();
+        when(db.listByType("all")).thenReturn(list);
+        
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains("No reading tips found."));
     }
 
 }
