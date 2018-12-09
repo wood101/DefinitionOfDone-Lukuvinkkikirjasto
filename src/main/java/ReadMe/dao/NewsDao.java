@@ -8,18 +8,19 @@ package ReadMe.dao;
 import ReadMe.database.Database;
 import ReadMe.domain.News;
 import ReadMe.domain.ReadingTip;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Interface for News database access object. 
+ * Interface for News database access object.
+ *
  * @author madjanne
  */
 public class NewsDao {
@@ -27,6 +28,7 @@ public class NewsDao {
 
     /**
      * Creates new News DAO for database
+     *
      * @param db
      */
     public NewsDao(Database db) {
@@ -36,9 +38,10 @@ public class NewsDao {
     /**
      * Lists all News objects. Connects to database, retrieves all lines from the News table, and returns a list of News objects.
      * Returns null in case of SQL exception.
+     *
      * @return
      */
-    
+
     public List<ReadingTip> listAll() {
         try (Connection c = db.getConnection()) {
             List<ReadingTip> newss = new ArrayList<>();
@@ -58,6 +61,7 @@ public class NewsDao {
     /**
      * Adds a new News to database. Connects to database, adds a new News to the database. In case of database conflict does nothing.
      * In case of SQL exception returns null.
+     *
      * @param news
      */
     public void add(News news) {
@@ -80,7 +84,8 @@ public class NewsDao {
 
     /**
      * Marks the News as read and sets the date it was read on.
-     * @param news Object that is marked read
+     *
+     * @param title of the Object that is marked read
      */
     public boolean markAsRead(String title) {
         try (Connection c = db.getConnection()) {
@@ -95,15 +100,16 @@ public class NewsDao {
             Logger.getLogger(NewsDao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-    }   
-    
-     /**
+    }
+
+    /**
      * Creates a new News object from database row
+     *
      * @param rs
      * @return
      * @throws SQLException
      */
-    public static News rowToNews(ResultSet rs) throws SQLException {
+    private static News rowToNews(ResultSet rs) throws SQLException {
         return new News(rs.getInt("news_id"), rs.getString("news_author"), rs.getString("news_title"), rs.getString("news_link"), rs.getString("news_description"), rs.getString("news_publisher"), rs.getInt("news_year"), rs.getBoolean("news_checked"), rs.getDate("news_date_checked"));
     }
 }

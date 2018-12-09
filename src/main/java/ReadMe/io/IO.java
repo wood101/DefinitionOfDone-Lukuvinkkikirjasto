@@ -1,8 +1,5 @@
 package ReadMe.io;
 
-import ReadMe.domain.ReadingTip;
-import java.util.List;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,19 +7,20 @@ import java.util.List;
  */
 
 /**
- *
  * @author bisi
  */
 public interface IO {
 
     /**
      * I/O interface for printing
+     *
      * @param toPrint
      */
     void print(String toPrint);
 
     /**
      * I/O interface for reading input
+     *
      * @param prompt
      * @return
      */

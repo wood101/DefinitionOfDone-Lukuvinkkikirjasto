@@ -5,22 +5,22 @@
  */
 package ReadMe.dao;
 
-import ReadMe.ui.UI;
 import ReadMe.database.Database;
 import ReadMe.database.SQLiteDatabase;
 import ReadMe.domain.ReadingTip;
+import ReadMe.domain.Video;
 import ReadMe.io.ConsoleIO;
-import java.io.File;
-import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import ReadMe.domain.Video;
+
+import java.io.File;
 import java.util.Date;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
- *
  * @author madjanne, hajame, obisi
  */
 public class VideoDaoTest {
@@ -29,13 +29,13 @@ public class VideoDaoTest {
     private Database testDatabase;
     ConsoleIO testIo;
     private VideoDao testDao;
-    
+
     public VideoDaoTest() {
     }
 
     @Before
-    public void setUp() throws ClassNotFoundException {
-        
+    public void setUp() {
+
         testFile = new File("testReadMeBase.db");
         testDatabase = new SQLiteDatabase("jdbc:sqlite:" + testFile.getAbsolutePath());
         testDao = new VideoDao(testDatabase);
@@ -52,19 +52,19 @@ public class VideoDaoTest {
     public void isListingCorrect() {
         testDao.add(new Video(1, "author", "title", "www", "desc", 2018, false, new Date(5)));
         testDao.add(new Video(3, "author1", "title2", "www4", "descr", 2015, true, new Date(7)));
-        
+
         List<ReadingTip> videos = testDao.listAll();
         assertEquals(2, videos.size());
-        assertEquals("title", videos.get(0).getTitle());  
-        assertEquals("desc", videos.get(0).getDescription());  
+        assertEquals("title", videos.get(0).getTitle());
+        assertEquals("desc", videos.get(0).getDescription());
     }
-    
-        @Test
+
+    @Test
     public void markAsReadWorks() {
         testDao.add(new Video(1, "author", "title", "www", "desc", 2018, false, null));
         testDao.markAsRead("title");
-        
+
         assertTrue(testDao.listAll().get(0).isChecked());
         assertNotNull(testDao.listAll().get(0).getDate_checked());
-    }  
+    }
 }

@@ -5,19 +5,11 @@
  */
 package ReadMe.ui;
 
-import ReadMe.io.IO;
 import ReadMe.dao.DaoManager;
-import ReadMe.domain.Article;
-import ReadMe.domain.Blog;
-import ReadMe.domain.Book;
-import ReadMe.domain.News;
-import ReadMe.domain.ReadingTip;
-import ReadMe.domain.Video;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import ReadMe.domain.*;
+import ReadMe.io.IO;
+
+import java.util.*;
 
 /**
  * UI object. Used to run console app.
@@ -35,7 +27,7 @@ public class UI {
         this.manager = manager;
     }
 
-    public int safeYearInput() {
+    private int safeYearInput() {
         Date today = new Date();
         int thisYear = today.getYear() + 1900; // getYear return this year - 1900 for reasons unknown
         int year = 0;
@@ -50,7 +42,7 @@ public class UI {
                 } else {
                     flag = true;
                 }
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 io.print("Please type year as a number!");
             }
         } while (!flag);
@@ -69,7 +61,7 @@ public class UI {
             return false;
         } else {
             String table = "";
-            String leftAlignFormat = "| %-6d| %-15s | %-20s | %-7s |%n";
+            final String leftAlignFormat = "| %-6d| %-15s | %-20s | %-7s |%n";
             table += String.format("+-------+-----------------+----------------------+---------+%n");
             table += String.format("| Index |     Author      |        Title         |  Type   |%n");
             table += String.format("+-------+-----------------+----------------------+---------+%n");
@@ -107,7 +99,7 @@ public class UI {
      * Displays fields to input for video entry, takes input, and creates video
      * entry
      */
-    public boolean addVideo() {
+    private boolean addVideo() {
         io.print("VIDEO ENTRY - enter information: \n\n");
         String title = io.readLine("Title: ");
         String author = io.readLine("Author: ");
@@ -123,7 +115,7 @@ public class UI {
      * Displays fields to input for book entry, takes input, and creates book
      * entry
      */
-    public boolean addBook() {
+    private boolean addBook() {
         io.print("BOOK ENTRY - enter information: \n\n");
         String title = io.readLine("Title: ");
         String author = io.readLine("Author: ");
@@ -138,7 +130,7 @@ public class UI {
      * Displays fields to input for news entry, takes input, and creates news
      * entry
      */
-    public boolean addNews() {
+    private boolean addNews() {
         io.print("NEWS ENTRY - enter information: \n\n");
         String title = io.readLine("Title: ");
         String author = io.readLine("Author: ");
@@ -154,7 +146,7 @@ public class UI {
      * Displays fields to input for article entry, takes input, and creates
      * article entry
      */
-    public boolean addArticle() {
+    private boolean addArticle() {
         io.print("ARTICLE ENTRY - enter information: \n\n");
         String title = io.readLine("Title: ");
         String author = io.readLine("Author: ");
@@ -170,7 +162,7 @@ public class UI {
      * Displays fields to input for blog entry, takes input, and creates blog
      * entry
      */
-    public boolean addBlog() {
+    private boolean addBlog() {
         io.print("BLOG ENTRY - enter information: \n\n");
         String title = io.readLine("Title: ");
         String author = io.readLine("Author: ");
@@ -407,7 +399,7 @@ public class UI {
      * Provides list of commands and prompts user for input. Accepts only input
      * from set of commands given as a parameter. Everything else is rejected.
      *
-     * @param prompt message for telling user what to do
+     * @param prompt        message for telling user what to do
      * @param acceptedInput set of accepted input(s)
      * @return which input the user has typed
      */
@@ -429,7 +421,6 @@ public class UI {
      * Runs console UI
      */
     public void run() {
-        this.io = io;
         io.print("Welcome to ReadTipper!\n\n");
         run = true;
         selectBaseCommand();

@@ -6,6 +6,7 @@ import java.util.Objects;
 
 /**
  * Class for books in the reading tip library.
+ *
  * @author madjanne
  */
 public class Book extends ReadingTip {
@@ -22,11 +23,11 @@ public class Book extends ReadingTip {
         super(id, author, title, description, year, checked, date_checked);
         this.ISBN = ISBN;
     }
-    
+
     public Book(String author, String title, String link, String description, int year) {
         super(author, title, description, year);
         this.ISBN = ISBN;
-    }    
+    }
 
     public String getISBN() {
         return ISBN;
@@ -35,17 +36,17 @@ public class Book extends ReadingTip {
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
-    
+
     @Override
     public String toString() {
         String dateText;
-        if(this.getDate_checked() == null) dateText = "";
-        else dateText = " Date checked: " + new SimpleDateFormat("dd-MM-yyyy").format(super.getDate_checked())+ "\n";
+        if (this.getDate_checked() == null) dateText = "";
+        else dateText = " Date checked: " + new SimpleDateFormat("dd-MM-yyyy").format(super.getDate_checked()) + "\n";
         return "\nTitle: " + super.getTitle() + "\n Author: " + super.getAuthor() +
-                "\n ISBN: " + ISBN + "\n Description: " + super.getDescription() + 
+                "\n ISBN: " + ISBN + "\n Description: " + super.getDescription() +
                 "\n Year: " + super.getYear() + "\n Checked: " + super.isChecked() + "\n" + dateText;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -77,5 +78,5 @@ public class Book extends ReadingTip {
                 && Objects.equals(this.ISBN, other.ISBN)
                 && Objects.equals(super.isChecked(), other.isChecked())
                 && Objects.equals(super.getDate_checked(), other.getDate_checked());
-    }    
+    }
 }

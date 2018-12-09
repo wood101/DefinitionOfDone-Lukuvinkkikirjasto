@@ -13,14 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author bisi & apndx
  */
 public class SQLiteDatabase implements Database {
 
     private String databaseAddress;
 
-    public SQLiteDatabase(String databaseAddress) throws ClassNotFoundException {
+    public SQLiteDatabase(String databaseAddress) {
         this.databaseAddress = databaseAddress;
         init();
     }
@@ -28,9 +27,9 @@ public class SQLiteDatabase implements Database {
     /**
      * Opens a connection to the database
      *
-     * @throws SQLException if this database query does not succeed, this
-     * exception is thrown
      * @return Connection returns a Connection
+     * @throws SQLException if this database query does not succeed, this
+     *                      exception is thrown
      */
     @Override
     public Connection getConnection() throws SQLException {
@@ -40,7 +39,6 @@ public class SQLiteDatabase implements Database {
     /**
      * Initialising procedures for the database. Creates the database and tables
      * for it if they do not exist in the root folder of the program
-     *
      */
     @Override
     public void init() {
@@ -55,17 +53,16 @@ public class SQLiteDatabase implements Database {
             createDatabaseTables();
         } catch (Exception e) {
             //System.out.println("Unable to create table. Maybe it already exists.");
-            return;
         }
     }
 
-     /**
+    /**
      * Databasetables are created if they do not exist already
      *
      * @throws SQLException if this database query does not succeed, this
-     * exception is thrown
+     *                      exception is thrown
      */
-    public void createDatabaseTables() throws SQLException {
+    private void createDatabaseTables() throws SQLException {
         List<String> createTablesSentences = sqliteTables();
 
         //  execute command, iterate through the list
@@ -78,7 +75,7 @@ public class SQLiteDatabase implements Database {
         //System.out.println("Tables created successfully");
     }
 
-     /**
+    /**
      * Creates the SQL database creation sentences
      *
      * @return a list of Strings, each String is a creation sentence for one database table

@@ -2,6 +2,7 @@ package ReadMe.dao;
 
 
 import ReadMe.domain.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +18,9 @@ public class DatabaseDao implements DaoManager {
     private NewsDao newsDao;
     private ArticleDao articleDao;
     private BlogDao blogDao;
-    int amountOfLists = 5;
 
     public DatabaseDao(VideoDao videoDao, BookDao bookDao,
-            NewsDao newsDao, ArticleDao articleDao, BlogDao blogDao) {
+                       NewsDao newsDao, ArticleDao articleDao, BlogDao blogDao) {
         this.videoDao = videoDao;
         this.bookDao = bookDao;
         this.newsDao = newsDao;
@@ -29,17 +29,17 @@ public class DatabaseDao implements DaoManager {
     }
 
     /**
-     * Returns all wanted bookmarks as a List. 
-     *
+     * Returns all wanted bookmarks as a List.
+     * <p>
      * Inputs = "all", "video", "book", "news", "article", "blog".
-
+     *
      * @return List<ReadingTips>
      */
     @Override
     public List<ReadingTip> listByType(String type) {
         ArrayList<ReadingTip> list = new ArrayList<>();
         switch (type) {
-            case "all":  
+            case "all":
                 videoDao.listAll().forEach(a -> list.add(a));
                 bookDao.listAll().forEach(a -> list.add(a));
                 newsDao.listAll().forEach(a -> list.add(a));
@@ -51,11 +51,11 @@ public class DatabaseDao implements DaoManager {
             case "book":
                 return bookDao.listAll();
             case "news":
-               return newsDao.listAll();
+                return newsDao.listAll();
             case "article":
                 return articleDao.listAll();
             case "blog":
-               return blogDao.listAll();
+                return blogDao.listAll();
             default:
                 return null;
         }
@@ -89,7 +89,7 @@ public class DatabaseDao implements DaoManager {
 
     /**
      * Marks selected title as read.
-     * 
+     *
      * @param type
      * @param title
      * @return true is marking is successful
@@ -111,7 +111,6 @@ public class DatabaseDao implements DaoManager {
                 return false;
         }
     }
-   
 
-    
+
 }

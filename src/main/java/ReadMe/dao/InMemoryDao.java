@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
  * @author bisi
  */
 public class InMemoryDao implements DaoManager {
@@ -26,7 +25,6 @@ public class InMemoryDao implements DaoManager {
     /**
      * In memory 'database' that can be used for testing. Creates new lists of
      * bookmark objects, and adds new objects in them.
-     *
      */
     public InMemoryDao() {
         this.videos = new ArrayList<>();
@@ -36,9 +34,9 @@ public class InMemoryDao implements DaoManager {
         this.blogs = new ArrayList<>();
         setInMemoryObjects();
     }
-    
+
     // not found testiä varten tyhjä konstruktori
-        public InMemoryDao(boolean empty) {
+    public InMemoryDao(boolean empty) {
         this.videos = new ArrayList<>();
         this.books = new ArrayList<>();
         this.news = new ArrayList<>();
@@ -62,7 +60,7 @@ public class InMemoryDao implements DaoManager {
 
     /**
      * Returns all wanted bookmarks as a List.
-     *
+     * <p>
      * Inputs = "all", "video", "book", "news", "article", "blog".
      *
      * @return List<ReadingTip>

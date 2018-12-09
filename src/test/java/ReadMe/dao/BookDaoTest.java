@@ -33,7 +33,7 @@ public class BookDaoTest {
     }
 
     @Before
-    public void setUp() throws ClassNotFoundException {
+    public void setUp() {
         
         testFile = new File("testReadMeBase.db");
         testDatabase = new SQLiteDatabase("jdbc:sqlite:" + testFile.getAbsolutePath());

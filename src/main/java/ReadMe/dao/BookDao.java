@@ -8,18 +8,19 @@ package ReadMe.dao;
 import ReadMe.database.Database;
 import ReadMe.domain.Book;
 import ReadMe.domain.ReadingTip;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Interface for Book database access object. 
+ * Interface for Book database access object.
+ *
  * @author madjanne
  */
 public class BookDao {
@@ -27,6 +28,7 @@ public class BookDao {
 
     /**
      * Creates new Book DAO for database
+     *
      * @param db
      */
     public BookDao(Database db) {
@@ -36,9 +38,10 @@ public class BookDao {
     /**
      * Lists all Book objects. Connects to database, retrieves all lines from the Book table, and returns a list of Book objects.
      * Returns null in case of SQL exception.
+     *
      * @return
      */
-    
+
     public List<ReadingTip> listAll() {
         try (Connection c = db.getConnection()) {
             List<ReadingTip> books = new ArrayList<>();
@@ -58,6 +61,7 @@ public class BookDao {
     /**
      * Adds a new Book to database. Connects to database, adds a new Book to the database. In case of database conflict does nothing.
      * In case of SQL exception returns null.
+     *
      * @param book
      */
     public void add(Book book) {
@@ -79,6 +83,7 @@ public class BookDao {
 
     /**
      * Marks the Book as read and sets the date it was read on.
+     *
      * @param book Object that is marked read
      */
     public boolean markAsRead(String title) {
@@ -94,15 +99,16 @@ public class BookDao {
             Logger.getLogger(BookDao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-    } 
-    
-     /**
+    }
+
+    /**
      * Creates a new Book object from database row
+     *
      * @param rs
      * @return
      * @throws SQLException
      */
-    public static Book rowToBook(ResultSet rs) throws SQLException {
+    private static Book rowToBook(ResultSet rs) throws SQLException {
         return new Book(rs.getInt("book_id"), rs.getString("book_author"), rs.getString("book_title"), rs.getString("book_ISBN"), rs.getString("book_description"), rs.getInt("book_year"), rs.getBoolean("book_checked"), rs.getDate("book_date_checked"));
     }
 }

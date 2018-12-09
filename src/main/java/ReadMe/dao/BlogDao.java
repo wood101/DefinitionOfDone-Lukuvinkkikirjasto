@@ -8,18 +8,19 @@ package ReadMe.dao;
 import ReadMe.database.Database;
 import ReadMe.domain.Blog;
 import ReadMe.domain.ReadingTip;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Interface for Blog database access object. 
+ * Interface for Blog database access object.
+ *
  * @author madjanne
  */
 public class BlogDao {
@@ -27,6 +28,7 @@ public class BlogDao {
 
     /**
      * Creates new Blog DAO for database
+     *
      * @param db
      */
     public BlogDao(Database db) {
@@ -36,9 +38,10 @@ public class BlogDao {
     /**
      * Lists all Blog objects. Connects to database, retrieves all lines from the Blog table, and returns a list of Blog objects.
      * Returns null in case of SQL exception.
+     *
      * @return
      */
-    
+
     public List<ReadingTip> listAll() {
         try (Connection c = db.getConnection()) {
             List<ReadingTip> blogs = new ArrayList<>();
@@ -58,6 +61,7 @@ public class BlogDao {
     /**
      * Adds a new Blog to database. Connects to database, adds a new Blog to the database. In case of database conflict does nothing.
      * In case of SQL exception returns null.
+     *
      * @param blog
      */
     public void add(Blog blog) {
@@ -79,6 +83,7 @@ public class BlogDao {
 
     /**
      * Marks the Blog as read and sets the date it was read on.
+     *
      * @param blog Object that is marked read
      */
     public boolean markAsRead(String title) {
@@ -94,15 +99,16 @@ public class BlogDao {
             Logger.getLogger(BlogDao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-    } 
-    
+    }
+
     /**
      * Creates a new Blog object from database row
+     *
      * @param rs
      * @return
      * @throws SQLException
      */
-    public static Blog rowToBlog(ResultSet rs) throws SQLException {
+    private static Blog rowToBlog(ResultSet rs) throws SQLException {
         return new Blog(rs.getInt("blog_id"), rs.getString("blog_author"), rs.getString("blog_title"), rs.getString("blog_link"), rs.getString("blog_description"), rs.getInt("blog_year"), rs.getBoolean("blog_checked"), rs.getDate("blog_date_checked"));
     }
 }

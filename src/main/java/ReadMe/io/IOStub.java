@@ -5,20 +5,16 @@
  */
 package ReadMe.io;
 
-import ReadMe.domain.ReadingTip;
-import ReadMe.io.IO;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- *
  * @author peje
  */
 public class IOStub implements IO {
 
-    String[] inputs;
-    int index;
-    public ArrayList<String> outputs;
+    private String[] inputs;
+    private int index;
+    private ArrayList<String> outputs;
 
     public IOStub(String... inputs) {
         this.inputs = inputs;
@@ -38,7 +34,7 @@ public class IOStub implements IO {
     public ArrayList<String> getOutputs() {
         return outputs;
     }
-    
+
     public String getOutputString() {
         return outputs.toString();
     }

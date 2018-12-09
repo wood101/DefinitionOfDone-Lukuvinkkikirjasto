@@ -7,19 +7,20 @@ package ReadMe.dao;
 
 import ReadMe.database.Database;
 import ReadMe.database.SQLiteDatabase;
+import ReadMe.domain.News;
+import ReadMe.domain.ReadingTip;
 import ReadMe.io.ConsoleIO;
-import java.io.File;
-import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import ReadMe.domain.News;
-import ReadMe.domain.ReadingTip;
+
+import java.io.File;
 import java.util.Date;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
- *
  * @author madjanne, hajame, obisi
  */
 public class NewsDaoTest {
@@ -33,7 +34,7 @@ public class NewsDaoTest {
     }
 
     @Before
-    public void setUp() throws ClassNotFoundException {
+    public void setUp() {
 
         testFile = new File("testReadMeBase.db");
         testDatabase = new SQLiteDatabase("jdbc:sqlite:" + testFile.getAbsolutePath());
@@ -56,13 +57,13 @@ public class NewsDaoTest {
         assertEquals("title", newsArray.get(0).getTitle());
         assertEquals("desc", newsArray.get(0).getDescription());
     }
-    
-        @Test
+
+    @Test
     public void markAsReadWorks() {
         testDao.add(new News(1, "author", "title", "www", "desc", "otava", 2018, false, null));
         testDao.markAsRead("title");
-        
+
         assertTrue(testDao.listAll().get(0).isChecked());
         assertNotNull(testDao.listAll().get(0).getDate_checked());
-    }  
+    }
 }

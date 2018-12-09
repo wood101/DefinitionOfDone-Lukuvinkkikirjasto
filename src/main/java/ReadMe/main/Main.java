@@ -1,23 +1,23 @@
 package ReadMe.main;
 
-import ReadMe.ui.UI;
+import ReadMe.dao.*;
 import ReadMe.database.Database;
 import ReadMe.database.SQLiteDatabase;
 import ReadMe.io.ConsoleIO;
-import ReadMe.dao.*;
+import ReadMe.ui.UI;
 
 /**
- *
  * @author bisi
  */
 public class Main {
 
     /**
      * Creates an I/O object, UI object and runs the UI.
+     *
      * @param args
      */
-    public static void main(String[] args) throws Exception {
-        
+    public static void main(String[] args) {
+
         String databaseName = "readMeBase.db";
         Database db = new SQLiteDatabase("jdbc:sqlite:" + databaseName);
         VideoDao video = new VideoDao(db);

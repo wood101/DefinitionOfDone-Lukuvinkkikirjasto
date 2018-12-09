@@ -6,6 +6,7 @@ import java.util.Objects;
 
 /**
  * Class for videos in the reading tip library.
+ *
  * @author madjanne
  */
 public class Video extends ReadingTip {
@@ -15,11 +16,11 @@ public class Video extends ReadingTip {
         super(id, author, title, description, year, checked, date_checked);
         this.link = link;
     }
-    
+
     public Video(String author, String title, String link, String description, int year) {
         super(author, title, description, year);
         this.link = link;
-    }   
+    }
 
     public String getLink() {
         return link;
@@ -28,17 +29,17 @@ public class Video extends ReadingTip {
     public void setLink(String link) {
         this.link = link;
     }
-    
+
     @Override
     public String toString() {
         String dateText;
-        if(this.getDate_checked() == null) dateText = "";
-        else dateText = " Date checked: " + new SimpleDateFormat("dd-MM-yyyy").format(super.getDate_checked())+ "\n";
-        return "\nTitle: " + super.getTitle() + "\n Author: " + super.getAuthor() + 
-                "\n Link: " + link + "\n Description: " + super.getDescription() + 
+        if (this.getDate_checked() == null) dateText = "";
+        else dateText = " Date checked: " + new SimpleDateFormat("dd-MM-yyyy").format(super.getDate_checked()) + "\n";
+        return "\nTitle: " + super.getTitle() + "\n Author: " + super.getAuthor() +
+                "\n Link: " + link + "\n Description: " + super.getDescription() +
                 "\n Year: " + super.getYear() + "\n Checked: " + super.isChecked() + "\n" + dateText;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -70,5 +71,5 @@ public class Video extends ReadingTip {
                 && Objects.equals(this.link, other.link)
                 && Objects.equals(super.isChecked(), other.isChecked())
                 && Objects.equals(super.getDate_checked(), other.getDate_checked());
-    }    
+    }
 }

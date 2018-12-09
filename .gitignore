@@ -6,3 +6,4 @@ gradle.properties
 nbproject/
 readMeBase.db
 testReadMeBase.db
+.idea/

@@ -4,38 +4,37 @@
  * and open the template in the editor.
  */
 package ReadMe.dao;
+
 import ReadMe.domain.*;
+
 import java.util.List;
 
 
 /**
- * Interface for BookMark database access object. 
+ * Interface for BookMark database access object.
+ *
  * @author bisi
  */
 public interface DaoManager {
 
     /**
-     * Returns all reading tips based on input type. If type is "all" 
+     * Returns all reading tips based on input type. If type is "all"
      * then all ReadingTips in the database are listed.
+     *
      * @param type the desired object
-     * @return  List of all ReadingTips of the given type
+     * @return List of all ReadingTips of the given type
      */
     List<ReadingTip> listByType(String type);
-    
-     /**
-     * Adds a new Bookmark object to database
-     * @param readTip Bookmark readTip
-     */
-    
+
     void addVideo(Video bookmark);
-    
+
     void addBook(Book bookmark);
-    
+
     void addNews(News bookmark);
-    
+
     void addArticle(Article bookmark);
-    
+
     void addBlog(Blog bookmark);
-    
+
     boolean markAsRead(ReadingTip tip);
 }

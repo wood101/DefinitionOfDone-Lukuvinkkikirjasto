@@ -10,6 +10,7 @@ import java.util.Objects;
 
 /**
  * Superclass for all the reading tips
+ *
  * @author madjanne
  */
 public abstract class ReadingTip {
@@ -20,7 +21,7 @@ public abstract class ReadingTip {
     private int year;
     private boolean checked;
     private Date date_checked;
-    
+
     public ReadingTip(int id, String author, String title, String description, int year, boolean checked, Date date_checked) {
         this.id = id;
         this.author = author;
@@ -30,7 +31,7 @@ public abstract class ReadingTip {
         this.checked = checked;
         this.date_checked = date_checked;
     }
-    
+
     public ReadingTip(String author, String title, String description, int year) {
         this.author = author;
         this.title = title;
@@ -145,11 +146,10 @@ public abstract class ReadingTip {
 
     @Override
     public String toString() {
-        return "\nTitle: " + title + "\n Author: " + author + 
-                "\n Description: " + description + 
+        return "\nTitle: " + title + "\n Author: " + author +
+                "\n Description: " + description +
                 "\n Year: " + year + "\n Checked: " + checked + "\n Date checked: " + date_checked + "\n";
     }
-    
-    
-    
+
+
 }

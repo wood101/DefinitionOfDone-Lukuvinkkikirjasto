@@ -8,18 +8,16 @@ package ReadMe.dao;
 import ReadMe.database.Database;
 import ReadMe.domain.Article;
 import ReadMe.domain.ReadingTip;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Date;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Interface for Article database access object. 
+ * Interface for Article database access object.
+ *
  * @author madjanne
  */
 public class ArticleDao {
@@ -27,6 +25,7 @@ public class ArticleDao {
 
     /**
      * Creates new Article DAO for database
+     *
      * @param db
      */
     public ArticleDao(Database db) {
@@ -36,9 +35,10 @@ public class ArticleDao {
     /**
      * Lists all Article objects. Connects to database, retrieves all lines from the Article table, and returns a list of Article objects.
      * Returns null in case of SQL exception.
+     *
      * @return
      */
-    
+
     public List<ReadingTip> listAll() {
         try (Connection c = db.getConnection()) {
             List<ReadingTip> articles = new ArrayList<>();
@@ -57,6 +57,7 @@ public class ArticleDao {
 
     /**
      * Marks the Article as read and sets the date it was read on.
+     *
      * @param article Object that is marked read
      */
     public boolean markAsRead(String title) {
@@ -72,11 +73,12 @@ public class ArticleDao {
             Logger.getLogger(ArticleDao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-    }    
-    
+    }
+
     /**
      * Adds a new Article to database. Connects to database, adds a new Article to the database. In case of database conflict does nothing.
      * In case of SQL exception returns null.
+     *
      * @param article
      */
     public void add(Article article) {
@@ -97,16 +99,17 @@ public class ArticleDao {
         }
     }
 
-     /**
+    /**
      * Creates a new Article object from database row
+     *
      * @param rs
      * @return
      * @throws SQLException
      */
-    public static Article rowToArticle(ResultSet rs) throws SQLException {
-        return new Article(rs.getInt("article_id"), rs.getString("article_author"), 
-                rs.getString("article_title"), rs.getString("article_link"), 
-                rs.getString("article_description"), rs.getString("article_publisher"), 
+    private static Article rowToArticle(ResultSet rs) throws SQLException {
+        return new Article(rs.getInt("article_id"), rs.getString("article_author"),
+                rs.getString("article_title"), rs.getString("article_link"),
+                rs.getString("article_description"), rs.getString("article_publisher"),
                 rs.getInt("article_year"), rs.getBoolean("article_checked"), rs.getDate("article_date_checked"));
     }
 }

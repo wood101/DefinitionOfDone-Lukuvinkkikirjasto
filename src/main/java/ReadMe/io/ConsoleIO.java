@@ -6,12 +6,9 @@
 package ReadMe.io;
 
 /**
- *
  * @author bisi
  */
 
-import ReadMe.domain.ReadingTip;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -20,10 +17,10 @@ import java.util.Scanner;
  */
 public class ConsoleIO implements IO {
     private Scanner scanner = new Scanner(System.in);
-    
+
     /**
      * Prints given input string
-     * @param String toPrint
+     * @param toPrint
      */
     public void print(String toPrint) {
         System.out.println(toPrint);
