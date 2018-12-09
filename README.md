@@ -48,3 +48,5 @@ pe 12.30-13.30  asiakaspalaverin jälkeen
   - [Virva Svala](https://github.com/vsvala)
   - [Janne Malin](https://github.com/wood101)
 
+
+  
