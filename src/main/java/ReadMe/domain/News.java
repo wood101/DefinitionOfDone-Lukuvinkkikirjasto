@@ -17,12 +17,12 @@ public class News extends ReadingTip {
         this.publisher = publisher;
         this.link = link;
     }
-    
+
     public News(String author, String title, String link, String description, String publisher, int year) {
         super(author, title, description, year);
         this.link = link;
         this.publisher = publisher;
-    }    
+    }
 
     public String getLink() {
         return link;
@@ -39,28 +39,23 @@ public class News extends ReadingTip {
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
-    
+
     @Override
     public String toString() {
         String dateText;
         if(this.getDate_checked() == null) dateText = "";
         else dateText = " Date checked: " + new SimpleDateFormat("dd-MM-yyyy").format(super.getDate_checked())+ "\n";
-        
+
         return "\nTitle: " + super.getTitle() + "\n Author: " + super.getAuthor() +
                 "\n Link: " + link + "\n Description: " + super.getDescription() +  "\n Publisher: " + publisher +
                 "\n Year: " + super.getYear() + "\n Checked: " + super.isChecked() + "\n" + dateText;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + Objects.hashCode(super.getAuthor());
-        hash = 23 * hash + Objects.hashCode(super.getTitle());
-        hash = 23 * hash + Objects.hashCode(super.getDescription());
+        int hash = super.hashCode();
         hash = 23 * hash + Objects.hashCode(this.publisher);
         hash = 23 * hash + Objects.hashCode(this.link);
-        hash = 23 * hash + Objects.hashCode(super.isChecked());
-        hash = 23 * hash + Objects.hashCode(super.getDate_checked());
         return hash;
     }
 
@@ -84,5 +79,5 @@ public class News extends ReadingTip {
                 && Objects.equals(this.link, other.link)
                 && Objects.equals(super.isChecked(), other.isChecked())
                 && Objects.equals(super.getDate_checked(), other.getDate_checked());
-    }    
+    }
 }

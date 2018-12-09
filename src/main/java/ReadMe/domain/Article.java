@@ -53,15 +53,9 @@ public class Article extends ReadingTip {
 
     @Override
     public int hashCode() {
-        
-        int hash = 3;
-        hash = 23 * hash + Objects.hashCode(super.getAuthor());
-        hash = 23 * hash + Objects.hashCode(super.getTitle());
-        hash = 23 * hash + Objects.hashCode(super.getDescription());
+        int hash = super.hashCode();
         hash = 23 * hash + Objects.hashCode(this.publisher);
         hash = 23 * hash + Objects.hashCode(this.link);
-        hash = 23 * hash + Objects.hashCode(super.isChecked());
-        hash = 23 * hash + Objects.hashCode(super.getDate_checked());
         return hash;
     }
 
