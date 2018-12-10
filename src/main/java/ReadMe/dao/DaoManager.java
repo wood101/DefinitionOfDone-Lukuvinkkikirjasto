@@ -22,6 +22,8 @@ public interface DaoManager {
      */
     List<ReadingTip> listByType(String type);
     
+    public List<ReadingTip> listByKeyword(String keyword);
+    
      /**
      * Adds a new Bookmark object to database
      * @param readTip Bookmark readTip

@@ -4,6 +4,7 @@ package ReadMe.dao;
 import ReadMe.domain.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Class that manages DAO Objects.
@@ -61,6 +62,16 @@ public class DatabaseDao implements DaoManager {
         }
     }
 
+    @Override
+    public List<ReadingTip> listByKeyword(String keyword) {
+        List<ReadingTip> all = listByType("all");
+        return all.stream()
+                .filter(t -> 
+                        t.getAuthor().contains(keyword) || 
+                        t.getTitle().contains(keyword) ||
+                        Integer.toString(t.getYear()).contains(keyword))
+                .collect(Collectors.toList());
+    }
 
     @Override
     public void addVideo(Video video) {

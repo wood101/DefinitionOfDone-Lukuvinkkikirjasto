@@ -10,6 +10,7 @@ import ReadMe.domain.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -91,6 +92,23 @@ public class InMemoryDao implements DaoManager {
             default:
                 return null;
         }
+    }
+    
+    /**
+     * Returns all ReadingTips matching keyword as a List.
+     * 
+     * @param keyword substring of author, title or year
+     * @return 
+     */
+    @Override
+    public List<ReadingTip> listByKeyword(String keyword) {
+        List<ReadingTip> all = listByType("all");
+        return all.stream()
+                .filter(t -> 
+                        t.getAuthor().contains(keyword) || 
+                        t.getTitle().contains(keyword) ||
+                        Integer.toString(t.getYear()).contains(keyword))
+                .collect(Collectors.toList());
     }
 
     public List<ReadingTip> getVideos() {

@@ -352,4 +352,34 @@ public class UITest {
         assertTrue(author.length() > 50);
         assertTrue(output.contains("..."));
     }
+    
+    @Test
+    public void searchWithKeywordReturnsListWithMatchingTips() {
+        io = new IOStub("f", "authorial", "q");
+        ui = new UI(io, db);
+        String title = "intelij";
+        Video video1 = new Video("authorial", title, "www.test.org", "desc", 2000);
+        List<ReadingTip> list = new ArrayList<>();
+        list.add(video1);
+
+        when(db.listByKeyword("authorial")).thenReturn(list);
+
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains("authorial"));
+    }
+    
+    @Test
+    public void searchWithKeywordMatchingNothingInformsUserNoTipsFound() {
+        io = new IOStub("f", "tester", "q");
+        ui = new UI(io, db);
+        String title = "intelij";
+        List<ReadingTip> list = new ArrayList<>();
+
+        when(db.listByKeyword("tester")).thenReturn(list);
+
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains("No reading tips found."));
+    }
 }
