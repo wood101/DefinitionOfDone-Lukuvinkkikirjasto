@@ -42,6 +42,9 @@ public class Stepdefs {
     
     String[] inputLinesMark = new String[10];
     String[] inputLinesMarkFail = new String[10];
+    
+    String[] inputLinesEnterMain = new String[10];
+    
 
     //for video: Feature: A new tip can be added if proper properties are given
     @Given("^command \"([^\"]*)\" add new readtip is selected and command \"([^\"]*)\" video is selected$")
@@ -524,6 +527,23 @@ public class Stepdefs {
         
         String dateToday = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
         assertTrue(ios.getOutputString().contains("Date checked: "+ dateToday));
+    }
+    
+    // can_return_to_higher_view_with_enter
+    
+      @Given("^command \"([^\"]*)\" only enter in main menu is input$")
+    public void command_only_enter_in_main_menu_is_input(String enter) throws Throwable {
+      inputLinesEnterMain[0] = enter;
+      inputLinesEnterMain[1] = "q";
+    }
+
+    @Then("^error message: \"([^\"]*)\" choose a correct input is printed$")
+    public void error_message_choose_a_correct_input_is_printed(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesEnterMain);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("Choose a correct input!"));
     }
 
 }
