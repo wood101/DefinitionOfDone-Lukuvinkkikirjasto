@@ -24,7 +24,7 @@ Ryhmän DefinitionOfGettingThere OhtuMiniProjekti. Syksyn 2018 ohjelmiostotuotan
 ## [Testikattavuus](https://codecov.io/gh/wood101/DefinitionOfDone-Lukuvinkkikirjasto) 
 [![codecov](https://codecov.io/gh/wood101/DefinitionOfDone-Lukuvinkkikirjasto/branch/master/graph/badge.svg)](https://codecov.io/gh/wood101/DefinitionOfDone-Lukuvinkkikirjasto)
 
-## Lisenssi](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/blob/dev/LICENSE.md)
+## [Lisenssi](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/blob/dev/LICENSE.md)
 
 ## [Käyttöohje](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/blob/master/Dokumentaatio/kaytto-ohje.md)
 
