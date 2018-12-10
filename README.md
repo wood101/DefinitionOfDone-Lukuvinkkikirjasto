@@ -37,7 +37,6 @@ pe 12.30-13.30  asiakaspalaverin jälkeen
 
 ## [työlle tulee määritellä lisenssi]()
 
-
 ## [Käyttöohje](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/blob/master/Dokumentaatio/kaytto-ohje.md)
 
 ### Tekijät:
