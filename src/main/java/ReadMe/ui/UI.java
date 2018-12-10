@@ -344,12 +344,6 @@ public class UI {
             }
             ReadingTip selected = null;
             switch (choice) {
-                case "s":
-                    selected = selectTipFromList(tips);
-                    if (selected != null) {
-                        singleTipView(selected);
-                    }
-                    break;
                 case "b":
                     viewing = false;
                     break;
