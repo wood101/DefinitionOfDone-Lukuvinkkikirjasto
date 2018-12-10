@@ -185,6 +185,13 @@ public class Stepdefs {
         assertTrue(dao.listByType("blog").contains(new Blog("author", "title", "www", "desc", 2000)));
     }
 
+    @Given("^data with a long author field exists$")
+    public void data_with_a_long_author_field_exists() throws Throwable {
+        Blog blog = new Blog("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "title", "site.fi", "description", 2000);
+        dao.addBlog(blog);
+    }
+    
+    
     // Feature changes here ----readtip_list_all.feature-------------------------------------------------------------------------------------------------------------------------------
     //Feature: all readtiplist is printed in correct form
     @Given("^command \"([^\"]*)\" list tips is given$")
@@ -224,7 +231,8 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains("blog"));
         assertTrue(ios.getOutputString().contains("news"));
         assertTrue(ios.getOutputString().contains("article"));
-
+        assertTrue(ios.getOutputString().contains("false"));        
+        assertTrue(ios.getOutputString().contains("2014"));  
     }
 
     @Then("^table don't contain link$")
@@ -235,6 +243,16 @@ public class Stepdefs {
         ui.run();
         assertTrue(!ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
     }
+    
+    @Then("^table contains \"([^\"]*)\"$")
+    public void table_contains(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesAll);
+        InMemoryDao dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(!ios.getOutputString().contains("..."));
+    }
+
 
     // Feature: readtiplists by type are printed in correct form  ---_______________------------------------uses same given as list all
     // video
