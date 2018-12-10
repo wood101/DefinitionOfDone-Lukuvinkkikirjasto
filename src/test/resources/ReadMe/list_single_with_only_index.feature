@@ -1,7 +1,6 @@
 Feature: User can see single view of a reading tip with only an index.
 
-  Scenario: after marking a tip as read the date checked is shown in single view
+  Scenario: the single view of a reading tip can be shown with giving the index only.
     Given all tips are shown by typing commands "l", "1"
     When command "1" is input for listing single view
-    And ...
-    Then ...
+    Then a single tip with is shown

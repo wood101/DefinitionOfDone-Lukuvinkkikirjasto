@@ -39,9 +39,17 @@ public class Stepdefs {
 
     String[] inputLinesSingle = new String[10];
     String[] inputLinesSingle2 = new String[10];
-    
+    String[] inputLinesSingleWithIndex = new String[10];
+    String[] inputLinesSingleMarkAsRead = new String[10];
+
     String[] inputLinesMark = new String[10];
     String[] inputLinesMarkFail = new String[10];
+
+    String[] inputLinesEnterMain = new String[10];
+    String[] inputLinesEnterAdd = new String[10];
+    String[] inputLinesEnterList = new String[10];
+
+    String[] inputLinesSearch = new String[10];
 
     //for video: Feature: A new tip can be added if proper properties are given
     @Given("^command \"([^\"]*)\" add new readtip is selected and command \"([^\"]*)\" video is selected$")
@@ -185,6 +193,12 @@ public class Stepdefs {
         assertTrue(dao.listByType("blog").contains(new Blog("author", "title", "www", "desc", 2000)));
     }
 
+    @Given("^data with a long author field exists$")
+    public void data_with_a_long_author_field_exists() throws Throwable {
+        Blog blog = new Blog("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "title", "site.fi", "description", 2000);
+        dao.addBlog(blog);
+    }
+
     // Feature changes here ----readtip_list_all.feature-------------------------------------------------------------------------------------------------------------------------------
     //Feature: all readtiplist is printed in correct form
     @Given("^command \"([^\"]*)\" list tips is given$")
@@ -224,7 +238,8 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains("blog"));
         assertTrue(ios.getOutputString().contains("news"));
         assertTrue(ios.getOutputString().contains("article"));
-
+        assertTrue(ios.getOutputString().contains("false"));
+        assertTrue(ios.getOutputString().contains("2014"));
     }
 
     @Then("^table don't contain link$")
@@ -233,7 +248,16 @@ public class Stepdefs {
         InMemoryDao dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
+        assertFalse(ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
+    }
+
+    @Then("^table contains \"([^\"]*)\"$")
+    public void table_contains(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesAll);
+        InMemoryDao dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertFalse(ios.getOutputString().contains("..."));
     }
 
     // Feature: readtiplists by type are printed in correct form  ---_______________------------------------uses same given as list all
@@ -259,13 +283,13 @@ public class Stepdefs {
     }
 
     //video
-    @Then("^videotable does not contain year$")
-    public void videotable_does_not_contain_year() throws Throwable {
+    @Then("^videotable does not contain link$")
+    public void videotable_does_not_contain_link() throws Throwable {
         IOStub ios = new IOStub(inputLinesVideoType);
         InMemoryDao dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("2014"));
+        assertFalse(ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
     }
 
     //book
@@ -290,13 +314,13 @@ public class Stepdefs {
 
     }
 
-    @Then("^booktable does not contain year$")
-    public void booktable_does_not_contain_year() throws Throwable {
+    @Then("^booktable does not contain ISBN$")
+    public void booktable_does_not_contain_ISBN() throws Throwable {
         IOStub ios = new IOStub(inputLinesBookType);
         InMemoryDao dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("2014"));
+        assertFalse(ios.getOutputString().contains("1234"));
     }
 
     //news
@@ -321,13 +345,13 @@ public class Stepdefs {
 
     }
 
-    @Then("^newstable does not contain year$")
-    public void newstable_does_not_contain_year() throws Throwable {
+    @Then("^newstable does not contain link$")
+    public void newstable_does_not_contain_link() throws Throwable {
         IOStub ios = new IOStub(inputLinesNewsType);
         InMemoryDao dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("2014"));
+        assertFalse(ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
     }
 
     //article
@@ -350,13 +374,13 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains("Article"));
     }
 
-    @Then("^articletable does not contain year$")
-    public void articletable_does_not_contain_year() throws Throwable {
+    @Then("^articletable does not contain link$")
+    public void articletable_does_not_contain_link() throws Throwable {
         IOStub ios = new IOStub(inputLinesArticleType);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("2014"));
+        assertFalse(ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
     }
 
     //blogs
@@ -379,13 +403,13 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains("Blog"));
     }
 
-    @Then("^blogtable does not contain year$")
-    public void blogtable_does_not_contain_year() throws Throwable {
+    @Then("^blogtable does not contain link$")
+    public void blogtable_does_not_contain_link() throws Throwable {
         IOStub ios = new IOStub(inputLinesBlogType);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("2014"));
+        assertFalse(ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
     }
 
     @Then("^error message :\"([^\"]*)\" is printed$")
@@ -443,16 +467,20 @@ public class Stepdefs {
 
         assertTrue(ios.getOutputString().contains("Bad index"));
     }
-    
+
 //  --------------------------- Mark as read ------------------------------------------------
-    
     @Given("^all tips are shown by typing commands \"([^\"]*)\", \"([^\"]*)\"$")
     public void all_tips_are_shown_by_typing_commands(String list, String type) throws Throwable {
         inputLinesMark[0] = list;
         inputLinesMarkFail[0] = list;
-        
+        inputLinesSingleWithIndex[0] = list;
+        inputLinesSingleMarkAsRead[0] = list;
+
         inputLinesMark[1] = type;
         inputLinesMarkFail[1] = type;
+        inputLinesSingleWithIndex[1] = type;
+        inputLinesSingleMarkAsRead[1] = type;
+
     }
 
     @When("^command \"([^\"]*)\" is input$")
@@ -472,40 +500,166 @@ public class Stepdefs {
         inputLinesMark[4] = "s";
         inputLinesMark[5] = index;
         inputLinesMark[6] = "q";
-        
+
         IOStub ios = new IOStub(inputLinesMark);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        
+
         assertTrue(ios.getOutputString().contains("Checked: true"));
     }
 
     @Then("^the input is rejected and application responds \"([^\"]*)\"$")
     public void the_input_is_rejected_and_application_responds(String error) throws Throwable {
         inputLinesMarkFail[4] = "q";
-        
+
         IOStub ios = new IOStub(inputLinesMarkFail);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        
+
         assertTrue(ios.getOutputString().contains(error));
     }
-    
+
     @Then("^the tip listed at index \"([^\"]*)\" shows when it was marked$")
     public void the_tip_listed_at_index_shows_when_it_was_marked(String index) throws Throwable {
         inputLinesMark[4] = "s";
         inputLinesMark[5] = index;
         inputLinesMark[6] = "q";
-        
+
         IOStub ios = new IOStub(inputLinesMark);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        
+
         String dateToday = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-        assertTrue(ios.getOutputString().contains("Date checked: "+ dateToday));
+        assertTrue(ios.getOutputString().contains("Date checked: " + dateToday));
     }
 
+    // ----------------------When viewing a single tip ...
+    @When("^command \"([^\"]*)\" is input for listing single view$")
+    public void command_is_input_for_listing_single_view(String index) throws Throwable {
+        inputLinesSingleWithIndex[2] = index;
+        inputLinesSingleMarkAsRead[2] = index;
+    }
+
+    @When("^input \"([^\"]*)\" is given$")
+    public void input_is_given(String input) throws Throwable {
+        inputLinesSingleMarkAsRead[3] = input;
+    }
+
+    @Then("^tip is marked as read and message \"([^\"]*)\" is shown$")
+    public void tip_is_marked_as_read_and_message_is_shown(String message) throws Throwable {
+        inputLinesSingleMarkAsRead[4] = "q"; // last input
+
+        IOStub ios = new IOStub(inputLinesSingleMarkAsRead);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains(message));
+    }
+
+    @Then("^a single tip with is shown$")
+    public void a_single_tip_with_is_shown() throws Throwable {
+        inputLinesSingleWithIndex[3] = "q"; // last input
+
+        Video testVideo = new Video("hackerdashery", "P vs. NP and the Computational Complexity Zoo",
+                "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "P js NP erot", 2014);
+        IOStub ios = new IOStub(inputLinesSingleWithIndex);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains(testVideo.toString()));
+    }
+
+    // feature: can_return_to_higher_view_with_enter ------------------
+    
+    @Given("^command \"([^\"]*)\" only enter in main menu is input$")
+    public void command_only_enter_in_main_menu_is_input(String enter) throws Throwable {
+        inputLinesEnterMain[0] = enter;
+        inputLinesEnterMain[1] = "q";
+    }
+
+    @Then("^error message: \"([^\"]*)\" choose a correct input is printed$")
+    public void error_message_choose_a_correct_input_is_printed(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesEnterMain);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("Choose a correct input!"));
+    }
+    
+    
+
+
+    @Given("^command \"([^\"]*)\" add new readtip is selected$")
+    public void command_add_new_readtip_is_selected(String a) throws Throwable {
+        inputLinesEnterAdd[0] = a;
+    }
+
+    @When("^command \"([^\"]*)\" enter is input$")
+    public void command_enter_is_input(String enter) throws Throwable {
+        inputLinesEnterAdd[1] = enter;
+        inputLinesEnterAdd[2] = "q";
+
+    }
+
+    @Then("^output \"([^\"]*)\" is printed$")
+    public void output_is_printed(String arg1) throws Throwable {
+
+        IOStub ios = new IOStub(inputLinesEnterAdd);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("Choose an action:"));
+    }
+    
+    @Given("^user has typed search command \"([^\"]*)\"$")
+    public void user_has_typed_search_command(String search) throws Throwable {
+        inputLinesSearch[0] = search;
+    }
+
+    @When("^user types keyword \"([^\"]*)\"$")
+    public void user_types_keyword(String keyword) throws Throwable {
+        inputLinesSearch[1] = keyword;
+        inputLinesSearch[2] = "q";
+    }
+
+    @Then("^a list of matching reading tips$")
+    public void a_list_of_matching_reading_tips() throws Throwable {
+        IOStub ios = new IOStub(inputLinesSingleWithIndex);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains("hackerdashery"));
+    }
+
+    @Then("^informs user that no reading tips found$")
+    public void informs_user_that_no_reading_tips_found() throws Throwable {
+        
+    }
+    
+   @Given("^command \"([^\"]*)\" list is selected$")
+    public void command_list_is_selected(String l) throws Throwable {
+        inputLinesEnterList[0] = l;
+
+    }
+
+    @When("^command \"([^\"]*)\" enter is input after listing$")
+    public void command_enter_is_input_after_listing(String enter) throws Throwable {
+        inputLinesEnterList[1] = enter;
+        inputLinesEnterList[2] = "q";
+    }
+
+    @Then("^output \"([^\"]*)\" is printed coming back from list$")
+    public void output_is_printed_coming_back_from_list(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesEnterList);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("Choose an action:"));
+    }
 }

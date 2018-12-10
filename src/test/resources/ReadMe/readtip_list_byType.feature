@@ -8,7 +8,7 @@ Feature: readtiplists by type are printed in correct form
   Scenario: videotips do not contain extra information
     Given command "l" list tips is given
     When  type command "2" video is input
-    Then videotable does not contain year
+    Then videotable does not contain link
 
   Scenario: booktips are printed in a compact table
     Given command "l" list tips is given
@@ -18,7 +18,7 @@ Feature: readtiplists by type are printed in correct form
   Scenario: booktips do not contain extra information
     Given command "l" list tips is given
     When  type command "3" book is input
-    Then booktable does not contain year
+    Then booktable does not contain link
 
   Scenario: newstips are printed in a compact table
     Given command "l" list tips is given
@@ -28,7 +28,7 @@ Feature: readtiplists by type are printed in correct form
   Scenario: newstips do not contain extra information
     Given command "l" list tips is given
     When  type command "4" news  is input
-    Then newstable does not contain year
+    Then newstable does not contain link
 
   Scenario: articletips are printed in a compact table
     Given command "l" list tips is given
@@ -38,7 +38,7 @@ Feature: readtiplists by type are printed in correct form
   Scenario: articletips do not contain extra information
     Given command "l" list tips is given
     When  type command "5" article is input
-    Then articletable does not contain year
+    Then articletable does not contain link
 
   Scenario: blogtips are printed in a compact table
     Given command "l" list tips is given
@@ -48,5 +48,5 @@ Feature: readtiplists by type are printed in correct form
   Scenario: blogtips do not contain extra information
     Given command "l" list tips is given
     When  type command "6" blog is input
-    Then blogtable does not contain year
+    Then blogtable does not contain link
 
