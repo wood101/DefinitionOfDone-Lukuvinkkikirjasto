@@ -429,7 +429,6 @@ public class UI {
      * Runs console UI
      */
     public void run() {
-        this.io = io;
         io.print("Welcome to ReadTipper!\n\n");
         run = true;
         selectBaseCommand();
