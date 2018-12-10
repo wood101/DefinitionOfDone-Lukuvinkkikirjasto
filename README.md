@@ -38,7 +38,7 @@ Sovellus on toteutettu käyttäjän omalle koneelle ladattavaksi paikalliseksi o
   - [Harri Mehtälä](https://github.com/hajame)
   - [Heli Huhtilainen](https://github.com/apndx)
   - [Olli Bisi](https://github.com/obisi)
-  - [Jesper Pettersson](https://github.com/sadibo)
+  - [Jesper Pettersson](https://github.com/stadibo)
   - [Virva Svala](https://github.com/vsvala)
   - [Janne Malin](https://github.com/wood101)
 
