@@ -44,9 +44,9 @@ public class Stepdefs {
 
     String[] inputLinesMark = new String[10];
     String[] inputLinesMarkFail = new String[10];
-    
+
     String[] inputLinesEnterMain = new String[10];
-    
+    String[] inputLinesEnterAdd = new String[10];
 
     //for video: Feature: A new tip can be added if proper properties are given
     @Given("^command \"([^\"]*)\" add new readtip is selected and command \"([^\"]*)\" video is selected$")
@@ -195,8 +195,7 @@ public class Stepdefs {
         Blog blog = new Blog("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "title", "site.fi", "description", 2000);
         dao.addBlog(blog);
     }
-    
-    
+
     // Feature changes here ----readtip_list_all.feature-------------------------------------------------------------------------------------------------------------------------------
     //Feature: all readtiplist is printed in correct form
     @Given("^command \"([^\"]*)\" list tips is given$")
@@ -236,8 +235,8 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains("blog"));
         assertTrue(ios.getOutputString().contains("news"));
         assertTrue(ios.getOutputString().contains("article"));
-        assertTrue(ios.getOutputString().contains("false"));        
-        assertTrue(ios.getOutputString().contains("2014"));  
+        assertTrue(ios.getOutputString().contains("false"));
+        assertTrue(ios.getOutputString().contains("2014"));
     }
 
     @Then("^table don't contain link$")
@@ -248,7 +247,7 @@ public class Stepdefs {
         ui.run();
         assertFalse(ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
     }
-    
+
     @Then("^table contains \"([^\"]*)\"$")
     public void table_contains(String arg1) throws Throwable {
         IOStub ios = new IOStub(inputLinesAll);
@@ -257,7 +256,6 @@ public class Stepdefs {
         ui.run();
         assertFalse(ios.getOutputString().contains("..."));
     }
-
 
     // Feature: readtiplists by type are printed in correct form  ---_______________------------------------uses same given as list all
     // video
@@ -572,13 +570,13 @@ public class Stepdefs {
 
         assertTrue(ios.getOutputString().contains(testVideo.toString()));
     }
+
+    // feature: can_return_to_higher_view_with_enter ------------------
     
-    // can_return_to_higher_view_with_enter
-    
-      @Given("^command \"([^\"]*)\" only enter in main menu is input$")
+    @Given("^command \"([^\"]*)\" only enter in main menu is input$")
     public void command_only_enter_in_main_menu_is_input(String enter) throws Throwable {
-      inputLinesEnterMain[0] = enter;
-      inputLinesEnterMain[1] = "q";
+        inputLinesEnterMain[0] = enter;
+        inputLinesEnterMain[1] = "q";
     }
 
     @Then("^error message: \"([^\"]*)\" choose a correct input is printed$")
@@ -588,6 +586,28 @@ public class Stepdefs {
         ui = new UI(ios, dao);
         ui.run();
         assertTrue(ios.getOutputString().contains("Choose a correct input!"));
+    }
+
+    @Given("^command \"([^\"]*)\" add new readtip is selected$")
+    public void command_add_new_readtip_is_selected(String a) throws Throwable {
+        inputLinesEnterAdd[0] = a;
+    }
+
+    @When("^command \"([^\"]*)\" enter is input$")
+    public void command_enter_is_input(String enter) throws Throwable {
+        inputLinesEnterAdd[1] = enter;
+        inputLinesEnterAdd[2] = "q";
+
+    }
+
+    @Then("^output \"([^\"]*)\" is printed$")
+    public void output_is_printed(String arg1) throws Throwable {
+
+        IOStub ios = new IOStub(inputLinesEnterAdd);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("Choose an action:"));
     }
 
 }
