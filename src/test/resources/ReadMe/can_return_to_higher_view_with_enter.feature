@@ -13,3 +13,8 @@ Feature: User can return to higher view with enter
     Given command "l" list is selected
     When command "" enter is input after listing
     Then output "Choose an action" is printed coming back from list
+
+  Scenario: When enter is pressed in the list all tips menu
+    Given command "l" list is selected and "1" all is chosen
+    When command "" enter is input after listing all
+    Then output "Choose an action" is printed coming back from listing all

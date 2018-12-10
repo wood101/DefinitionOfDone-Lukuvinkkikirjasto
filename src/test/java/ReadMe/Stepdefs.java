@@ -48,7 +48,7 @@ public class Stepdefs {
     String[] inputLinesEnterMain = new String[10];
     String[] inputLinesEnterAdd = new String[10];
     String[] inputLinesEnterList = new String[10];
-
+    String[] inputLinesEnterListAll = new String[10];
     String[] inputLinesSearch = new String[10];
 
     //for video: Feature: A new tip can be added if proper properties are given
@@ -700,4 +700,27 @@ public class Stepdefs {
         ui.run();
         assertTrue(ios.getOutputString().contains("Choose an action:"));
     }
+    
+    @Given("^command \"([^\"]*)\" list is selected and \"([^\"]*)\" all is chosen$")
+    public void command_list_is_selected_and_all_is_chosen(String list, String all) throws Throwable {
+        inputLinesEnterListAll[0] = list;
+        inputLinesEnterListAll[1] = all;
+
+    }
+
+    @When("^command \"([^\"]*)\" enter is input after listing all$")
+    public void command_enter_is_input_after_listing_all(String enter) throws Throwable {
+        inputLinesEnterListAll[2] = enter;
+        inputLinesEnterListAll[3] = "q";
+    }
+
+    @Then("^output \"([^\"]*)\" is printed coming back from listing all$")
+    public void output_is_printed_coming_back_from_listing_all(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesEnterListAll);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("Choose an action:"));
+    }
+
 }
