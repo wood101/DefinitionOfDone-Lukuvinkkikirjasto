@@ -19,7 +19,7 @@ public class Book extends ReadingTip {
     public Book(String author, String title, String ISBN, String description, int year) {
         super(author, title, description, year);
         this.ISBN = ISBN;
-    }    
+    }
 
     public String getISBN() {
         return ISBN;
@@ -28,7 +28,7 @@ public class Book extends ReadingTip {
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
-    
+
     @Override
     public String toString() {
         String dateText;
@@ -38,16 +38,11 @@ public class Book extends ReadingTip {
                 "\n ISBN: " + ISBN + "\n Description: " + this.getDescription() +
                 "\n Year: " + this.getYear() + "\n Checked: " + this.isChecked() + "\n" + dateText;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + Objects.hashCode(this.getAuthor());
-        hash = 23 * hash + Objects.hashCode(this.getTitle());
-        hash = 23 * hash + Objects.hashCode(this.getDescription());
+        int hash = super.hashCode();
         hash = 23 * hash + Objects.hashCode(this.ISBN);
-        hash = 23 * hash + Objects.hashCode(this.isChecked());
-        hash = 23 * hash + Objects.hashCode(this.getDate_checked());
         return hash;
     }
 

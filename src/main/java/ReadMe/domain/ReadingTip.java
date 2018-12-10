@@ -20,7 +20,7 @@ public abstract class ReadingTip {
     private int year;
     private boolean checked;
     private Date date_checked;
-    
+
     public ReadingTip(int id, String author, String title, String description, int year, boolean checked, Date date_checked) {
         this.id = id;
         this.author = author;
@@ -30,7 +30,7 @@ public abstract class ReadingTip {
         this.checked = checked;
         this.date_checked = date_checked;
     }
-    
+
     public ReadingTip(String author, String title, String description, int year) {
         this.author = author;
         this.title = title;
@@ -97,13 +97,13 @@ public abstract class ReadingTip {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 19 * hash + this.id;
-        hash = 19 * hash + Objects.hashCode(this.author);
-        hash = 19 * hash + Objects.hashCode(this.title);
-        hash = 19 * hash + Objects.hashCode(this.description);
-        hash = 19 * hash + this.year;
-        hash = 19 * hash + (this.checked ? 1 : 0);
-        hash = 19 * hash + Objects.hashCode(this.date_checked);
+        hash = 23 * hash + this.id;
+        hash = 23 * hash + Objects.hashCode(this.author);
+        hash = 23 * hash + Objects.hashCode(this.title);
+        hash = 23 * hash + Objects.hashCode(this.description);
+        hash = 23 * hash + this.year;
+        hash = 23 * hash + (this.checked ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.date_checked);
         return hash;
     }
 
@@ -145,11 +145,11 @@ public abstract class ReadingTip {
 
     @Override
     public String toString() {
-        return "\nTitle: " + title + "\n Author: " + author + 
-                "\n Description: " + description + 
+        return "\nTitle: " + title + "\n Author: " + author +
+                "\n Description: " + description +
                 "\n Year: " + year + "\n Checked: " + checked + "\n Date checked: " + date_checked + "\n";
     }
-    
-    
-    
+
+
+
 }

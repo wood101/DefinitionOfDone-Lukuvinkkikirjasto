@@ -15,11 +15,11 @@ public class Video extends ReadingTip {
         super(id, author, title, description, year, checked, date_checked);
         this.link = link;
     }
-    
+
     public Video(String author, String title, String link, String description, int year) {
         super(author, title, description, year);
         this.link = link;
-    }   
+    }
 
     public String getLink() {
         return link;
@@ -28,7 +28,7 @@ public class Video extends ReadingTip {
     public void setLink(String link) {
         this.link = link;
     }
-    
+
     @Override
     public String toString() {
         String dateText;
@@ -38,16 +38,11 @@ public class Video extends ReadingTip {
                 "\n Link: " + link + "\n Description: " + this.getDescription() +
                 "\n Year: " + this.getYear() + "\n Checked: " + this.isChecked() + "\n" + dateText;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + Objects.hashCode(this.getAuthor());
-        hash = 23 * hash + Objects.hashCode(this.getTitle());
-        hash = 23 * hash + Objects.hashCode(this.getDescription());
+        int hash = super.hashCode();
         hash = 23 * hash + Objects.hashCode(this.link);
-        hash = 23 * hash + Objects.hashCode(this.isChecked());
-        hash = 23 * hash + Objects.hashCode(this.getDate_checked());
         return hash;
     }
 
