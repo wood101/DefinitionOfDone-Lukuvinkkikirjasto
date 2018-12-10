@@ -48,6 +48,12 @@ public class Stepdefs {
     String[] inputLinesEnterMain = new String[10];
     String[] inputLinesEnterAdd = new String[10];
     String[] inputLinesEnterList = new String[10];
+    String[] inputLinesEnterListAll = new String[10];
+    String[] inputLinesEnterListVideo = new String[10];
+    String[] inputLinesEnterListBook = new String[10];
+    String[] inputLinesEnterListNews = new String[10];
+    String[] inputLinesEnterListArticle = new String[10];
+    String[] inputLinesEnterListBlog = new String[10];
 
     String[] inputLinesSearch = new String[10];
 
@@ -543,6 +549,41 @@ public class Stepdefs {
         inputLinesSingleMarkAsRead[2] = index;
     }
 
+    // ---------------------------------- Book opened in browser
+    @When("^command \"([^\"]*)\" is input for listing single book view$")
+    public void command_is_input_for_listing_single_book_view(String arg1) throws Throwable {
+        inputLinesAll[1] = arg1;
+    }
+
+    @Then("^book's link is opened in browser$")
+    public void book_s_link_is_opened_in_browser() throws Throwable {
+        inputLinesAll[2] = "o";
+        inputLinesAll[3] = "q";
+
+        IOStub ios = new IOStub(inputLinesAll);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains("Searching for the book's ISBN at isbnsearch.org in your default browser"));
+    }
+
+    // ----------------------------------- Bookmark opened in browser
+    @Then("^bookmark's link is opened in browser$")
+    public void bookmark_s_link_is_opened_in_browser() throws Throwable {
+        inputLinesAll[2] = "o";
+        inputLinesAll[3] = "q";
+
+        IOStub ios = new IOStub(inputLinesAll);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains("Link opened in your default browser"));
+    }
+
     @When("^input \"([^\"]*)\" is given$")
     public void input_is_given(String input) throws Throwable {
         inputLinesSingleMarkAsRead[3] = input;
@@ -575,7 +616,6 @@ public class Stepdefs {
     }
 
     // feature: can_return_to_higher_view_with_enter ------------------
-    
     @Given("^command \"([^\"]*)\" only enter in main menu is input$")
     public void command_only_enter_in_main_menu_is_input(String enter) throws Throwable {
         inputLinesEnterMain[0] = enter;
@@ -590,9 +630,6 @@ public class Stepdefs {
         ui.run();
         assertTrue(ios.getOutputString().contains("Choose a correct input!"));
     }
-    
-    
-
 
     @Given("^command \"([^\"]*)\" add new readtip is selected$")
     public void command_add_new_readtip_is_selected(String a) throws Throwable {
@@ -615,7 +652,7 @@ public class Stepdefs {
         ui.run();
         assertTrue(ios.getOutputString().contains("Choose an action:"));
     }
-    
+
     @Given("^user has typed search command \"([^\"]*)\"$")
     public void user_has_typed_search_command(String search) throws Throwable {
         inputLinesSearch[0] = search;
@@ -626,7 +663,7 @@ public class Stepdefs {
         inputLinesSearch[1] = keyword;
         inputLinesSearch[2] = "q";
     }
-    
+
     @Then("^list returned contains searched for reading tip \"([^\"]*)\"$")
     public void list_returned_contains_searched_for_reading_tip(String tipInfo) throws Throwable {
         IOStub ios = new IOStub(inputLinesSearch);
@@ -636,7 +673,6 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains(tipInfo));
     }
 
-
     @Then("^informs user that no reading tips found$")
     public void informs_user_that_no_reading_tips_found() throws Throwable {
         IOStub ios = new IOStub(inputLinesSearch);
@@ -645,8 +681,8 @@ public class Stepdefs {
         ui.run();
         assertTrue(ios.getOutputString().contains("No reading tips found."));
     }
-    
-   @Given("^command \"([^\"]*)\" list is selected$")
+
+    @Given("^command \"([^\"]*)\" list is selected$")
     public void command_list_is_selected(String l) throws Throwable {
         inputLinesEnterList[0] = l;
 
@@ -666,4 +702,132 @@ public class Stepdefs {
         ui.run();
         assertTrue(ios.getOutputString().contains("Choose an action:"));
     }
+
+    @Given("^command \"([^\"]*)\" list is selected and \"([^\"]*)\" all is chosen$")
+    public void command_list_is_selected_and_all_is_chosen(String list, String all) throws Throwable {
+        inputLinesEnterListAll[0] = list;
+        inputLinesEnterListAll[1] = all;
+
+    }
+
+    @When("^command \"([^\"]*)\" enter is input after listing all$")
+    public void command_enter_is_input_after_listing_all(String enter) throws Throwable {
+        inputLinesEnterListAll[2] = enter;
+        inputLinesEnterListAll[3] = "q";
+    }
+
+    @Then("^output \"([^\"]*)\" is printed coming back from listing all$")
+    public void output_is_printed_coming_back_from_listing_all(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesEnterListAll);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("Choose an action:"));
+    }
+
+    @Given("^command \"([^\"]*)\" list is selected and \"([^\"]*)\" video is chosen$")
+    public void command_list_is_selected_and_video_is_chosen(String list, String video) throws Throwable {
+        inputLinesEnterListVideo[0] = list;
+        inputLinesEnterListVideo[1] = video;
+    }
+
+    @When("^command \"([^\"]*)\" enter is input after listing videos$")
+    public void command_enter_is_input_after_listing_videos(String enter) throws Throwable {
+        inputLinesEnterListVideo[2] = enter;
+        inputLinesEnterListVideo[3] = "q";
+    }
+
+    @Then("^output \"([^\"]*)\" is printed coming back from listing videos$")
+    public void output_is_printed_coming_back_from_listing_videos(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesEnterListVideo);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("Choose an action:"));
+    }
+
+    @Given("^command \"([^\"]*)\" list is selected and \"([^\"]*)\" book is chosen$")
+    public void command_list_is_selected_and_book_is_chosen(String list, String book) throws Throwable {
+        inputLinesEnterListBook[0] = list;
+        inputLinesEnterListBook[1] = book;
+    }
+
+    @When("^command \"([^\"]*)\" enter is input after listing books$")
+    public void command_enter_is_input_after_listing_books(String enter) throws Throwable {
+        inputLinesEnterListBook[2] = enter;
+        inputLinesEnterListBook[3] = "q";
+    }
+
+    @Then("^output \"([^\"]*)\" is printed coming back from listing books$")
+    public void output_is_printed_coming_back_from_listing_books(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesEnterListBook);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("Choose an action:"));
+    }
+
+    @Given("^command \"([^\"]*)\" list is selected and \"([^\"]*)\" news is chosen$")
+    public void command_list_is_selected_and_news_is_chosen(String list, String news) throws Throwable {
+        inputLinesEnterListNews[0] = list;
+        inputLinesEnterListNews[1] = news;
+    }
+
+    @When("^command \"([^\"]*)\" enter is input after listing news$")
+    public void command_enter_is_input_after_listing_news(String enter) throws Throwable {
+        inputLinesEnterListNews[2] = enter;
+        inputLinesEnterListNews[3] = "q";
+    }
+
+    @Then("^output \"([^\"]*)\" is printed coming back from listing news$")
+    public void output_is_printed_coming_back_from_listing_news(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesEnterListNews);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("Choose an action:"));
+    }
+
+    @Given("^command \"([^\"]*)\" list is selected and \"([^\"]*)\" article is chosen$")
+    public void command_list_is_selected_and_article_is_chosen(String list, String article) throws Throwable {
+        inputLinesEnterListArticle[0] = list;
+        inputLinesEnterListArticle[1] = article;
+    }
+
+    @When("^command \"([^\"]*)\" enter is input after listing articles$")
+    public void command_enter_is_input_after_listing_articles(String enter) throws Throwable {
+        inputLinesEnterListArticle[2] = enter;
+        inputLinesEnterListArticle[3] = "q";
+    }
+
+    @Then("^output \"([^\"]*)\" is printed coming back from listing articles$")
+    public void output_is_printed_coming_back_from_listing_articles(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesEnterListArticle);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("Choose an action:"));
+    }
+
+    @Given("^command \"([^\"]*)\" list is selected and \"([^\"]*)\" blog is chosen$")
+    public void command_list_is_selected_and_blog_is_chosen(String list, String blog) throws Throwable {
+        inputLinesEnterListBlog[0] = list;
+        inputLinesEnterListBlog[1] = blog;;
+    }
+
+    @When("^command \"([^\"]*)\" enter is input after listing blogs$")
+    public void command_enter_is_input_after_listing_blogs(String enter) throws Throwable {
+        inputLinesEnterListBlog[2] = enter;
+        inputLinesEnterListBlog[3] = "q";;
+    }
+
+    @Then("^output \"([^\"]*)\" is printed coming back from listing blogs$")
+    public void output_is_printed_coming_back_from_listing_blogs(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesEnterListBlog);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("Choose an action:"));
+    }
+
 }
