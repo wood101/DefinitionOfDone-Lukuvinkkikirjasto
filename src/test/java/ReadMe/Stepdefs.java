@@ -542,6 +542,43 @@ public class Stepdefs {
         inputLinesSingleWithIndex[2] = index;
         inputLinesSingleMarkAsRead[2] = index;
     }
+    
+    // ---------------------------------- Book opened in browser
+    
+    @When("^command \"([^\"]*)\" is input for listing single book view$")
+    public void command_is_input_for_listing_single_book_view(String arg1) throws Throwable {
+        inputLinesAll[1] = arg1;
+    }
+    
+    @Then("^book's link is opened in browser$")
+    public void book_s_link_is_opened_in_browser() throws Throwable {
+        inputLinesAll[2] = "o";
+        inputLinesAll[3] = "q";
+        
+        IOStub ios = new IOStub(inputLinesAll);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        
+        ui.run();
+        
+        assertTrue(ios.getOutputString().contains("Searching for the book's ISBN at isbnsearch.org in your default browser"));
+    }
+    
+    // ----------------------------------- Bookmark opened in browser
+    @Then("^bookmark's link is opened in browser$")
+    public void bookmark_s_link_is_opened_in_browser() throws Throwable {
+        inputLinesAll[2] = "o";
+        inputLinesAll[3] = "q";
+        
+        IOStub ios = new IOStub(inputLinesAll);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        
+        ui.run();
+        
+        assertTrue(ios.getOutputString().contains("Link opened in your default browser"));
+    }
+      
 
     @When("^input \"([^\"]*)\" is given$")
     public void input_is_given(String input) throws Throwable {
@@ -590,9 +627,6 @@ public class Stepdefs {
         ui.run();
         assertTrue(ios.getOutputString().contains("Choose a correct input!"));
     }
-    
-    
-
 
     @Given("^command \"([^\"]*)\" add new readtip is selected$")
     public void command_add_new_readtip_is_selected(String a) throws Throwable {

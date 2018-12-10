@@ -13,6 +13,8 @@ import ReadMe.domain.Book;
 import ReadMe.domain.News;
 import ReadMe.domain.ReadingTip;
 import ReadMe.domain.Video;
+import java.awt.Desktop;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,9 +37,10 @@ public class UI {
         this.manager = manager;
     }
 
+    // accepts only valid years. Years BCE are marked as negative values.
     public int safeYearInput() {
         Date today = new Date();
-        int thisYear = today.getYear() + 1900; // getYear return this year - 1900 for reasons unknown
+        int thisYear = today.getYear() + 1900; // getYear returns this year - 1900 for reasons unknown
         int year = 0;
         boolean flag = false;
 
@@ -94,6 +97,7 @@ public class UI {
      */
     private void singleTipView(ReadingTip tip) {
         io.print(tip.toString());
+
     }
 
     /**
@@ -390,6 +394,7 @@ public class UI {
             acceptedInput.add("a");
             acceptedInput.add("l");
             acceptedInput.add("q");
+            acceptedInput.add("link");
 
             String choice = userCommand(prompt, acceptedInput);
             switch (choice) {
@@ -400,6 +405,9 @@ public class UI {
                 case "l":
                     io.print("Existing tips: \n");
                     selectTypeToList();
+                    break;
+                case "link":
+                    openLinkInBrowser("http://www.google.com");
                     break;
                 case "q":
                     exitApplication();
@@ -441,6 +449,85 @@ public class UI {
     private void exitApplication() {
         run = false;
         io.print("Thank you!");
+    }
+
+    public boolean openLinkInBrowser(String url) {
+        try {
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI oURL = new URI(url);
+            desktop.browse(oURL);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // given isbn is edited into an isbnsearch.org link
+    private String isbnSearchLink(String ISBN) {
+        return "https://isbnsearch.org/search?s=" + ISBN;
+    }
+    
+    private String getLinkFromReadingTip(ReadingTip tip){
+        String url = "";
+        if(tip instanceof Video){
+            url = ((Video) tip).getLink();
+        } else if (tip instanceof Article){
+            url = ((Article) tip).getLink();  
+        } else if (tip instanceof Blog){
+            url = ((Blog) tip).getLink();
+        } else if (tip instanceof News){
+            url = ((News) tip).getLink();
+        }
+        return url;
+    }
+
+    private void singleTipCommands(List<ReadingTip> tips, int index) {
+        boolean viewing = true;
+        while (viewing) {
+            String prompt = "Choose an action:\n"
+                    + "  r - mark reading tip as read\n"
+                    + "  b - back to list commands\n"
+                    + "  q - quit app\n";
+
+            Set<String> acceptedInput = new TreeSet<>();
+            acceptedInput.add("b");
+            acceptedInput.add("r");
+            acceptedInput.add("o");
+            acceptedInput.add("q");
+
+            String choice = userCommand(prompt, acceptedInput);
+            ReadingTip selected = tips.get(index);
+            String successPrint = "";
+            boolean LinkOpenedSuccesfully;
+            switch (choice) {
+                case "o":
+                    if (selected instanceof Book) {
+                        LinkOpenedSuccesfully = openLinkInBrowser(((Book) selected).getISBN());
+                        successPrint = "Searching for the book's ISBN at isbnsearch.org in your default browser";
+                    } else {
+                        LinkOpenedSuccesfully = openLinkInBrowser(getLinkFromReadingTip(selected));
+                        successPrint = "Link opened in your default browser";
+                    }
+                    if(LinkOpenedSuccesfully){
+                        io.print(successPrint);
+                    } else {
+                        io.print("Failed to open link");
+                    }
+                case "b":
+                    viewing = false;
+                    break;
+                case "r":
+                    ReadingTip edited = MarkTipAsRead(selected);
+                    updateCachedTipWhenMarked(tips, selected, edited);
+                    break;
+                case "q":
+                    exitApplication();
+                    viewing = false;
+                    break;
+            }
+        }
+
     }
 
 }
