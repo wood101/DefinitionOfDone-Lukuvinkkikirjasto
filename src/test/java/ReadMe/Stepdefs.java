@@ -22,7 +22,7 @@ public class Stepdefs {
     InMemoryDao dao = new InMemoryDao();
     String[] inputLinesAdd = new String[2];
     String[] inputLinesList = new String[5];
-    String[] inputLinesAll = new String[5];
+    String[] inputLinesAll = new String[10];
     String[] inputLinesListType = new String[4];
 
     String[] inputLinesVideo = new String[10];
@@ -552,13 +552,15 @@ public class Stepdefs {
     // ---------------------------------- Book opened in browser
     @When("^command \"([^\"]*)\" is input for listing single book view$")
     public void command_is_input_for_listing_single_book_view(String arg1) throws Throwable {
-        inputLinesAll[1] = arg1;
+        inputLinesAll[1] = "3";
+        inputLinesAll[2] = arg1;
     }
 
     @Then("^book's link is opened in browser$")
     public void book_s_link_is_opened_in_browser() throws Throwable {
-        inputLinesAll[2] = "o";
-        inputLinesAll[3] = "q";
+        inputLinesAll[3] = "o";
+        inputLinesAll[4] = "b";
+        inputLinesAll[5] = "q";
 
         IOStub ios = new IOStub(inputLinesAll);
         dao = new InMemoryDao();
@@ -572,8 +574,8 @@ public class Stepdefs {
     // ----------------------------------- Bookmark opened in browser
     @Then("^bookmark's link is opened in browser$")
     public void bookmark_s_link_is_opened_in_browser() throws Throwable {
-        inputLinesAll[2] = "o";
-        inputLinesAll[3] = "q";
+        inputLinesAll[4] = "b";
+        inputLinesAll[5] = "q";
 
         IOStub ios = new IOStub(inputLinesAll);
         dao = new InMemoryDao();
@@ -582,6 +584,11 @@ public class Stepdefs {
         ui.run();
 
         assertTrue(ios.getOutputString().contains("Link opened in your default browser"));
+    }
+
+    @When("^command \"([^\"]*)\" open link is given$")
+    public void command_open_link_is_given(String arg1) throws Throwable {
+        inputLinesAll[3] = "o";
     }
 
     @When("^input \"([^\"]*)\" is given$")
@@ -601,9 +608,10 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains(message));
     }
 
-    @Then("^a single tip with is shown$")
-    public void a_single_tip_with_is_shown() throws Throwable {
-        inputLinesSingleWithIndex[3] = "q"; // last input
+    @Then("^a single tip is shown$")
+    public void a_single_tip_is_shown() throws Throwable {
+        inputLinesSingleWithIndex[3] = "b"; // back to main menu
+        inputLinesSingleWithIndex[4] = "q"; // last input
 
         Video testVideo = new Video("hackerdashery", "P vs. NP and the Computational Complexity Zoo",
                 "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "P js NP erot", 2014);
