@@ -606,7 +606,7 @@ public class Stepdefs {
         ui = new UI(ios, dao);
         ui.run();
 
-        assertTrue(ios.getOutputString().contains("Marked as read"));
+        assertTrue(ios.getOutputString().contains(message));
     }
 
     @Then("^a single tip is shown$")
