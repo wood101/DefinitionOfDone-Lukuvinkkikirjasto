@@ -36,4 +36,3 @@ Ryhmän DefinitionOfGettingThere OhtuMiniProjekti. Syksyn 2018 ohjelmiostotuotan
   - [Jesper Pettersson](https://github.com/sadibo)
   - [Virva Svala](https://github.com/vsvala)
   - [Janne Malin](https://github.com/wood101)
-

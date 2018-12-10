@@ -33,22 +33,22 @@ public class Blog extends ReadingTip {
     public String toString() {
         String dateText;
         if(this.getDate_checked() == null) dateText = "";
-        else dateText = " Date checked: " + new SimpleDateFormat("dd-MM-yyyy").format(super.getDate_checked())+ "\n";
+        else dateText = " Date checked: " + new SimpleDateFormat("dd-MM-yyyy").format(this.getDate_checked())+ "\n";
                 
-        return "\nTitle: " + super.getTitle() + "\n Author: " + super.getAuthor() + 
-                "\n Link: " + link + "\n Description: " + super.getDescription() + 
-                "\n Year: " + super.getYear() + "\n Checked: " + super.isChecked() + "\n" + dateText;
+        return "\nTitle: " + this.getTitle() + "\n Author: " + this.getAuthor() +
+                "\n Link: " + link + "\n Description: " + this.getDescription() +
+                "\n Year: " + this.getYear() + "\n Checked: " + this.isChecked() + "\n" + dateText;
     }
     
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 23 * hash + Objects.hashCode(super.getAuthor());
-        hash = 23 * hash + Objects.hashCode(super.getTitle());
-        hash = 23 * hash + Objects.hashCode(super.getDescription());
+        hash = 23 * hash + Objects.hashCode(this.getAuthor());
+        hash = 23 * hash + Objects.hashCode(this.getTitle());
+        hash = 23 * hash + Objects.hashCode(this.getDescription());
         hash = 23 * hash + Objects.hashCode(this.link);
-        hash = 23 * hash + Objects.hashCode(super.isChecked());
-        hash = 23 * hash + Objects.hashCode(super.getDate_checked());
+        hash = 23 * hash + Objects.hashCode(this.isChecked());
+        hash = 23 * hash + Objects.hashCode(this.getDate_checked());
         return hash;
     }
 
@@ -65,11 +65,11 @@ public class Blog extends ReadingTip {
         }
 
         final Blog other = (Blog) obj;
-        return Objects.equals(super.getAuthor(), other.getAuthor())
-                && Objects.equals(super.getTitle(), other.getTitle())
-                && Objects.equals(super.getDescription(), other.getDescription())
+        return Objects.equals(this.getAuthor(), other.getAuthor())
+                && Objects.equals(this.getTitle(), other.getTitle())
+                && Objects.equals(this.getDescription(), other.getDescription())
                 && Objects.equals(this.link, other.link)
-                && Objects.equals(super.isChecked(), other.isChecked())
-                && Objects.equals(super.getDate_checked(), other.getDate_checked());
+                && Objects.equals(this.isChecked(), other.isChecked())
+                && Objects.equals(this.getDate_checked(), other.getDate_checked());
     }    
 }
