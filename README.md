@@ -1,5 +1,10 @@
 # DefinitionOfGettingThere lukuvinkkikirjasto
-Ryhmän DefinitionOfGettingThere OhtuMiniProjekti. Syksyn 2018 ohjelmiostotuotantokurssin projektiryhmätyö.
+
+Ryhmän DefinitionOfGettingThere OhtuMiniProjekti. Syksyn 2018 ohjelmiostotuotantokurssin projektiryhmätyö. Projektissa harjoitellaan ohjelmistotuotantoprojektien hallintaa sekä työvaiheiden ja työvälineiden perusteita. Erityinen painotus ketterissä ohjelmistotuotantomenetelmissä.
+
+Miniprojektissa on toteutettu asiakkaan toiveiden mukainen lukuvinkkikirjasto lukuvinkkien tallennukseen ja järjestämiseen. Projektin lukuvinkkikirjastoon voi lisätä erilaisia lukuvinkkkityyppejä: kirjoja, videoita, uutisia, artikkeleita ja blogeja. Käyttäjä voi selata kaikkia lukuvinkkejä, tai haluamiaan lukuvinkkityyppejä listaamalla ne taulukkonaäkymänä. Käyttäjä voi taulukkonäkymästä valita luettavaksi yksittäisen lukuvinkin kaikki tiedot. Lukuvinkkejä voi myös hakea annetulla hakusanalla ja luetun lukuvinkin voi merkata luetuksi.
+ 
+Sovellus on toteutettu käyttäjän omalle koneelle ladattavaksi paikalliseksi ohjelmaksi. Sovellukseen on toteutettu komentoriviltä toimiva konsolipohjainen käyttöliittymä ja tietojen tallennukseen käytetään SQLlite tietokantaa. Sovellus on toteutettu javalla Gradle build työkalulla. Testaamisessa on käytössä JUnit sekä Cucumber testit. Jatkuvaan integraatioon CI on käytetty Travisis-ci:tä ja testikattavuuksien tarkateluun Codecovia.
 
 ## Releases
 
