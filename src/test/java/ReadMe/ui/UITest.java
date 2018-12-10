@@ -113,8 +113,9 @@ public class UITest {
     public void listAllPrintsCorrectly() {
         io = new IOStub("l", "1", "q");
         ui = new UI(io, db);
-        Video video1 = new Video("author1", "title", "www.test.org", "desc", 2000);
-        Video video2 = new Video("author2", "title", "www.testAlt.org", "desc", 2000);
+        Integer year = 2000;
+        Video video1 = new Video("author1", "title", "www.test.org", "desc", year);
+        Video video2 = new Video("author2", "title", "www.testAlt.org", "desc", year);
         List<ReadingTip> list = new ArrayList<>();
         list.add(video1);
         list.add(video2);
@@ -123,7 +124,7 @@ public class UITest {
 
         ui.run();
         String output = io.getOutputString();
-        assertTrue(output.contains(video1.getAuthor()) && output.contains(video2.getTitle()));
+        assertTrue(output.contains(video1.getAuthor()) && output.contains(video2.getTitle()) && output.contains(year.toString()));
     }
 
     @Test
@@ -132,8 +133,9 @@ public class UITest {
         ui = new UI(io, db);
         String author = "author1";
         String title = "title2";
-        Video video1 = new Video(author, "title", "www.test.org", "desc", 2000);
-        Video video2 = new Video("author2", title, "www.testAlt.org", "desc", 2000);
+        Integer year = 2000;
+        Video video1 = new Video(author, "title", "www.test.org", "desc", year);
+        Video video2 = new Video("author2", title, "www.testAlt.org", "desc", year);
         List<ReadingTip> list = new ArrayList<>();
         list.add(video1);
         list.add(video2);
@@ -141,7 +143,7 @@ public class UITest {
 
         ui.run();
         String output = io.getOutputString();
-        assertTrue(output.contains(author) && output.contains(title));
+        assertTrue(output.contains(author) && output.contains(title) && output.contains(year.toString()));
     }
 
     @Test
@@ -150,8 +152,9 @@ public class UITest {
         ui = new UI(io, db);
         String author = "author1";
         String title = "title2";
-        Book book1 = new Book(author, "title", "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "desc", 2000);
-        Book book2 = new Book("author2", title, "4321", "desc", 2000);
+        Integer year = 2000;
+        Book book1 = new Book(author, "title", "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "desc", year);
+        Book book2 = new Book("author2", title, "4321", "desc", year);
         List<ReadingTip> list = new ArrayList<>();
         list.add(book1);
         list.add(book2);
@@ -160,7 +163,7 @@ public class UITest {
 
         ui.run();
         String output = io.getOutputString();
-        assertTrue(output.contains(author) && output.contains(title));
+        assertTrue(output.contains(author) && output.contains(title) && output.contains(year.toString()));
 
     }
 
@@ -170,8 +173,9 @@ public class UITest {
         ui = new UI(io, db);
         String author = "author1";
         String title = "title2";
-        News news1 = new News(author, "title", "www.test.org", "desc", "publisher", 2000);
-        News news2 = new News("author2", title, "www.testAlt.org", "desc", "publisher", 2000);
+        Integer year = 2000;
+        News news1 = new News(author, "title", "www.test.org", "desc", "publisher", year);
+        News news2 = new News("author2", title, "www.testAlt.org", "desc", "publisher", year);
         List<ReadingTip> list = new ArrayList<>();
         list.add(news1);
         list.add(news2);
@@ -180,7 +184,7 @@ public class UITest {
 
         ui.run();
         String output = io.getOutputString();
-        assertTrue(output.contains(author) && output.contains(title));
+        assertTrue(output.contains(author) && output.contains(title) && output.contains(year.toString()));
     }
 
     @Test
@@ -189,8 +193,9 @@ public class UITest {
         ui = new UI(io, db);
         String author = "author1";
         String title = "title2";
-        Article article1 = new Article(author, "title", "www.test.org", "desc", "publisher", 2000);
-        Article article2 = new Article("author2", title, "www.testAlt.org", "desc", "publisher", 2000);
+        Integer year = 2000;
+        Article article1 = new Article(author, "title", "www.test.org", "desc", "publisher", year);
+        Article article2 = new Article("author2", title, "www.testAlt.org", "desc", "publisher", year);
         List<ReadingTip> list = new ArrayList<>();
         list.add(article1);
         list.add(article2);
@@ -199,7 +204,7 @@ public class UITest {
 
         ui.run();
         String output = io.getOutputString();
-        assertTrue(output.contains(author) && output.contains(title));
+        assertTrue(output.contains(author) && output.contains(title) && output.contains(year.toString()));
     }
 
     @Test
@@ -208,8 +213,9 @@ public class UITest {
         ui = new UI(io, db);
         String author = "author1";
         String title = "title2";
-        Blog blog1 = new Blog(author, "title", "www.test.org", "desc", 2000);
-        Blog blog2 = new Blog("author2", title, "www.testAlt.org", "desc", 2000);
+        Integer year = 2000;
+        Blog blog1 = new Blog(author, "title", "www.test.org", "desc", year);
+        Blog blog2 = new Blog("author2", title, "www.testAlt.org", "desc", year);
         List<ReadingTip> list = new ArrayList<>();
         list.add(blog1);
         list.add(blog2);
@@ -218,7 +224,7 @@ public class UITest {
 
         ui.run();
         String output = io.getOutputString();
-        assertTrue(output.contains(author) && output.contains(title));
+        assertTrue(output.contains(author) && output.contains(title) && output.contains(year.toString()));
     }
 
     @Test
@@ -310,4 +316,40 @@ public class UITest {
         assertTrue(output.contains("No reading tips found."));
     }
 
+    @Test
+    public void tooLongATitlePrintsDots() {
+        io = new IOStub("l", "1", "q");
+        ui = new UI(io, db);
+        String title = "titleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+        Video video1 = new Video("author", title, "www.test.org", "desc", 2000);
+        Video video2 = new Video("author2", title, "www.testAlt.org", "desc", 2001);
+        List<ReadingTip> list = new ArrayList<>();
+        list.add(video1);
+        list.add(video2);
+
+        when(db.listByType("all")).thenReturn(list);
+
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(title.length() > 70);
+        assertTrue(output.contains("..."));
+    }
+    @Test
+    public void tooLongAnAuthorPrintsDots() {
+        io = new IOStub("l", "1", "q");
+        ui = new UI(io, db);
+        String author = "Leeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+        Video video1 = new Video(author, "title", "www.test.org", "desc", 2000);
+        Video video2 = new Video(author, "title2", "www.testAlt.org", "desc", 2001);
+        List<ReadingTip> list = new ArrayList<>();
+        list.add(video1);
+        list.add(video2);
+
+        when(db.listByType("all")).thenReturn(list);
+
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(author.length() > 50);
+        assertTrue(output.contains("..."));
+    }
 }

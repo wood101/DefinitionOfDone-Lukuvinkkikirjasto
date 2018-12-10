@@ -18,7 +18,7 @@ Feature: readtiplists by type are printed in correct form
   Scenario: booktips do not contain extra information
     Given command "l" list tips is given
     When  type command "3" book is input
-    Then booktable does not contain link
+    Then booktable does not contain ISBN
 
   Scenario: newstips are printed in a compact table
     Given command "l" list tips is given
