@@ -1,21 +1,10 @@
 # DefinitionOfGettingThere lukuvinkkikirjasto
-Ryhmän DefinitionOfGettingThere OhtuMiniProjekti
+Ryhmän DefinitionOfGettingThere OhtuMiniProjekti. Syksyn 2018 ohjelmiostotuotantokurssin projektiryhmätyö.
 
 ## Releases
 
 - [Versio 0.7.1 (sprintti3)](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/releases/tag/sprintti3)
 - [Versio 0.5 (sprintti2)](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/releases/tag/sprintti2)
-
-### Asiakaspalaveri perjantaisin 12.00-12.30 normisti. Poikkeus: 30.11 klo. 13.15-13.45
-
-## Mahdolliset yhteiset tapaamisajat:
-
-Ma 9.30-11.30   osa pystyy jatkamaan myös loppupäivällä luentojen jälkeen…
-
-To  9.30-11.30
-
-pe 12.30-13.30  asiakaspalaverin jälkeen
-
 
 ## [Product backlog Google Docissa](https://docs.google.com/spreadsheets/d/1O1Wx9K8pMFfu_qx0O7vAwgkPlIZMfkedQ_htNHWB_vM/edit#gid=1)
 
