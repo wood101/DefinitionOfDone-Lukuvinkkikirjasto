@@ -626,20 +626,24 @@ public class Stepdefs {
         inputLinesSearch[1] = keyword;
         inputLinesSearch[2] = "q";
     }
-
-    @Then("^a list of matching reading tips$")
-    public void a_list_of_matching_reading_tips() throws Throwable {
-        IOStub ios = new IOStub(inputLinesSingleWithIndex);
+    
+    @Then("^list returned contains searched for reading tip \"([^\"]*)\"$")
+    public void list_returned_contains_searched_for_reading_tip(String tipInfo) throws Throwable {
+        IOStub ios = new IOStub(inputLinesSearch);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-
-        assertTrue(ios.getOutputString().contains("hackerdashery"));
+        assertTrue(ios.getOutputString().contains(tipInfo));
     }
+
 
     @Then("^informs user that no reading tips found$")
     public void informs_user_that_no_reading_tips_found() throws Throwable {
-        
+        IOStub ios = new IOStub(inputLinesSearch);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("No reading tips found."));
     }
     
    @Given("^command \"([^\"]*)\" list is selected$")
