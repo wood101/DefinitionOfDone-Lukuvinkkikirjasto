@@ -39,7 +39,9 @@ public class Stepdefs {
 
     String[] inputLinesSingle = new String[10];
     String[] inputLinesSingle2 = new String[10];
-    
+    String[] inputLinesSingleWithIndex = new String[10];
+    String[] inputLinesSingleMarkAsRead = new String[10];
+
     String[] inputLinesMark = new String[10];
     String[] inputLinesMarkFail = new String[10];
     
@@ -464,16 +466,20 @@ public class Stepdefs {
 
         assertTrue(ios.getOutputString().contains("Bad index"));
     }
-    
+
 //  --------------------------- Mark as read ------------------------------------------------
-    
     @Given("^all tips are shown by typing commands \"([^\"]*)\", \"([^\"]*)\"$")
     public void all_tips_are_shown_by_typing_commands(String list, String type) throws Throwable {
         inputLinesMark[0] = list;
         inputLinesMarkFail[0] = list;
-        
+        inputLinesSingleWithIndex[0] = list;
+        inputLinesSingleMarkAsRead[0] = list;
+
         inputLinesMark[1] = type;
         inputLinesMarkFail[1] = type;
+        inputLinesSingleWithIndex[1] = type;
+        inputLinesSingleMarkAsRead[1] = type;
+
     }
 
     @When("^command \"([^\"]*)\" is input$")
@@ -493,40 +499,78 @@ public class Stepdefs {
         inputLinesMark[4] = "s";
         inputLinesMark[5] = index;
         inputLinesMark[6] = "q";
-        
+
         IOStub ios = new IOStub(inputLinesMark);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        
+
         assertTrue(ios.getOutputString().contains("Checked: true"));
     }
 
     @Then("^the input is rejected and application responds \"([^\"]*)\"$")
     public void the_input_is_rejected_and_application_responds(String error) throws Throwable {
         inputLinesMarkFail[4] = "q";
-        
+
         IOStub ios = new IOStub(inputLinesMarkFail);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        
+
         assertTrue(ios.getOutputString().contains(error));
     }
-    
+
     @Then("^the tip listed at index \"([^\"]*)\" shows when it was marked$")
     public void the_tip_listed_at_index_shows_when_it_was_marked(String index) throws Throwable {
         inputLinesMark[4] = "s";
         inputLinesMark[5] = index;
         inputLinesMark[6] = "q";
-        
+
         IOStub ios = new IOStub(inputLinesMark);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        
+
         String dateToday = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-        assertTrue(ios.getOutputString().contains("Date checked: "+ dateToday));
+        assertTrue(ios.getOutputString().contains("Date checked: " + dateToday));
+    }
+
+    // ----------------------When viewing a single tip ...
+    @When("^command \"([^\"]*)\" is input for listing single view$")
+    public void command_is_input_for_listing_single_view(String index) throws Throwable {
+        inputLinesSingleWithIndex[2] = index;
+        inputLinesSingleMarkAsRead[2] = index;
+    }
+
+    @When("^input \"([^\"]*)\" is given$")
+    public void input_is_given(String input) throws Throwable {
+        inputLinesSingleMarkAsRead[3] = input;
+    }
+
+    @Then("^tip is marked as read and message \"([^\"]*)\" is shown$")
+    public void tip_is_marked_as_read_and_message_is_shown(String message) throws Throwable {
+        inputLinesSingleMarkAsRead[4] = "q"; // last input
+
+        IOStub ios = new IOStub(inputLinesSingleMarkAsRead);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains(message));
+    }
+
+    @Then("^a single tip with is shown$")
+    public void a_single_tip_with_is_shown() throws Throwable {
+        inputLinesSingleWithIndex[3] = "q"; // last input
+
+        Video testVideo = new Video("hackerdashery", "P vs. NP and the Computational Complexity Zoo",
+                "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "P js NP erot", 2014);
+        IOStub ios = new IOStub(inputLinesSingleWithIndex);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains(testVideo.toString()));
     }
     
     // can_return_to_higher_view_with_enter
