@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.regex.Pattern;
 
 /**
  * UI object. Used to run console app.
@@ -60,6 +61,21 @@ public class UI {
         return year;
     }
 
+    // accepts only valid years. Years BCE are marked as negative values.
+    public boolean isIndex(String string) {
+        int index = 0;
+        try {
+            index = Integer.parseInt(string);
+            if (index < 1) {
+                io.print("Bad index");
+                return false;
+            } 
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Prints reading tips as a table
      *
@@ -79,8 +95,12 @@ public class UI {
             for (int i = 0; i < tips.size(); i++) {
                 String author = tips.get(i).getAuthor();
                 String title = tips.get(i).getTitle();
-                if(tips.get(i).getAuthor().length() > 50) author = tips.get(i).getAuthor().substring(0, 46) + "...";
-                if(tips.get(i).getTitle().length() > 50) title = tips.get(i).getTitle().substring(0, 66) + "...";
+                if (tips.get(i).getAuthor().length() > 50) {
+                    author = tips.get(i).getAuthor().substring(0, 46) + "...";
+                }
+                if (tips.get(i).getTitle().length() > 50) {
+                    title = tips.get(i).getTitle().substring(0, 66) + "...";
+                }
                 table += String.format(leftAlignFormat, incrementedIndex(i), author, title, tips.get(i).getYear(), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""), tips.get(i).isChecked());
             }
             table += String.format("+-------+----------------------------------------------------+------------------------------------------------------------------------+------+---------+---------+%n");
@@ -122,7 +142,7 @@ public class UI {
         String link = io.readLine("Link: ");
         String description = io.readLine("Description: ");
         int year = safeYearInput();
-        manager.addVideo(new Video(author, title, description, link, year));
+        manager.addVideo(new Video(author, title, link, description, year));
         return true;
 
     }
@@ -303,18 +323,25 @@ public class UI {
         boolean viewing = true;
         while (viewing) {
             String prompt = "Choose an action:\n"
-                    + "  s - show more info about single tip\n"
-                    + "  r - mark reading tip as read\n"
-                    + "  b - back to main commands\n"
-                    + "  q - quit app\n";
+                    + "  [index] - show more info about single tip\n"
+                    + "  r       - mark reading tip as read\n"
+                    + "  b       - back to main commands\n"
+                    + "  q       - quit app\n";
 
             Set<String> acceptedInput = new TreeSet<>();
-            acceptedInput.add("s");
             acceptedInput.add("b");
             acceptedInput.add("r");
             acceptedInput.add("q");
 
-            String choice = userCommand(prompt, acceptedInput);
+            String choice = singleCommand(prompt, acceptedInput);
+            if (isIndex(choice)) {
+                try {
+                    int index = Integer.parseInt(choice) - 1;
+                    singleTipCommands(tips, index);
+                } catch (Exception e) {
+                    io.print("Bad index");
+                }
+            }
             ReadingTip selected = null;
             switch (choice) {
                 case "s":
@@ -438,6 +465,32 @@ public class UI {
     }
 
     /**
+     * Provides list of commands and prompts user for input in single view.
+     * Accepts integers or input from set of commands given as a parameter.
+     * Everything else is rejected.
+     *
+     * @param prompt
+     * @param acceptedInput
+     * @return
+     */
+    private String singleCommand(String prompt, Set<String> acceptedInput) {
+        io.print(prompt);
+        String choice = "";
+        while (true) {
+            choice = io.readLine("Enter choice: ");
+            if (isIndex(choice)) {
+                break;
+            }
+            if (acceptedInput.contains(choice)) {
+                break;
+            } else {
+                io.print("Choose a correct input!");
+            }
+        }
+        return choice;
+    }
+
+    /**
      * Runs console UI
      */
     public void run() {
@@ -467,27 +520,29 @@ public class UI {
     private String isbnSearchLink(String ISBN) {
         return "https://isbnsearch.org/search?s=" + ISBN;
     }
-    
-    private String getLinkFromReadingTip(ReadingTip tip){
+
+    private String getLinkFromReadingTip(ReadingTip tip) {
         String url = "";
-        if(tip instanceof Video){
+        if (tip instanceof Video) {
             url = ((Video) tip).getLink();
-        } else if (tip instanceof Article){
-            url = ((Article) tip).getLink();  
-        } else if (tip instanceof Blog){
+        } else if (tip instanceof Article) {
+            url = ((Article) tip).getLink();
+        } else if (tip instanceof Blog) {
             url = ((Blog) tip).getLink();
-        } else if (tip instanceof News){
+        } else if (tip instanceof News) {
             url = ((News) tip).getLink();
         }
         return url;
     }
 
     private void singleTipCommands(List<ReadingTip> tips, int index) {
+        io.print(tips.get(index).toString());
         boolean viewing = true;
         while (viewing) {
             String prompt = "Choose an action:\n"
                     + "  r - mark reading tip as read\n"
                     + "  b - back to list commands\n"
+                    + "  o - open link in browser\n"
                     + "  q - quit app\n";
 
             Set<String> acceptedInput = new TreeSet<>();
@@ -509,7 +564,7 @@ public class UI {
                         LinkOpenedSuccesfully = openLinkInBrowser(getLinkFromReadingTip(selected));
                         successPrint = "Link opened in your default browser";
                     }
-                    if(LinkOpenedSuccesfully){
+                    if (LinkOpenedSuccesfully) {
                         io.print(successPrint);
                     } else {
                         io.print("Failed to open link");
