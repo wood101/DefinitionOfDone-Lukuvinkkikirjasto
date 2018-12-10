@@ -46,7 +46,10 @@ public class Stepdefs {
     String[] inputLinesMarkFail = new String[10];
 
     String[] inputLinesEnterMain = new String[10];
+
     String[] inputLinesEnterAdd = new String[10];
+
+    String[] inputLinesSearch = new String[10];
 
     //for video: Feature: A new tip can be added if proper properties are given
     @Given("^command \"([^\"]*)\" add new readtip is selected and command \"([^\"]*)\" video is selected$")
@@ -587,6 +590,9 @@ public class Stepdefs {
         ui.run();
         assertTrue(ios.getOutputString().contains("Choose a correct input!"));
     }
+    
+    
+
 
     @Given("^command \"([^\"]*)\" add new readtip is selected$")
     public void command_add_new_readtip_is_selected(String a) throws Throwable {
@@ -608,6 +614,32 @@ public class Stepdefs {
         ui = new UI(ios, dao);
         ui.run();
         assertTrue(ios.getOutputString().contains("Choose an action:"));
+    }
+    
+    @Given("^user has typed search command \"([^\"]*)\"$")
+    public void user_has_typed_search_command(String search) throws Throwable {
+        inputLinesSearch[0] = search;
+    }
+
+    @When("^user types keyword \"([^\"]*)\"$")
+    public void user_types_keyword(String keyword) throws Throwable {
+        inputLinesSearch[1] = keyword;
+        inputLinesSearch[2] = "q";
+    }
+
+    @Then("^a list of matching reading tips$")
+    public void a_list_of_matching_reading_tips() throws Throwable {
+        IOStub ios = new IOStub(inputLinesSingleWithIndex);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains("hackerdashery"));
+    }
+
+    @Then("^informs user that no reading tips found$")
+    public void informs_user_that_no_reading_tips_found() throws Throwable {
+        
     }
 
 }
