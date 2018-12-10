@@ -69,14 +69,18 @@ public class UI {
             return false;
         } else {
             String table = "";
-            String leftAlignFormat = "| %-6d| %-15s | %-20s | %-7s |%n";
-            table += String.format("+-------+-----------------+----------------------+---------+%n");
-            table += String.format("| Index |     Author      |        Title         |  Type   |%n");
-            table += String.format("+-------+-----------------+----------------------+---------+%n");
+            String leftAlignFormat = "| %-6d| %-50s | %-70s | %-4d | %-7s | %-7s |%n";
+            table += String.format("+-------+----------------------------------------------------+------------------------------------------------------------------------+------+---------+---------+%n");
+            table += String.format("| Index |                      Author                        |                                     Title                              | Year |  Type   | Checked |%n");
+            table += String.format("+-------+----------------------------------------------------+------------------------------------------------------------------------+------+---------+---------+%n");
             for (int i = 0; i < tips.size(); i++) {
-                table += String.format(leftAlignFormat, incrementedIndex(i), tips.get(i).getAuthor(), tips.get(i).getTitle().substring(0, Math.min(19, tips.get(i).getTitle().length())), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
+                String author = tips.get(i).getAuthor();
+                String title = tips.get(i).getTitle();
+                if(tips.get(i).getAuthor().length() > 50) author = tips.get(i).getAuthor().substring(0, 46) + "...";
+                if(tips.get(i).getTitle().length() > 50) title = tips.get(i).getTitle().substring(0, 66) + "...";
+                table += String.format(leftAlignFormat, incrementedIndex(i), author, title, tips.get(i).getYear(), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""), tips.get(i).isChecked());
             }
-            table += String.format("+-------+-----------------+----------------------+---------+%n");
+            table += String.format("+-------+----------------------------------------------------+------------------------------------------------------------------------+------+---------+---------+%n");
             io.print(table);
 
             return true;

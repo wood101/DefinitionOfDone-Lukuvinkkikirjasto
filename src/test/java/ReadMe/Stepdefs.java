@@ -246,7 +246,7 @@ public class Stepdefs {
         InMemoryDao dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
+        assertFalse(ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
     }
     
     @Then("^table contains \"([^\"]*)\"$")
@@ -255,7 +255,7 @@ public class Stepdefs {
         InMemoryDao dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("..."));
+        assertFalse(ios.getOutputString().contains("..."));
     }
 
 
@@ -282,13 +282,13 @@ public class Stepdefs {
     }
 
     //video
-    @Then("^videotable does not contain year$")
-    public void videotable_does_not_contain_year() throws Throwable {
+    @Then("^videotable does not contain link$")
+    public void videotable_does_not_contain_link() throws Throwable {
         IOStub ios = new IOStub(inputLinesVideoType);
         InMemoryDao dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("2014"));
+        assertFalse(ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
     }
 
     //book
@@ -313,13 +313,13 @@ public class Stepdefs {
 
     }
 
-    @Then("^booktable does not contain year$")
-    public void booktable_does_not_contain_year() throws Throwable {
+    @Then("^booktable does not contain ISBN$")
+    public void booktable_does_not_contain_ISBN() throws Throwable {
         IOStub ios = new IOStub(inputLinesBookType);
         InMemoryDao dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("2014"));
+        assertFalse(ios.getOutputString().contains("1234"));
     }
 
     //news
@@ -344,13 +344,13 @@ public class Stepdefs {
 
     }
 
-    @Then("^newstable does not contain year$")
-    public void newstable_does_not_contain_year() throws Throwable {
+    @Then("^newstable does not contain link$")
+    public void newstable_does_not_contain_link() throws Throwable {
         IOStub ios = new IOStub(inputLinesNewsType);
         InMemoryDao dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("2014"));
+        assertFalse(ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
     }
 
     //article
@@ -373,13 +373,13 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains("Article"));
     }
 
-    @Then("^articletable does not contain year$")
-    public void articletable_does_not_contain_year() throws Throwable {
+    @Then("^articletable does not contain link$")
+    public void articletable_does_not_contain_link() throws Throwable {
         IOStub ios = new IOStub(inputLinesArticleType);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("2014"));
+        assertFalse(ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
     }
 
     //blogs
@@ -402,13 +402,13 @@ public class Stepdefs {
         assertTrue(ios.getOutputString().contains("Blog"));
     }
 
-    @Then("^blogtable does not contain year$")
-    public void blogtable_does_not_contain_year() throws Throwable {
+    @Then("^blogtable does not contain link$")
+    public void blogtable_does_not_contain_link() throws Throwable {
         IOStub ios = new IOStub(inputLinesBlogType);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
         ui.run();
-        assertTrue(!ios.getOutputString().contains("2014"));
+        assertFalse(ios.getOutputString().contains("https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn"));
     }
 
     @Then("^error message :\"([^\"]*)\" is printed$")

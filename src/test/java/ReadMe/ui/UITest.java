@@ -59,9 +59,9 @@ public class UITest {
 
     @Test
     public void addBookSuccessfulWhenCorrectInputIsGiven() {
-        io = new IOStub("a", "2", "title", "author", "1234", "desc", "2000", "q");
+        io = new IOStub("a", "2", "title", "author", "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "desc", "2000", "q");
         ui = new UI(io, db);
-        Book book = new Book("author", "title", "1234", "desc", 2000);
+        Book book = new Book("author", "title", "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "desc", 2000);
 
         ui.run();
 
@@ -150,7 +150,7 @@ public class UITest {
         ui = new UI(io, db);
         String author = "author1";
         String title = "title2";
-        Book book1 = new Book(author, "title", "1234", "desc", 2000);
+        Book book1 = new Book(author, "title", "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "desc", 2000);
         Book book2 = new Book("author2", title, "4321", "desc", 2000);
         List<ReadingTip> list = new ArrayList<>();
         list.add(book1);
@@ -261,7 +261,7 @@ public class UITest {
 
     @Test
     public void givingWrongIndexForTipDoesNotShowTip() {
-        io = new IOStub("l", "4", "s", "1234", "q");
+        io = new IOStub("l", "4", "s", "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "q");
         ui = new UI(io, db);
         String author = "author1";
         String title = "title2";
@@ -280,7 +280,7 @@ public class UITest {
 
     @Test
     public void addVideoUnsuccessfulWhenNonnumericalYearIsGiven() {
-        io = new IOStub("a", "2", "title", "author", "1234", "desc", "f", "2000", "q");
+        io = new IOStub("a", "2", "title", "author", "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "desc", "f", "2000", "q");
         ui = new UI(io, db);
 
         ui.run();
@@ -290,7 +290,7 @@ public class UITest {
 
     @Test
     public void addVideoUnsuccessfulWhenFutureYearIsGiven() {
-        io = new IOStub("a", "2", "title", "author", "1234", "desc", "20000", "2000", "q");
+        io = new IOStub("a", "2", "title", "author", "https://www.youtube.com/watch?v=YX40hbAHx3s&frags=pl%2Cwn", "desc", "20000", "2000", "q");
         ui = new UI(io, db);
 
         ui.run();
