@@ -1,5 +1,6 @@
 # DefinitionOfGettingThere lukuvinkkikirjasto
-Ryhmän DefinitionOfGettingThere OhtuMiniProjekti.  Syksyn 2018 ohjelmiostotuotantokurssin projektiryhmätyö.
+
+Ryhmän DefinitionOfGettingThere OhtuMiniProjekti.  Syksyn 2018 ohjelmistotuotantokurssin projektiryhmätyö.
 
 
 ## Releases
