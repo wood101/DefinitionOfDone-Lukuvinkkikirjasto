@@ -15,8 +15,8 @@ public class Book extends ReadingTip {
         super(id, author, title, description, year, checked, date_checked);
         this.ISBN = ISBN;
     }
-
-    public Book(String author, String title, String link, String description, int year) {
+    
+    public Book(String author, String title, String ISBN, String description, int year) {
         super(author, title, description, year);
         this.ISBN = ISBN;
     }
@@ -33,10 +33,10 @@ public class Book extends ReadingTip {
     public String toString() {
         String dateText;
         if(this.getDate_checked() == null) dateText = "";
-        else dateText = " Date checked: " + new SimpleDateFormat("dd-MM-yyyy").format(super.getDate_checked())+ "\n";
-        return "\nTitle: " + super.getTitle() + "\n Author: " + super.getAuthor() +
-                "\n ISBN: " + ISBN + "\n Description: " + super.getDescription() +
-                "\n Year: " + super.getYear() + "\n Checked: " + super.isChecked() + "\n" + dateText;
+        else dateText = " Date checked: " + new SimpleDateFormat("dd-MM-yyyy").format(this.getDate_checked())+ "\n";
+        return "\nTitle: " + this.getTitle() + "\n Author: " + this.getAuthor() +
+                "\n ISBN: " + ISBN + "\n Description: " + this.getDescription() +
+                "\n Year: " + this.getYear() + "\n Checked: " + this.isChecked() + "\n" + dateText;
     }
 
     @Override
@@ -59,11 +59,11 @@ public class Book extends ReadingTip {
         }
 
         final Book other = (Book) obj;
-        return Objects.equals(super.getAuthor(), other.getAuthor())
-                && Objects.equals(super.getTitle(), other.getTitle())
-                && Objects.equals(super.getDescription(), other.getDescription())
+        return Objects.equals(this.getAuthor(), other.getAuthor())
+                && Objects.equals(this.getTitle(), other.getTitle())
+                && Objects.equals(this.getDescription(), other.getDescription())
                 && Objects.equals(this.ISBN, other.ISBN)
-                && Objects.equals(super.isChecked(), other.isChecked())
-                && Objects.equals(super.getDate_checked(), other.getDate_checked());
-    }
+                && Objects.equals(this.isChecked(), other.isChecked())
+                && Objects.equals(this.getDate_checked(), other.getDate_checked());
+    }    
 }
