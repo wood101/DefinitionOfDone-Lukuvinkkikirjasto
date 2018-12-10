@@ -46,8 +46,8 @@ public class Stepdefs {
     String[] inputLinesMarkFail = new String[10];
 
     String[] inputLinesEnterMain = new String[10];
-
     String[] inputLinesEnterAdd = new String[10];
+    String[] inputLinesEnterList = new String[10];
 
     String[] inputLinesSearch = new String[10];
 
@@ -641,5 +641,25 @@ public class Stepdefs {
     public void informs_user_that_no_reading_tips_found() throws Throwable {
         
     }
+    
+   @Given("^command \"([^\"]*)\" list is selected$")
+    public void command_list_is_selected(String l) throws Throwable {
+        inputLinesEnterList[0] = l;
 
+    }
+
+    @When("^command \"([^\"]*)\" enter is input after listing$")
+    public void command_enter_is_input_after_listing(String enter) throws Throwable {
+        inputLinesEnterList[1] = enter;
+        inputLinesEnterList[2] = "q";
+    }
+
+    @Then("^output \"([^\"]*)\" is printed coming back from list$")
+    public void output_is_printed_coming_back_from_list(String arg1) throws Throwable {
+        IOStub ios = new IOStub(inputLinesEnterList);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+        assertTrue(ios.getOutputString().contains("Choose an action:"));
+    }
 }

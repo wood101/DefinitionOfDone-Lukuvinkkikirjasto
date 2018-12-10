@@ -8,3 +8,8 @@ Feature: User can return to higher view with enter
     Given command "a" add new readtip is selected
     When command "" enter is input
     Then output "Choose an action" is printed
+
+  Scenario: When enter is pressed in the list tips menu
+    Given command "l" list is selected
+    When command "" enter is input after listing
+    Then output "Choose an action" is printed coming back from list
