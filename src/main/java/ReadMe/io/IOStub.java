@@ -5,10 +5,7 @@
  */
 package ReadMe.io;
 
-import ReadMe.domain.ReadingTip;
-import ReadMe.io.IO;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *

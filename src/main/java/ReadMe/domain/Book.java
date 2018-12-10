@@ -9,21 +9,14 @@ import java.util.Objects;
  * @author madjanne
  */
 public class Book extends ReadingTip {
-    private int id;
-    private String author;
-    private String title;
     private String ISBN;
-    private String description;
-    private int year;
-    private boolean checked;
-    private Date date_checked;
 
     public Book(int id, String author, String title, String ISBN, String description, int year, boolean checked, Date date_checked) {
         super(id, author, title, description, year, checked, date_checked);
         this.ISBN = ISBN;
     }
     
-    public Book(String author, String title, String link, String description, int year) {
+    public Book(String author, String title, String ISBN, String description, int year) {
         super(author, title, description, year);
         this.ISBN = ISBN;
     }    

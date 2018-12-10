@@ -10,8 +10,6 @@ package ReadMe.io;
  * @author bisi
  */
 
-import ReadMe.domain.ReadingTip;
-import java.util.List;
 import java.util.Scanner;
 
 /**
