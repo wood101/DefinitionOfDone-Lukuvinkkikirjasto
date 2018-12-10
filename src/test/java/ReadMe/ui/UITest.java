@@ -223,7 +223,7 @@ public class UITest {
 
     @Test
     public void singleBlogPrintsCorrectly() {
-        io = new IOStub("l", "6", "s", "1", "q");
+        io = new IOStub("l", "6", "1", "q");
         ui = new UI(io, db);
         String author = "author1";
         String title = "title2";
@@ -242,7 +242,7 @@ public class UITest {
 
     @Test
     public void singleNewsPrintsCorrectly() {
-        io = new IOStub("l", "4", "s", "2", "q");
+        io = new IOStub("l", "4", "2", "q");
         ui = new UI(io, db);
         String author = "author1";
         String title = "title2";
