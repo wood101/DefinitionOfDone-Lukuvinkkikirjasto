@@ -31,7 +31,6 @@ public class UI {
 
     private IO io;
     private DaoManager manager;
-    private boolean run;
 
     public UI(IO io, DaoManager manager) {
         this.io = io;
@@ -405,7 +404,7 @@ public class UI {
      * selection of type or to list all
      */
     private void selectBaseCommand() {
-        while (run) {
+        while (true) {
             String prompt = "Choose an action:\n"
                     + "  a - add new readtip\n"
                     + "  l - list tips\n"
@@ -489,13 +488,12 @@ public class UI {
      */
     public void run() {
         io.print("Welcome to ReadTipper!\n\n");
-        run = true;
         selectBaseCommand();
     }
 
     private void exitApplication() {
-        run = false;
         io.print("Thank you!");
+        System.exit(0);
     }
 
     public boolean openLinkInBrowser(String url) {
@@ -572,8 +570,6 @@ public class UI {
                     break;
                 case "q":
                     exitApplication();
-                    viewing = false;
-                    break;
             }
         }
 
