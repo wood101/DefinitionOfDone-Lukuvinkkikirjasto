@@ -327,7 +327,7 @@ public class UI {
      */
     private void selectSingleTip(List<ReadingTip> tips) {
         boolean viewing = true;
-        while (viewing) {
+        while (viewing && run) {
             String prompt = "Choose an action:\n"
                     + "  [index] - show more info about single tip\n"
                     + "  r       - mark reading tip as read\n"
@@ -543,7 +543,7 @@ public class UI {
     private void singleTipCommands(List<ReadingTip> tips, int index) {
         io.print(tips.get(index).toString());
         boolean viewing = true;
-        while (viewing) {
+        while (viewing && run) {
             String prompt = "Choose an action:\n"
                     + "  r - mark reading tip as read\n"
                     + "  b - back to list commands\n"
@@ -583,6 +583,7 @@ public class UI {
                     break;
                 case "q":
                     exitApplication();
+                    viewing = false;
             }
         }
 
