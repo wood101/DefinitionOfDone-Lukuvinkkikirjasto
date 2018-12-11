@@ -602,8 +602,8 @@ public class Stepdefs {
         inputLinesSingleMarkAsRead[3] = input;
     }
 
-    @Then("^tip is marked as read and message \"([^\"]*)\" is shown$")
-    public void tip_is_marked_as_read_and_message_is_shown(String message) throws Throwable {
+    @Then("^tip is marked as read and a message is shown$")
+    public void tip_is_marked_as_read_and_a_message_is_shown() throws Throwable {
         inputLinesSingleMarkAsRead[4] = "b"; // last input
         inputLinesSingleMarkAsRead[5] = "q"; // last input
 
@@ -612,7 +612,8 @@ public class Stepdefs {
         ui = new UI(ios, dao);
         ui.run();
 
-        assertTrue(ios.getOutputString().contains(message));
+        assertTrue(ios.getOutputString().contains("Marked"));
+        assertTrue(ios.getOutputString().contains("as read"));
     }
 
     @Then("^a single tip is shown$")
