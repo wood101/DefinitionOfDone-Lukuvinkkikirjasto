@@ -69,7 +69,7 @@ public class UI {
             if (index < 1) {
                 io.print("Bad index");
                 return false;
-            } 
+            }
         } catch (Exception e) {
             return false;
         }
@@ -367,7 +367,7 @@ public class UI {
                     break;
                 case "":
                     viewing = false;
-                    break;                     
+                    break;
             }
         }
 
@@ -449,13 +449,18 @@ public class UI {
             }
         }
     }
-    
+
+    /**
+     * Prompts user for a keyword (string) which will be matched with reading
+     * tips in the database if such tips are found. The keyword should be a
+     * substring of an author, title or year.
+     */
     private void searchWithKeyword() {
         io.print("Find reading tips using keyword matching author, title or year.");
         String keyword = io.readLine("Type keyword: ");
         List<ReadingTip> tips = manager.listByKeyword(keyword);
         boolean hasTips = summaryTableView(tips);
-        
+
         if (hasTips) {
             selectSingleTip(tips);
         }
