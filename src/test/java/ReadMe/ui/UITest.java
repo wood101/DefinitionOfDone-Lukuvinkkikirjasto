@@ -382,4 +382,24 @@ public class UITest {
         String output = io.getOutputString();
         assertTrue(output.contains("No reading tips found."));
     }
+    
+    @Test
+    public void addMenuReactsToEnterCorrectly() {
+        io = new IOStub("a", "", "q");
+        ui = new UI(io, db);
+        
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains("Choose an action:")); 
+    }
+    
+    @Test
+    public void listMenuReactsToEnterCorrectly() {
+        io = new IOStub("l", "", "q");
+        ui = new UI(io, db);
+        
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains("Choose an action:")); 
+    }
 }
