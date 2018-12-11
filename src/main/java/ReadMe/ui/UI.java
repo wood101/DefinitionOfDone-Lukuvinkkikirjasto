@@ -577,22 +577,9 @@ public class UI {
 
             String choice = userCommand(prompt, acceptedInput);
             ReadingTip selected = tips.get(index);
-            String successPrint = "";
-            boolean LinkOpenedSuccesfully;
             switch (choice) {
                 case "o":
-                    if (selected instanceof Book) {
-                        LinkOpenedSuccesfully = openLinkInBrowser(((Book) selected).getISBN());
-                        successPrint = "Searching for the book's ISBN at isbnsearch.org in your default browser";
-                    } else {
-                        LinkOpenedSuccesfully = openLinkInBrowser(getLinkFromReadingTip(selected));
-                        successPrint = "Link opened in your default browser";
-                    }
-                    if (LinkOpenedSuccesfully) {
-                        io.print(successPrint);
-                    } else {
-                        io.print("Failed to open link");
-                    }
+                    openLinkOfSelected(selected);
                 case "b":
                     viewing = false;
                     break;
@@ -606,6 +593,23 @@ public class UI {
             }
         }
 
+    }
+
+    private void openLinkOfSelected(ReadingTip selected) {
+        String successPrint = "";
+        boolean LinkOpenedSuccesfully = false;
+        if (selected instanceof Book) {
+            LinkOpenedSuccesfully = openLinkInBrowser(((Book) selected).getISBN());
+            successPrint = "Searching for the book's ISBN at isbnsearch.org in your default browser";
+        } else {
+            LinkOpenedSuccesfully = openLinkInBrowser(getLinkFromReadingTip(selected));
+            successPrint = "Link opened in your default browser";
+        }
+        if (LinkOpenedSuccesfully) {
+            io.print(successPrint);
+        } else {
+            io.print("Failed to open link");
+        }
     }
 
 }
