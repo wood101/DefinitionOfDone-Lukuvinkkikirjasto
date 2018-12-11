@@ -412,4 +412,26 @@ public class UITest {
         String output = io.getOutputString();
         assertTrue(output.contains("add new readtip")); 
     }
+    
+       @Test
+      public void  MarkingSingleTipAsReadReturnsRightMessage() {
+        io = new IOStub("l", "2", "1", "r", "q");
+        ui = new UI(io, db);
+        String author = "author1";
+        String title = "title";
+        Integer year = 2000;
+        Video video1 = new Video(author, title, "www.test.org", "desc", year);
+        List<ReadingTip> list = new ArrayList<>();
+     
+        when(db.markAsRead(video1)).thenReturn(true);
+        list.add(video1);
+    
+        when(db.listByType("video")).thenReturn(list);
+      
+        ui.run();
+        String output = io.getOutputString();
+        //System.out.println("output"+output);
+        assertTrue(output.contains("Marked title as read"));  
+    }
 }
+
