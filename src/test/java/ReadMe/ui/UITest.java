@@ -382,4 +382,34 @@ public class UITest {
         String output = io.getOutputString();
         assertTrue(output.contains("No reading tips found."));
     }
+    
+    @Test
+    public void addMenuReactsToEnterCorrectly() {
+        io = new IOStub("a", "", "q");
+        ui = new UI(io, db);
+        
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains("find tip by keyword")); 
+    }
+    
+    @Test
+    public void listMenuReactsToEnterCorrectly() {
+        io = new IOStub("l", "", "q");
+        ui = new UI(io, db);
+        
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains("add new readtip")); 
+    }
+    
+    @Test
+    public void listAllMenuReactsToEnterCorrectly() {
+        io = new IOStub("l", "1", "", "q");
+        ui = new UI(io, db);
+        
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains("add new readtip")); 
+    }
 }
