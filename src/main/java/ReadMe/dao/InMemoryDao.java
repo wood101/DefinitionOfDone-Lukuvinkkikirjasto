@@ -102,12 +102,13 @@ public class InMemoryDao implements DaoManager {
      */
     @Override
     public List<ReadingTip> listByKeyword(String keyword) {
+        String lowerKeyword = keyword.toLowerCase();
         List<ReadingTip> all = listByType("all");
         return all.stream()
-                .filter(t -> 
-                        t.getAuthor().contains(keyword) || 
-                        t.getTitle().contains(keyword) ||
-                        Integer.toString(t.getYear()).contains(keyword))
+                .filter(t -> {
+                    String tipAsString = t.toString().toLowerCase();
+                    return tipAsString.contains(lowerKeyword);
+                })
                 .collect(Collectors.toList());
     }
 
