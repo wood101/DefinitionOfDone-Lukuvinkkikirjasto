@@ -390,7 +390,7 @@ public class UITest {
         
         ui.run();
         String output = io.getOutputString();
-        assertTrue(output.contains("Choose an action:")); 
+        assertTrue(output.contains("find tip by keyword")); 
     }
     
     @Test
@@ -400,6 +400,16 @@ public class UITest {
         
         ui.run();
         String output = io.getOutputString();
-        assertTrue(output.contains("Choose an action:")); 
+        assertTrue(output.contains("add new readtip")); 
+    }
+    
+    @Test
+    public void listAllMenuReactsToEnterCorrectly() {
+        io = new IOStub("l", "1", "", "q");
+        ui = new UI(io, db);
+        
+        ui.run();
+        String output = io.getOutputString();
+        assertTrue(output.contains("add new readtip")); 
     }
 }
