@@ -281,6 +281,7 @@ public class UI {
         acceptedInput.add("5");
         acceptedInput.add("6");
         acceptedInput.add("b");
+        acceptedInput.add("");
 
         String choice = userCommand(prompt, acceptedInput);
         boolean hasTips = true;
@@ -312,6 +313,8 @@ public class UI {
                 break;
             case "b":
                 return;
+            case "":
+                return;
         }
         if (hasTips) {
             selectSingleTip(tips);
@@ -335,6 +338,7 @@ public class UI {
             acceptedInput.add("b");
             acceptedInput.add("r");
             acceptedInput.add("q");
+            acceptedInput.add("");
 
             String choice = singleCommand(prompt, acceptedInput);
             if (isIndex(choice)) {
@@ -361,6 +365,9 @@ public class UI {
                     exitApplication();
                     viewing = false;
                     break;
+                case "":
+                    viewing = false;
+                    break;                     
             }
         }
 
