@@ -426,7 +426,6 @@ public class UI {
             acceptedInput.add("l");
             acceptedInput.add("q");
             acceptedInput.add("link");
-            acceptedInput.add("");
 
             String choice = userCommand(prompt, acceptedInput);
             switch (choice) {
