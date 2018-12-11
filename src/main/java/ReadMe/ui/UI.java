@@ -409,11 +409,13 @@ public class UI {
             String prompt = "Choose an action:\n"
                     + "  a - add new readtip\n"
                     + "  l - list tips\n"
+                    + "  f - find tip by keyword\n"
                     + "  q - quit app\n";
 
             Set<String> acceptedInput = new TreeSet<>();
             acceptedInput.add("a");
             acceptedInput.add("l");
+            acceptedInput.add("f");
             acceptedInput.add("q");
             acceptedInput.add("link");
 
@@ -424,8 +426,10 @@ public class UI {
                     selectTypeToAdd();
                     break;
                 case "l":
-                    io.print("Existing tips: \n");
                     selectTypeToList();
+                    break;
+                case "f":
+                    searchWithKeyword();
                     break;
                 case "link":
                     openLinkInBrowser("http://www.google.com");
@@ -433,6 +437,17 @@ public class UI {
                 case "q":
                     exitApplication();
             }
+        }
+    }
+    
+    private void searchWithKeyword() {
+        io.print("Find reading tips using keyword matching author, title or year.");
+        String keyword = io.readLine("Type keyword: ");
+        List<ReadingTip> tips = manager.listByKeyword(keyword);
+        boolean hasTips = summaryTableView(tips);
+        
+        if (hasTips) {
+            selectSingleTip(tips);
         }
     }
 
