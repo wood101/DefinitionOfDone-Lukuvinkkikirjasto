@@ -591,6 +591,12 @@ public class Stepdefs {
         inputLinesAll[3] = "o";
     }
 
+    @When("^bad index \"([^\"]*)\" is input for listing single view$")
+    public void bad_index_is_input_for_listing_single_view(String index) throws Throwable {
+        inputLinesSingleWithIndex[2] = index;
+        inputLinesSingleMarkAsRead[2] = index;
+    }
+
     @When("^input \"([^\"]*)\" is given$")
     public void input_is_given(String input) throws Throwable {
         inputLinesSingleMarkAsRead[3] = input;
@@ -600,7 +606,7 @@ public class Stepdefs {
     public void tip_is_marked_as_read_and_message_is_shown(String message) throws Throwable {
         inputLinesSingleMarkAsRead[4] = "b"; // last input
         inputLinesSingleMarkAsRead[5] = "q"; // last input
-        
+
         IOStub ios = new IOStub(inputLinesSingleMarkAsRead);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
@@ -622,6 +628,18 @@ public class Stepdefs {
         ui.run();
 
         assertTrue(ios.getOutputString().contains(testVideo.toString()));
+    }
+
+    @Then("^no tip is shown and \"([^\"]*)\" is printed$")
+    public void no_tip_is_shown_and_is_printed(String arg1) throws Throwable {
+        inputLinesSingleWithIndex[3] = "b"; // back to main menu
+        inputLinesSingleWithIndex[4] = "q"; // last input
+        IOStub ios = new IOStub(inputLinesSingleWithIndex);
+        dao = new InMemoryDao();
+        ui = new UI(ios, dao);
+        ui.run();
+
+        assertTrue(ios.getOutputString().contains("Bad index"));
     }
 
     // feature: can_return_to_higher_view_with_enter ------------------

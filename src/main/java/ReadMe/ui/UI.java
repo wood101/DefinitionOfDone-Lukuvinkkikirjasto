@@ -229,6 +229,7 @@ public class UI {
         acceptedInput.add("4");
         acceptedInput.add("5");
         acceptedInput.add("b");
+        acceptedInput.add("");
 
         String choice = userCommand(prompt, acceptedInput);
         boolean addedSuccessfully = false;
@@ -249,6 +250,8 @@ public class UI {
                 addedSuccessfully = addBlog();
                 break;
             case "b":
+                return;
+            case "":
                 return;
         }
         if (addedSuccessfully) {
@@ -278,6 +281,7 @@ public class UI {
         acceptedInput.add("5");
         acceptedInput.add("6");
         acceptedInput.add("b");
+        acceptedInput.add("");
 
         String choice = userCommand(prompt, acceptedInput);
         boolean hasTips = true;
@@ -309,6 +313,8 @@ public class UI {
                 break;
             case "b":
                 return;
+            case "":
+                return;
         }
         if (hasTips) {
             selectSingleTip(tips);
@@ -321,7 +327,7 @@ public class UI {
      */
     private void selectSingleTip(List<ReadingTip> tips) {
         boolean viewing = true;
-        while (viewing) {
+        while (viewing && run) {
             String prompt = "Choose an action:\n"
                     + "  [index] - show more info about single tip\n"
                     + "  r       - mark reading tip as read\n"
@@ -332,6 +338,7 @@ public class UI {
             acceptedInput.add("b");
             acceptedInput.add("r");
             acceptedInput.add("q");
+            acceptedInput.add("");
 
             String choice = singleCommand(prompt, acceptedInput);
             if (isIndex(choice)) {
@@ -358,6 +365,9 @@ public class UI {
                     exitApplication();
                     viewing = false;
                     break;
+                case "":
+                    viewing = false;
+                    break;                     
             }
         }
 
@@ -547,7 +557,7 @@ public class UI {
     private void singleTipCommands(List<ReadingTip> tips, int index) {
         io.print(tips.get(index).toString());
         boolean viewing = true;
-        while (viewing) {
+        while (viewing && run) {
             String prompt = "Choose an action:\n"
                     + "  r - mark reading tip as read\n"
                     + "  b - back to list commands\n"
@@ -587,6 +597,7 @@ public class UI {
                     break;
                 case "q":
                     exitApplication();
+                    viewing = false;
             }
         }
 
