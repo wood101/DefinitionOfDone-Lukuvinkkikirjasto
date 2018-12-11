@@ -229,6 +229,7 @@ public class UI {
         acceptedInput.add("4");
         acceptedInput.add("5");
         acceptedInput.add("b");
+        acceptedInput.add("");
 
         String choice = userCommand(prompt, acceptedInput);
         boolean addedSuccessfully = false;
@@ -249,6 +250,8 @@ public class UI {
                 addedSuccessfully = addBlog();
                 break;
             case "b":
+                return;
+            case "":
                 return;
         }
         if (addedSuccessfully) {
@@ -416,6 +419,7 @@ public class UI {
             acceptedInput.add("l");
             acceptedInput.add("q");
             acceptedInput.add("link");
+            acceptedInput.add("");
 
             String choice = userCommand(prompt, acceptedInput);
             switch (choice) {
