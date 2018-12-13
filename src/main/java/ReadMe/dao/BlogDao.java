@@ -35,7 +35,7 @@ public class BlogDao {
     /**
      * Lists all Blog objects. Connects to database, retrieves all lines from the Blog table, and returns a list of Blog objects.
      * Returns null in case of SQL exception.
-     * @return
+     * @return List of all Blog objects
      */
     
     public List<ReadingTip> listAll() {
@@ -78,7 +78,8 @@ public class BlogDao {
 
     /**
      * Marks the Blog as read and sets the date it was read on.
-     * @param blog Object that is marked read
+     * @param title Title of object that is marked read
+     * @return boolean
      */
     public boolean markAsRead(String title) {
         try (Connection c = db.getConnection()) {
@@ -98,7 +99,7 @@ public class BlogDao {
     /**
      * Creates a new Blog object from database row
      * @param rs
-     * @return
+     * @return Blog object 
      * @throws SQLException
      */
     public static Blog rowToBlog(ResultSet rs) throws SQLException {
