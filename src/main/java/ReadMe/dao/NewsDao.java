@@ -37,7 +37,6 @@ public class NewsDao {
      * Returns null in case of SQL exception.
      * @return
      */
-    
     public List<ReadingTip> listAll() {
         try (Connection c = db.getConnection()) {
             List<ReadingTip> newss = new ArrayList<>();
@@ -79,7 +78,8 @@ public class NewsDao {
 
     /**
      * Marks the News as read and sets the date it was read on.
-     * @param news Object that is marked read
+     * @param title Object that is marked read
+     * @return boolean true if successful
      */
     public boolean markAsRead(String title) {
         try (Connection c = db.getConnection()) {
@@ -98,8 +98,8 @@ public class NewsDao {
     
      /**
      * Creates a new News object from database row
-     * @param rs
-     * @return
+     * @param rs result set from the database
+     * @return a new News object
      * @throws SQLException
      */
     public static News rowToNews(ResultSet rs) throws SQLException {

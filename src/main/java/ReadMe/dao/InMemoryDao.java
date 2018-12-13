@@ -37,9 +37,12 @@ public class InMemoryDao implements DaoManager {
         this.blogs = new ArrayList<>();
         setInMemoryObjects();
     }
-    
-    // not found testiä varten tyhjä konstruktori
-        public InMemoryDao(boolean empty) {
+
+    /**
+     * Empty constructor for "not found" testing
+     * @param empty if the InMemoryDao is created as an empty one
+     */
+    public InMemoryDao(boolean empty) {
         this.videos = new ArrayList<>();
         this.books = new ArrayList<>();
         this.news = new ArrayList<>();
@@ -65,7 +68,7 @@ public class InMemoryDao implements DaoManager {
      * Returns all wanted bookmarks as a List.
      *
      * Inputs = "all", "video", "book", "news", "article", "blog".
-     *
+     * @param type of the objects listed
      * @return List<ReadingTip>
      */
     @Override
@@ -93,12 +96,12 @@ public class InMemoryDao implements DaoManager {
                 return null;
         }
     }
-    
+
     /**
      * Returns all ReadingTips matching keyword as a List.
-     * 
+     *
      * @param keyword substring of author, title or year
-     * @return 
+     * @return
      */
     @Override
     public List<ReadingTip> listByKeyword(String keyword) {
@@ -159,9 +162,13 @@ public class InMemoryDao implements DaoManager {
 
     @Override
     public boolean markAsRead(ReadingTip tip) {
-        if (tip == null) return false;
+        if (tip == null) {
+            return false;
+        }
         ReadingTip toBeMarked = findFromList(tip);
-        if (toBeMarked == null) return false;
+        if (toBeMarked == null) {
+            return false;
+        }
 
         toBeMarked.setChecked(true);
         toBeMarked.setDate_checked(new Date());

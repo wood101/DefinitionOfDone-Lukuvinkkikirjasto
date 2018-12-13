@@ -33,7 +33,8 @@ public class DatabaseDao implements DaoManager {
      *
      * Inputs = "all", "video", "book", "news", "article", "blog".
      *
-     * @return List<ReadingTips>
+     * @param type of the bookmark
+     * @return List<ReadingTip>
      */
     @Override
     public List<ReadingTip> listByType(String type) {
@@ -61,6 +62,12 @@ public class DatabaseDao implements DaoManager {
         }
     }
 
+    /**
+     * Returns all wanted bookmarks as a List, searches them by a key work
+     *
+     * @param keyword
+     * @return List<ReadingTip>
+     */
     @Override
     public List<ReadingTip> listByKeyword(String keyword) {
         String lowerKeyword = keyword.toLowerCase();
@@ -73,26 +80,51 @@ public class DatabaseDao implements DaoManager {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Adds a Video
+     *
+     * @param video to be added
+     */
     @Override
     public void addVideo(Video video) {
         videoDao.add(video);
     }
 
+    /**
+     * Adds a Book
+     *
+     * @param book to be added
+     */
     @Override
     public void addBook(Book book) {
         bookDao.add(book);
     }
 
+    /**
+     * Adds a News
+     *
+     * @param news to be added
+     */
     @Override
     public void addNews(News news) {
         newsDao.add(news);
     }
 
+    /**
+     * Adds an Article
+     *
+     * @param article to be added
+     */
     @Override
     public void addArticle(Article article) {
         articleDao.add(article);
     }
 
+    /**
+     * Adds a Blog
+     *
+     * @param blog to be added
+     */
     @Override
     public void addBlog(Blog blog) {
         blogDao.add(blog);
@@ -101,9 +133,8 @@ public class DatabaseDao implements DaoManager {
     /**
      * Marks selected title as read.
      *
-     * @param type
-     * @param title
-     * @return true is marking is successful
+     * @param tip
+     * @return true if marking is successful
      */
     public boolean markAsRead(ReadingTip tip) {
         if (tip == null) {
