@@ -2,13 +2,6 @@
 
 ### Luontilauseet
 
-Sprint 1:
-
-Tietokannassa on tässä vaiheessa yksi taulu, jolla määritellään Lukuvinkki. Käytössä on SQLite3 tietokanta.
-
-Tietokannan luontilauseet
-
-
 ```sql
 
 sqlite3 readMeBase.db
