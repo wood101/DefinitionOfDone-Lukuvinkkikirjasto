@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Projektin suorittamista varten tarkista että sinulla on käytössäsi SQLite3, Gradle asennettuna ja Javasta vähintään versio 8. (versiossa 10 ei välttämättä kaikki testit toimi)
+Projektin suorittamista varten tarkista että sinulla on käytössäsi SQLite3, Gradle asennettuna ja Javasta vähintään versio 8. (versiossa 10 ei välttämättä kaikki testit toimi).
 
 ## Koodista buildaaminen
 
@@ -70,4 +70,4 @@ Näkymä listaa yksittäisen lukuvinkin tiedot. Komennot ovat:
   o - avaa lukuvinkin linkki selaimeen
   q - lopeta ohjelma
 ```
-- `o` avaa lukuvinkin selaimeen. Kirjojen tapauksessa ohjataan ISBN-numeron perusteella kirjaa vastaavaan hakuun www.isbnsearch.org -sivustolla. Linkit, joista puuttuu verkkotunnus avautuu google hakuun syötteenä.
+- `o` avaa lukuvinkin selaimeen. Linkin avaus toimii varmimmin, jos oletusselaimesi on Firefox. Kirjojen tapauksessa ohjataan ISBN-numeron perusteella kirjaa vastaavaan hakuun www.isbnsearch.org -sivustolla. Linkit, joista puuttuu verkkotunnus avautuu google hakuun syötteenä.
