@@ -6,4 +6,6 @@
 
  <suppressions>
     <suppress checks="MethodLength" files="UI.java"/>
+    <suppress checks="MethodLength" files="SQLiteDatabase.java"/>
+    <suppress checks="MethodLength" files="ReadingTip.java"/>
   </suppressions>

@@ -5,7 +5,6 @@
  */
 package ReadMe.dao;
 
-import ReadMe.ui.UI;
 import ReadMe.database.Database;
 import ReadMe.database.SQLiteDatabase;
 import ReadMe.domain.ReadingTip;
@@ -29,13 +28,13 @@ public class VideoDaoTest {
     private Database testDatabase;
     ConsoleIO testIo;
     private VideoDao testDao;
-    
+
     public VideoDaoTest() {
     }
 
     @Before
     public void setUp() throws ClassNotFoundException {
-        
+
         testFile = new File("testReadMeBase.db");
         testDatabase = new SQLiteDatabase("jdbc:sqlite:" + testFile.getAbsolutePath());
         testDao = new VideoDao(testDatabase);
@@ -52,19 +51,19 @@ public class VideoDaoTest {
     public void isListingCorrect() {
         testDao.add(new Video(1, "author", "title", "www", "desc", 2018, false, new Date(5)));
         testDao.add(new Video(3, "author1", "title2", "www4", "descr", 2015, true, new Date(7)));
-        
+
         List<ReadingTip> videos = testDao.listAll();
         assertEquals(2, videos.size());
-        assertEquals("title", videos.get(0).getTitle());  
-        assertEquals("desc", videos.get(0).getDescription());  
+        assertEquals("title", videos.get(0).getTitle());
+        assertEquals("desc", videos.get(0).getDescription());
     }
-    
-        @Test
+
+    @Test
     public void markAsReadWorks() {
         testDao.add(new Video(1, "author", "title", "www", "desc", 2018, false, null));
         testDao.markAsRead("title");
-        
+
         assertTrue(testDao.listAll().get(0).isChecked());
         assertNotNull(testDao.listAll().get(0).getDate_checked());
-    }  
+    }
 }

@@ -14,11 +14,8 @@ import ReadMe.domain.Book;
 import ReadMe.domain.News;
 import ReadMe.domain.ReadingTip;
 import ReadMe.domain.Video;
-import ReadMe.io.ConsoleIO;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import org.junit.Before;
@@ -303,14 +300,14 @@ public class UITest {
 
         assertTrue(io.getOutputs().contains("Year cannot be in the future!"));
     }
-    
+
     @Test
     public void noReadingTipsPrintedWhenDatabaseIsEmpty() {
         io = new IOStub("l", "1", "q");
         ui = new UI(io, db);
         List<ReadingTip> list = new ArrayList<>();
         when(db.listByType("all")).thenReturn(list);
-        
+
         ui.run();
         String output = io.getOutputString();
         assertTrue(output.contains("No reading tips found."));
@@ -334,6 +331,7 @@ public class UITest {
         assertTrue(title.length() > 70);
         assertTrue(output.contains("..."));
     }
+
     @Test
     public void tooLongAnAuthorPrintsDots() {
         io = new IOStub("l", "1", "q");
@@ -352,7 +350,7 @@ public class UITest {
         assertTrue(author.length() > 50);
         assertTrue(output.contains("..."));
     }
-    
+
     @Test
     public void searchWithKeywordReturnsListWithMatchingTips() {
         io = new IOStub("f", "authorial", "q");
@@ -368,7 +366,7 @@ public class UITest {
         String output = io.getOutputString();
         assertTrue(output.contains("authorial"));
     }
-    
+
     @Test
     public void searchWithKeywordMatchingNothingInformsUserNoTipsFound() {
         io = new IOStub("f", "tester", "q");
@@ -382,39 +380,39 @@ public class UITest {
         String output = io.getOutputString();
         assertTrue(output.contains("No reading tips found."));
     }
-    
+
     @Test
     public void addMenuReactsToEnterCorrectly() {
         io = new IOStub("a", "", "q");
         ui = new UI(io, db);
-        
+
         ui.run();
         String output = io.getOutputString();
-        assertTrue(output.contains("find tip by keyword")); 
+        assertTrue(output.contains("find tip by keyword"));
     }
-    
+
     @Test
     public void listMenuReactsToEnterCorrectly() {
         io = new IOStub("l", "", "q");
         ui = new UI(io, db);
-        
+
         ui.run();
         String output = io.getOutputString();
-        assertTrue(output.contains("add new readtip")); 
+        assertTrue(output.contains("add new readtip"));
     }
-    
+
     @Test
     public void listAllMenuReactsToEnterCorrectly() {
         io = new IOStub("l", "1", "", "q");
         ui = new UI(io, db);
-        
+
         ui.run();
         String output = io.getOutputString();
-        assertTrue(output.contains("add new readtip")); 
+        assertTrue(output.contains("add new readtip"));
     }
-    
-       @Test
-      public void  MarkingSingleTipAsReadReturnsRightMessage() {
+
+    @Test
+    public void MarkingSingleTipAsReadReturnsRightMessage() {
         io = new IOStub("l", "2", "1", "r", "q");
         ui = new UI(io, db);
         String author = "author1";
@@ -422,16 +420,15 @@ public class UITest {
         Integer year = 2000;
         Video video1 = new Video(author, title, "www.test.org", "desc", year);
         List<ReadingTip> list = new ArrayList<>();
-     
+
         when(db.markAsRead(video1)).thenReturn(true);
         list.add(video1);
-    
+
         when(db.listByType("video")).thenReturn(list);
-      
+
         ui.run();
         String output = io.getOutputString();
         //System.out.println("output"+output);
-        assertTrue(output.contains("Marked title as read"));  
+        assertTrue(output.contains("Marked title as read"));
     }
 }
-
