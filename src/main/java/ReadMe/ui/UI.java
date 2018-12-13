@@ -65,7 +65,7 @@ public class UI {
 
         /**
      * Checks if given index is valid 
-     *
+     * @param string to be checked
      * @return true if index is valid otherwise false
      */
     public boolean isIndex(String string) {
