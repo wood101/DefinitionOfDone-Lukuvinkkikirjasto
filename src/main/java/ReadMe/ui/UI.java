@@ -551,23 +551,23 @@ public class UI {
      * @return 
      */
     public boolean openLinkInBrowser(String url) {
+        String newUrl = url;
         Desktop desktop = java.awt.Desktop.getDesktop();
         try {
             if(!url.contains("http")) {
-                url = "http://" + url;
+                newUrl = "http://" + url;
             }
-            URL oURL = new URL(url);
-            if(!isTesting) desktop.browse(oURL.toURI());
-            return true;
-        } catch (Exception e) {
-            try {
-                url = url.replace("http://", "").replace(" ", "+");
+            URL oURL = new URL(newUrl);
+            if(oURL.getHost() == null) {
+                if(!isTesting) desktop.browse(oURL.toURI());
+            } else {
+                url = url.replace(" ", "+");
                 URL googleURL = new URL("https://www.google.com/search?q="+url);
                 if(!isTesting) desktop.browse(googleURL.toURI());
-                return true;
-            } catch (Exception ex){
-                return false;   
             }
+            return true;
+        } catch (Exception e) {
+                return false;   
         }
     }
 
