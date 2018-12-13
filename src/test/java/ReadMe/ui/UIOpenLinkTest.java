@@ -37,7 +37,6 @@ public class UIOpenLinkTest {
         ui.isTesting = true;
         ui.run();
         String output = io.getOutputString();
-        System.out.println(output);
         assertTrue(output.contains("Link opened in your default browser"));   
       }
       
@@ -49,7 +48,6 @@ public class UIOpenLinkTest {
         ui.isTesting = true;
         ui.run();
         String output = io.getOutputString();
-        System.out.println(output);
         assertTrue(output.contains("Link opened in your default browser"));  
       }
       
@@ -61,7 +59,6 @@ public class UIOpenLinkTest {
         ui.isTesting = true;
         ui.run();
         String output = io.getOutputString();
-        System.out.println(output);
         assertTrue(output.contains("Link opened in your default browser"));  
           
       }
@@ -74,7 +71,6 @@ public class UIOpenLinkTest {
         ui.isTesting = true;
         ui.run();
         String output = io.getOutputString();
-        System.out.println(output);
         assertTrue(output.contains("Searching for the book's ISBN at isbnsearch.org in your default browser"));   
           
       }
