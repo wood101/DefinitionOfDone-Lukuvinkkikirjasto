@@ -35,9 +35,8 @@ public class BookDao {
     /**
      * Lists all Book objects. Connects to database, retrieves all lines from the Book table, and returns a list of Book objects.
      * Returns null in case of SQL exception.
-     * @return
+     * @return List of Book objects
      */
-    
     public List<ReadingTip> listAll() {
         try (Connection c = db.getConnection()) {
             List<ReadingTip> books = new ArrayList<>();
@@ -57,7 +56,7 @@ public class BookDao {
     /**
      * Adds a new Book to database. Connects to database, adds a new Book to the database. In case of database conflict does nothing.
      * In case of SQL exception returns null.
-     * @param book
+     * @param book object
      */
     public void add(Book book) {
         try (Connection c = db.getConnection()) {
@@ -78,7 +77,8 @@ public class BookDao {
 
     /**
      * Marks the Book as read and sets the date it was read on.
-     * @param book Object that is marked read
+     * @param title Title of Object that is marked read
+     * @return boolean
      */
     public boolean markAsRead(String title) {
         try (Connection c = db.getConnection()) {
@@ -98,7 +98,7 @@ public class BookDao {
      /**
      * Creates a new Book object from database row
      * @param rs
-     * @return
+     * @return a new Book object
      * @throws SQLException
      */
     public static Book rowToBook(ResultSet rs) throws SQLException {

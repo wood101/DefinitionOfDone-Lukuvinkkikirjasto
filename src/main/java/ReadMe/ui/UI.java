@@ -13,11 +13,17 @@ import ReadMe.domain.Book;
 import ReadMe.domain.News;
 import ReadMe.domain.ReadingTip;
 import ReadMe.domain.Video;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.regex.Pattern;
 
 /**
  * UI object. Used to run console app.
@@ -35,9 +41,10 @@ public class UI {
         this.manager = manager;
     }
 
+    // accepts only valid years. Years BCE are marked as negative values.
     public int safeYearInput() {
         Date today = new Date();
-        int thisYear = today.getYear() + 1900; // getYear return this year - 1900 for reasons unknown
+        int thisYear = today.getYear() + 1900; // getYear returns this year - 1900 for reasons unknown
         int year = 0;
         boolean flag = false;
 
@@ -57,6 +64,21 @@ public class UI {
         return year;
     }
 
+    // accepts only valid years. Years BCE are marked as negative values.
+    public boolean isIndex(String string) {
+        int index = 0;
+        try {
+            index = Integer.parseInt(string);
+            if (index < 1) {
+                io.print("Bad index");
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Prints reading tips as a table
      *
@@ -69,14 +91,22 @@ public class UI {
             return false;
         } else {
             String table = "";
-            String leftAlignFormat = "| %-6d| %-15s | %-20s | %-7s |%n";
-            table += String.format("+-------+-----------------+----------------------+---------+%n");
-            table += String.format("| Index |     Author      |        Title         |  Type   |%n");
-            table += String.format("+-------+-----------------+----------------------+---------+%n");
+            String leftAlignFormat = "| %-6d| %-50s | %-70s | %-4d | %-7s | %-7s |%n";
+            table += String.format("+-------+----------------------------------------------------+------------------------------------------------------------------------+------+---------+---------+%n");
+            table += String.format("| Index |                      Author                        |                                     Title                              | Year |  Type   | Checked |%n");
+            table += String.format("+-------+----------------------------------------------------+------------------------------------------------------------------------+------+---------+---------+%n");
             for (int i = 0; i < tips.size(); i++) {
-                table += String.format(leftAlignFormat, incrementedIndex(i), tips.get(i).getAuthor(), tips.get(i).getTitle().substring(0, Math.min(19, tips.get(i).getTitle().length())), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""));
+                String author = tips.get(i).getAuthor();
+                String title = tips.get(i).getTitle();
+                if (tips.get(i).getAuthor().length() > 50) {
+                    author = tips.get(i).getAuthor().substring(0, 46) + "...";
+                }
+                if (tips.get(i).getTitle().length() > 50) {
+                    title = tips.get(i).getTitle().substring(0, 66) + "...";
+                }
+                table += String.format(leftAlignFormat, incrementedIndex(i), author, title, tips.get(i).getYear(), tips.get(i).getClass().getName().replace("ReadMe.domain.", ""), tips.get(i).isChecked());
             }
-            table += String.format("+-------+-----------------+----------------------+---------+%n");
+            table += String.format("+-------+----------------------------------------------------+------------------------------------------------------------------------+------+---------+---------+%n");
             io.print(table);
 
             return true;
@@ -90,6 +120,7 @@ public class UI {
      */
     private void singleTipView(ReadingTip tip) {
         io.print(tip.toString());
+
     }
 
     /**
@@ -114,7 +145,7 @@ public class UI {
         String link = io.readLine("Link: ");
         String description = io.readLine("Description: ");
         int year = safeYearInput();
-        manager.addVideo(new Video(author, title, description, link, year));
+        manager.addVideo(new Video(author, title, link, description, year));
         return true;
 
     }
@@ -201,6 +232,7 @@ public class UI {
         acceptedInput.add("4");
         acceptedInput.add("5");
         acceptedInput.add("b");
+        acceptedInput.add("");
 
         String choice = userCommand(prompt, acceptedInput);
         boolean addedSuccessfully = false;
@@ -221,6 +253,8 @@ public class UI {
                 addedSuccessfully = addBlog();
                 break;
             case "b":
+                return;
+            case "":
                 return;
         }
         if (addedSuccessfully) {
@@ -250,6 +284,7 @@ public class UI {
         acceptedInput.add("5");
         acceptedInput.add("6");
         acceptedInput.add("b");
+        acceptedInput.add("");
 
         String choice = userCommand(prompt, acceptedInput);
         boolean hasTips = true;
@@ -281,6 +316,8 @@ public class UI {
                 break;
             case "b":
                 return;
+            case "":
+                return;
         }
         if (hasTips) {
             selectSingleTip(tips);
@@ -293,28 +330,30 @@ public class UI {
      */
     private void selectSingleTip(List<ReadingTip> tips) {
         boolean viewing = true;
-        while (viewing) {
+        while (viewing && run) {
             String prompt = "Choose an action:\n"
-                    + "  s - show more info about single tip\n"
-                    + "  r - mark reading tip as read\n"
-                    + "  b - back to main commands\n"
-                    + "  q - quit app\n";
+                    + "  [index] - show more info about single tip\n"
+                    + "  r       - mark reading tip as read\n"
+                    + "  b       - back to main commands\n"
+                    + "  q       - quit app\n";
 
             Set<String> acceptedInput = new TreeSet<>();
-            acceptedInput.add("s");
             acceptedInput.add("b");
             acceptedInput.add("r");
             acceptedInput.add("q");
+            acceptedInput.add("");
 
-            String choice = userCommand(prompt, acceptedInput);
+            String choice = singleCommand(prompt, acceptedInput);
+            if (isIndex(choice)) {
+                try {
+                    int index = Integer.parseInt(choice) - 1;
+                    singleTipCommands(tips, index);
+                } catch (Exception e) {
+                    io.print("Bad index");
+                }
+            }
             ReadingTip selected = null;
             switch (choice) {
-                case "s":
-                    selected = selectTipFromList(tips);
-                    if (selected != null) {
-                        singleTipView(selected);
-                    }
-                    break;
                 case "b":
                     viewing = false;
                     break;
@@ -327,6 +366,9 @@ public class UI {
                     break;
                 case "q":
                     exitApplication();
+                    viewing = false;
+                    break;
+                case "":
                     viewing = false;
                     break;
             }
@@ -380,12 +422,15 @@ public class UI {
             String prompt = "Choose an action:\n"
                     + "  a - add new readtip\n"
                     + "  l - list tips\n"
+                    + "  f - find tip by keyword\n"
                     + "  q - quit app\n";
 
             Set<String> acceptedInput = new TreeSet<>();
             acceptedInput.add("a");
             acceptedInput.add("l");
+            acceptedInput.add("f");
             acceptedInput.add("q");
+            acceptedInput.add("link");
 
             String choice = userCommand(prompt, acceptedInput);
             switch (choice) {
@@ -394,12 +439,33 @@ public class UI {
                     selectTypeToAdd();
                     break;
                 case "l":
-                    io.print("Existing tips: \n");
                     selectTypeToList();
+                    break;
+                case "f":
+                    searchWithKeyword();
+                    break;
+                case "link":
+                    openLinkInBrowser("http://www.google.com");
                     break;
                 case "q":
                     exitApplication();
             }
+        }
+    }
+
+    /**
+     * Prompts user for a keyword (string) which will be matched with reading
+     * tips in the database if such tips are found. The keyword should be a
+     * substring of an author, title or year.
+     */
+    private void searchWithKeyword() {
+        io.print("Find reading tips using keyword matching author, title or year.");
+        String keyword = io.readLine("Type keyword: ");
+        List<ReadingTip> tips = manager.listByKeyword(keyword);
+        boolean hasTips = summaryTableView(tips);
+
+        if (hasTips) {
+            selectSingleTip(tips);
         }
     }
 
@@ -426,6 +492,32 @@ public class UI {
     }
 
     /**
+     * Provides list of commands and prompts user for input in single view.
+     * Accepts integers or input from set of commands given as a parameter.
+     * Everything else is rejected.
+     *
+     * @param prompt
+     * @param acceptedInput
+     * @return
+     */
+    private String singleCommand(String prompt, Set<String> acceptedInput) {
+        io.print(prompt);
+        String choice = "";
+        while (true) {
+            choice = io.readLine("Enter choice: ");
+            if (isIndex(choice)) {
+                break;
+            }
+            if (acceptedInput.contains(choice)) {
+                break;
+            } else {
+                io.print("Choose a correct input!");
+            }
+        }
+        return choice;
+    }
+
+    /**
      * Runs console UI
      */
     public void run() {
@@ -435,8 +527,103 @@ public class UI {
     }
 
     private void exitApplication() {
-        run = false;
         io.print("Thank you!");
+        run = false;
+    }
+
+    public boolean openLinkInBrowser(String url) {
+        Desktop desktop = java.awt.Desktop.getDesktop();
+        try {
+            if(!url.contains("http")) {
+                url = "http://" + url;
+            }
+            URL oURL = new URL(url);
+            desktop.browse(oURL.toURI());
+            return true;
+        } catch (Exception e) {
+            try {
+                System.out.println("TOIMIIIIKO?");
+                url = url.replace("http://", "").replace(" ", "+");
+                URL googleURL = new URL("https://www.google.com/search?q="+url);
+                desktop.browse(googleURL.toURI());
+                return true;
+            } catch (Exception ex){
+             return false;   
+            }
+        }
+    }
+
+    // given isbn is edited into an isbnsearch.org link
+    private String isbnSearchLink(String ISBN) {
+        return "https://isbnsearch.org/search?s=" + ISBN;
+    }
+
+    private String getLinkFromReadingTip(ReadingTip tip) {
+        String url = "";
+        if (tip instanceof Video) {
+            url = ((Video) tip).getLink();
+        } else if (tip instanceof Article) {
+            url = ((Article) tip).getLink();
+        } else if (tip instanceof Blog) {
+            url = ((Blog) tip).getLink();
+        } else if (tip instanceof News) {
+            url = ((News) tip).getLink();
+        }
+        return url;
+    }
+
+    private void singleTipCommands(List<ReadingTip> tips, int index) {
+        io.print(tips.get(index).toString());
+        boolean viewing = true;
+        while (viewing && run) {
+            String prompt = "Choose an action:\n"
+                    + "  r - mark reading tip as read\n"
+                    + "  b - back to list commands\n"
+                    + "  o - open link in browser\n"
+                    + "  q - quit app\n";
+
+            Set<String> acceptedInput = new TreeSet<>();
+            acceptedInput.add("b");
+            acceptedInput.add("r");
+            acceptedInput.add("o");
+            acceptedInput.add("q");
+
+            String choice = userCommand(prompt, acceptedInput);
+            ReadingTip selected = tips.get(index);
+            switch (choice) {
+                case "o":
+                    openLinkOfSelected(selected);
+                    break;
+                case "b":
+                    viewing = false;
+                    break;
+                case "r":
+                    ReadingTip edited = MarkTipAsRead(selected);
+                    updateCachedTipWhenMarked(tips, selected, edited);
+                    break;
+                case "q":
+                    exitApplication();
+                    viewing = false;
+            }
+        }
+
+    }
+
+    private void openLinkOfSelected(ReadingTip selected) {
+        String successPrint = "";
+        boolean LinkOpenedSuccesfully = false;
+        if (selected instanceof Book) {
+            LinkOpenedSuccesfully = openLinkInBrowser(isbnSearchLink(((Book) selected).getISBN()));
+            successPrint = "Searching for the book's ISBN at isbnsearch.org in your default browser";
+        } else {
+            LinkOpenedSuccesfully = openLinkInBrowser(getLinkFromReadingTip(selected));
+            successPrint = "Link opened in your default browser";
+        }
+        if (LinkOpenedSuccesfully) {
+            io.print(successPrint);
+        } else {
+            io.print("Failed to open link");
+        }
     }
 
 }

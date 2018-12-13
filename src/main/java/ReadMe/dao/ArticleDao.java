@@ -36,9 +36,8 @@ public class ArticleDao {
     /**
      * Lists all Article objects. Connects to database, retrieves all lines from the Article table, and returns a list of Article objects.
      * Returns null in case of SQL exception.
-     * @return
-     */
-    
+     * @return all lines from the Article table
+     */    
     public List<ReadingTip> listAll() {
         try (Connection c = db.getConnection()) {
             List<ReadingTip> articles = new ArrayList<>();
@@ -57,7 +56,8 @@ public class ArticleDao {
 
     /**
      * Marks the Article as read and sets the date it was read on.
-     * @param article Object that is marked read
+     * @param title Object that is marked read
+     * @return boolean
      */
     public boolean markAsRead(String title) {
         try (Connection c = db.getConnection()) {
@@ -100,7 +100,7 @@ public class ArticleDao {
      /**
      * Creates a new Article object from database row
      * @param rs
-     * @return
+     * @return Article object
      * @throws SQLException
      */
     public static Article rowToArticle(ResultSet rs) throws SQLException {

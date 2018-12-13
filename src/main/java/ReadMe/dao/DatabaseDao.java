@@ -1,9 +1,9 @@
 package ReadMe.dao;
 
-
 import ReadMe.domain.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Class that manages DAO Objects.
@@ -29,17 +29,17 @@ public class DatabaseDao implements DaoManager {
     }
 
     /**
-     * Returns all wanted bookmarks as a List. 
+     * Returns all wanted bookmarks as a List.
      *
      * Inputs = "all", "video", "book", "news", "article", "blog".
-
+     *
      * @return List<ReadingTips>
      */
     @Override
     public List<ReadingTip> listByType(String type) {
         ArrayList<ReadingTip> list = new ArrayList<>();
         switch (type) {
-            case "all":  
+            case "all":
                 videoDao.listAll().forEach(a -> list.add(a));
                 bookDao.listAll().forEach(a -> list.add(a));
                 newsDao.listAll().forEach(a -> list.add(a));
@@ -51,16 +51,27 @@ public class DatabaseDao implements DaoManager {
             case "book":
                 return bookDao.listAll();
             case "news":
-               return newsDao.listAll();
+                return newsDao.listAll();
             case "article":
                 return articleDao.listAll();
             case "blog":
-               return blogDao.listAll();
+                return blogDao.listAll();
             default:
                 return null;
         }
     }
 
+    @Override
+    public List<ReadingTip> listByKeyword(String keyword) {
+        String lowerKeyword = keyword.toLowerCase();
+        List<ReadingTip> all = listByType("all");
+        return all.stream()
+                .filter(t -> {
+                    String tipAsString = t.toString().toLowerCase();
+                    return tipAsString.contains(lowerKeyword);
+                })
+                .collect(Collectors.toList());
+    }
 
     @Override
     public void addVideo(Video video) {
@@ -89,13 +100,15 @@ public class DatabaseDao implements DaoManager {
 
     /**
      * Marks selected title as read.
-     * 
+     *
      * @param type
      * @param title
      * @return true is marking is successful
      */
     public boolean markAsRead(ReadingTip tip) {
-        if (tip == null) return false;
+        if (tip == null) {
+            return false;
+        }
         switch (tip.getClass().getName().replace("ReadMe.domain.", "")) {
             case "Video":
                 return videoDao.markAsRead(tip.getTitle());
@@ -111,7 +124,5 @@ public class DatabaseDao implements DaoManager {
                 return false;
         }
     }
-   
 
-    
 }
