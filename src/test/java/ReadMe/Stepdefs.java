@@ -548,9 +548,6 @@ public class Stepdefs {
         inputLinesAll[1] = "1";
         inputLinesAll[2] = index;
     }
-<<<<<<< HEAD
-=======
-    
     // ---------------------------------- Book opened in browser
     @When("^command \"([^\"]*)\" is input for listing single book view$")
     public void command_is_input_for_listing_single_book_view(String arg1) throws Throwable {
@@ -592,7 +589,6 @@ public class Stepdefs {
     public void command_open_link_is_given(String arg1) throws Throwable {
         inputLinesAll[3] = "o";
     }
->>>>>>> linkki
 
     @When("^bad index \"([^\"]*)\" is input for listing single view$")
     public void bad_index_is_input_for_listing_single_view(String index) throws Throwable {
