@@ -130,6 +130,7 @@ public class UI {
     /**
      * Displays fields to input for video entry, takes input, and creates video
      * entry
+     * @return true if video is added, otherwise false
      */
     public boolean addVideo() {
         io.print("VIDEO ENTRY - enter information: \n\n");
@@ -146,6 +147,7 @@ public class UI {
     /**
      * Displays fields to input for book entry, takes input, and creates book
      * entry
+     * @return true if book is added, otherwise false
      */
     public boolean addBook() {
         io.print("BOOK ENTRY - enter information: \n\n");
@@ -161,6 +163,7 @@ public class UI {
     /**
      * Displays fields to input for news entry, takes input, and creates news
      * entry
+     * @return true if news is added otherwise false
      */
     public boolean addNews() {
         io.print("NEWS ENTRY - enter information: \n\n");
@@ -177,6 +180,7 @@ public class UI {
     /**
      * Displays fields to input for article entry, takes input, and creates
      * article entry
+    * @return true if article is added otherwise false
      */
     public boolean addArticle() {
         io.print("ARTICLE ENTRY - enter information: \n\n");
@@ -193,6 +197,7 @@ public class UI {
     /**
      * Displays fields to input for blog entry, takes input, and creates blog
      * entry
+     * @return true blog is added otherwise false
      */
     public boolean addBlog() {
         io.print("BLOG ENTRY - enter information: \n\n");
@@ -208,6 +213,7 @@ public class UI {
     /**
      * Displays options of types of tips to add and takes user input for
      * selection of type
+     * @return print "Tip added" if adding is successful
      */
     private void selectTypeToAdd() {
         String prompt = "Choose type:\n"
@@ -376,7 +382,12 @@ public class UI {
             }
         }
     }
-
+    
+    /**
+     * Marks given tip as read by setting checked true
+     * @param tip
+     * @return tip with checked true and  date
+     */
     private ReadingTip MarkTipAsRead(ReadingTip tip) {
         manager.markAsRead(tip);
         io.print("Marked " + tip.getTitle() + " as read");
@@ -487,7 +498,7 @@ public class UI {
      *
      * @param prompt
      * @param acceptedInput
-     * @return
+     * @return given choice
      */
     private String singleCommand(String prompt, Set<String> acceptedInput) {
         io.print(prompt);
@@ -515,11 +526,19 @@ public class UI {
         selectBaseCommand();
     }
 
+      /**
+     * Exits application
+     */
     private void exitApplication() {
         io.print("Thank you!");
         running = false;
     }
 
+    /**
+     * 
+     * @param tips
+     * @param index 
+     */
     private void singleTipCommands(List<ReadingTip> tips, int index) {
         io.print(tips.get(index).toString());
         boolean viewing = true;
