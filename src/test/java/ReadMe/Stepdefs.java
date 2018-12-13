@@ -11,6 +11,7 @@ import ReadMe.domain.Video;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import java.awt.Desktop;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import static org.junit.Assert.*;
@@ -548,6 +549,7 @@ public class Stepdefs {
         inputLinesAll[1] = "1";
         inputLinesAll[2] = index;
     }
+
     // ---------------------------------- Book opened in browser
     @When("^command \"([^\"]*)\" is input for listing single book view$")
     public void command_is_input_for_listing_single_book_view(String arg1) throws Throwable {
@@ -561,13 +563,15 @@ public class Stepdefs {
         inputLinesAll[4] = "b";
         inputLinesAll[5] = "q";
 
-        IOStub ios = new IOStub(inputLinesAll);
-        dao = new InMemoryDao();
-        ui = new UI(ios, dao);
-        ui.isTesting = true;
-        ui.run();
+        if (Desktop.isDesktopSupported()) {
+            IOStub ios = new IOStub(inputLinesAll);
+            dao = new InMemoryDao();
+            ui = new UI(ios, dao);
+            ui.isTesting = true;
+            ui.run();
+            assertTrue(ios.getOutputString().contains("Searching for the book's ISBN at isbnsearch.org in your default browser"));
+        }
 
-        assertTrue(ios.getOutputString().contains("Searching for the book's ISBN at isbnsearch.org in your default browser"));
     }
 
     // ----------------------------------- Bookmark opened in browser
@@ -576,13 +580,15 @@ public class Stepdefs {
         inputLinesAll[4] = "b";
         inputLinesAll[5] = "q";
 
-        IOStub ios = new IOStub(inputLinesAll);
-        dao = new InMemoryDao();
-        ui = new UI(ios, dao);
-        ui.isTesting = true;
-        ui.run();
+        if (Desktop.isDesktopSupported()) {
+            IOStub ios = new IOStub(inputLinesAll);
+            dao = new InMemoryDao();
+            ui = new UI(ios, dao);
+            ui.isTesting = true;
+            ui.run();
+            assertTrue(ios.getOutputString().contains("Link opened in your default browser"));
+        }
 
-        assertTrue(ios.getOutputString().contains("Link opened in your default browser"));
     }
 
     @When("^command \"([^\"]*)\" open link is given$")
