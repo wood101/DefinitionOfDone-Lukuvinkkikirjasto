@@ -559,7 +559,7 @@ public class UI {
         String newUrl = url;
         Desktop desktop = java.awt.Desktop.getDesktop();
         try {
-            if(!url.contains("http")) {
+            if(!url.contains("http://") && !url.contains("https://")) {
                 newUrl = "http://" + url;
             }
             URL oURL = new URL(newUrl);
@@ -591,7 +591,6 @@ public class UI {
             return false;
         }
         return responseCode != 404;
-
     }
     
    /**
