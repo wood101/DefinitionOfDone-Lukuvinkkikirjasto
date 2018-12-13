@@ -15,12 +15,16 @@ import ReadMe.domain.ReadingTip;
 import ReadMe.domain.Video;
 import java.time.LocalDateTime;
 import java.awt.Desktop;
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * UI object. Used to running console app.
@@ -558,7 +562,7 @@ public class UI {
                 newUrl = "http://" + url;
             }
             URL oURL = new URL(newUrl);
-            if(oURL.getHost() == null) {
+            if(checkIfSiteExists(oURL)) {
                 if(!isTesting) desktop.browse(oURL.toURI());
             } else {
                 url = url.replace(" ", "+");
@@ -570,7 +574,26 @@ public class UI {
             return false;   
         }
     }
+    
+    /**
+     * Checks if a site exists on the web.
+     * @param url
+     * @return 
+     */
+    private boolean checkIfSiteExists(URL url) {
+        int responseCode = 0;
+        try {
+            HttpURLConnection huc = (HttpURLConnection) url.openConnection();
+            huc.setRequestMethod("HEAD");
+            responseCode = huc.getResponseCode();
+        } catch (Exception e) {
+            return false;
+        }
+        if (responseCode != 404) return true;
+        return false;
 
+    }
+    
    /**
      * given isbn is edited into an isbnsearch.org link
      * @param ISBN
