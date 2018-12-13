@@ -62,13 +62,12 @@ Jos valitset jonkun listanäkymistä 1-6: avautuu seuraava näkymä:
   b       - takaisin päävalikkoon
   q       - lopeta ohjelma
 ```
-
 ### Yksittäisen vinkin näkymä
-
 Näkymä listaa yksittäisen lukuvinkin tiedot. Komennot ovat:
-
 ```
   r - merkkaa luetuksi
   b - takaisin edelliseen listausnäkymään
+  o - avaa lukuvinkin linkki selaimeen
   q - lopeta ohjelma
 ```
+- `o` avaa lukuvinkin selaimeen. Kirjojen tapauksessa ohjataan ISBN-numeron perusteella kirjaa vastaavaan hakuun www.isbnsearch.org -sivustolla. Linkit, joista puuttuu verkkotunnus avautuu google hakuun syötteenä.

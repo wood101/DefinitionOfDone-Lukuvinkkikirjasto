@@ -179,37 +179,25 @@ public class InMemoryDao implements DaoManager {
         switch (tip.getClass().getName().replace("ReadMe.domain.", "")) {
             case "Video":
                 for (ReadingTip item : videos) {
-                    if (item.equals(tip)) {
-                        return item;
-                    }
+                    if (item.equals(tip)) return item;
                 }
             case "Book":
                 for (ReadingTip item : books) {
-                    if (item.equals(tip)) {
-                        return item;
-                    }
+                    if (item.equals(tip)) return item;
                 }
             case "News":
                 for (ReadingTip item : news) {
-                    if (item.equals(tip)) {
-                        return item;
-                    }
+                    if (item.equals(tip)) return item;
                 }
             case "Article":
                 for (ReadingTip item : articles) {
-                    if (item.equals(tip)) {
-                        return item;
-                    }
+                    if (item.equals(tip)) return item;
                 }
             case "Blog":
                 for (ReadingTip item : blogs) {
-                    if (item.equals(tip)) {
-                        return item;
-                    }
+                    if (item.equals(tip)) return item;
                 }
-            default:
-                return null;
         }
-
+        return null;
     }
 }
