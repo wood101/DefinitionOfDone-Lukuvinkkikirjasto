@@ -589,6 +589,7 @@ public class UI {
         while (viewing && running) {
             String prompt = "Choose an action:\n"
                     + "  r - mark reading tip as read\n"
+                    + "  o - open link or search ISBN in browser\n"
                     + "  b - back to list commands\n"
                     + "  q - quit app\n";
 
