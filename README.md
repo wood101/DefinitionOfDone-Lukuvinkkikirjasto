@@ -7,7 +7,7 @@ Miniprojektissa on toteutettu asiakkaan toiveiden mukainen lukuvinkkikirjasto lu
 Sovellus on toteutettu käyttäjän omalle koneelle ladattavaksi paikalliseksi ohjelmaksi. Sovellukseen on toteutettu komentoriviltä toimiva konsolipohjainen käyttöliittymä ja tietojen tallennukseen käytetään SQLlite [tietokantaa](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/blob/dev/Dokumentaatio/Tietokanta.md). Sovellus on toteutettu javalla Gradle build työkalulla. Testaamisessa on käytössä JUnit sekä Cucumber testit. Jatkuvaan integraatioon CI on käytetty Travisis-ci:tä ja testikattavuuksien tarkateluun Codecovia.
 
 ## Releases
-- [Lopullinen versio 1.0](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/releases/tag/1.0)
+- [Lopullinen versio 1.0.1](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/releases/tag/1.0.1)
 - [Versio 0.7.1 (sprintti3)](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/releases/tag/sprintti3)
 - [Versio 0.5 (sprintti2)](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/releases/tag/sprintti2)
 
