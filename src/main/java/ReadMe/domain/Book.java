@@ -9,24 +9,17 @@ import java.util.Objects;
  * @author madjanne
  */
 public class Book extends ReadingTip {
-    private int id;
-    private String author;
-    private String title;
     private String ISBN;
-    private String description;
-    private int year;
-    private boolean checked;
-    private Date date_checked;
 
     public Book(int id, String author, String title, String ISBN, String description, int year, boolean checked, Date date_checked) {
         super(id, author, title, description, year, checked, date_checked);
         this.ISBN = ISBN;
     }
     
-    public Book(String author, String title, String link, String description, int year) {
+    public Book(String author, String title, String ISBN, String description, int year) {
         super(author, title, description, year);
         this.ISBN = ISBN;
-    }    
+    }
 
     public String getISBN() {
         return ISBN;
@@ -35,26 +28,21 @@ public class Book extends ReadingTip {
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
-    
+
     @Override
     public String toString() {
         String dateText;
         if(this.getDate_checked() == null) dateText = "";
-        else dateText = " Date checked: " + new SimpleDateFormat("dd-MM-yyyy").format(super.getDate_checked())+ "\n";
-        return "\nTitle: " + super.getTitle() + "\n Author: " + super.getAuthor() +
-                "\n ISBN: " + ISBN + "\n Description: " + super.getDescription() + 
-                "\n Year: " + super.getYear() + "\n Checked: " + super.isChecked() + "\n" + dateText;
+        else dateText = " Date checked: " + new SimpleDateFormat("dd-MM-yyyy").format(this.getDate_checked())+ "\n";
+        return "\nTitle: " + this.getTitle() + "\n Author: " + this.getAuthor() +
+                "\n ISBN: " + ISBN + "\n Description: " + this.getDescription() +
+                "\n Year: " + this.getYear() + "\n Checked: " + this.isChecked() + "\n" + dateText;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + Objects.hashCode(super.getAuthor());
-        hash = 23 * hash + Objects.hashCode(super.getTitle());
-        hash = 23 * hash + Objects.hashCode(super.getDescription());
+        int hash = super.hashCode();
         hash = 23 * hash + Objects.hashCode(this.ISBN);
-        hash = 23 * hash + Objects.hashCode(super.isChecked());
-        hash = 23 * hash + Objects.hashCode(super.getDate_checked());
         return hash;
     }
 
@@ -71,11 +59,11 @@ public class Book extends ReadingTip {
         }
 
         final Book other = (Book) obj;
-        return Objects.equals(super.getAuthor(), other.getAuthor())
-                && Objects.equals(super.getTitle(), other.getTitle())
-                && Objects.equals(super.getDescription(), other.getDescription())
+        return Objects.equals(this.getAuthor(), other.getAuthor())
+                && Objects.equals(this.getTitle(), other.getTitle())
+                && Objects.equals(this.getDescription(), other.getDescription())
                 && Objects.equals(this.ISBN, other.ISBN)
-                && Objects.equals(super.isChecked(), other.isChecked())
-                && Objects.equals(super.getDate_checked(), other.getDate_checked());
+                && Objects.equals(this.isChecked(), other.isChecked())
+                && Objects.equals(this.getDate_checked(), other.getDate_checked());
     }    
 }
