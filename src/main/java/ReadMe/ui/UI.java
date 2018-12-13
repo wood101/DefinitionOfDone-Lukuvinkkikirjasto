@@ -377,7 +377,13 @@ public class UI {
         }
 
     }
-
+    /**
+     * Updates marked tips
+     *
+     * @param tips
+     * @param selected
+     * @param edited
+     */
     private void updateCachedTipWhenMarked(List<ReadingTip> tips, ReadingTip selected, ReadingTip edited) {
         for (int i = 0; i < tips.size(); i++) {
             if (tips.get(i).equals(selected)) {
@@ -537,11 +543,14 @@ public class UI {
         running = false;
     }
 
-    // Tries to open link in browser. If http is not included, method adds it to the link while opening. 
-    // if link is not in a link format, link is opened in google search
-    // returns true if link is openable, false is something fails.
     
-    private boolean openLinkInBrowser(String url) {
+   /**
+     * Opens link in browser based on given url
+     * If url doesn't have a domain, opens it with google search
+     * @param url
+     * @return 
+     */
+    public boolean openLinkInBrowser(String url) {
         Desktop desktop = java.awt.Desktop.getDesktop();
         try {
             if(!url.contains("http")) {
@@ -552,7 +561,6 @@ public class UI {
             return true;
         } catch (Exception e) {
             try {
-                //Viime hetken purkka
                 url = url.replace("http://", "").replace(" ", "+");
                 URL googleURL = new URL("https://www.google.com/search?q="+url);
                 if(!isTesting) desktop.browse(googleURL.toURI());
@@ -563,12 +571,21 @@ public class UI {
         }
     }
 
-    // given isbn is edited into an isbnsearch.org link
-    
+   /**
+     * given isbn is edited into an isbnsearch.org link
+     * @param ISBN
+     * @return  string with url and ISBN
+     */
     private String isbnSearchLink(String ISBN) {
         return "https://isbnsearch.org/search?s=" + ISBN;
     }
 
+    /**
+     * Get links based on readingtip type
+     *
+     * @param tip
+     * @return
+     */
     private String getLinkFromReadingTip(ReadingTip tip) {
         String url = "";
         if (tip instanceof Video) {
@@ -583,12 +600,14 @@ public class UI {
         return url;
     }
 
-    /** 
-     * UI Commands after choosing a single tip from listing view. 
-     * Loop for user while viewing information about a single tip.
-     * 
-     * @param tips list of all tips
-     * @param index chosen index
+
+    /**
+     * Displays options of a command on singleTip view and takes user input for
+     * selections: to mark reading tip as read, to go back to list commands or
+     * to quit app
+     *
+     * @param tips
+     * @param index
      */
     private void singleTipCommands(List<ReadingTip> tips, int index) {
         io.print(tips.get(index).toString());
@@ -629,10 +648,13 @@ public class UI {
             }
         }
     }
-    
-    // Tries to open a readingtip's link in browser and prints whether operation is succesfull.
-    // ISBN is searched at isbnsearch.org
-    
+
+    /**
+     *  If selected reading tip is a book, calls openlinkBrowser with an url based on ISBN 
+     *  Otherwise calls openLinkBrowser with the object link
+     *  prints a success message, otherwise prints a failing message
+     * @param selected 
+     */
     private void openLinkOfSelected(ReadingTip selected) {
         String successPrint = "";
         boolean LinkOpenedSuccesfully = false;
