@@ -15,6 +15,7 @@ import ReadMe.domain.ReadingTip;
 import ReadMe.domain.Video;
 import java.time.LocalDateTime;
 import java.awt.Desktop;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
@@ -586,11 +587,10 @@ public class UI {
             HttpURLConnection huc = (HttpURLConnection) url.openConnection();
             huc.setRequestMethod("HEAD");
             responseCode = huc.getResponseCode();
-        } catch (Exception e) {
+        } catch (IOException e) {
             return false;
         }
-        if (responseCode != 404) return true;
-        return false;
+        return responseCode != 404;
 
     }
     
