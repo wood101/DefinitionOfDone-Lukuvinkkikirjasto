@@ -32,9 +32,7 @@ public class ArticleDaoTest {
     public ArticleDaoTest() {
     }
 
-    /**
-     * Creates new testFile, testDatabase, Article DAO and ConsoleIO for testing
-     */
+    //Creates new testFile, testDatabase, Article DAO and ConsoleIO for testing
     @Before
     public void setUp() throws ClassNotFoundException {
         
@@ -43,17 +41,15 @@ public class ArticleDaoTest {
         testDao = new ArticleDao(testDatabase);
         testIo = new ConsoleIO();
     }
-     /**
-     * Deletes testFile
-     */
+     
+    //Deletes testFile
     @After
     public void tearDown() {
         testFile.delete();
     }
   
-    /**
-     * Tests if listing All gives correct output 
-     */
+    
+    //Tests if listing All gives correct output 
     @Test
     public void isListingCorrect() {
         testDao.add(new Article(1, "author", "title", "www", "desc", "otava", 2018, false, new Date(5)));
@@ -65,9 +61,7 @@ public class ArticleDaoTest {
         assertEquals("desc", articles.get(0).getDescription());  
     }
     
-     /**
-     * Tests if marking as read works
-     */
+    //Tests if marking as read works
     @Test
     public void markAsReadWorks() {
         testDao.add(new Article(1, "author", "title", "www", "desc", "otava", 2018, false, null));
