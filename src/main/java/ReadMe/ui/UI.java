@@ -560,7 +560,6 @@ public class UI {
             return true;
         } catch (Exception e) {
             try {
-                //Viime hetken purkka
                 url = url.replace("http://", "").replace(" ", "+");
                 URL googleURL = new URL("https://www.google.com/search?q="+url);
                 if(!isTesting) desktop.browse(googleURL.toURI());
