@@ -37,7 +37,6 @@ public class VideoDao {
      * Returns null in case of SQL exception.
      * @return
      */
-    
     public List<ReadingTip> listAll() {
         try (Connection c = db.getConnection()) {
             List<ReadingTip> videos = new ArrayList<>();
@@ -57,7 +56,7 @@ public class VideoDao {
     /**
      * Adds a new Video to database. Connects to database, adds a new Video to the database. In case of database conflict does nothing.
      * In case of SQL exception returns null.
-     * @param vid
+     * @param vid video to add
      */
     public void add(Video vid) {
         try (Connection c = db.getConnection()) {
@@ -78,7 +77,8 @@ public class VideoDao {
 
     /**
      * Marks the Video as read and sets the date it was read on.
-     * @param video Object that is marked read
+     * @param title Object that is marked read
+     * @return boolean true if successful
      */
     public boolean markAsRead(String title) {
         try (Connection c = db.getConnection()) {
@@ -97,8 +97,8 @@ public class VideoDao {
     
      /**
      * Creates a new Video object from database row
-     * @param rs
-     * @return
+     * @param rs result set from the database
+     * @return Video object
      * @throws SQLException
      */
     public static Video rowToVideo(ResultSet rs) throws SQLException {
