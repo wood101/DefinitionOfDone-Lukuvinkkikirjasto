@@ -33,7 +33,7 @@ public class UI {
     private DaoManager manager;
     private boolean running;
     public static boolean isTesting = false;
-
+    
     public UI(IO io, DaoManager manager) {
         this.io = io;
         this.manager = manager;
@@ -537,6 +537,13 @@ public class UI {
         running = false;
     }
 
+    
+    /**
+     * Opens link in browser based on given url
+     * If url doesn't have a domain, opens it with google search
+     * @param url
+     * @return 
+     */
     public boolean openLinkInBrowser(String url) {
         Desktop desktop = java.awt.Desktop.getDesktop();
         try {
@@ -559,11 +566,22 @@ public class UI {
         }
     }
 
-    // given isbn is edited into an isbnsearch.org link
+
+    /**
+     * given isbn is edited into an isbnsearch.org link
+     * @param ISBN
+     * @return  string with url and ISBN
+     */
     private String isbnSearchLink(String ISBN) {
         return "https://isbnsearch.org/search?s=" + ISBN;
     }
 
+    
+    /**
+     * Get links based on readingtip type
+     * @param tip
+     * @return 
+     */
     private String getLinkFromReadingTip(ReadingTip tip) {
         String url = "";
         if (tip instanceof Video) {
@@ -578,8 +596,10 @@ public class UI {
         return url;
     }
 
-    /**
-     * 
+    
+     /**
+     * Displays options of a command on singleTip view and takes user input for
+     * selections: to mark reading tip as read,  to go back to list commands or to quit app
      * @param tips
      * @param index 
      */
@@ -621,6 +641,12 @@ public class UI {
             }
         }
     }
+    /**
+     *  If selected reading tip is a book, calls openlinkBrowser with an url based on ISBN 
+     *  Otherwise calls openLinkBrowser with the object link
+     *  prints a success message, otherwise prints a failing message
+     * @param selected 
+     */
     private void openLinkOfSelected(ReadingTip selected) {
         String successPrint = "";
         boolean LinkOpenedSuccesfully = false;
