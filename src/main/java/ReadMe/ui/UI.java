@@ -537,7 +537,11 @@ public class UI {
         running = false;
     }
 
-    public boolean openLinkInBrowser(String url) {
+    // Tries to open link in browser. If http is not included, method adds it to the link while opening. 
+    // if link is not in a link format, link is opened in google search
+    // returns true if link is openable, false is something fails.
+    
+    private boolean openLinkInBrowser(String url) {
         Desktop desktop = java.awt.Desktop.getDesktop();
         try {
             if(!url.contains("http")) {
@@ -560,6 +564,7 @@ public class UI {
     }
 
     // given isbn is edited into an isbnsearch.org link
+    
     private String isbnSearchLink(String ISBN) {
         return "https://isbnsearch.org/search?s=" + ISBN;
     }
@@ -578,10 +583,12 @@ public class UI {
         return url;
     }
 
-    /**
+    /** 
+     * UI Commands after choosing a single tip from listing view. 
+     * Loop for user while viewing information about a single tip.
      * 
-     * @param tips
-     * @param index 
+     * @param tips list of all tips
+     * @param index chosen index
      */
     private void singleTipCommands(List<ReadingTip> tips, int index) {
         io.print(tips.get(index).toString());
@@ -622,6 +629,10 @@ public class UI {
             }
         }
     }
+    
+    // Tries to open a readingtip's link in browser and prints whether operation is succesfull.
+    // ISBN is searched at isbnsearch.org
+    
     private void openLinkOfSelected(ReadingTip selected) {
         String successPrint = "";
         boolean LinkOpenedSuccesfully = false;
