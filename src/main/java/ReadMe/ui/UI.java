@@ -534,6 +534,7 @@ public class UI {
             acceptedInput.add("r");
             acceptedInput.add("o");
             acceptedInput.add("q");
+            acceptedInput.add("");
 
             String choice = userCommand(prompt, acceptedInput);
             ReadingTip selected = tips.get(index);
@@ -548,6 +549,9 @@ public class UI {
                 case "q":
                     exitApplication();
                     viewing = false;
+                case "":
+                    viewing = false;
+                    break;
             }
         }
     }
