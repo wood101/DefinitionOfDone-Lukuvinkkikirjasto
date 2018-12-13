@@ -4,7 +4,7 @@ Ryhmän DefinitionOfGettingThere OhtuMiniProjekti. Syksyn 2018 ohjelmiostotuotan
 
 Miniprojektissa on toteutettu asiakkaan toiveiden mukainen lukuvinkkikirjasto lukuvinkkien tallennukseen ja järjestämiseen. Projektin lukuvinkkikirjastoon voi lisätä erilaisia lukuvinkkkityyppejä: kirjoja, videoita, uutisia, artikkeleita ja blogeja. Käyttäjä voi selata kaikkia lukuvinkkejä, tai haluamiaan lukuvinkkityyppejä listaamalla ne taulukkonäkymänä. Käyttäjä voi taulukkonäkymästä valita luettavaksi yksittäisen lukuvinkin kaikki tiedot. Lukuvinkkejä voi myös hakea annetulla hakusanalla ja luetun lukuvinkin voi merkata luetuksi.
  
-Sovellus on toteutettu käyttäjän omalle koneelle ladattavaksi paikalliseksi ohjelmaksi. Sovellukseen on toteutettu komentoriviltä toimiva konsolipohjainen käyttöliittymä ja tietojen tallennukseen käytetään SQLlite tietokantaa. Sovellus on toteutettu javalla Gradle build työkalulla. Testaamisessa on käytössä JUnit sekä Cucumber testit. Jatkuvaan integraatioon CI on käytetty Travisis-ci:tä ja testikattavuuksien tarkateluun Codecovia.
+Sovellus on toteutettu käyttäjän omalle koneelle ladattavaksi paikalliseksi ohjelmaksi. Sovellukseen on toteutettu komentoriviltä toimiva konsolipohjainen käyttöliittymä ja tietojen tallennukseen käytetään SQLlite [tietokantaa](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/blob/dev/Dokumentaatio/Tietokanta.md). Sovellus on toteutettu javalla Gradle build työkalulla. Testaamisessa on käytössä JUnit sekä Cucumber testit. Jatkuvaan integraatioon CI on käytetty Travisis-ci:tä ja testikattavuuksien tarkateluun Codecovia.
 
 ## Releases
 
