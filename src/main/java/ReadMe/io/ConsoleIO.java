@@ -12,17 +12,15 @@ package ReadMe.io;
 
 import java.util.Scanner;
 
-/**
- *
- * @author bisi
- */
+
 public class ConsoleIO implements IO {
     private Scanner scanner = new Scanner(System.in);
     
     /**
      * Prints given input string
-     * @param String toPrint
+     * @param toPrint String toPrint
      */
+    @Override
     public void print(String toPrint) {
         System.out.println(toPrint);
     }
@@ -30,8 +28,9 @@ public class ConsoleIO implements IO {
     /**
      * Reads a line from user and returns the read string.
      * @param prompt
-     * @return
+     * @return String 
      */
+    @Override
     public String readLine(String prompt) {
         System.out.println(prompt);
         return scanner.nextLine();
