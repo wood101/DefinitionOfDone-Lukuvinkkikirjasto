@@ -14,7 +14,10 @@ import ReadMe.domain.News;
 import ReadMe.domain.ReadingTip;
 import ReadMe.domain.Video;
 import java.awt.Desktop;
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -529,14 +532,24 @@ public class UI {
     }
 
     public boolean openLinkInBrowser(String url) {
+        Desktop desktop = java.awt.Desktop.getDesktop();
         try {
-            Desktop desktop = java.awt.Desktop.getDesktop();
-            URI oURL = new URI(url);
-            desktop.browse(oURL);
+            if(!url.contains("http")) {
+                url = "http://" + url;
+            }
+            URL oURL = new URL(url);
+            desktop.browse(oURL.toURI());
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            try {
+                System.out.println("TOIMIIIIKO?");
+                url = url.replace("http://", "").replace(" ", "+");
+                URL googleURL = new URL("https://www.google.com/search?q="+url);
+                desktop.browse(googleURL.toURI());
+                return true;
+            } catch (Exception ex){
+             return false;   
+            }
         }
     }
 
@@ -580,6 +593,7 @@ public class UI {
             switch (choice) {
                 case "o":
                     openLinkOfSelected(selected);
+                    break;
                 case "b":
                     viewing = false;
                     break;
@@ -599,7 +613,7 @@ public class UI {
         String successPrint = "";
         boolean LinkOpenedSuccesfully = false;
         if (selected instanceof Book) {
-            LinkOpenedSuccesfully = openLinkInBrowser(((Book) selected).getISBN());
+            LinkOpenedSuccesfully = openLinkInBrowser(isbnSearchLink(((Book) selected).getISBN()));
             successPrint = "Searching for the book's ISBN at isbnsearch.org in your default browser";
         } else {
             LinkOpenedSuccesfully = openLinkInBrowser(getLinkFromReadingTip(selected));

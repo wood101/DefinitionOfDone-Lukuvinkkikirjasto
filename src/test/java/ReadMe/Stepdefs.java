@@ -547,8 +547,10 @@ public class Stepdefs {
     public void command_is_input_for_listing_single_view(String index) throws Throwable {
         inputLinesSingleWithIndex[2] = index;
         inputLinesSingleMarkAsRead[2] = index;
+        inputLinesAll[1] = "1";
+        inputLinesAll[2] = index;
     }
-
+    
     // ---------------------------------- Book opened in browser
     @When("^command \"([^\"]*)\" is input for listing single book view$")
     public void command_is_input_for_listing_single_book_view(String arg1) throws Throwable {
