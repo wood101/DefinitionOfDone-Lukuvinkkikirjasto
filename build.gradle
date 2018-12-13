@@ -1,5 +1,5 @@
 plugins {
-  id 'com.github.johnrengelman.shadow' version '2.0.1'
+    id 'com.github.johnrengelman.shadow' version '2.0.1'
 }
 
 // Apply the java plugin to add support for Java
@@ -54,15 +54,16 @@ jacocoTestReport {
     }
     afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
-            fileTree(dir: it,
+                fileTree(dir: it,
                     exclude: ['ReadMe/main/**',
                     'ReadMe/dao/DatabaseDao**'])
-        })
+            })
     }
 }
 
 checkstyle {
-  checkstyleTest.enabled = false
+    configFile = project(':').file('config/checkstyle/checkstyle.xml')
+    configProperties = [ "suppressionFile" : project(':').file('config/checkstyle/suppressions.xml')]
 }
 
 jar {

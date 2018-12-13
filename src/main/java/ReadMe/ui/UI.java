@@ -39,7 +39,7 @@ public class UI {
     /**
      * Accepts only valid years. Years BCE are marked as negative values.
      *
-     * @return true
+     * @return the year input by the user
      */
     public int safeYearInput() {
         LocalDateTime now = LocalDateTime.now();
@@ -63,7 +63,7 @@ public class UI {
         return year;
     }
 
-        /**
+     /**
      * Checks if given index is valid 
      * @param string to be checked
      * @return true if index is valid otherwise false
@@ -526,7 +526,7 @@ public class UI {
         selectBaseCommand();
     }
 
-      /**
+    /**
      * Exits application
      */
     private void exitApplication() {
