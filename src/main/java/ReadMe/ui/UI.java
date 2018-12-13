@@ -63,7 +63,11 @@ public class UI {
         return year;
     }
 
-    // accepts only valid years. Years BCE are marked as negative values.
+        /**
+     * Checks if given index is valid 
+     *
+     * @return true if index is valid otherwise false
+     */
     public boolean isIndex(String string) {
         int index = 0;
         try {
