@@ -13,14 +13,11 @@ import ReadMe.domain.Book;
 import ReadMe.domain.News;
 import ReadMe.domain.ReadingTip;
 import ReadMe.domain.Video;
-import java.awt.Desktop;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.regex.Pattern;
 
 /**
  * UI object. Used to run console app.
@@ -108,16 +105,6 @@ public class UI {
 
             return true;
         }
-    }
-
-    /**
-     * Method prints a the string representation of the tip
-     *
-     * @param tip
-     */
-    private void singleTipView(ReadingTip tip) {
-        io.print(tip.toString());
-
     }
 
     /**
@@ -427,7 +414,6 @@ public class UI {
             acceptedInput.add("l");
             acceptedInput.add("f");
             acceptedInput.add("q");
-            acceptedInput.add("link");
 
             String choice = userCommand(prompt, acceptedInput);
             switch (choice) {
@@ -440,9 +426,6 @@ public class UI {
                     break;
                 case "f":
                     searchWithKeyword();
-                    break;
-                case "link":
-                    openLinkInBrowser("http://www.google.com");
                     break;
                 case "q":
                     exitApplication();
@@ -528,37 +511,6 @@ public class UI {
         run = false;
     }
 
-    public boolean openLinkInBrowser(String url) {
-        try {
-            Desktop desktop = java.awt.Desktop.getDesktop();
-            URI oURL = new URI(url);
-            desktop.browse(oURL);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    // given isbn is edited into an isbnsearch.org link
-    private String isbnSearchLink(String ISBN) {
-        return "https://isbnsearch.org/search?s=" + ISBN;
-    }
-
-    private String getLinkFromReadingTip(ReadingTip tip) {
-        String url = "";
-        if (tip instanceof Video) {
-            url = ((Video) tip).getLink();
-        } else if (tip instanceof Article) {
-            url = ((Article) tip).getLink();
-        } else if (tip instanceof Blog) {
-            url = ((Blog) tip).getLink();
-        } else if (tip instanceof News) {
-            url = ((News) tip).getLink();
-        }
-        return url;
-    }
-
     private void singleTipCommands(List<ReadingTip> tips, int index) {
         io.print(tips.get(index).toString());
         boolean viewing = true;
@@ -566,7 +518,6 @@ public class UI {
             String prompt = "Choose an action:\n"
                     + "  r - mark reading tip as read\n"
                     + "  b - back to list commands\n"
-                    + "  o - open link in browser\n"
                     + "  q - quit app\n";
 
             Set<String> acceptedInput = new TreeSet<>();
@@ -578,8 +529,6 @@ public class UI {
             String choice = userCommand(prompt, acceptedInput);
             ReadingTip selected = tips.get(index);
             switch (choice) {
-                case "o":
-                    openLinkOfSelected(selected);
                 case "b":
                     viewing = false;
                     break;
@@ -592,24 +541,5 @@ public class UI {
                     viewing = false;
             }
         }
-
     }
-
-    private void openLinkOfSelected(ReadingTip selected) {
-        String successPrint = "";
-        boolean LinkOpenedSuccesfully = false;
-        if (selected instanceof Book) {
-            LinkOpenedSuccesfully = openLinkInBrowser(((Book) selected).getISBN());
-            successPrint = "Searching for the book's ISBN at isbnsearch.org in your default browser";
-        } else {
-            LinkOpenedSuccesfully = openLinkInBrowser(getLinkFromReadingTip(selected));
-            successPrint = "Link opened in your default browser";
-        }
-        if (LinkOpenedSuccesfully) {
-            io.print(successPrint);
-        } else {
-            io.print("Failed to open link");
-        }
-    }
-
 }

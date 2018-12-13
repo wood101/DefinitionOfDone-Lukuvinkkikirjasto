@@ -70,7 +70,5 @@ Näkymä listaa yksittäisen lukuvinkin tiedot. Komennot ovat:
 ```
   r - merkkaa luetuksi
   b - takaisin edelliseen listausnäkymään
-  o - avaa lukuvinkin linkki selaimeen
   q - lopeta ohjelma
 ```
-- `o` avaa lukuvinkin selaimeen. Kirjojen tapauksessa ohjataan ISBN-numeron perusteella kirjaa vastaavaan hakuun www.isbnsearch.org -sivustolla.
