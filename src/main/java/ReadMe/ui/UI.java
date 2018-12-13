@@ -13,6 +13,7 @@ import ReadMe.domain.Book;
 import ReadMe.domain.News;
 import ReadMe.domain.ReadingTip;
 import ReadMe.domain.Video;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * UI object. Used to run console app.
+ * UI object. Used to running console app.
  *
  * @author bisi, peje
  */
@@ -28,17 +29,21 @@ public class UI {
 
     private IO io;
     private DaoManager manager;
-    private boolean run;
+    private boolean running;
 
     public UI(IO io, DaoManager manager) {
         this.io = io;
         this.manager = manager;
     }
 
-    // accepts only valid years. Years BCE are marked as negative values.
+    /**
+     * Accepts only valid years. Years BCE are marked as negative values.
+     *
+     * @return true
+     */
     public int safeYearInput() {
-        Date today = new Date();
-        int thisYear = today.getYear() + 1900; // getYear returns this year - 1900 for reasons unknown
+        LocalDateTime now = LocalDateTime.now();
+        int thisYear = now.getYear();
         int year = 0;
         boolean flag = false;
 
@@ -314,7 +319,7 @@ public class UI {
      */
     private void selectSingleTip(List<ReadingTip> tips) {
         boolean viewing = true;
-        while (viewing && run) {
+        while (viewing && running) {
             String prompt = "Choose an action:\n"
                     + "  [index] - show more info about single tip\n"
                     + "  r       - mark reading tip as read\n"
@@ -402,7 +407,7 @@ public class UI {
      * selection of type or to list all
      */
     private void selectBaseCommand() {
-        while (run) {
+        while (running) {
             String prompt = "Choose an action:\n"
                     + "  a - add new readtip\n"
                     + "  l - list tips\n"
@@ -502,19 +507,19 @@ public class UI {
      */
     public void run() {
         io.print("Welcome to ReadTipper!\n\n");
-        run = true;
+        running = true;
         selectBaseCommand();
     }
 
     private void exitApplication() {
         io.print("Thank you!");
-        run = false;
+        running = false;
     }
 
     private void singleTipCommands(List<ReadingTip> tips, int index) {
         io.print(tips.get(index).toString());
         boolean viewing = true;
-        while (viewing && run) {
+        while (viewing && running) {
             String prompt = "Choose an action:\n"
                     + "  r - mark reading tip as read\n"
                     + "  b - back to list commands\n"
