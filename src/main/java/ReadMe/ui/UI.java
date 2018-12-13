@@ -14,6 +14,8 @@ import ReadMe.domain.News;
 import ReadMe.domain.ReadingTip;
 import ReadMe.domain.Video;
 import java.time.LocalDateTime;
+import java.awt.Desktop;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +32,7 @@ public class UI {
     private IO io;
     private DaoManager manager;
     private boolean running;
+    public static boolean isTesting = false;
 
     public UI(IO io, DaoManager manager) {
         this.io = io;
@@ -534,6 +537,47 @@ public class UI {
         running = false;
     }
 
+    public boolean openLinkInBrowser(String url) {
+        Desktop desktop = java.awt.Desktop.getDesktop();
+        try {
+            if(!url.contains("http")) {
+                url = "http://" + url;
+            }
+            URL oURL = new URL(url);
+            if(!isTesting) desktop.browse(oURL.toURI());
+            return true;
+        } catch (Exception e) {
+            try {
+                //Viime hetken purkka
+                url = url.replace("http://", "").replace(" ", "+");
+                URL googleURL = new URL("https://www.google.com/search?q="+url);
+                if(!isTesting) desktop.browse(googleURL.toURI());
+                return true;
+            } catch (Exception ex){
+             return false;   
+            }
+        }
+    }
+
+    // given isbn is edited into an isbnsearch.org link
+    private String isbnSearchLink(String ISBN) {
+        return "https://isbnsearch.org/search?s=" + ISBN;
+    }
+
+    private String getLinkFromReadingTip(ReadingTip tip) {
+        String url = "";
+        if (tip instanceof Video) {
+            url = ((Video) tip).getLink();
+        } else if (tip instanceof Article) {
+            url = ((Article) tip).getLink();
+        } else if (tip instanceof Blog) {
+            url = ((Blog) tip).getLink();
+        } else if (tip instanceof News) {
+            url = ((News) tip).getLink();
+        }
+        return url;
+    }
+
     /**
      * 
      * @param tips
@@ -558,6 +602,9 @@ public class UI {
             String choice = userCommand(prompt, acceptedInput);
             ReadingTip selected = tips.get(index);
             switch (choice) {
+                case "o":
+                    openLinkOfSelected(selected);
+                    break;
                 case "b":
                     viewing = false;
                     break;
@@ -574,4 +621,21 @@ public class UI {
             }
         }
     }
+    private void openLinkOfSelected(ReadingTip selected) {
+        String successPrint = "";
+        boolean LinkOpenedSuccesfully = false;
+        if (selected instanceof Book) {
+            LinkOpenedSuccesfully = openLinkInBrowser(isbnSearchLink(((Book) selected).getISBN()));
+            successPrint = "Searching for the book's ISBN at isbnsearch.org in your default browser";
+        } else {
+            LinkOpenedSuccesfully = openLinkInBrowser(getLinkFromReadingTip(selected));
+            successPrint = "Link opened in your default browser";
+        }
+        if (LinkOpenedSuccesfully) {
+            io.print(successPrint);
+        } else {
+            io.print("Failed to open link");
+        }
+    }
+
 }
