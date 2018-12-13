@@ -567,7 +567,7 @@ public class Stepdefs {
         IOStub ios = new IOStub(inputLinesAll);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
-
+        ui.isTesting = true;
         ui.run();
 
         assertTrue(ios.getOutputString().contains("Searching for the book's ISBN at isbnsearch.org in your default browser"));
@@ -582,7 +582,7 @@ public class Stepdefs {
         IOStub ios = new IOStub(inputLinesAll);
         dao = new InMemoryDao();
         ui = new UI(ios, dao);
-
+        ui.isTesting = true;
         ui.run();
 
         assertTrue(ios.getOutputString().contains("Link opened in your default browser"));

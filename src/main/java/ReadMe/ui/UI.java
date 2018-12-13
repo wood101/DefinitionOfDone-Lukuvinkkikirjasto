@@ -14,16 +14,12 @@ import ReadMe.domain.News;
 import ReadMe.domain.ReadingTip;
 import ReadMe.domain.Video;
 import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.regex.Pattern;
 
 /**
  * UI object. Used to run console app.
@@ -35,6 +31,7 @@ public class UI {
     private IO io;
     private DaoManager manager;
     private boolean run;
+    public static boolean isTesting = false;
 
     public UI(IO io, DaoManager manager) {
         this.io = io;
@@ -538,14 +535,14 @@ public class UI {
                 url = "http://" + url;
             }
             URL oURL = new URL(url);
-            desktop.browse(oURL.toURI());
+            if(!isTesting) desktop.browse(oURL.toURI());
             return true;
         } catch (Exception e) {
             try {
-                System.out.println("TOIMIIIIKO?");
+                //Viime hetken purkka
                 url = url.replace("http://", "").replace(" ", "+");
                 URL googleURL = new URL("https://www.google.com/search?q="+url);
-                desktop.browse(googleURL.toURI());
+                if(!isTesting) desktop.browse(googleURL.toURI());
                 return true;
             } catch (Exception ex){
              return false;   

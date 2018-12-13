@@ -433,6 +433,5 @@ public class UITest {
         //System.out.println("output"+output);
         assertTrue(output.contains("Marked title as read"));  
     }
-
 }
 

@@ -5,7 +5,6 @@ import ReadMe.io.IOStub;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.mock;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -35,6 +34,7 @@ public class UIOpenLinkTest {
         io = new IOStub("l", "2", "1", "o", "q");
         db = new InMemoryDao();
         ui = new UI(io, db);
+        ui.isTesting = true;
         ui.run();
         String output = io.getOutputString();
         System.out.println(output);
@@ -46,6 +46,7 @@ public class UIOpenLinkTest {
         io = new IOStub("a", "1", "titl", "auth", "link", "desc", "2000", "l", "2", "2", "o", "q");
         db = new InMemoryDao();
         ui = new UI(io, db);
+        ui.isTesting = true;
         ui.run();
         String output = io.getOutputString();
         System.out.println(output);
@@ -57,6 +58,7 @@ public class UIOpenLinkTest {
         io = new IOStub("a", "1", "titl", "auth", "google.fi", "desc", "2000", "l", "2", "2", "o", "q");
         db = new InMemoryDao();
         ui = new UI(io, db);
+        ui.isTesting = true;
         ui.run();
         String output = io.getOutputString();
         System.out.println(output);
@@ -69,6 +71,7 @@ public class UIOpenLinkTest {
         io = new IOStub("l", "3", "1", "o", "q");
         db = new InMemoryDao();
         ui = new UI(io, db);
+        ui.isTesting = true;
         ui.run();
         String output = io.getOutputString();
         System.out.println(output);
