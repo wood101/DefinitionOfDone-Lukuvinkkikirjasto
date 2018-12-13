@@ -377,7 +377,13 @@ public class UI {
         }
 
     }
-
+    /**
+     * Updates marked tips
+     *
+     * @param tips
+     * @param selected
+     * @param edited
+     */
     private void updateCachedTipWhenMarked(List<ReadingTip> tips, ReadingTip selected, ReadingTip edited) {
         for (int i = 0; i < tips.size(); i++) {
             if (tips.get(i).equals(selected)) {
