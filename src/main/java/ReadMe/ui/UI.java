@@ -554,7 +554,7 @@ public class UI {
                 if(!isTesting) desktop.browse(googleURL.toURI());
                 return true;
             } catch (Exception ex){
-             return false;   
+                return false;   
             }
         }
     }
