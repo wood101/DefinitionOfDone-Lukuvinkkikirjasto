@@ -17,6 +17,11 @@ public class IOStub implements IO {
     int index;
     public ArrayList<String> outputs;
 
+    /**
+     * IOStubfor testing, inputs are stored in an array
+     *
+     * @param inputs that are stored in an array
+     */
     public IOStub(String... inputs) {
         this.inputs = inputs;
         this.outputs = new ArrayList<>();
@@ -35,7 +40,12 @@ public class IOStub implements IO {
     public ArrayList<String> getOutputs() {
         return outputs;
     }
-    
+
+    /**
+     * Returns the outputs that UI provides after getting the inputs in the input array
+     *
+     * @return output string
+     */
     public String getOutputString() {
         return outputs.toString();
     }

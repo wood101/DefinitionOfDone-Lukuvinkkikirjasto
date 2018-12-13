@@ -12,10 +12,7 @@ package ReadMe.io;
 
 import java.util.Scanner;
 
-/**
- *
- * @author bisi
- */
+
 public class ConsoleIO implements IO {
     private Scanner scanner = new Scanner(System.in);
     
