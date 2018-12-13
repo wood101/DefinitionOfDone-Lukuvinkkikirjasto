@@ -546,7 +546,7 @@ public class UI {
     
    /**
      * Opens link in browser based on given url
-     * If url doesn't have a domain, opens it with google search
+     * If url doesn't have a top-level-domain, opens it with google search
      * @param url
      * @return 
      */
