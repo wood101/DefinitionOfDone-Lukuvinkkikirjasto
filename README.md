@@ -41,5 +41,3 @@ Sovellus on toteutettu käyttäjän omalle koneelle ladattavaksi paikalliseksi o
   - [Jesper Pettersson](https://github.com/stadibo)
   - [Virva Svala](https://github.com/vsvala)
   - [Janne Malin](https://github.com/wood101)
-
-
