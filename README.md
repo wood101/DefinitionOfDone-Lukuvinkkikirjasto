@@ -33,6 +33,8 @@ Sovellus on toteutettu käyttäjän omalle koneelle ladattavaksi paikalliseksi o
 
 ## [Käyttöohje](https://github.com/wood101/DefinitionOfDone-Lukuvinkkikirjasto/blob/master/Dokumentaatio/kaytto-ohje.md)
 
+## [Loppuraportti](https://docs.google.com/document/d/1SEguuU6LB1GY3YXo_dYIeRwojcAkNhaJxwhqJX57vFY/edit#)
+
 ### Tekijät:
 
   - [Harri Mehtälä](https://github.com/hajame)
